@@ -4,8 +4,31 @@
     <div class="row-fluid">
         <div class="span10">
             <div ng-include="'views/partials/indicator-menu.html'" class="hide"></div>
-            <br>
-
+           <br><br><br><br><br>
+           <h1>Elco List</h1>
+            <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>FWWOMFNAME</th>
+                        <th>FWGENDER</th>
+                        <th>FWWOMAGE</th>
+                        <th>FWHUSNAME</th>
+                        <th>FWNHREGDATE</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="elcoRegisterEntry in ecloRegisterEntries">                        
+                        <td>{{elcoRegisterEntry.FWWOMFNAME}}</td>
+                        <td>{{elcoRegisterEntry.FWGENDER}}</td>
+                        <td>{{elcoRegisterEntry.FWWOMAGE}}</td>
+                        <td>{{elcoRegisterEntry.FWHUSNAME}}</td>
+                         <td>{{elcoRegisterEntry.FWBIRTHDATE}}</td>
+                        
+                      </tr>
+                      
+                    </tbody>
+              </table>
           <!--   <div ng-include="'views/partials/anm-data-summary.html'"></div> -->
         </div>
     </div>

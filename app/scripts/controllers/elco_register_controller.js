@@ -8,10 +8,11 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('ElcoCtrl', function () {
+  .controller('ElcoCtrl', function ($scope,$http,ElcoRegisterService) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+     ElcoRegisterService.elcos($scope);
   });
