@@ -1,12 +1,16 @@
 <data-ng-include src="'views/partials/header.html'"></data-ng-include>
 <data-ng-include src="'views/partials/main-navbar.html'"></data-ng-include>
+<script type="text/javascript" src="assets/js/visual_chart.js"></script>
 <div class="container-fluid container-tall">
     <div class="row-fluid">
         <div class="span10">
             <div ng-include="'views/partials/indicator-menu.html'" class="hide"></div>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <a href="#/households" > Households</a><br />
-            <a href="#/elcos" > Elcos</a>
+            <br><br><br><br><br><br>
+             <div id="area" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            <div id="column" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            <div id="line" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            <div id="pie" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            <div id="area" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
           <!--   <div ng-include="'views/partials/anm-data-summary.html'"></div> -->
         </div>

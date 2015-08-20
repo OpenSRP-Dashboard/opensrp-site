@@ -10,10 +10,12 @@
 angular.module('opensrpSiteApp')
   .service('ElcoRegisterService', function ($http,$rootScope,Base64,OPENSRP_WEB_BASE_URL) {
     this.elcos = function ($scope) {
-        var apiURL = OPENSRP_WEB_BASE_URL+"registers/hh?anm-id="+$rootScope.username;
+        $scope.loading = true;
+        var apiURL = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username;
         console.log(apiURL);
         return  $http({method: 'GET', url: apiURL}).success(function(data) {
             console.log(data);
+            $scope.loading = false;
             $scope.ecloRegisterEntries = data.ecRegisterEntries;
         });                 
     };
