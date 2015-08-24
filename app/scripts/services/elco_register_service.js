@@ -13,7 +13,7 @@ angular.module('opensrpSiteApp')
         $scope.loading = true;
         var apiURL = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username;
         console.log(apiURL);
-        return  $http({method: 'GET', url: apiURL}).success(function(data) {
+        return  $http({method: 'GET',cache:true, url: apiURL}).success(function(data) {
             console.log(data);
             $scope.loading = false;
             $scope.ecloRegisterEntries = data.ecRegisterEntries;

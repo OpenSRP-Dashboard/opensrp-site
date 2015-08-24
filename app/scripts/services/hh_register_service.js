@@ -15,7 +15,7 @@ angular.module('opensrpSiteApp')
         $scope.totalUsers = 30;
         $scope.usersPerPage =2;
         var apiURL = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;          
-        return  $http({method: 'GET', url: apiURL}).success(function(data) {
+        return  $http({method: 'GET',cache:true, url: apiURL}).success(function(data) {
            
             $scope.loading = false;
             $scope.hhRegisterEntries = data.hhRegisterEntries;
