@@ -33,6 +33,9 @@ module.exports = function(config) {
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/moment/moment.js',
       'bower_components/angular-momentjs/angular-momentjs.js',
+      'bower_components/highcharts-release/highcharts.js',
+      'bower_components/highcharts-release/highcharts-more.js',
+      'bower_components/highcharts-release/modules/exporting.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

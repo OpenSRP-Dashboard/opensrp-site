@@ -14,10 +14,10 @@ describe('Controller: AuthControllerCtrl', function () {
    /* AuthControllerCtrl = $controller('AuthControllerCtrl', {
       $scope: scope
       // place here mocked dependencies
-    });
+    });*/
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
+ /* it('should attach a list of awesomeThings to the scope', function () {
     expect(AuthControllerCtrl.awesomeThings.length).toBe(3);
   });*/
 });

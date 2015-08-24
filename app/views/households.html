@@ -1,11 +1,11 @@
 <data-ng-include src="'views/partials/header.html'"></data-ng-include>
 <data-ng-include src="'views/partials/main-navbar.html'"></data-ng-include>
-
+<script type="text/javascript" src="assets/js/download.js"></script>
 <div class="container-fluid container-tall">
     <div class="row-fluid">
-        <div class="span10">
+        <div class="span12">
             <div ng-include="'views/partials/indicator-menu.html'" class="hide"></div>
-            <br><br><br><br><br>
+            <br><br><br><br><br><br><br>
                 <h1 style="color:red">Household list </h1>
                
                <table class="table table-striped">
@@ -35,9 +35,50 @@
                 <img src="images/spinner.gif"  alt="Opensrp"/>
 		</p>
           <!--   <div ng-include="'views/partials/anm-data-summary.html'"></div> -->
+             <p>dfg:{{get.length}}</p>       
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in get">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.description}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <td colspan="3">
+                    <div class="pagination">
+                      <ul>
+                        <li ng-class="prevPageDisabled()">
+                          <a href ng-click="prevPage()">« Prev</a>
+                        </li>
+                        <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+                          <a href="http://localhost:9000/#/households">{{n+1}}</a>
+                        </li>
+                        <li ng-class="nextPageDisabled()">
+                          <a href ng-click="nextPage()">Next »</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                </tfoot>
+            </table>
         </div>
     </div>
-</div> 
+</div>
+
+    
+    
+<div class='mydiv'>    
+    <textarea id="txt" class='txtarea'>{{hhRegisterEntries}}</textarea>
+    <button class='gen_btn'>Generate File</button>
+</div>
 <data-ng-include src="'views/partials/footer.html'" style="clear: both;" class="navbar"></data-ng-include>
 
 

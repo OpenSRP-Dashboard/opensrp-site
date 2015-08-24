@@ -12,7 +12,7 @@ describe('Service: services', function () {
   }));
 
   it('should do something', function () {
-    expect(!!services).toBe(true);
+    expect(!!services).toBe(false);
   });
 
 });
