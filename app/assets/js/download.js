@@ -85,5 +85,5 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
 
 var myJSONObject = {"ircEvent": "PRIVMSG", "method": "newURI", "regex": "^http://.*"};
 delete myJSONObject.regex;
-alert ( JSON.stringify(myJSONObject));
+//alert ( JSON.stringify(myJSONObject));
 

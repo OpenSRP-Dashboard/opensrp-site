@@ -2,11 +2,16 @@
 
 /**
  * @ngdoc function
- * @name expressAngularAppApp.controller:MainCtrl
+ * @name opensrpSiteApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the expressAngularAppApp
+ * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
   .controller('MainCtrl', function () {
-    });
+    this.awesomeThings = [
+      'HTML5 Boilerplate',
+      'AngularJS',
+      'Karma'
+    ];
+  });

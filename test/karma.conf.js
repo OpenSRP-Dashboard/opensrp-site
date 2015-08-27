@@ -1,6 +1,6 @@
 // Karma configuration
 // http://karma-runner.github.io/0.12/config/configuration-file.html
-// Generated on 2015-08-17 using
+// Generated on 2015-08-25 using
 // generator-karma 1.0.0
 
 module.exports = function(config) {
@@ -36,6 +36,7 @@ module.exports = function(config) {
       'bower_components/highcharts-release/highcharts.js',
       'bower_components/highcharts-release/highcharts-more.js',
       'bower_components/highcharts-release/modules/exporting.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

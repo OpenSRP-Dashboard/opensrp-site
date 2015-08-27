@@ -6,8 +6,21 @@
         <div class="span12">
             <div ng-include="'views/partials/indicator-menu.html'" class="hide"></div>
             <br><br><br><br><br><br><br>
-                <h1 style="color:red">Household list </h1>
-               
+               <h1 style="color:red">Household list {{total}} </h1>
+                <label>Search:</label> <input type="text" ng-model="search.FWGOBHHID" placeholder="Search" />
+                <label>Search:</label> <input type="text" ng-model="search.FWHOHFNAME" placeholder="Search" />
+			<br />
+			
+			<label>Filter by Category:</label>
+			<ul>
+				<li><a href="" ng-click="search.category='engineering'">Engineering</a></li>
+				<li><a href="" ng-click="search.category='management'">Management</a></li>
+				<li><a href="" ng-click="search.category='business'">Business</a></li>
+			</ul>
+
+			
+
+			<p><strong><a href="" ng-click="resetFilters()">Show All</a></strong></p>
                <table class="table table-striped">
                     <thead>
                       <tr>
@@ -20,7 +33,8 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="hhRegisterEntry in hhRegisterEntries">
+                      <tr ng-repeat="hhRegisterEntry in hhRegisterEntries | filter:search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit" >
+                        
                         <td>{{hhRegisterEntry.ELCODETAILS[0].FWWOMFNAME}}</td>
                         <td>{{hhRegisterEntry.FWHOHFNAME}}</td>
                         <td>{{hhRegisterEntry.FWGOBHHID}}</td>
@@ -31,44 +45,14 @@
                       
                     </tbody>
               </table>
+              
+                <pagination page="currentPage" max-size="noOfPages" total-items="totalItems" items-per-page="entryLimit"></pagination>
                <p class="text-center" ng-show="loading">
                 <img src="images/spinner.gif"  alt="Opensrp"/>
 		</p>
           <!--   <div ng-include="'views/partials/anm-data-summary.html'"></div> -->
-             <p>dfg:{{get.length}}</p>       
-            <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="item in get">
-                    <td>{{item.id}}</td>
-                    <td>{{item.name}}</td>
-                    <td>{{item.description}}</td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <td colspan="3">
-                    <div class="pagination">
-                      <ul>
-                        <li ng-class="prevPageDisabled()">
-                          <a href ng-click="prevPage()">« Prev</a>
-                        </li>
-                        <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)">
-                          <a href="http://localhost:9000/#/households">{{n+1}}</a>
-                        </li>
-                        <li ng-class="nextPageDisabled()">
-                          <a href ng-click="nextPage()">Next »</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </td>
-                </tfoot>
-            </table>
+                 
+            
         </div>
     </div>
 </div>

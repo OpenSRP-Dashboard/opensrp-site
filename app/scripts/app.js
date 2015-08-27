@@ -9,9 +9,9 @@
  * Main module of the application.
  */
 angular
-  .module('opensrpSiteApp', ['ngAnimate','ngCookies','ngResource','ngRoute','angular-momentjs','ngSanitize','ngTouch'])
+  .module('opensrpSiteApp', ['ngAnimate','ngCookies','ngResource','ngRoute','angular-momentjs','ngSanitize','ngTouch','ui.bootstrap'])
   .constant('AUTH_URL', 'http://192.168.21.167:1337/27.147.129.50:9979/authenticate-user')
-  .constant('OPENSRP_WEB_BASE_URL', 'http://hp:1337/192.168.21.218:9979')
+  .constant('OPENSRP_WEB_BASE_URL', 'http://hp:1337/192.168.21.51:9979')
   .constant("HH_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/hh?anm-id=')
   .constant("ELCO_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/ec?anm-id=')
   .constant("CORS_PROXY_URL",'http://hp:1337/')
@@ -40,7 +40,9 @@ angular
        .when('/households', {
         templateUrl: 'views/households.html',
         controller: 'HouseholdCtrl',
-        controllerAs: 'household'
+        controllerAs: 'household',
+        resolve:{ 'HHServiceData':function(HHRegisterService){ return HHRegisterService.promise;}
+        }
       })
        .when('/elcos', {
         templateUrl: 'views/elcos.html',

@@ -2,10 +2,10 @@
 
 /**
  * @ngdoc function
- * @name expressAngularAppApp.controller:AboutCtrl
+ * @name opensrpSiteApp.controller:AboutCtrl
  * @description
  * # AboutCtrl
- * Controller of the expressAngularAppApp
+ * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
   .controller('AboutCtrl', function () {

@@ -105,20 +105,20 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-    <script src="assets/js/ui-bootstrap-tpls-0.10.0.js" type="text/javascript"></script>
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/about.js"></script>
-    <script src="scripts/services/services.js"></script>
-    <script src="scripts/services/login_service.js"></script>
-    <script src="scripts/services/register_service.js"></script>
-    <script src="scripts/services/hh_register_service.js"></script>
-    <script src="scripts/services/elco_register_service.js"></script>
-    <script src="scripts/controllers/auth_controller.js"></script>
-    <script src="scripts/controllers/hh_register_controller.js"></script>
-    <script src="scripts/controllers/elco_register_controller.js"></script>
-    <script src="scripts/services/page.js"></script>
+<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js" type="text/javascript"></script>
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/services/services.js"></script>
+        <script src="scripts/services/login_service.js"></script>
+        <script src="scripts/services/register_service.js"></script>
+        <script src="scripts/services/hh_register_service.js"></script>
+        <script src="scripts/services/elco_register_service.js"></script>
+        <script src="scripts/controllers/auth_controller.js"></script>
+        <script src="scripts/controllers/hh_register_controller.js"></script>
+        <script src="scripts/controllers/elco_register_controller.js"></script>
+        <script src="scripts/services/page.js"></script>
         <!-- endbuild -->
 </body>
 </html>
