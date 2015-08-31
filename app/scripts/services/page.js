@@ -14,6 +14,8 @@ angular.module('opensrpSiteApp')
         $scope.resetFilters = function () {    
           $scope.search = {};
         };
+        $scope.sortType     = 'FWWOMFNAME'; // set the default sort type
+        $scope.sortReverse  = false;
         $scope.currentPage = 1;
         $scope.totalItems = data.length;
         $scope.entryLimit = 8; // items per page

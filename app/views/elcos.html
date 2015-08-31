@@ -12,16 +12,40 @@
             <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th>FWWOMFNAME</th>
-                        <th>FWGENDER</th>
-                        <th>FWWOMAGE</th>
-                        <th>FWHUSNAME</th>
-                        <th>FWNHREGDATE</th>
-                        
+                        <th> <a href="http://localhost:9000/#/elcos" ng-click="sortType = 'FWWOMFNAME'; sortReverse = !sortReverse">FWWOMFNAME
+                            <span ng-show="sortType == 'FWWOMFNAME' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'FWWOMFNAME' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>                        
+                        </th>
+                        <th>
+                            <a href="http://localhost:9000/#/elcos" ng-click="sortType = 'FWGENDER'; sortReverse = !sortReverse">FWGENDER
+                            <span ng-show="sortType == 'FWGENDER' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'FWGENDER' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="http://localhost:9000/#/elcos" ng-click="sortType = 'FWWOMAGE'; sortReverse = !sortReverse">FWWOMAGE
+                            <span ng-show="sortType == 'FWWOMAGE' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'FWWOMAGE' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="http://localhost:9000/#/elcos" ng-click="sortType = 'FWHUSNAME'; sortReverse = !sortReverse">FWHUSNAME
+                            <span ng-show="sortType == 'FWHUSNAME' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'FWHUSNAME' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                            
+                        </th>
+                        <th>
+                            <a href="http://localhost:9000/#/elcos" ng-click="sortType = 'FWNHREGDATE'; sortReverse = !sortReverse">FWNHREGDATE
+                            <span ng-show="sortType == 'FWNHREGDATE' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'FWNHREGDATE' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>                            
+                        </th>                        
                       </tr>
                     </thead>
                     <tbody>
-                       <tr ng-repeat="elcoRegisterEntry in data | filter:search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit" >                  
+                       <tr ng-repeat="elcoRegisterEntry in data | filter:search | orderBy:sortType:sortReverse | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit" >                  
                         <td>{{elcoRegisterEntry.FWWOMFNAME}}</td>
                         <td>{{elcoRegisterEntry.FWGENDER}}</td>
                         <td>{{elcoRegisterEntry.FWWOMAGE}}</td>

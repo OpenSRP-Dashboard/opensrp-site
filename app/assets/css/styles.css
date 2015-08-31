@@ -645,3 +645,10 @@ pre code {
     text-align: right;
     float: left;
 }
+.fa-caret-down:before {
+    content: "";
+}
+
+.fa-caret-up:before {
+    content: "";
+}
