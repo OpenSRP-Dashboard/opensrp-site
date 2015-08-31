@@ -4,8 +4,11 @@
     <div class="row-fluid">
         <div class="span10">
             <div ng-include="'views/partials/indicator-menu.html'" class="hide"></div>
-           <br><br><br><br><br>
-           <h1>Elco List</h1>
+           <br><br><br><br><br><br /><br />
+           <h1>Elco List {{totalItems}}</h1>
+            <label>Search:</label> <input type="text" ng-model="search.FWWOMAGE" placeholder="Search" />
+            <label>Search:</label> <input type="text" ng-model="search.FWWOMFNAME" placeholder="Search" />
+	    <p><strong><a href="" ng-click="resetFilters()">Show All</a></strong></p>
             <table class="table table-striped">
                     <thead>
                       <tr>
@@ -18,17 +21,16 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="elcoRegisterEntry in ecloRegisterEntries">                        
+                       <tr ng-repeat="elcoRegisterEntry in data | filter:search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit" >                  
                         <td>{{elcoRegisterEntry.FWWOMFNAME}}</td>
                         <td>{{elcoRegisterEntry.FWGENDER}}</td>
                         <td>{{elcoRegisterEntry.FWWOMAGE}}</td>
                         <td>{{elcoRegisterEntry.FWHUSNAME}}</td>
-                         <td>{{elcoRegisterEntry.FWBIRTHDATE}}</td>
-                        
-                      </tr>
-                      
+                         <td>{{elcoRegisterEntry.FWBIRTHDATE}}</td>                        
+                      </tr>                      
                     </tbody>
               </table>
+             <pagination page="currentPage" max-size="noOfPages" total-items="totalItems" items-per-page="entryLimit"></pagination>
             <p class="text-center" ng-show="loading">
                 <img src="images/spinner.gif"  alt="Opensrp"/>
 		

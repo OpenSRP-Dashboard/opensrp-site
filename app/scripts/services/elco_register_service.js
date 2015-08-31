@@ -9,15 +9,20 @@
  */
 angular.module('opensrpSiteApp')
   .service('ElcoRegisterService', function ($http,$rootScope,Base64,OPENSRP_WEB_BASE_URL) {
-    this.elcos = function ($scope) {
-        $scope.loading = true;
-        var apiURL = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username;
-        console.log(apiURL);
-        return  $http({method: 'GET',cache:true, url: apiURL}).success(function(data) {
-            console.log(data);
-            $scope.loading = false;
-            $scope.ecloRegisterEntries = data.ecRegisterEntries;
-        });                 
-    };
+        var elcos = null;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username; 
+        var elcoData = $http.get(apiURLs, { cache: true}).success(function (data) {
+            elcos = data.ecRegisterEntries;      
+        });    
+        return {
+            promise:elcoData,
+            setData: function (data) {
+                elcos = data;
+            },
+            Data: function () {        
+                return elcos;
+            }
+        };
+   
     // AngularJS will instantiate a singleton by calling "new" on this function
   });

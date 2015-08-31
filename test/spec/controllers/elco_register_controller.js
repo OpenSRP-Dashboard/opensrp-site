@@ -7,7 +7,7 @@ describe('Controller: ElcoRegisterControllerCtrl', function () {
 
   var ElcoRegisterControllerCtrl,
     scope;
-
+  
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
@@ -16,8 +16,10 @@ describe('Controller: ElcoRegisterControllerCtrl', function () {
       // place here mocked dependencies
     });
   }));
-
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(ElcoRegisterControllerCtrl.awesomeThings.length).toBe(3);
+  it('should have assigned right pattern to numberPattern', function(){
+    expect(scope.numberPattern).toBeDefined();
+    expect(scope.numberPattern.test("100")).toBe(true);
+    expect(scope.numberPattern.test("100aa")).toBe(false);
   });
+  
 });

@@ -15,6 +15,9 @@ angular
   .constant("HH_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/hh?anm-id=')
   .constant("ELCO_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/ec?anm-id=')
   .constant("CORS_PROXY_URL",'http://hp:1337/')
+  .config(['$httpProvider', function ($httpProvider) {           
+      $httpProvider.defaults.cache = true;
+  }])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -47,7 +50,9 @@ angular
        .when('/elcos', {
         templateUrl: 'views/elcos.html',
         controller: 'ElcoCtrl',
-        controllerAs: 'elco'
+        controllerAs: 'elco',
+        resolve:{ 'ElcoServiceData':function(ElcoRegisterService){ return ElcoRegisterService.promise;}
+        }
       })
       .otherwise({
         redirectTo: '/'

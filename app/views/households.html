@@ -6,21 +6,10 @@
         <div class="span12">
             <div ng-include="'views/partials/indicator-menu.html'" class="hide"></div>
             <br><br><br><br><br><br><br>
-               <h1 style="color:red">Household list {{total}} </h1>
+               <h1 style="color:red">Household list {{totalItems}} </h1>
                 <label>Search:</label> <input type="text" ng-model="search.FWGOBHHID" placeholder="Search" />
                 <label>Search:</label> <input type="text" ng-model="search.FWHOHFNAME" placeholder="Search" />
-			<br />
-			
-			<label>Filter by Category:</label>
-			<ul>
-				<li><a href="" ng-click="search.category='engineering'">Engineering</a></li>
-				<li><a href="" ng-click="search.category='management'">Management</a></li>
-				<li><a href="" ng-click="search.category='business'">Business</a></li>
-			</ul>
-
-			
-
-			<p><strong><a href="" ng-click="resetFilters()">Show All</a></strong></p>
+		<p><strong><a href="" ng-click="resetFilters()">Show All</a></strong></p>
                <table class="table table-striped">
                     <thead>
                       <tr>
@@ -33,7 +22,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="hhRegisterEntry in hhRegisterEntries | filter:search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit" >
+                      <tr ng-repeat="hhRegisterEntry in data | filter:search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit" >
                         
                         <td>{{hhRegisterEntry.ELCODETAILS[0].FWWOMFNAME}}</td>
                         <td>{{hhRegisterEntry.FWHOHFNAME}}</td>
