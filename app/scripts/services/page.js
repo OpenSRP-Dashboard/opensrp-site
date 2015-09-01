@@ -21,12 +21,19 @@ angular.module('opensrpSiteApp')
         $scope.entryLimit = 8; // items per page
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
         $scope.$watch('search', function (newVal, oldVal) {   
-          $scope.filtered = filterFilter(data, newVal);    
+          $scope.filtered = filterFilter(data, newVal);          
           $scope.totalItems = $scope.filtered.length;
           $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
           $scope.currentPage = 1;
         }, true);        
         
+    };
+    this.download = function($scope,data){        
+        if ($scope.filtered) {
+            JSONToCSVConvertor($scope.filtered, "Export Report", true);
+        }else{
+            JSONToCSVConvertor(data, "Export Report", true);
+        }
     }
     // AngularJS will instantiate a singleton by calling "new" on this function
   });

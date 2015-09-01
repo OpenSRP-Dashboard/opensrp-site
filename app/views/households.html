@@ -34,7 +34,7 @@
                       
                     </tbody>
               </table>
-              
+              <button class='gen_btn' ng-click="download()">Export Data</button>
                 <pagination page="currentPage" max-size="noOfPages" total-items="totalItems" items-per-page="entryLimit"></pagination>
                <p class="text-center" ng-show="loading">
                 <img src="images/spinner.gif"  alt="Opensrp"/>
@@ -48,10 +48,7 @@
 
     
     
-<div class='mydiv'>    
-    <textarea id="txt" class='txtarea'>{{hhRegisterEntries}}</textarea>
-    <button class='gen_btn'>Generate File</button>
-</div>
+
 <data-ng-include src="'views/partials/footer.html'" style="clear: both;" class="navbar"></data-ng-include>
 
 

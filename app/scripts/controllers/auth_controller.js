@@ -9,7 +9,7 @@
  */
 angular.module('opensrpSiteApp')
    .controller('LoginCtrl', function ($scope, $location, $http, $window, Authentication, LoginService) {
-        'use strict';
+       
 
         $scope.loginUser = function () {
             LoginService.login($scope.username, $scope.password).then(function (result) {
@@ -32,7 +32,7 @@ angular.module('opensrpSiteApp')
         };
     })
     .controller('LogoutCtrl', function ($scope, $location, $http, $window, Authentication) {
-        'use strict';
+        
 
         Authentication.clearCredentials();
         $location.path('#/');

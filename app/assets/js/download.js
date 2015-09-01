@@ -1,4 +1,4 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
     $('button').click(function(){
         var data = $('#txt').val();
         if(data == '')
@@ -6,7 +6,7 @@ $(document).ready(function(){
         
         JSONToCSVConvertor(data, "Vehicle Report", true);
     });
-});
+});*/
 
 function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object

@@ -14,10 +14,12 @@ angular.module('opensrpSiteApp')
       'AngularJS',
       'Karma'
     ];
-  $scope.download= function(){
-      //JSONToCSVConvertor(data, "Vehicle Report", true);
-  }; 
+   
   $scope.data = HHRegisterService.Data();
   page.pagination($scope,$scope.data);
   
+  $scope.download= function(){
+      //JSONToCSVConvertor($scope.data, "Vehicle Report", true);
+      page.download($scope, $scope.data);
+  };
 });
