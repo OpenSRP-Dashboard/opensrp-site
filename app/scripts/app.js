@@ -18,7 +18,7 @@ angular
   .config(['$httpProvider', function ($httpProvider) {           
       $httpProvider.defaults.cache = true;
   }])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider,$locationProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -57,6 +57,7 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+      //$locationProvider.html5Mode(true);
   })  
   .run(function ($rootScope, $location, $window, Authentication, $http) {
       'use strict';

@@ -15,6 +15,7 @@ angular.module('opensrpSiteApp')
           start = +start;
           return input.slice(start);
         }
+        
       return [];
     };
   });

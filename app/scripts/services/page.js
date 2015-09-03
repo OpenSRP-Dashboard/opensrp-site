@@ -21,10 +21,27 @@ angular.module('opensrpSiteApp')
         $scope.entryLimit = 8; // items per page
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
         $scope.$watch('search', function (newVal, oldVal) {   
-          $scope.filtered = filterFilter(data, newVal);          
-          $scope.totalItems = $scope.filtered.length;
-          $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
-          $scope.currentPage = 1;
+          //$scope.filtered = filterFilter(data, newVal);
+          $scope.datas = [];
+          $scope.indicator = 0;
+          //console.log(newVal.FWWOMAGE);
+          angular.forEach(data, function(item, key) {            
+            if(parseInt(item.FWWOMAGE) == parseInt(newVal.FWWOMAGE)) {
+                $scope.indicator = 1;
+                    $scope.datas.push(item);
+                }
+            });
+            if (parseInt(newVal.FWWOMAGE)) {
+              $scope.data = $scope.datas;            
+            } else {
+              $scope.data = $scope.data;            
+            }
+            var d = $scope.data;
+            
+            console.log($scope.data);
+            $scope.totalItems = $scope.data.length;
+            $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
+            $scope.currentPage = 1;
         }, true);        
         
     };

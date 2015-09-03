@@ -20,6 +20,6 @@ angular.module('opensrpSiteApp')
   
   $scope.download= function(){
       //JSONToCSVConvertor($scope.data, "Vehicle Report", true);
-      page.download($scope, $scope.data);
+    page.download($scope, $scope.data);
   };
 });

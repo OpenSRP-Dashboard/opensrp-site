@@ -1,69 +1,280 @@
-<data-ng-include src="'views/partials/header.html'"></data-ng-include>
-<data-ng-include src="'views/partials/main-navbar.html'"></data-ng-include>
-<div class="container-fluid container-tall">
-    <div class="row-fluid">
-        <div class="span10">
-            <div ng-include="'views/partials/indicator-menu.html'" class="hide"></div>
-           <br><br><br><br><br><br /><br />
-           <h1>Elco List {{totalItems}}</h1>
-            <label>Search:</label> <input type="text" ng-model="search.FWWOMAGE" placeholder="Search" />
-            <label>Search:</label> <input type="text" ng-model="search.FWWOMFNAME" placeholder="Search" />
-	    <p><strong><a href="" ng-click="resetFilters()">Show All</a></strong></p>
-            <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th> <a href="/#/elcos" ng-click="sortType = 'FWWOMFNAME'; sortReverse = !sortReverse">FWWOMFNAME
-                            <span ng-show="sortType == 'FWWOMFNAME' && !sortReverse" class="fa fa-caret-down"></span>
-                            <span ng-show="sortType == 'FWWOMFNAME' && sortReverse" class="fa fa-caret-up"></span>
-                            </a>                        
-                        </th>
-                        <th>
-                            <a href="/#/elcos" ng-click="sortType = 'FWGENDER'; sortReverse = !sortReverse">FWGENDER
-                            <span ng-show="sortType == 'FWGENDER' && !sortReverse" class="fa fa-caret-down"></span>
-                            <span ng-show="sortType == 'FWGENDER' && sortReverse" class="fa fa-caret-up"></span>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="/#/elcos" ng-click="sortType = 'FWWOMAGE'; sortReverse = !sortReverse">FWWOMAGE
-                            <span ng-show="sortType == 'FWWOMAGE' && !sortReverse" class="fa fa-caret-down"></span>
-                            <span ng-show="sortType == 'FWWOMAGE' && sortReverse" class="fa fa-caret-up"></span>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="/#/elcos" ng-click="sortType = 'FWHUSNAME'; sortReverse = !sortReverse">FWHUSNAME
-                            <span ng-show="sortType == 'FWHUSNAME' && !sortReverse" class="fa fa-caret-down"></span>
-                            <span ng-show="sortType == 'FWHUSNAME' && sortReverse" class="fa fa-caret-up"></span>
-                            </a>
+<data-ng-include src="'views/partials/header-inner.html'"></data-ng-include>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 col-md-3">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <div data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    <span class="glyphicon glyphicon-folder-close"></span>
+                                    Content
+                                </div>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <ul class="nav">
+                                    <li><a href="#glyphicons-glyphs">Available glyphs</a></li>
+                                    <li><a href="#glyphicons-how-to-use">How to use</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <div data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                    Modules
+                                </div>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            <a href="#">Orders</a> <span class="label label-success">$ 320</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="#">Invoices</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="#">Shipments</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="#">Tex</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <div data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    Account
+                                </div>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            <a href="#">Change Password</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="#">Notifications</a> <span class="label label-info">5</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="#">Import/Export</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-trash text-danger"></span><a href="#" class="text-danger">
+                                                Delete Account</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <div data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                                    <span class="glyphicon glyphicon-file"></span>
+                                    Reports
+                                </div>
+                            </h4>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-usd"></span><a href="#">Sales</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-user"></span><a href="#">Customers</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-tasks"></span><a href="#">Products</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-shopping-cart"></span><a href="#">Shopping Cart</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                             
-                        </th>
-                        <th>
-                            <a href="http://localhost:9000/#/elcos" ng-click="sortType = 'FWNHREGDATE'; sortReverse = !sortReverse">FWNHREGDATE
-                            <span ng-show="sortType == 'FWNHREGDATE' && !sortReverse" class="fa fa-caret-down"></span>
-                            <span ng-show="sortType == 'FWNHREGDATE' && sortReverse" class="fa fa-caret-up"></span>
-                            </a>                            
-                        </th>                        
-                      </tr>
-                    </thead>
-                    <tbody>
-                       <tr ng-repeat="elcoRegisterEntry in data | filter:search | orderBy:sortType:sortReverse | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit" >                  
-                        <td>{{elcoRegisterEntry.FWWOMFNAME}}</td>
-                        <td>{{elcoRegisterEntry.FWGENDER}}</td>
-                        <td>{{elcoRegisterEntry.FWWOMAGE}}</td>
-                        <td>{{elcoRegisterEntry.FWHUSNAME}}</td>
-                         <td>{{elcoRegisterEntry.FWBIRTHDATE}}</td>                        
-                      </tr>                      
-                    </tbody>
-              </table>
-             <pagination page="currentPage" max-size="noOfPages" total-items="totalItems" items-per-page="entryLimit"></pagination>
-            <p class="text-center" ng-show="loading">
-                <img src="images/spinner.gif"  alt="Opensrp"/>
-		
-	    </p>
-          <!--   <div ng-include="'views/partials/anm-data-summary.html'"></div> -->
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            <h5>Search Title</h5>
+            <div class="col-sm-9 col-md-9">
+                <div class="well">
+                    <div class="pull-left search">
+                        <input class="form-control" type="text" placeholder="Search">
+                    </div>
+                    <div class="pull-left search">
+                        <input class="form-control" type="text" placeholder="Search">
+                    </div>
+                    <div class="pull-left search">
+                        <input class="form-control" type="text" placeholder="Search">
+                    </div>
+                    <div class="pull-left search">
+                        <input class="form-control" type="text" placeholder="Search">
+                    </div>
+    
+                </div>
+                <!-- content accordion  start -->           
+                <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading2" role="tab" id="headingOne">
+                            <table>
+                                <thead> <!--table head-->
+                                    <tr style="background:none">
+                                        <th style="width:250px; font-size:12px;">
+                                            <a href="/#/elcos" ng-click="sortType = 'FWWOMFNAME'; sortReverse = !sortReverse">FWWOMFNAME
+                                                <span ng-show="sortType == 'FWWOMFNAME' && !sortReverse" class="fa fa-caret-down"></span>
+                                                <span ng-show="sortType == 'FWWOMFNAME' && sortReverse" class="fa fa-caret-up"></span>
+                                            </a>                        
+                                        </th>
+                                        <th style="width:245px;">
+                                            <a href="/#/elcos" ng-click="sortType = 'FWGENDER'; sortReverse = !sortReverse">FWGENDER
+                                                <span ng-show="sortType == 'FWGENDER' && !sortReverse" class="fa fa-caret-down"></span>
+                                                <span ng-show="sortType == 'FWGENDER' && sortReverse" class="fa fa-caret-up"></span>
+                                            </a>
+                                        </th>
+                                        <th>
+                                            <a href="/#/elcos" ng-click="sortType = 'FWWOMAGE'; sortReverse = !sortReverse">FWWOMAGE
+                                                <span ng-show="sortType == 'FWWOMAGE' && !sortReverse" class="fa fa-caret-down"></span>
+                                                <span ng-show="sortType == 'FWWOMAGE' && sortReverse" class="fa fa-caret-up"></span>
+                                            </a>
+                                        </th>
+                                        <th>
+                                            <a href="/#/elcos" ng-click="sortType = 'FWHUSNAME'; sortReverse = !sortReverse">FWHUSNAME
+                                                <span ng-show="sortType == 'FWHUSNAME' && !sortReverse" class="fa fa-caret-down"></span>
+                                                <span ng-show="sortType == 'FWHUSNAME' && sortReverse" class="fa fa-caret-up"></span>
+                                            </a>
+                                    
+                                        </th>
+                                        <th>
+                                            <a href="/#/elcos"  ng-click="sortType = 'FWNHREGDATE'; sortReverse = !sortReverse">FWNHREGDATE
+                                                <span ng-show="sortType == 'FWNHREGDATE' && !sortReverse" class="fa fa-caret-down"></span>
+                                                <span ng-show="sortType == 'FWNHREGDATE' && sortReverse" class="fa fa-caret-up"></span>
+                                            </a>                            
+                                        </th>                        
+                                    </tr>
+                                </thead><!--//table head-->
+                            </table>                        
+                        </div>                       
+                    </div>
+                    
+                    <div class="panel panel-default" ng-repeat="elcoRegisterEntry in data | filter:search | orderBy:sortType:sortReverse | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                        <div class="panel-heading2" role="tab" id="headingTwo2">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <span class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#{{elcoRegisterEntry.CASEID}}" aria-expanded="false" aria-controls="collapseTwo">
+                                                <div class="btn-group-md">
+                                                    <img src="images/photo.png" alt="">
+                                                </div>
+                                            </span>
+                                        </th>  
+                                        <th>{{elcoRegisterEntry.FWWOMFNAME}}</th>
+                                        <th>{{elcoRegisterEntry.FWWOMBID}}</th>
+                                        <th>{{elcoRegisterEntry.FWWOMAGE}}</th>
+                                        <th>{{elcoRegisterEntry.FWHUSNAME}}</th>
+                                        <th>{{elcoRegisterEntry.FWBIRTHDATE}}</th> 
+                                    </tr>
+                                </thead>
+                            </table><!--//table body-->
+                        </div>
+                        <div id="{{elcoRegisterEntry.CASEID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">                    
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="images/photo2.png" class="img-circle img-responsive"> </div>
+                                        <div class=" col-md-9 col-lg-9 "> 
+                                            <table class="table table-user-information">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Department:</td>
+                                                        <td>Programming</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Hire date:</td>
+                                                        <td>06/23/2013</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Date of Birth</td>
+                                                        <td>01/24/1988</td>
+                                                    </tr>                       
+                                                    <tr>
+                                                        <td>Gender</td>
+                                                        <td>Male</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Home Address</td>
+                                                        <td>Metro Manila,Philippines</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Email</td>
+                                                        <td><a href="mailto:info@support.com">info@support.com</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Phone Number</td>
+                                                        <td>123-4567-890(Landline)<br><br>555-4567-890(Mobile)</td>
+                                                    </tr>
+                             
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>                     
+                            </div>
+                        </div
+                    
+                    </div>
+                    <pagination page="currentPage" max-size="noOfPages" total-items="totalItems" items-per-page="entryLimit"></pagination>
+                    
+                </div><!-- content accordion  end -->
+            </div>
         </div>
-    </div>
-    <data-ng-include src="'views/partials/footer.html'" style="clear: both;" class="navbar"></data-ng-include>
-</div>
+    
+</section>
+
+<data-ng-include src="'views/partials/footer.html'" style="clear: both;" class="navbar"></data-ng-include>
+
 
 
 

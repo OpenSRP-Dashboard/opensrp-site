@@ -1,31 +1,32 @@
-<div class="container-fluid">
-    <form class="form-signin form-horizontal" data-ng-submit="loginUser()">
-        <div><!-- <img src="http://farm8.staticflickr.com/7315/12166972196_f29feafb1d_o.png" alt="Dristhi Health Dashboard"/> -->
-        <img src="images/OpenSRP.png" alt="OpenSRP Health Dashboard"/>
-        </div>
-        <h2 class="form-signin-heading">Please sign in</h2>
-
-        <div class="control-group">
-            <label class="control-label" for="inputUser">Username</label>
-
-            <div class="controls">
-                <input type="text" id="inputUser" placeholder="Username" data-ng-model="username" required>
+<!-- login Grid Section -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2><img src="images/heder_logo.png" alt=""></h2>
+                    <hr class="star-primary">
+                </div>
             </div>
+            <div class="row"><!-- login form -->
+			<div class="col-md-4"></div>
+			<div class="col-md-4 col-h">									
+                    <p class="lead">Enter username and password</p>
+                    <form class="form-signin" data-ng-submit="loginUser()">			
+                                                <input type="text" class="form-control" id="inputUser" placeholder="Username" data-ng-model="username" required>                                                
+   						<input class="form-control" type="password" id="inputPassword" placeholder="Password" data-ng-model="password" required>
+                                                <button id="login" class="btn btn-lg btn-primary btn-block"
+						type="submit">Sign in</button>
+						 <div class="form-options">
+      						<div class="checkbox">
+							 <label> <input type="checkbox" name="remember"> Remember Me</label>
+					       </div>
+				          	<ul class="list-inline">
+					            <li class="pull-left"><a class="" href="#">Forgot Your Password?</a></li>
+					            <li class="pull-right"><a class="" href="#">No account, register</a></li>
+				       		</ul>
+        				</div> 
+                      </form>
+			  </div>
+			</div>
         </div>
-        <div class="control-group">
-            <label class="control-label" for="inputPassword">Password</label>
-
-            <div class="controls">
-                <input type="password" id="inputPassword" placeholder="Password" data-ng-model="password" required>
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <label class="checkbox">
-                    <input type="checkbox"> Remember me
-                </label>
-                <button type="submit" class="btn">Sign in</button>
-            </div>
-        </div>
-    </form>
-</div>
+    </section>
