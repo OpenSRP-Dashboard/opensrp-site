@@ -12,7 +12,22 @@ angular.module('opensrpSiteApp')
         var elcos = null;
         var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username; 
         var elcoData = $http.get(apiURLs, { cache: true}).success(function (data) {            
-            elcos = data.ecRegisterEntries;            
+            elcos = data.ecRegisterEntries;
+            //console.log(elcos);
+            window.elcoData = JSON.parse(JSON.stringify(data));            
+            var s= jsonsql.query("select * from elcoData.ecRegisterEntries where (PROVIDERID=='opensrp') ",elcoData);
+            console.log(s.length);
+            var results =[];
+             var arr = [];
+            for(var j=0;j<3;j++){
+                arr[j] = []; 
+                for (var i = 0; i <4; i++) {
+                    arr[j][i] = j*i;
+                    //results.push(d);
+                }
+                //results.push( JSON.stringify(sub));
+            }
+            console.log(arr.length);
         });    
         return {
             promise:elcoData,
