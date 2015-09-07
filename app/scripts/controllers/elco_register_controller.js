@@ -12,7 +12,6 @@ angular.module('opensrpSiteApp')
       $scope.numberPattern = /^\d*$/;
       $scope.data = ElcoRegisterService.Data();
       var dta = $scope.data;
-      
-      
+     
       page.pagination($scope,$scope.data);
   });

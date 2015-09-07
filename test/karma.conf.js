@@ -37,6 +37,7 @@ module.exports = function(config) {
       'bower_components/highcharts-release/highcharts-more.js',
       'bower_components/highcharts-release/modules/exporting.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'bower_components/ngDialog/js/ngDialog.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

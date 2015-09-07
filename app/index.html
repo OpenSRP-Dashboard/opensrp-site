@@ -8,6 +8,8 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/ngDialog/css/ngDialog.css" />
+    <link rel="stylesheet" href="bower_components/ngDialog/css/ngDialog-theme-default.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -40,8 +42,10 @@
     <![endif]-->
     
   </head>
-  <body ng-app="opensrpSiteApp">      
-    <div data-ng-view></div>
+  <body ng-app="opensrpSiteApp">
+    <resolve-loader></resolve-loader>
+    
+    <div data-ng-view class="fadein"></div>
     <script type="text/javascript" src="assets/plugins/jquery-1.11.1.min.js"></script>
         
     
@@ -67,6 +71,7 @@
     <script src="bower_components/highcharts-release/highcharts-more.js"></script>
     <script src="bower_components/highcharts-release/modules/exporting.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/ngDialog/js/ngDialog.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     
@@ -87,6 +92,7 @@
     <script src="scripts/controllers/elco_register_controller.js"></script>
     <script src="scripts/services/page.js"></script>
     <script src="scripts/filters/search.js"></script>
+        <script src="scripts/directives/resolveloading.js"></script>
         <!-- endbuild -->
 </body>
 </html>

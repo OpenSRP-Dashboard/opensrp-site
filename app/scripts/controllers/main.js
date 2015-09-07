@@ -8,10 +8,16 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('MainCtrl', function () {
+  .controller('MainCtrl', function ($scope,ngDialog) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+    $scope.clickToOpen = function () {
+        ngDialog.open({
+          template: '<p>my template</p>',
+          plain: true
+      });
+    };
   });
