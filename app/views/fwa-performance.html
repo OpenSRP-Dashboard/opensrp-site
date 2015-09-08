@@ -1,0 +1,49 @@
+<data-ng-include src="'views/partials/header-inner.html'"></data-ng-include>
+<script type="text/javascript" src="assets/js/download.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css" />
+<script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+<section>
+    <div class="container">
+        <div class="row">
+            <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include>           
+            <div class="col-sm-9 col-md-9">
+                <!-- content accordion  start -->
+                <div>
+                  <input type="daterange" ng-model="dateRange">
+                    <button ng-click="report(dateRange)">Report</button>
+                    
+                </div>
+                <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default" >
+                        <div class="panel-heading2" role="tab" id="headingTwo2">
+                            <table class="table table-striped collapsed">
+                                <thead>
+                                    <tr ng-repeat="all in data"  ng-if="$first">
+                                        <th>User </th>
+                                       
+                                        <th ng-repeat="a in range(5)  track by $index"> Week {{$index+1}} </th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="all in data | filter:search | orderBy:sortType:sortReverse | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">                                         
+                                        
+                                        <td width="100" ng-repeat="d in all.data">{{d.init}}</td>
+                                       
+                                    </tr>
+                               </tbody>
+                            </table><!--//table body-->
+                        </div>                        
+                    </div>                   
+                </div>
+                <pagination page="currentPage" max-size="noOfPages" total-items="totalItems" items-per-page="entryLimit"></pagination>                    
+            </div><!-- content accordion  end -->
+        </div>
+    </div>    
+</section>
+
+<data-ng-include src="'views/partials/footer.html'" style="clear: both;" class="navbar"></data-ng-include>
+
+
+
+
