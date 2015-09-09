@@ -9,12 +9,15 @@
  */
 angular.module('opensrpSiteApp')
    .controller('LoginCtrl', function ($scope, $location, $http, $window, Authentication, LoginService) {
-       
+       $scope.loading = false;
 
         $scope.loginUser = function () {
+          $scope.loading = true;
             LoginService.login($scope.username, $scope.password).then(function (result) {
 		//result=true;
+                
                 if (result === true) {
+                    $scope.loading = false;
                     Authentication.authenticate($scope.username, $scope.password);
                     $window.location = '#/';
                     if (!$scope.$$phase) {

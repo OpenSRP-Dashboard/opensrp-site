@@ -16,8 +16,7 @@ angular.module('opensrpSiteApp')
     ];
     $scope.range = function(n) {
         return new Array(n);
-    };
-    
+    }; 
     
     $scope.data = FWAPerformanceService.Data();    
     function getDates(startDate, stopDate) {

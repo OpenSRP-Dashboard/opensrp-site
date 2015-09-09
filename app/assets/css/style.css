@@ -663,6 +663,20 @@ th {
 }
 /* search field*/
 
-.scroll{    
-    overflow: scroll;
+.login{    
+    padding-top: 20px;
+}
+.panel-group1 {
+    clear: both;
+    margin-bottom: 21px;
+    overflow-x: scroll;
+}
+.red {
+    color: red;
+}
+.black {
+    color: blue;
+}
+.blue{
+    color:blue;
 }

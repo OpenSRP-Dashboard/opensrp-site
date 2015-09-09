@@ -1,5 +1,5 @@
 <!-- login Grid Section -->
-<section id="portfolio">
+<section id="portfolio" class="login">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -9,7 +9,11 @@
         </div>
         <div class="row"><!-- login form -->
 	    <div class="col-md-4"></div>
-	    <div class="col-md-4 col-h">									
+            
+	    <div class="col-md-4 col-h">
+                <center><span class="text-center" ng-show="loading">
+                <img src="images/spinner.gif"  alt="Opensrp"/>
+                 </span></center>
                 <p class="lead">Enter username and password</p>
                 <form class="form-signin" data-ng-submit="loginUser()">			
                     <input type="text" class="form-control" id="inputUser" placeholder="Username" data-ng-model="username" required>                                                
