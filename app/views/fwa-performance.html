@@ -16,12 +16,12 @@
                 <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default" >
                         <div class="panel-heading2" role="tab" id="headingTwo2">
-                            <table class="table table-striped collapsed">
+                            <table class="table table-striped scroll">
                                 <thead>
                                     <tr ng-repeat="all in data"  ng-if="$first">
                                         <th>User </th>
                                        
-                                        <th ng-repeat="a in range(5)  track by $index"> Week {{$index+1}} </th>
+                                        <th ng-repeat="a in range(all.data.length-1)  track by $index"> Week {{$index+1}} </th>
                                        
                                     </tr>
                                 </thead>

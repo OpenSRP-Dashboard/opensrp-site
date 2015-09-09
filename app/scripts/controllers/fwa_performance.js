@@ -30,9 +30,9 @@ angular.module('opensrpSiteApp')
       return dateArray;
     }               
      // create weeks with demanding day     
-    function calculateWeek(){
-      var days = getDates('2015-03-31','2015-04-30');
-      var totalDays = parseInt(getDates('2015-03-31','2015-04-30').length);            
+    function calculateWeek(start,end){
+      var days = getDates(start,end);
+      var totalDays = parseInt(getDates(start,end).length);            
       var totalWeeks = Math.ceil(totalDays/7); 
       var weeks = [];
       for(var initWeeks=0;initWeeks<totalWeeks;initWeeks++){
@@ -51,8 +51,8 @@ angular.module('opensrpSiteApp')
       return weeks;
     }    
     //provider list
-    function dataOperation(getData){
-      var weeks = calculateWeek();
+    function dataOperation(getData,start,end){
+      var weeks = calculateWeek(start,end);
       var providerList = ['opensrp','sohel','demotest','proshanto','asif','shakil','shakil','shakil','shakil','shakil','shakil','shakil','shakil','shakil','shakil'];
       var reportDatas= [];
       var object = new Object();
@@ -71,15 +71,22 @@ angular.module('opensrpSiteApp')
       return reportDatas;
     }    
     window.getData = JSON.parse(JSON.stringify($scope.data)); 
-    $scope.data =   dataOperation(getData);
+    $scope.data =   dataOperation(getData,'2015-01-01','2015-12-31');
     page.pagination($scope,$scope.data);
     $scope.report = function(date){
-     var dd= JSON.stringify(date.endDate._d);
-      var  d = new Date(dd);
-      console.log(d);
-      var start = date.startDate._i[0]+'-'+date.startDate._i[1]+'-'+date.startDate._i[2];
-      var end = date.endDate._i[0]+'-'+date.endDate._i[1]+'-'+date.endDate._i[2];
-      console.log(start);
-      console.log(end)
+      var stratMonth = date.startDate._d.getMonth();
+      stratMonth =  stratMonth < 10 ? '0' + stratMonth : '' + stratMonth;
+      var startDay = date.startDate._d.getDate();
+      startDay =  startDay < 10 ? '0' + startDay : '' + startDay;
+      var endMonth = date.endDate._d.getMonth();
+      endMonth =  endMonth < 10 ? '0' + endMonth : '' + endMonth;
+      var start = date.startDate._d.getFullYear()+'-'+stratMonth+'-'+startDay;
+      var endDay = date.endDate._d.getDate();
+      endDay =  endDay < 10 ? '0' + endDay : '' + endDay;
+      var end = date.endDate._d.getFullYear()+'-'+endMonth+'-'+endDay;
+      console.log(getData);
+      $scope.data =   dataOperation(getData,start,end);
+      page.pagination($scope,$scope.data);
+      
     }
   });

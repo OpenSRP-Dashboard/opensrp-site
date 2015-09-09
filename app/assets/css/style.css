@@ -663,4 +663,6 @@ th {
 }
 /* search field*/
 
-
+.scroll{    
+    overflow: scroll;
+}
