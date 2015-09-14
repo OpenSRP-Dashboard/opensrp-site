@@ -32,7 +32,6 @@ module.exports = function(config) {
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/moment/moment.js',
-      'bower_components/momentjs/moment.js',
       'bower_components/angular-momentjs/angular-momentjs.js',
       'bower_components/highcharts-release/highcharts.js',
       'bower_components/highcharts-release/highcharts-more.js',
@@ -41,7 +40,9 @@ module.exports = function(config) {
       'bower_components/ngDialog/js/ngDialog.js',
       'bower_components/bootstrap-daterangepicker/daterangepicker.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
+      'bower_components/momentjs/moment.js',
       'bower_components/ng-bs-daterangepicker/src/ng-bs-daterangepicker.js',
+      'bower_components/angular-mapbox/dist/angular-mapbox.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

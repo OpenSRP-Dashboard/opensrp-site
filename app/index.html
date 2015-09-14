@@ -27,7 +27,7 @@
       
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/bootstrap-responsive.css" rel="stylesheet" />
-
+    
     <!-- Custom CSS -->
     <link href="assets/css/style.css" rel="stylesheet">
 
@@ -49,8 +49,8 @@
     
     <div data-ng-view class="fadein"></div>
     <script type="text/javascript" src="assets/plugins/jquery-1.11.1.min.js"></script>
-        
-    
+    <script src="bower_components/mapbox.js/mapbox.js"></script>    
+    <script src="assets/js/leaflet.markercluster.js"></script>
     <script type="text/javascript" src="assets/js/dump.js"></script>
     <script type="text/javascript" src="assets/js/jsonsql-0.1.js"></script>
     <script src="assets/js/jquery.easing.min.js"></script>
@@ -68,6 +68,7 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/momentjs/moment.js"></script>
     <script src="bower_components/angular-momentjs/angular-momentjs.js"></script>
     <script src="bower_components/highcharts-release/highcharts.js"></script>
     <script src="bower_components/highcharts-release/highcharts-more.js"></script>
@@ -76,8 +77,8 @@
     <script src="bower_components/ngDialog/js/ngDialog.js"></script>
     <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/momentjs/moment.js"></script>
     <script src="bower_components/ng-bs-daterangepicker/src/ng-bs-daterangepicker.js"></script>
+    <script src="bower_components/angular-mapbox/dist/angular-mapbox.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     
@@ -100,8 +101,8 @@
     <script src="scripts/filters/search.js"></script>
     <script src="scripts/directives/resolveloading.js"></script>
     <script src="scripts/controllers/fwa_performance.js"></script>
-        <script src="scripts/services/fwa-performance.js"></script>
-        <script src="scripts/directives/date_picker.js"></script>
+    <script src="scripts/services/fwa-performance.js"></script>
+    <script src="scripts/directives/date_picker.js"></script>
         <!-- endbuild -->
 </body>
 </html>

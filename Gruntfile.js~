@@ -76,11 +76,7 @@ module.exports = function (grunt) {
         livereload: 35729,
 	keepalive : true
       },
-     proxies: {
-            context: "*",  // When the url contains this...
-            host: "services.odata.org", // Proxy to this host
-            changeOrigin: true
-        },
+     
       livereload: {
         options: {
           open: true,

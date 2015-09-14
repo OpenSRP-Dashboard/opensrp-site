@@ -13,6 +13,7 @@ angular.module('opensrpSiteApp')
         var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username; 
         var elcoData = $http.get(apiURLs, { cache: true}).success(function (data) {            
             elcos = data.ecRegisterEntries;
+            console.log(elcos);
         });    
         return {
             promise:elcoData,
