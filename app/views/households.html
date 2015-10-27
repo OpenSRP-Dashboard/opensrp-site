@@ -7,7 +7,7 @@
         <div class="row">
             <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include>            
             <div class="col-sm-9 col-md-9">
-                <!--<div>
+                <div>
                     <div class="pull-left search">
                         <input class="form-control" ng-model="search.FWWOMFNAME" type="text" placeholder="Search by name">
                     </div>
@@ -20,7 +20,7 @@
                     <div class="pull-left search">
                         <input class="form-control" type="text" placeholder="Search">
                     </div>    
-                </div>-->
+                </div>
                 
                 <!-- content accordion  start -->           
                 <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
@@ -166,6 +166,7 @@
                     </div>
                     
                 </div>
+                <button class='gen_btn' ng-click="download()">Export Data</button>
                 <pagination page="currentPage" max-size="noOfPages" total-items="totalItems" items-per-page="entryLimit"></pagination>                    
             </div><!-- content accordion  end -->
         </div>

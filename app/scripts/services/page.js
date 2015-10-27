@@ -45,11 +45,11 @@ angular.module('opensrpSiteApp')
         }, true);        
         
     };
-    this.download = function($scope,data){        
+    this.download = function($scope,data,title){        
         if ($scope.filtered) {
-            JSONToCSVConvertor($scope.filtered, "Export Report", true);
+            JSONToCSVConvertor($scope.filtered, title, true);
         }else{
-            JSONToCSVConvertor(data, "Export Report", true);
+            JSONToCSVConvertor(data, title, true);
         }
     }
     // AngularJS will instantiate a singleton by calling "new" on this function
