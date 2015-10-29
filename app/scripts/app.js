@@ -31,6 +31,26 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/acl', {
+        templateUrl: 'views/acl.html',
+        controller: 'AclCtrl',
+        controllerAs: 'acl'
+      })
+      .when('/role', {
+        templateUrl: 'views/role.html',
+        controller: 'RoleCtrl',
+        controllerAs: 'role'
+      })
+      .when('/role/:param', {
+        templateUrl: 'views/role.html',
+        controller: 'RoleCtrl',
+        controllerAs: 'role'
+      })
+      .when('/access_tokens', {
+        templateUrl: 'views/accesstokens.html',
+        controller: 'AccesstokensCtrl',
+        controllerAs: 'access_tokens'
+      })
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
