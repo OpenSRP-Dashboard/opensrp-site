@@ -34,7 +34,26 @@ angular
       .when('/acl', {
         templateUrl: 'views/acl.html',
         controller: 'AclCtrl',
-        controllerAs: 'acl'
+        controllerAs: 'acl',       
+        
+      })
+      .when('/hh', {
+        templateUrl: 'views/hh.html',
+        controller: 'HhCtrl',
+        controllerAs: 'hh',       
+        
+      })
+      .when('/ec', {
+        templateUrl: 'views/ec.html',
+        controller: 'EcCtrl',
+        controllerAs: 'ec',       
+        
+      })
+      .when('/pw', {
+        templateUrl: 'views/pw.html',
+        controller: 'PwCtrl',
+        controllerAs: 'pw',       
+        
       })
       .when('/role', {
         templateUrl: 'views/role.html',

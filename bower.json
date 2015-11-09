@@ -26,8 +26,7 @@
   "overrides": {
     "bootstrap": {
       "main": [
-        "less/bootstrap.less",
-        "dist/css/bootstrap.css",
+        "less/bootstrap.less",        
         "dist/js/bootstrap.js"
       ]
     }

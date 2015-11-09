@@ -14,7 +14,11 @@ angular.module('opensrpSiteApp')
       'AngularJS',
       'Karma'
     ];
-  
+  $scope.detailData =
+     ' <a href="#/households">'+
+     '<i class="glyphicon glyphicon-list-alt"></i>'+
+    ' <span>Data Details</span>'+
+    '</a>';
   mapboxService.init({ accessToken: 'pk.eyJ1IjoicHJvYmlyMTIzIiwiYSI6IjhwRDJyZ0EifQ.KzOVb_vdS3CMYzUKMww59g' });
   $scope.latitude = function(location){      
       return location.split(" ")[0];

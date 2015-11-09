@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="bower_components/ngDialog/css/ngDialog.css" />
     <link rel="stylesheet" href="bower_components/ngDialog/css/ngDialog-theme-default.css" />
     <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css" />
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -44,10 +43,12 @@
     <![endif]-->
     
   </head>
-  <body ng-app="opensrpSiteApp">
+  <body id="page-top" class="index" ng-app="opensrpSiteApp"> 
     <resolve-loader></resolve-loader>
     
     <div data-ng-view class="fadein"></div>
+    
+    <data-ng-include src="'views/partials/footer.html'" style="clear: both;" class="navbar"></data-ng-include>
     <script type="text/javascript" src="assets/plugins/jquery-1.11.1.min.js"></script>
     <script src="bower_components/mapbox.js/mapbox.js"></script>    
     <script src="assets/js/leaflet.markercluster.js"></script>
@@ -108,6 +109,12 @@
     <script src="scripts/services/role.js"></script>
     <script src="scripts/controllers/accesstokens.js"></script>
     <script src="scripts/services/accesstokens.js"></script>
+        <script src="scripts/controllers/hh.js"></script>
+        <script src="scripts/controllers/ec.js"></script>
+        <script src="scripts/services/hh.js"></script>
+        <script src="scripts/services/ec.js"></script>
+        <script src="scripts/controllers/pw.js"></script>
+        <script src="scripts/services/pw.js"></script>
         <!-- endbuild -->
 </body>
 </html>

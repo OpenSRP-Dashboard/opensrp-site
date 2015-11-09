@@ -1,81 +1,168 @@
 <data-ng-include src="'views/partials/header.html'"></data-ng-include>
 <script type="text/javascript" src="assets/js/visual_chart.js"></script>
 <!-- box -->
+ <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="../../images/heder_logo.png" alt="">
+                    <div class="intro-text">
+                        <!--<span class="name">Start Bootstrap</span>-->
+                        <span class="skills">Open Smart Register Platform is an open source mobile health platform that allows frontline health workers to electronically register and track the health of their entire client                         population.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+</header>
+ 
 <div show-during-resolve style="width: 100%;height: 200px;background: #888;position: absolute;z-index:1000">   
   <center><img src="images/spinner.gif"  alt="Opensrp"/></center>
 </div>
-<div class='container sp'>
-    <div class="row ">
-	<div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-aqua">
-                <div class="inner">
-                    <h3>150 </h3>
-		    <h4>Household</h4>
-                    <p2>Registration</p2>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-bag"></i>
-                </div>
-                <a href="#households" class="small-box-footer"> View <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-	<div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-            <div class="small-box bg-green">
-                <div class="inner">
-                    <h3> 53</h3>
-		    <h4> ELCO</h4>
-                    <p2>Registration</p2>
-                </div>
-                <div class="icon"><i class="ion ion-stats-bars"></i></div>
-                <a href="#/elcos" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-	<div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-            <div class="small-box bg-yellow">
-                <div class="inner">
-                    <h3>44 </h3>
-		    <h4> ANC </h4>
-                    <p2> Registration </p2>
-                </div>
-                <div class="icon"><i class="ion ion-person-add"></i> </div>
-                <a href="index3.html" class="small-box-footer"> View <i class="fa fa-arrow-circle-right"></i> </a>
-            </div>
-        </div>
-	<div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-            <div class="small-box bg-red">
-                <div class="inner">
-                    <h3>65</h3>
-		    <h4>PNC</h4>
-                    <p2> Registration</p2>
-                </div>
-                <div class="icon"> <i class="ion ion-pie-graph"></i> </div>
-                <a href="index3.html" class="small-box-footer"> View <i class="fa fa-arrow-circle-right"></i> </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-lgreen">
-                <div class="inner">
-                    <h3>65 </h3>
-		    <h4>Child </h4>
-                    <p2> Registration </p2>
-                </div>
-                <div class="icon"> <i class="ion ion-pie-graph"></i> </div>
-                <a href="index3.html" class="small-box-footer"> View <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-    </div>
-    <div class="row">   
-        <div id="area" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-        <div id="column" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-        <div id="line" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-        <div id="pie" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-    </div>      
-</div>
-<data-ng-include src="'views/partials/footer.html'" style="clear: both;" class="navbar"></data-ng-include>
+    <div class='container sp'>
+			<div class="row ">
+				<div class="col-lg-3 col-xs-6">
+					<!-- small box -->
+					<div class="box1 ">
+						<a href="#hh"><img src="../../images/station_icon.png" class="imgs" alt="image"> </a>
+						<div class="counter">
+							<div class="counter_left">1</div>
+							<div class="counter_mid">0</div>
+							<div class="counter_mid">3</div>
+							<div class="counter_right">5</div>
+						</div>
+					</div>
+					<div class="count_box">
+						<div class="box_inner1">
+							<div class="box_top">  TODAY   </div>
+							 <div class="box_buttom">  50  </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top"> THIS WEEK 	 </div>
+							<div class="box_buttom"> 08 </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top">  THIS MONTH  </div>
+							<div class="box_buttom">   40  </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-xs-6">
+					<!-- small box -->
+					<div class="box2">
+						<a href="#/ec"><img src="../../images/cupol_icon.png" class="imgs" alt="slider">  </a>
+						<div class="counter">
+							<div class="counter_left">1</div> <div class="counter_mid">0</div><div class="counter_mid">3</div><div class="counter_right">5</div>
+						</div>
+					</div>
+					<div class="count_box">
+						<div class="box_inner1">
+							<div class="box_top1">  TODAY </div>
+							<div class="box_buttom1">  10  </div>
+						</div>
+						<div class="box_inner1">
+						  <div class="box_top1">  THIS WEEK  </div>
+						  <div class="box_buttom1"> 25 </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top1">   THIS MONTH   </div>
+							<div class="box_buttom1">  50 </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-xs-6">
+					<!-- small box -->
+					<div class="box3 ">
+						<a href="details.html"><img src="../../images/p_icon.png" class="imgs" alt="slider">  </a>
+						<div class="counter">
+							<div class="counter_left">1</div> <div class="counter_mid">0</div><div class="counter_mid">3</div><div class="counter_right">5</div>
+						</div>
+					</div>
+					<div class="count_box">
+						<div class="box_inner1">
+							<div class="box_top2">  TODAY  </div>
+							<div class="box_buttom2">  10  </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top2">   THIS WEEK  </div>
+							<div class="box_buttom2">  09  </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top2">  THIS MONTH  </div>
+								<div class="box_buttom2"> 18 </div>
+						</div>
+					</div>
+	
+				</div>
+				<div class="col-lg-3 col-xs-6 hidden">
+					<!-- small box -->
+					<div class="box3 ">
+						<a href="user.html"><img src="../../images/p_icon.png" class="imgs" alt="slider">  </a>
+						<div class="counter">
+							<div class="counter_left">1</div> <div class="counter_mid">0</div><div class="counter_mid">3</div><div class="counter_right">5</div>
+						</div>
+					</div>
+					<div class="count_box">
+						<div class="box_inner1">
+							<div class="box_top2"> TODAY </div>
+							<div class="box_buttom2"> 10 </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top2"> THIS WEEK </div>
+							<div class="box_buttom2"> 09  </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top2">THIS MONTH  </div>
+							<div class="box_buttom2">18 </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-xs-6 hidden">
+					<!-- small box -->
+					<div class="box3 ">
+						<a href="user.html"><img src="../../images/p_icon.png" class="imgs" alt="slider">  </a>
+						<div class="counter">
+							<div class="counter_left">1</div> <div class="counter_mid">0</div><div class="counter_mid">3</div><div class="counter_right">5</div>
+						</div>
+					</div>
+					<div class="count_box">
+						<div class="box_inner1">
+							<div class="box_top2"> TODAY  </div>
+							<div class="box_buttom2"> 10 </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top2"> THIS WEEK </div>
+							<div class="box_buttom2"> 09 </div>
+						</div>
+						<div class="box_inner1">
+						  <div class="box_top2"> THIS MONTH  </div>
+						  <div class="box_buttom2"> 18 </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-xs-6 hidden">
+					<!-- small box -->
+					<div class="box3 ">
+						<a href="user.html"><img src="../../images/p_icon.png" class="imgs" alt="slider">  </a>
+						<div class="counter">
+							<div class="counter_left">1</div> <div class="counter_mid">0</div><div class="counter_mid">3</div><div class="counter_right">5</div>
+						</div>
+					</div>
+					<div class="count_box">
+						<div class="box_inner1">
+							<div class="box_top2"> TODAY </div>
+							<div class="box_buttom2"> 10 </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top2"> THIS WEEK  </div>
+							<div class="box_buttom2">  09 </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top2">THIS MONTH </div>
+							<div class="box_buttom2"> 18 </div>
+						</div>
+					</div>
+				</div>
+			</div>
+
 
 

@@ -855,12 +855,12 @@
 }
 
 }
-/*@media (min-width: 418px) {
+@media (min-width: 418px) {
 	.pull-left {
-	width:100% !important;
-	border:1px solid #f00;
+	/*width:100% !important;
+	border:1px solid #f00;*/
 }
-}*/
+}
 @media (max-width: 360px) {
     .col-xs-6 {
     width: 65%;
