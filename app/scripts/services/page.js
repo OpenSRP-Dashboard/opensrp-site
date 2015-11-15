@@ -56,6 +56,9 @@ angular.module('opensrpSiteApp')
     this.downloadHH = function(data,title){     
       JSONToCSVConvertor(data, title, true);       
     }
+    this.downloadpw = function(data,title){     
+      psrfFromExport(data, title, true);       
+    }
     
     this.reportThisMonth = function($scope,data,$rootScope,today,ngBind){      
       $scope.search = {};

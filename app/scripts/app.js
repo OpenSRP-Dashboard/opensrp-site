@@ -143,8 +143,56 @@ angular
             type:"get"				
           });*/
       });
-      $rootScope.HHDATA= function(){
-        page.downloadHH(window.HhData,"Household form");
+      
+      $rootScope.HHDATAEXPORT= function(){
+        $("#export").css("display","none");
+        $("#wait").css("display","block");       
+        var url = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
+          $rootScope.Data = '';
+          $.ajax({
+            async:false,		   
+            dataType: "json",
+            cache:true,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
+            },
+            url:url,
+              success:function (data) {
+                window.HhData = data.hhRegisterEntries;
+                $("#wait").css("display","none");
+                $("#export").css("display","block");
+               page.downloadHH(window.HhData,"Household form");
+            },
+            type:"get"				
+          });
+        
+      }
+      $rootScope.PWDATAEXPORT= function(){
+        $("#wait").css("display","block");
+        $("#export").css("display","none");
+        var url = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username;
+          $rootScope.Data = '';
+          $.ajax({
+            async:false,		   
+            dataType: "json",
+            cache:true,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
+            },
+            url:url,
+              success:function (data) {
+                window.ecData = data.ecRegisterEntries;                
+                $("#wait").css("display","none");
+                $("#export").css("display","block");
+               page.downloadpw( window.ecData,"Psfr form");
+            },
+            type:"get"				
+          });
+        
+      }
+      $rootScope.CENCUSDATAEXPORT= function(){
+        alert("Comming Soon.....");
+        
       }
       
   

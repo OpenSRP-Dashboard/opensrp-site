@@ -14,12 +14,14 @@
   <div class="right-side">
   <ul>
     <li><a href="/#/"> <i class="glyphicon glyphicon-home"></i> <span>Home</span>  </a></li>    
-    <li>
-      <a href=""><i class="glyphicon glyphicon-download-alt"></i>  <span>Data Export </span> <i class="caret"></i></a>
+    <li><span style="display: none" id="wait">Please Wait ....</span>
+      <a id="export" href=""><i class="glyphicon glyphicon-download-alt"></i><span>   <span>Data Export </span> <i class="caret"></i></a>
       <ul>
-         <li ><a href="" ng-click="HHDATA()">NEW HOUSEHOLD Form</a></li>
-				<li> <a href"" ng-click="ECDATA()"> CENSUS FORM </a></li>
-        <li> <a href"" ng-click="PWDATA()">PSRF FORM </a></li>
+         <li>
+          <p class="hoverMenu"><a href="" ng-click="HHDATAEXPORT()">NEW HOUSEHOLD Form</a></p>
+          <p class="hoverMenu"><a href"" ng-click="CENCUSDATAEXPORT()"> CENSUS FORM </a></p>
+          <p class="hoverMenu"><a href"" ng-click="PWDATAEXPORT()">PSRF FORM </a></p>
+         </li>
       </ul>
     </li>
   

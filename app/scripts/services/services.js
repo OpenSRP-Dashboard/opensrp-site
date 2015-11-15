@@ -25,11 +25,11 @@ angular.module('opensrpSiteApp')
               }
               $rootScope.username = Base64.decode(authdata).split(':')[0];
                $rootScope.password = Base64.decode(authdata).split(':')[1];
-              var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username; 
+              /*var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username; 
                 var householdData = $http.get(apiURLs, { cache: true}).success(function (data) {
                 $rootScope.hhData = data.hhRegisterEntries;
                  window.HhData = data.hhRegisterEntries;
-              });
+              });*/
               
               return true;
           }

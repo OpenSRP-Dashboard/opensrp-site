@@ -144,5 +144,176 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
     document.body.removeChild(link);
 }
 
+function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
+   
+  
+    //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
+    var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+    
+    var CSV = '';    
+    //Set Report title in first row or line
+   
+    CSV += ReportTitle + '\r\n\n';
+
+    //This condition will generate the Label/Header
+    if (ShowLabel) {
+        var row = "";
+        
+        row += 'start' + ',';//1
+        row += 'end' + ',';//2
+        row += 'today' + ',';//3
+        row += 'FWGOBHHID' + ',';//4
+        row += 'FWJIVHHID' + ',';//5
+        row += 'FWUNION' + ',';//6
+        row += 'FWWARD' + ',';//7
+        row += 'FWSUBUNIT' + ',';//8
+        row += 'FWMAUZA_PARA' + ',';//9
+        row += 'wom_nid' + ',';//10
+        row += 'wob_bid' + ',';//11
+        row += 'wom_age' + ',';//12
+        row += 'first_name' + ',';//13
+        row += 'husname' + ',';//14
+        row += 'FD Worker ID' + ',';//15
+        row += 'FWA Worker ID' + ','; //16
+        row += 'Form Status at Submission' + ',';//17
+        row += 'SCHEDULED_DATE_PSRF_FD' + ',';//18
+        row += 'FWPSRDATE' + ',';//19
+        row += 'FWPSRSTS' + ',';//20
+        row += 'FWPSRLMP' + ',';//21
+        row += 'FWPSRPREGSTS' + ',';//22
+        row += 'FWPSRPREGWTD' + ',';//23
+        row += 'FWPSRHUSPREGWTD' + ',';//24
+        row += 'FWPSREVRPREG' + ',';//25
+        row += 'FWPSRTOTBIRTH' + ',';//26
+        row += 'FWPSRNBDTH' + ',';//27
+        row += 'FWPSRPRSB' + ',';//28
+        row += 'FWPSRPRMC' + ',';//29
+        row += 'FWPSRPREGTWYRS' + ',';//30
+        
+        row += 'FWPSRPRVPREGCOMP' + ',';//31
+        row += 'FWPSRPRCHECKS' + ',';//32
+        row += 'FWPSRANM' + ',';//33
+        row += 'FWPSRHBP' + ',';//34
+        row += 'FWPSRDBT' + ',';//35
+        row += 'FWPSRTHY' + ',';//36
+        row += 'FWPSRVDGMEM' + ',';//37
+        row += 'FWPSRWOMEDU' + ',';//38
+        row += 'FWPSRHHLAT' + ',';//39
+        row += 'FWPSRHHRICE' + ',';//40
+        row += 'FWPSRPHONE' + ',';//41
+        row += 'FWPSRPHONENUM' + ',';//42
+        row += 'FWPSRMUAC' + ',';//43
+        row += 'FWVG' + ',';//44
+        row += 'VWHRP' + ','; //45       
+        row += 'FWHR_PSR' + ',';//46
+        row += 'FWFLAGVALUE' + ',';//47
+        row += 'FWSORTVALUE' + ',';//48
+
+        row = row.slice(0, -1);
+        
+        //append Label row with line break
+        CSV += row + '\r\n';
+    }
+    var fd = '';
+    //1st loop is to extract each row
+    for (var i = 0; i < Data.length; i++) {      
+       
+        //2nd loop will extract each column and convert it in string comma-seprated
+      if(Data[i].PSRFDETAILS.length !=0){
+         console.log( Data[i].PSRFDETAILS.length);
+        for (var index=0 ; index< Data[i].PSRFDETAILS.length;index++) {
+            var row = "";
+            row += '"' + 'comming' + '",';//1
+            row += '"' + 'comming' + '",';//2
+            row += '"' + 'comming' +'",';//3
+            row += '"' + Data[i].GOBHHID + '",';//4
+            row += '"' + Data[i].JiVitAHHID + '",';//5
+            row += '"' + Data[i].FWWOMUNION + '",';//6
+            row += '"' + Data[i].FWWOMWARD + '",';//7
+            row += '"' + Data[i].FWWOMSUBUNIT + '",';//8
+            row += '"' + Data[i].FWWOMMAUZA_PARA + '",';//9
+            row += '"' + Data[i].FWWOMRETYPENID + '",';//10
+            row += '"' + Data[i].FWWOMRETYPEBID + '",';//11
+            row += '"' + Data[i].FWWOMAGE + '",';//12
+            row += '"' + Data[i].FWWOMFNAME + '",';//13
+            row += '"' + Data[i].FWHUSNAME + '",';//14            
+            row += '"' + fd + '",';//15
+            row += '"' + Data[i].PROVIDERID + '",';//16
+            row += '"' + 'comming'  + '",';//17
+            row += '"' + 'comming'  + '",';//18
+            row += '"' +Data[i].PSRFDETAILS[index].FWPSRDATE   + '",'; //19FWPSRSTS
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRSTS   + '",';//20
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRLMP + '",';//21
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRPREGSTS + '",';//22
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRWOMPREGWTD  + '",';//23
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRHUSPREGWTD + '",';//24
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSREVRPREG + '",';//25
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRTOTBIRTH + '",';//26
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRNBDTH + '",';//27
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRPRSB + '",';//28
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRPRMC + '",';//29
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRPREGTWYRS + '",';//30
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRPRVPREGCOMP + '",';//31
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRPRCHECKS + '",';//32
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRANM + '",';//33
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRHBP + '",';//34
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRDBT + '",';//35
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRTHY + '",';//36
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRVDGMEM + '",';//37
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRWOMEDU + '",';//38
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRHHLAT + '",';//39
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRHHRICE + '",';//40
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRPHONE + '",';//41
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRPHONENUM + '",';//42
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRMUAC + '",';//43
+            row += '"' + Data[i].details.FWVG + '",';//44
+            row += '"' + Data[i].details.FWHRP + '",';//45
+            row += '"' + Data[i].details.FWHR_PSR + '",';//46
+            row += '"' + Data[i].details.FWFLAGVALUE + '",';//47
+            row += '"' + Data[i].details.FWSORTVALUE + '",';//48           
+            //row.slice(0, row.length - 1);
+        
+            //add a line break after each row
+            CSV += row + '\r\n';
+            
+        }
+        
+      }
+        
+
+        
+    }
+
+    if (CSV == '') {        
+        alert("Invalid data");
+        return;
+    }   
+    
+    //Generate a file name
+    var fileName = "";
+    //this will remove the blank-spaces from the title and replace it with an underscore
+    fileName += ReportTitle.replace(/ /g,"_");   
+        //Initialize file format you want csv or xls
+    var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+   
+    // Now the little tricky part.
+    // you can use either>> window.open(uri);
+    // but this will not work in some browsers
+    // or you will not get the correct file extension    
+    
+    //this trick will generate a temp <a /> tag
+    var link = document.createElement("a");    
+    link.href = uri;
+   
+    //set the visibility hidden so it will not effect on your web-layout
+    link.style = "visibility:hidden";
+    link.download = fileName + ".csv";
+    
+    //this part will append the anchor tag and remove it after automatic click
+    document.body.appendChild(link);
+    link.click();
+    //window.open(link);
+    document.body.removeChild(link);
+}
 
 
