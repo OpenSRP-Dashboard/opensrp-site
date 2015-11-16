@@ -127,21 +127,7 @@ angular
               delete $http.defaults.headers.common['X-Requested-With'];
               delete $http.defaults.headers.common.Authorization;
           }
-          /*var url = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
-          $rootScope.Data = '';
-          $.ajax({
-            async:false,		   
-            dataType: "json",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
-            },
-            url:url,
-              success:function (data) {
-                window.HhData = data.hhRegisterEntries;
-               
-            },
-            type:"get"				
-          });*/
+         
       });
       
       $rootScope.HHDATAEXPORT= function(){
@@ -191,7 +177,26 @@ angular
         
       }
       $rootScope.CENCUSDATAEXPORT= function(){
-        alert("Comming Soon.....");
+       $("#export").css("display","none");
+        $("#wait").css("display","block");       
+        var url = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
+          $rootScope.Data = '';
+          $.ajax({
+            async:false,		   
+            dataType: "json",
+            cache:true,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
+            },
+            url:url,
+              success:function (data) {
+                window.HhData = data.hhRegisterEntries;
+                $("#wait").css("display","none");
+                $("#export").css("display","block");
+               page.downloadCS(window.HhData,"Census form");
+            },
+            type:"get"				
+          });
         
       }
       

@@ -59,6 +59,9 @@ angular.module('opensrpSiteApp')
     this.downloadpw = function(data,title){     
       psrfFromExport(data, title, true);       
     }
+    this.downloadCS = function(data,title){     
+      censusFornExport(data, title, true);       
+    }
     
     this.reportThisMonth = function($scope,data,$rootScope,today,ngBind){      
       $scope.search = {};
