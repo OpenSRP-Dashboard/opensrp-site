@@ -55,7 +55,8 @@ angular.module('opensrpSiteApp')
     var start = moment(currentMonth).format('YYYY-MM-DD');
     var end = moment(date).format('YYYY-MM-DD');
     window.getData = JSON.parse(JSON.stringify(getData));       
-    var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"' && PROVIDERID =='"+$rootScope.username+"' ) ",getData);                   
+    //var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"' && PROVIDERID =='"+$rootScope.username+"' ) ",getData);                   
+    var queryResult= jsonsql.query("select * from getData where (PSRFDETAILS != '' && PSRFDETAILS[0].today  >='"+start+"' && PSRFDETAILS[0].today  <='"+end+"'  && details.FWPSRPREGSTS == 1 ) ",getData);                      
     $("#"+ngBind).html(queryResult.length);
   }
   
@@ -65,7 +66,8 @@ angular.module('opensrpSiteApp')
     var end = moment(date).format('YYYY-MM-DD');
     var start = moment(date.setDate(date.getDate()-7)).format('YYYY-MM-DD');       
     window.getData = JSON.parse(JSON.stringify(getData));
-    var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"' && PROVIDERID =='"+$rootScope.username+"' ) ",getData);                   
+    var queryResult= jsonsql.query("select * from getData where (PSRFDETAILS != '' &&  PSRFDETAILS[0].today  >='"+start+"' && PSRFDETAILS[0].today  <='"+end+"'  && details.FWPSRPREGSTS == 1  ) ",getData);                      
+    
     $("#"+ngBind).html(queryResult.length);
   }
   
@@ -73,7 +75,7 @@ angular.module('opensrpSiteApp')
     var date = new Date();
     var currentDay = moment(date).format('YYYY-MM-DD');             
     window.getData = JSON.parse(JSON.stringify(getData));
-    var queryResult= jsonsql.query("select * from getData where ("+today+" =='"+currentDay+"'  && PROVIDERID =='"+$rootScope.username+"' ) ",getData);                   
+    var queryResult= jsonsql.query("select * from getData where (PSRFDETAILS != '' && PSRFDETAILS[0].today  >='"+currentDay+"' && details.FWPSRPREGSTS == 1  ) ",getData);                      
     $("#"+ngBind).html(queryResult.length);  
   }
   function TotalCount(total,type){
@@ -115,6 +117,50 @@ angular.module('opensrpSiteApp')
     }
    
   }
+  
+  function totalPW(data){
+     window.getData = JSON.parse(JSON.stringify(data));       
+    //var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"' && PROVIDERID =='"+$rootScope.username+"' ) ",getData);                   
+    var queryResult= jsonsql.query("select * from getData where (PSRFDETAILS != '' && PSRFDETAILS[0].FWPSRPREGSTS == 1) ",getData);                   
+    var stringLength = queryResult.length+"";
+    var Lenght = stringLength.split("");   
+    var type ='W';
+    if (Lenght.length == 1) {
+      $("#L"+type).html(0);
+      $("#M"+type+"1").html(0);
+      $("#M"+type+"2").html(0);
+      $("#M"+type+"3").html(0);
+      $("#R"+type).html(Lenght[0]);
+      
+    }else if(Lenght.length == 2){
+      $("#L"+type).html(0);
+      $("#M"+type+"1").html(0);
+      $("#M"+type+"2").html(0);
+      $("#M"+type+"3").html(Lenght[0]);
+      $("#R"+type).html(Lenght[1]);
+    }else if(Lenght.length == 3){
+      $("#L"+type).html(0);
+      $("#M"+type+"1").html(0);
+      $("#M"+type+"2").html(Lenght[0]);
+      $("#M"+type+"3").html(Lenght[1]);
+      $("#R"+type).html(Lenght[2]);
+      
+    }else if (Lenght.length == 4) {      
+      $("#L"+type).html(0);
+      $("#M"+type+"1").html(Lenght[0]);
+      $("#M"+type+"2").html(Lenght[1]);
+      $("#M"+type+"3").html(Lenght[2]);
+      $("#R"+type).html(Lenght[3]);
+    }else{      
+      $("#L"+type).html(Lenght[0]);
+      $("#M"+type+"1").html(Lenght[1]);
+      $("#M"+type+"2").html(Lenght[2]);
+      $("#M"+type+"3").html(Lenght[3]);
+      $("#R"+type).html(Lenght[4]);
+    }
+   
+  }
+  
   this.mainReportHH = function($scope,$rootScope,url,today,monthId,weekId,dayId){   
     $.ajax({
       async:false,		   
@@ -146,10 +192,17 @@ angular.module('opensrpSiteApp')
       },
       url:url,
       success:function (data) {
+        $rootScope.ECR = data.ecRegisterEntries;
         TotalCount(data.ecRegisterEntries.length,'E');
         thisMonth(data.ecRegisterEntries,today,monthId);
         thisWeek(data.ecRegisterEntries,today,weekId);
         toDay(data.ecRegisterEntries,today,dayId);
+        
+        totalPW(data.ecRegisterEntries);
+        thisMonthPW(data.ecRegisterEntries,today,'thisMonthPW');
+        thisWeekPW(data.ecRegisterEntries,today,'thisWeekPW');
+        toDayPW(data.ecRegisterEntries,today,'todayPW');
+        
       },
       type:"get"				
     });			

@@ -1,1 +1,98 @@
-<h1>Comming Soon</h1>
+<data-ng-include src="'views/partials/header.html'"></data-ng-include>
+
+
+<div class="container">
+    <section>    
+       <div class="row">
+        <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include>	
+    <div class="col-sm-9 col-md-9">
+      <div show-during-resolve class="loader">   
+        <center><img src="images/spinner.gif"  alt="Opensrp"/></center>
+      </div>
+			<div class="row"> <!-- main col left --> 
+				<div class="starter-template3">		
+					<div class="col-md-3">
+						<div class="location" >
+							<span class="glyphicon glyphicon-map-marker"></span>LOCATION
+						</div>
+					</div>
+					<div class="col-md-3">
+						<select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
+							<option value="01">District </option>
+							<option id="03"ng-click="search.FWWOMDISTRICT='BANDARBAN'">BANDARBAN</option>
+							<option id="04" ng-click="search.FWWOMDISTRICT='BARGUNA'">BARGUNA</option>
+						</select>
+					</div>
+					<div class=" col-md-3">
+						<select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
+							<option value="01">Upazila </option>
+							<option id="03" value="BANDARBAN">BANDARBAN</option>
+							<option id="04" value="BARGUNA">BARGUNA</option>
+						</select>
+					</div>
+					<div class=" col-md-3">
+						<select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
+							<option value="01">Union </option>
+							<option id="03" value="BANDARBAN">BANDARBAN</option>
+							<option id="04" value="BARGUNA">BARGUNA</option>
+						</select>
+					</div>
+                </div> <!-- main col right -->
+            </div><!--/row-->
+			<div class="row"> <!-- main col left --> 
+				<div class="starter-template3">		
+					<div class="col-md-3">
+						<div class="location" >
+							<span class="glyphicon glyphicon-user"></span>WORKER NAME
+						</div>
+					</div>
+					<div class="col-md-9">
+						<input id="f1_gn_q11_elem1" class="form-control" ng-model="search.PROVIDERID" value=" NAME" name="f1_gn_q11_elem1">
+					</div>
+                </div> <!-- main col right -->
+            </div><!--/row-->
+			<div class="row">
+        <div class="col-xs-6 col-lg-4">
+          <div class="box3 ">
+            <a href="/#/pw"><img src="../../images/p_icon.png" class="imgs" alt="image">  </a>              
+          </div>
+        </div><!--/.col-xs-6.col-lg-4-->
+				<div class="col-xs-6 col-lg-4">
+					<div class="box2">
+						<a href="/#/ec"><img src="../../images/cupol_icon.png" class="imgs" alt="image">  </a>			  
+					</div>
+				</div><!--/.col-xs-6.col-lg-4-->
+        <div class="col-xs-6 col-lg-4">
+					<div class="box1 selected ">
+						<a href="/#/hh"><img src="../../images/station_icon.png" class="imgs" alt="image"> </a>            
+					</div>
+				</div><!--/.col-xs-6.col-lg-4-->
+        
+      </div>
+		<div class="row">           
+            <div class="col-xs-6 col-lg-4">
+				<div class="count_box">
+						<div class="box_inner1">
+							<div class="box_top2">  TODAY  </div>
+							<div class="box_buttom2"  ng-bind="today">   </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top2">   THIS WEEK  </div>
+							<div class="box_buttom2"  ng-bind="thisWeek">    </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top2">  THIS MONTH  </div>
+								<div class="box_buttom2"  ng-bind="thisMonth">  </div>
+						</div>
+					</div>
+            </div><!--/.col-xs-6.col-lg-4-->			
+			<div class="col-xs-8 col-lg-8">
+				<img src="../../images/chart.png" class="imgs" alt="slider">
+			</div>
+        </div>
+    </div>
+</div>       
+</section>
+    
+
+

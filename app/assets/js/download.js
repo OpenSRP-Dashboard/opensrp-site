@@ -220,12 +220,12 @@ function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
        
         //2nd loop will extract each column and convert it in string comma-seprated
       if(Data[i].PSRFDETAILS.length !=0){
-         console.log( Data[i].PSRFDETAILS.length);
+        
         for (var index=0 ; index< Data[i].PSRFDETAILS.length;index++) {
             var row = "";
-            row += '"' + 'comming' + '",';//1
-            row += '"' + 'comming' + '",';//2
-            row += '"' + 'comming' +'",';//3
+            row += '"' + Data[i].PSRFDETAILS[index].start + '",';//1
+            row += '"' + Data[i].PSRFDETAILS[index].end + '",';//2
+            row += '"' + Data[i].PSRFDETAILS[index].today +'",';//3
             row += '"' + Data[i].GOBHHID + '",';//4
             row += '"' + Data[i].JiVitAHHID + '",';//5
             row += '"' + Data[i].FWWOMUNION + '",';//6
@@ -239,9 +239,9 @@ function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
             row += '"' + Data[i].FWHUSNAME + '",';//14            
             row += '"' + fd + '",';//15
             row += '"' + Data[i].PROVIDERID + '",';//16
-            row += '"' + 'comming'  + '",';//17
-            row += '"' + 'comming'  + '",';//18
-            row += '"' +Data[i].PSRFDETAILS[index].FWPSRDATE   + '",'; //19FWPSRSTS
+            row += '"' + fd  + '",';//17
+            row += '"' + Data[i].PSRFDETAILS[index].start  + '",';//18
+            row += '"' + Data[i].PSRFDETAILS[index].FWPSRDATE + '",'; //19FWPSRSTS
             row += '"' + Data[i].PSRFDETAILS[index].FWPSRSTS   + '",';//20
             row += '"' + Data[i].PSRFDETAILS[index].FWPSRLMP + '",';//21
             row += '"' + Data[i].PSRFDETAILS[index].FWPSRPREGSTS + '",';//22
@@ -316,4 +316,134 @@ function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
     document.body.removeChild(link);
 }
 
+
+function censusFornExport(JSONData, ReportTitle, ShowLabel) {
+  
+    //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
+    var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+    
+    var CSV = '';    
+    //Set Report title in first row or line
+     
+    CSV += ReportTitle + '\r\n\n';
+
+    //This condition will generate the Label/Header
+    if (ShowLabel) {
+        var row = "";
+        
+        //This loop will extract the label from 1st index of on array
+        /*for (var index in Data[0]) {
+            
+            //Now convert each value to string and comma-seprated
+            row += index + ',';
+        }*/
+        row += 'Form Status at Submission' + ','; //1
+        row += 'SCHEDULED_DATE_Census_FW' + ','; //2
+        row += 'today_census_FW' + ','; //3
+        row += 'start_census_FW' + ','; //4
+        row += 'end_census_FW' + ','; //5
+        row += 'FWCENDATE' + ','; //6
+        row += 'FWCENSTAT' + ','; //7
+        row += 'FWGOBHHID' + ','; //8
+        row += 'FWJIVHHID' + ','; //9
+        row += 'FWUNION' + ','; //10
+        row += 'FWWARD' + ','; //11
+        row += 'FWSUBUNIT' + ','; //12
+        row += 'FWMAUZA_PARA' + ','; //13
+        row += 'ELCO' + ','; //14
+        row += 'existing_ELCO' + ','; //15
+        row += 'new_ELCO' + ','; //16
+        row += 'CENDATE' + ','; //17
+        row += 'FWWOMFNAME' + ','; //18
+        row += 'FWBIRTHDATE' + ','; //19
+        row += 'FWWOMAGE' + ','; //20
+        row += 'FWCWOMSTRMEN' + ','; //21
+        row += 'FWCWOMHUSLIV' + ','; //22
+        row += 'FWCWOMHUSALV' + ','; //23
+        row += 'FWCWOMHUSSTR' + ','; //24
+        row += 'FWELIGIBLE' + ','; //25
+        row += 'FWWOMANYID' + ','; //26
+        row += 'FWWOMNID' + ','; //27
+        row += 'FWWOMBID' + ','; //28
+        row += 'FWHUSNAME' + ','; //29        
+        row = row.slice(0, -1);        
+        //append Label row with line break
+        CSV += row + '\r\n';
+    }
+    
+    //1st loop is to extract each row
+    for (var i = 0; i < Data.length; i++) {      
+        var comming = '';
+        //2nd loop will extract each column and convert it in string comma-seprated
+        for (var index=0 ; index< Data[i].ELCODETAILS.length;index++) {
+           var row = "";
+            row += '"' + comming + '",'; //1
+            row += '"' + comming + '",'; //2
+            row += '"' + Data[i].ELCODETAILS[index].TODAY + '",'; //3
+            row += '"' + Data[i].ELCODETAILS[index].START + '",'; //4
+            row += '"' + Data[i].ELCODETAILS[index].END + '",';//5
+            row += '"' + comming + '",';//6
+            row += '"' + comming + '",';//7
+            row += '"' + Data[i].FWGOBHHID + '",'; //8
+            row += '"' + Data[i].FWJIVHHID + '",'; //9
+            row += '"' + Data[i].FWSUBUNIT + '",';
+            row += '"' + Data[i].FWMAUZA_PARA + '",';
+            row += '"' + Data[i].FWHOHFNAME + '",';
+            row += '"' + Data[i].FWHOHBIRTHDATE + '",';
+            row += '"' + Data[i].FWHOHGENDER + '",';
+            row += '"' + Data[i].FWNHHMBRNUM + '",';
+            row += '"' + Data[i].FWNHHMWRA + '",';
+            row += '"' + Data[i].ELCODETAILS[index].TODAY + '",';
+            row += '"' + Data[i].ELCODETAILS[index].FWWOMFNAME + '",';
+            row += '"' + Data[i].ELCODETAILS[index].FWBIRTHDATE + '",';
+            row += '"' + Data[i].ELCODETAILS[index].FWWOMAGE + '",';
+            row += '"' + Data[i].ELCODETAILS[index].FWNHWOMSTRMEN + '",';
+            row += '"' + Data[i].ELCODETAILS[index].FWNHWOMHUSLIV + '",';
+            row += '"' + Data[i].ELCODETAILS[index].FWNHWOMHUSALV + '",';
+            row += '"' + Data[i].ELCODETAILS[index].FWNHWOMHUSSTR + '",';
+            row += '"' + Data[i].ELCODETAILS[index].FWELIGIBLE + '",';
+            row += '"' + Data[i].ELCODETAILS[index].FWWOMANYID + '",';
+            row += '"' + Data[i].ELCODETAILS[index].FWWOMNID + '",';
+            row += '"' + Data[i].ELCODETAILS[index].FWWOMBID + '",';
+            row += '"' + Data[i].ELCODETAILS[index].FWHUSNAME + '",';
+            row += '"' + Data[i].ELCO + '",';
+            
+            CSV += row + '\r\n';
+            
+        }
+
+        
+    }
+
+    if (CSV == '') {        
+        alert("Invalid data");
+        return;
+    }   
+    
+    //Generate a file name
+    var fileName = "";
+    //this will remove the blank-spaces from the title and replace it with an underscore
+    fileName += ReportTitle.replace(/ /g,"_");   
+        //Initialize file format you want csv or xls
+    var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+   
+    // Now the little tricky part.
+    // you can use either>> window.open(uri);
+    // but this will not work in some browsers
+    // or you will not get the correct file extension    
+    
+    //this trick will generate a temp <a /> tag
+    var link = document.createElement("a");    
+    link.href = uri;
+   
+    //set the visibility hidden so it will not effect on your web-layout
+    link.style = "visibility:hidden";
+    link.download = fileName + ".csv";
+    
+    //this part will append the anchor tag and remove it after automatic click
+    document.body.appendChild(link);
+    link.click();
+    //window.open(link);
+    document.body.removeChild(link);
+}
 
