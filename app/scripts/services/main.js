@@ -27,7 +27,7 @@ angular.module('opensrpSiteApp')
     var start = moment(currentMonth).format('YYYY-MM-DD');
     var end = moment(date).format('YYYY-MM-DD');
     window.getData = JSON.parse(JSON.stringify(getData));       
-    var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"' && PROVIDERID =='"+$rootScope.username+"' ) ",getData);                   
+    var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"') ",getData);                   
     $("#"+ngBind).html(queryResult.length);
   }
   function thisWeek(getData,today,ngBind){
@@ -35,7 +35,7 @@ angular.module('opensrpSiteApp')
     var end = moment(date).format('YYYY-MM-DD');
     var start = moment(date.setDate(date.getDate()-7)).format('YYYY-MM-DD');    
     window.getData = JSON.parse(JSON.stringify(getData));
-    var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"' && PROVIDERID =='"+$rootScope.username+"' ) ",getData);                   
+    var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"') ",getData);                   
     $("#"+ngBind).html(queryResult.length);
   }
   
@@ -43,7 +43,7 @@ angular.module('opensrpSiteApp')
     var date = new Date();
     var currentDay = moment(date).format('YYYY-MM-DD');             
     window.getData = JSON.parse(JSON.stringify(getData));
-    var queryResult= jsonsql.query("select * from getData where ("+today+" =='"+currentDay+"'  && PROVIDERID =='"+$rootScope.username+"' ) ",getData);                   
+    var queryResult= jsonsql.query("select * from getData where ("+today+" =='"+currentDay+"') ",getData);                   
     
     $("#"+ngBind).html(queryResult.length);  
   }
@@ -171,7 +171,7 @@ angular.module('opensrpSiteApp')
       },
       url:url,
         success:function (data) {
-          
+          window.getHHata = data.hhRegisterEntries
           TotalCount(data.hhRegisterEntries.length,'H');
           thisMonth(data.hhRegisterEntries,today,monthId);
           thisWeek(data.hhRegisterEntries,today,weekId);

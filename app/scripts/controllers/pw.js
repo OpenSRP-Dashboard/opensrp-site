@@ -8,14 +8,15 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('PwCtrl', function ($scope,$http,$rootScope,PW) {
+  .controller('PwCtrl', function ($scope,$http,$rootScope,PW,ElcoRegisterService) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-    console.log($rootScope.ECR);
-    PW.reportThisMonth($scope, $rootScope.ECR,$rootScope,'details.WomanREGDATE','thisMonth');
-    PW.reportThisWeek($scope, $rootScope.ECR,$rootScope,'details.WomanREGDATE','thisWeek');
-    PW.reportToday($scope,$rootScope.ECR,$rootScope,'details.WomanREGDATE','today'); 
+    
+    $scope.data = ElcoRegisterService.Data();
+    PW.reportThisMonth($scope, $scope.data,$rootScope,'details.WomanREGDATE','thisMonth');
+    PW.reportThisWeek($scope, $scope.data,$rootScope,'details.WomanREGDATE','thisWeek');
+    PW.reportToday($scope,$scope.data,$rootScope,'details.WomanREGDATE','today'); 
   });
