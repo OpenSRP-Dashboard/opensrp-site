@@ -39,17 +39,50 @@ angular.module('opensrpSiteApp')
       }        
        return weeks;
     }   
-    
-    this.chartDataCal = function(monthLists,data,DATE){     
-      window.columnChartData= [];
-      window.getHHData = JSON.parse(JSON.stringify(data));
-      for(var outer = 0;outer < monthLists.length;outer++){
-        var weeks =  getWeeksInMonth(moment(monthLists[outer]).format('MM'),moment(monthLists[outer]).format('YYYY'),moment(monthLists[outer]).format('YYYY-MM-DD'));
-        for(var inner=0;inner<weeks.length;inner++){
-          var start = weeks[inner].start;         
-          var queryResult= jsonsql.query("select * from getHHData where ("+DATE+" >='"+ weeks[inner].start+"' && "+DATE+" <='"+ weeks[inner].end+"') ",getHHData);                   
-          columnChartData.push({init:queryResult.length});          
+    function waitForElement($scope){
+      if(typeof window.columnChartData !== "undefined"){
+        
+        
+      }else{
+            setTimeout(function(){
+                waitForElement();
+            },250);
         }
-      }
     }
+    this.chartDataCal = function($scope,monthLists,data,DATE,$timeout){
+      $scope.search = {};
+      $scope.resetFilters = function () {    
+        $scope.search = {};
+      };      
+      $scope.$watch('search', function (newVal, oldVal) { 
+        window.columnChartData= [];
+        $scope.filtered = filterFilter(data, newVal);
+       
+        window.getHHData = JSON.parse(JSON.stringify($scope.filtered));
+        for(var outer = 0;outer < monthLists.length;outer++){
+          var weeks =  getWeeksInMonth(moment(monthLists[outer]).format('MM'),moment(monthLists[outer]).format('YYYY'),moment(monthLists[outer]).format('YYYY-MM-DD'));
+          for(var inner=0;inner<weeks.length;inner++){
+            var start = weeks[inner].start;         
+            var queryResult= jsonsql.query("select * from getHHData where ("+DATE+" >='"+ weeks[inner].start+"' && "+DATE+" <='"+ weeks[inner].end+"') ",getHHData);                   
+            columnChartData.push({init:queryResult.length});          
+          }
+        }
+        //waitForElement($scope);
+        $timeout(function () {
+          var monthNames = ["January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"];
+          $scope.labels = [monthNames[monthLists[0].getMonth()], monthNames[monthLists[1].getMonth()], monthNames[monthLists[2].getMonth()], monthNames[monthLists[3].getMonth()]];
+          $scope.series = ['1st Week ', '2nd Week ','3rd Week', '4th Week ','5th Week '];
+          
+          $scope.chartData = [
+            [columnChartData[0].init, columnChartData[5].init, columnChartData[10].init, columnChartData[15].init],
+            [columnChartData[1].init, columnChartData[6].init, columnChartData[11].init, columnChartData[16].init],
+            [columnChartData[2].init, columnChartData[7].init, columnChartData[12].init, columnChartData[17].init],
+            [columnChartData[3].init, columnChartData[8].init, columnChartData[13].init, columnChartData[18].init],
+            [columnChartData[4].init, columnChartData[9].init, columnChartData[14].init, columnChartData[19].init]
+          ];
+        }, 250);        
+      }, true);      
+    }
+   
   });

@@ -8,7 +8,7 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('EcCtrl', function ($scope,$http,$rootScope,ElcoRegisterService,page,EC,Common) {
+  .controller('EcCtrl', function ($scope,$http,$rootScope,$timeout,ElcoRegisterService,page,EC,Common) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -27,8 +27,9 @@ angular.module('opensrpSiteApp')
     monthLists[3] = new Date(date.getFullYear(), date.getMonth()-3, 1);
     
     $scope.data = ElcoRegisterService.Data();
-    Common.chartDataCal(monthLists,window.getECata,'details.WomanREGDATE')
-    page.reportThisMonth($scope,$scope.data,$rootScope,'details.WomanREGDATE','thisMonth');
-    page.reportThisWeek($scope,$scope.data,$rootScope,'details.WomanREGDATE','thisWeek');
-    page.reportToday($scope,$scope.data,$rootScope,'details.WomanREGDATE','today'); 
+    console.log($scope.data)
+    Common.chartDataCal($scope,monthLists,$scope.data,'WomanREGDATE',$timeout)
+    page.reportThisMonth($scope,$scope.data,$rootScope,'WomanREGDATE','thisMonth');
+    page.reportThisWeek($scope,$scope.data,$rootScope,'WomanREGDATE','thisWeek');
+    page.reportToday($scope,$scope.data,$rootScope,'WomanREGDATE','today'); 
   });

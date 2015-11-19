@@ -9,7 +9,7 @@ $(document).ready(function(){
         JSONToCSVConvertor(data, "Household form ", true);
     });
 });
-function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
+function newHhFormExport(JSONData, ReportTitle, ShowLabel) {
   
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
     var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
@@ -59,6 +59,8 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
         row += 'FWWOMBID' + ',';
         row += 'FWHUSNAME' + ',';
         row += 'ELCO' + ',';
+        row += 'Latitude' + ',';
+        row += 'Longitude' + ',';
         row = row.slice(0, -1);
         
         //append Label row with line break
@@ -66,11 +68,11 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
     }
     
     //1st loop is to extract each row
-    for (var i = 0; i < Data.length; i++) {      
-        
+    for (var i = 0; i < Data.length; i++) {
         //2nd loop will extract each column and convert it in string comma-seprated
-        for (var index=0 ; index< Data[i].ELCODETAILS.length;index++) {
-           var row = "";
+        for (var index=0 ; index< Data[i].ELCODETAILS.length;index++) {         
+          if (Data[i].ELCODETAILS[index].form_name =='FWNewHH') {
+            var row = "";
             row += '"' + Data[i].PROVIDERID + '",';
             row += '"' + Data[i].TODAY + '",';
             row += '"' + Data[i].START + '",';
@@ -98,25 +100,21 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
             row += '"' + Data[i].ELCODETAILS[index].FWELIGIBLE + '",';
             row += '"' + Data[i].ELCODETAILS[index].FWWOMANYID + '",';
             row += '"' + Data[i].ELCODETAILS[index].FWWOMNID + '",';
-            row += '"' + Data[i].ELCODETAILS[index].FWWOMBID + '",';
-            row += '"' + Data[i].ELCODETAILS[index].FWHUSNAME + '",';
+            row += '""' + Data[i].ELCODETAILS[index].FWWOMBID + '"",';
+            row += '"' + Data[i].ELCODETAILS[index].FWHUSNAME + '",';            
             row += '"' + Data[i].ELCO + '",';
-            
-            //row.slice(0, row.length - 1);
-        
-        //add a line break after each row
-        CSV += row + '\r\n';
-            
+            var gps = Data[i].ELCODETAILS[index].FWWOMGPS;
+            var location = gps.split(" ");
+            row += '"' + location[0] + '",';
+            row += '"' + location[1] + '",';            
+            CSV += row + '\r\n';
+          } 
         }
-
-        
     }
-
     if (CSV == '') {        
         alert("Invalid data");
         return;
-    }   
-    
+    } 
     //Generate a file name
     var fileName = "";
     //this will remove the blank-spaces from the title and replace it with an underscore
@@ -145,20 +143,14 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
 }
 
 function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
-   
-  
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
     var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
-    
     var CSV = '';    
     //Set Report title in first row or line
-   
     CSV += ReportTitle + '\r\n\n';
-
     //This condition will generate the Label/Header
     if (ShowLabel) {
-        var row = "";
-        
+        var row = "";        
         row += 'start' + ',';//1
         row += 'end' + ',';//2
         row += 'today' + ',';//3
@@ -188,8 +180,7 @@ function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
         row += 'FWPSRNBDTH' + ',';//27
         row += 'FWPSRPRSB' + ',';//28
         row += 'FWPSRPRMC' + ',';//29
-        row += 'FWPSRPREGTWYRS' + ',';//30
-        
+        row += 'FWPSRPREGTWYRS' + ',';//30        
         row += 'FWPSRPRVPREGCOMP' + ',';//31
         row += 'FWPSRPRCHECKS' + ',';//32
         row += 'FWPSRANM' + ',';//33
@@ -208,9 +199,7 @@ function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
         row += 'FWHR_PSR' + ',';//46
         row += 'FWFLAGVALUE' + ',';//47
         row += 'FWSORTVALUE' + ',';//48
-
-        row = row.slice(0, -1);
-        
+        row = row.slice(0, -1);        
         //append Label row with line break
         CSV += row + '\r\n';
     }
@@ -219,8 +208,7 @@ function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
     for (var i = 0; i < Data.length; i++) {      
        
         //2nd loop will extract each column and convert it in string comma-seprated
-      if(Data[i].PSRFDETAILS.length !=0){
-        
+      if(Data[i].PSRFDETAILS.length !=0){        
         for (var index=0 ; index< Data[i].PSRFDETAILS.length;index++) {
             var row = "";
             row += '"' + Data[i].PSRFDETAILS[index].start + '",';//1
@@ -271,24 +259,16 @@ function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
             row += '"' + Data[i].details.FWHR_PSR + '",';//46
             row += '"' + Data[i].details.FWFLAGVALUE + '",';//47
             row += '"' + Data[i].details.FWSORTVALUE + '",';//48           
-            //row.slice(0, row.length - 1);
-        
+            //row.slice(0, row.length - 1);        
             //add a line break after each row
             CSV += row + '\r\n';
-            
         }
-        
-      }
-        
-
-        
+      } 
     }
-
     if (CSV == '') {        
         alert("Invalid data");
         return;
-    }   
-    
+    }
     //Generate a file name
     var fileName = "";
     //this will remove the blank-spaces from the title and replace it with an underscore
@@ -318,19 +298,14 @@ function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
 
 
 function censusFornExport(JSONData, ReportTitle, ShowLabel) {
-  
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
-    var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
-    
+    var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;    
     var CSV = '';    
-    //Set Report title in first row or line
-     
+    //Set Report title in first row or line     
     CSV += ReportTitle + '\r\n\n';
-
     //This condition will generate the Label/Header
     if (ShowLabel) {
-        var row = "";
-        
+        var row = "";        
         //This loop will extract the label from 1st index of on array
         /*for (var index in Data[0]) {
             
@@ -376,10 +351,10 @@ function censusFornExport(JSONData, ReportTitle, ShowLabel) {
         var comming = '';
         //2nd loop will extract each column and convert it in string comma-seprated
         for (var index=0 ; index< Data[i].ELCODETAILS.length;index++) {
-          console.log(Data[i].ELCODETAILS.length);
-           var row = "";
+          if (Data[i].ELCODETAILS[index].form_name =='Census') {
+            var row = "";
             row += '"' + comming + '",'; //1
-            row += '"' + comming + '",'; //2
+            row += '"' + Data[i].ELCODETAILS[index].start + '",'; //2
             row += '"' + Data[i].ELCODETAILS[index].TODAY + '",'; //3
             row += '"' + Data[i].ELCODETAILS[index].start + '",'; //4
             row += '"' + Data[i].ELCODETAILS[index].end + '",';//5
@@ -405,21 +380,16 @@ function censusFornExport(JSONData, ReportTitle, ShowLabel) {
             row += '"' + Data[i].ELCODETAILS[index].FWELIGIBLE + '",'; //25
             row += '"' + Data[i].ELCODETAILS[index].FWWOMANYID + '",'; //26
             row += '"' + Data[i].ELCODETAILS[index].FWWOMRETYPENID + '",'; //27
-            row += '"' + Data[i].ELCODETAILS[index].FWWOMRETYPEBID + '",'; //28
-            row += '"' + Data[i].ELCODETAILS[index].FWHUSNAME + '",'; //29           
-            
+            row += '""' + Data[i].ELCODETAILS[index].FWWOMRETYPEBID + '"",'; //28
+            row += '"' + Data[i].ELCODETAILS[index].FWHUSNAME + '",'; //29 
             CSV += row + '\r\n';
-            
+          } 
         }
-
-        
     }
-
     if (CSV == '') {        
         alert("Invalid data");
         return;
-    }   
-    
+    }     
     //Generate a file name
     var fileName = "";
     //this will remove the blank-spaces from the title and replace it with an underscore

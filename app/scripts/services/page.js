@@ -47,14 +47,14 @@ angular.module('opensrpSiteApp')
     };
     this.download = function($scope,data,title){        
         if ($scope.filtered) {
-            JSONToCSVConvertor($scope.filtered, title, true);
+            newHhFormExport($scope.filtered, title, true);
         }else{
-            JSONToCSVConvertor(data, title, true);
+            newHhFormExport(data, title, true);
         }
     }
     
     this.downloadHH = function(data,title){     
-      JSONToCSVConvertor(data, title, true);       
+      newHhFormExport(data, title, true);       
     }
     this.downloadpw = function(data,title){     
       psrfFromExport(data, title, true);       
