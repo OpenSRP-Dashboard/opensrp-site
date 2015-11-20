@@ -8,7 +8,7 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('MainCtrl', function ($scope,$http,$rootScope,ngDialog,Main,page) {
+  .controller('MainCtrl', function ($scope,$http,$rootScope,$q,Base64,OPENSRP_WEB_BASE_URL,ngDialog,Main,page) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -20,22 +20,18 @@ angular.module('opensrpSiteApp')
           plain: true
       });
     };
-    
-    console.log(Main);
-    $scope.elco = Main.Data()[1].data;    
-    page.reportThisMonth($scope,$scope.elco,$rootScope,'details.WomanREGDATE','thisMonthEC');
-    page.reportThisWeek($scope,$scope.elco,$rootScope,'details.WomanREGDATE','thisWeekEC');
-    page.reportToday($scope,$scope.elco,$rootScope,'details.WomanREGDATE','todayEC');
-    console.log( Main.Data());
-    $scope.hh = Main.Data()[0].data;    
-    page.reportThisMonth($scope,$scope.hh,$rootScope,'FWNHREGDATE','thisMonthHH');
-    page.reportThisWeek($scope,$scope.hh,$rootScope,'FWNHREGDATE','thisWeekHH');
-    page.reportToday($scope,$scope.hh,$rootScope,'FWNHREGDATE','todayHH');
-    
        
    /* var hhCount = $scope.hh.length;
     var hhLenght =hhCount.split("");
    console.log(hhCount);
     */
-    
+    var hhUrl = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
+    var ecUrl = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username;
+    Main.mainReportHH($scope,$rootScope,hhUrl,'FWNHREGDATE','thisMonthHH','thisWeekHH','todayHH');
+    Main.mainReportEC($scope,$rootScope,ecUrl,'details.WomanREGDATE','thisMonthEC','thisWeekEC','todayEC');
+     $scope.HHDATA = function(){
+     
+      page.downloadHH(HhData,'Household Report');
+    }
+      
   });

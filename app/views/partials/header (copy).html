@@ -1,0 +1,75 @@
+ <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">
+          <img src="../../images/logo-mini.png" class="img-responsive" alt=""></a> </div>
+        
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="hidden">
+                <a href="#page-top"></a>
+              </li>
+              <li>
+                <a href="/#/">
+                  <i class="glyphicon glyphicon-home"></i>
+                  <span>Home</span>
+                </a>
+              </li>
+              <li>
+                <a href="creat.html">
+                  <i class="glyphicon glyphicon-tag"></i>
+                    <span>Access Token</span>
+                </a>
+              </li>
+              <li>
+                <a href="role.html">
+                  <i class="glyphicon glyphicon-check"></i>
+                  <span>Creat Role</span>
+                </a>
+              </li>
+              <li ng-bind-html="detailDataLink" >                
+              </li>
+              <li class="page-scroll">
+                <a href="/#/logout">
+						      <i class="glyphicon glyphicon-log-out"></i>
+						      <span>Logout</span>
+						    </a>
+              </li>
+               <li>
+                <a href="#" class="dropdown-toggle">Data Export<i class="caret"></i></a> 
+                <ul class="dropdown-menu" >
+					        
+				 	        <li ><a href="" id="HHDATA" download="s.csv">Household</a></li>
+					        <li> <a href"" ng-click="ECDATA()"> Elco </a></li>
+                  <li> <a href"" ng-click="PWDATA()">Pregnant Woman </a></li>
+			          </ul>
+			        </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-expanded="false"><img src="../../images/pp.png" class="img-circle" width="30px"><i class="caret"></i></a> 
+                <ul class="dropdown-menu" role="menu">
+					        <li><img src="../../images/pp.png" class="img-circle" alt="User Image" width="100px" /></li>
+				 	        <li class="dropdown-header">Dr Sumaiya Mamoozar</li>
+					        <li><a href="#">View Profile</a></li>
+			          </ul>
+			        </li>
+					
+            </ul>
+          </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+     
+    <script type="text/javascript" src="assets/js/download.js"></script>
+
+    
+   

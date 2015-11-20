@@ -53,6 +53,10 @@ angular.module('opensrpSiteApp')
         }
     }
     
+    this.downloadHH = function(data,title){     
+      JSONToCSVConvertor(data, title, true);       
+    }
+    
     this.reportThisMonth = function($scope,data,$rootScope,today,ngBind){      
       $scope.search = {};
       $scope.resetFilters = function () {    
@@ -85,7 +89,8 @@ angular.module('opensrpSiteApp')
         var start = moment(date.setDate(date.getDate()-7)).format('YYYY-MM-DD');       
         window.getData = JSON.parse(JSON.stringify($scope.filtered));
         var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"' && PROVIDERID =='"+$rootScope.username+"' ) ",getData);                   
-        $scope[ngBind] = queryResult.length;        
+        $scope[ngBind] = queryResult.length;
+        
         
       }, true);
         

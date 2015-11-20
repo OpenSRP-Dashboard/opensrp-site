@@ -24,6 +24,7 @@ angular.module('opensrpSiteApp')
                   return false;
               }
               $rootScope.username = Base64.decode(authdata).split(':')[0];
+               $rootScope.password = Base64.decode(authdata).split(':')[1];
               return true;
           }
       };

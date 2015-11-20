@@ -24,9 +24,8 @@ angular
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
-        controllerAs: 'main',
-        resolve:{ 'mainData':function(Main){ return Main.promise;}
-        }
+        controllerAs: 'main'
+        
       })
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -111,7 +110,7 @@ angular
       });
       //$locationProvider.html5Mode(true);
   })  
-  .run(function ($rootScope, $location, $window, Authentication, $http) {
+  .run(function ($rootScope, $location, $window, Authentication, $http,$q,Base64,OPENSRP_WEB_BASE_URL,page) {
       'use strict';
 
       $rootScope.$on('$locationChangeStart', function () {
@@ -123,11 +122,29 @@ angular
                   $rootScope.$apply();
               }
               else {
-                  $window.location = '#/login';
+                  $window.location = '/#/login';
               }
               delete $http.defaults.headers.common['X-Requested-With'];
               delete $http.defaults.headers.common.Authorization;
           }
+          var url = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
+          $rootScope.Data = '';
+          $.ajax({
+            async:false,		   
+            dataType: "json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
+            },
+            url:url,
+              success:function (data) {
+                window.HhData = data.hhRegisterEntries;
+               
+            },
+            type:"get"				
+          });
       });
+      
+  
+   
   });
 /*_.mixin(_.str.exports());*/

@@ -1,11 +1,22 @@
-
+$(document).ready(function(){
+    
+    $("#HHDATA").on("click", function (event) {
+        var data = HhData;
+        
+        if(data == '')
+            return;
+        
+        JSONToCSVConvertor(data, "Vehicle Report", true);
+    });
+});
 function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
+  console.log(JSONData);
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
     var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
     
     var CSV = '';    
     //Set Report title in first row or line
-    
+     
     CSV += ReportTitle + '\r\n\n';
 
     //This condition will generate the Label/Header
@@ -110,10 +121,10 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
     var fileName = "";
     //this will remove the blank-spaces from the title and replace it with an underscore
     fileName += ReportTitle.replace(/ /g,"_");   
-    
+     console.log(fileName);
     //Initialize file format you want csv or xls
     var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
-    
+   
     // Now the little tricky part.
     // you can use either>> window.open(uri);
     // but this will not work in some browsers
@@ -122,7 +133,7 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
     //this trick will generate a temp <a /> tag
     var link = document.createElement("a");    
     link.href = uri;
-    
+   
     //set the visibility hidden so it will not effect on your web-layout
     link.style = "visibility:hidden";
     link.download = fileName + ".csv";
@@ -130,14 +141,9 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
     //this part will append the anchor tag and remove it after automatic click
     document.body.appendChild(link);
     link.click();
+    //window.open(link);
     document.body.removeChild(link);
 }
 
 
-
-var myJSONObject = {"ircEvent": "PRIVMSG", "method": "newURI", "regex": "^http://.*"};
-delete myJSONObject.regex;
-var d = new Date();
-//alert(d.getDay())
-//alert(d.getDate())
 

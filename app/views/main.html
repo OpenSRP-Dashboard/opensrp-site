@@ -25,25 +25,25 @@
 					<div class="box1 ">
 						<a href="#hh"><img src="../../images/station_icon.png" class="imgs" alt="image"> </a>
 						<div class="counter">
-							<div class="counter_left">1</div>
-							<div class="counter_mid">0</div>
-              <div class="counter_mid">0</div>
-							<div class="counter_mid">3</div>
-							<div class="counter_right">5</div>
+							<div class="counter_left" id="LH"></div>
+							<div class="counter_mid" id="MH1"></div>
+              <div class="counter_mid" id="MH2"></div>
+							<div class="counter_mid" id="MH3"></div>
+							<div class="counter_right" id="RH"></div>
 						</div>
 					</div>
 					<div class="count_box">
 						<div class="box_inner1">
 							<div class="box_top">  TODAY   </div>
-							 <div class="box_buttom" ng-bind="todayHH">    </div>
+							 <div class="box_buttom" id="todayHH">    </div>
 						</div>
 						<div class="box_inner1">
 							<div class="box_top"> THIS WEEK 	 </div>
-							<div class="box_buttom" ng-bind="thisWeekHH">  </div>
+							<div class="box_buttom" id="thisWeekHH">  </div>
 						</div>
 						<div class="box_inner1">
 							<div class="box_top">  THIS MONTH  </div>
-							<div class="box_buttom" ng-bind="thisMonthHH">  </div>
+							<div class="box_buttom" id="thisMonthHH">  </div>
 						</div>
 					</div>
 				</div>
@@ -52,25 +52,25 @@
 					<div class="box2">
 						<a href="#/ec"><img src="../../images/cupol_icon.png" class="imgs" alt="slider">  </a>
 						<div class="counter">
-							<div class="counter_left">1</div>
-              <div class="counter_mid">0</div>
-              <div class="counter_mid">3</div>
-              <div class="counter_mid">3</div>
-              <div class="counter_right">5</div>
+							<div class="counter_left" id="LE"></div>
+              <div class="counter_mid" id="ME1"></div>
+              <div class="counter_mid" id="ME2"></div>
+              <div class="counter_mid" id="ME3"></div>
+              <div class="counter_right" id="RE"></div>
 						</div>
 					</div>
 					<div class="count_box">
 						<div class="box_inner1">
 							<div class="box_top1">  TODAY </div>
-							<div class="box_buttom1" ng-bind="todayEC">    </div>
+							<div class="box_buttom1" id="todayEC">    </div>
 						</div>
 						<div class="box_inner1">
 						  <div class="box_top1">  THIS WEEK  </div>
-						  <div class="box_buttom1" ng-bind="thisWeekEC">  </div>
+						  <div class="box_buttom1" id="thisWeekEC">  </div>
 						</div>
 						<div class="box_inner1">
 							<div class="box_top1">   THIS MONTH   </div>
-							<div class="box_buttom1" ng-bind="thisMonthEC">  </div>
+							<div class="box_buttom1" id="thisMonthEC">  </div>
 						</div>
 					</div>
 				</div>
@@ -89,15 +89,15 @@
 					<div class="count_box">
 						<div class="box_inner1">
 							<div class="box_top2">  TODAY  </div>
-							<div class="box_buttom2">  10  </div>
+							<div class="box_buttom2" id="todayPW">   </div>
 						</div>
 						<div class="box_inner1">
 							<div class="box_top2">   THIS WEEK  </div>
-							<div class="box_buttom2">  09  </div>
+							<div class="box_buttom2" id="thisWeekPW">    </div>
 						</div>
 						<div class="box_inner1">
 							<div class="box_top2">  THIS MONTH  </div>
-								<div class="box_buttom2"> 18 </div>
+								<div class="box_buttom2" id="thisMonthPW">  </div>
 						</div>
 					</div>
 	
