@@ -23,7 +23,7 @@ angular.module('opensrpSiteApp')
       var dateArray = [];
       var currentDate = moment(startDate);            
       while (currentDate <= moment(stopDate)) {                
-        dateArray.push( moment(currentDate).format('YYYY-MM-DD') )
+          dateArray.push( moment(currentDate).format('YYYY-MM-DD') )
           currentDate = moment(currentDate).add(1, 'days');
         }
       return dateArray;

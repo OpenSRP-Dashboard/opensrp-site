@@ -24,7 +24,9 @@ angular
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
-        controllerAs: 'main'
+        controllerAs: 'main',
+        resolve:{ 'mainData':function(Main){ return Main.promise;}
+        }
       })
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -40,13 +42,17 @@ angular
       .when('/hh', {
         templateUrl: 'views/hh.html',
         controller: 'HhCtrl',
-        controllerAs: 'hh',       
+        controllerAs: 'hh',
+        resolve:{ 'HHServiceData':function(HHRegisterService){ return HHRegisterService.promise;}
+        }
         
       })
       .when('/ec', {
         templateUrl: 'views/ec.html',
         controller: 'EcCtrl',
-        controllerAs: 'ec',       
+        controllerAs: 'ec',
+        resolve:{ 'ElcoServiceData':function(ElcoRegisterService){ return ElcoRegisterService.promise;}
+        }
         
       })
       .when('/pw', {

@@ -12,8 +12,7 @@ angular.module('opensrpSiteApp')
         var households = null;
         var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username; 
         var householdData = $http.get(apiURLs, { cache: true}).success(function (data) {
-            households = data.hhRegisterEntries;
-            console.log(households)
+            households = data.hhRegisterEntries;            
         });    
         return {
             promise:householdData,

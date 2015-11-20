@@ -14,7 +14,7 @@ angular.module('opensrpSiteApp')
       'AngularJS',
       'Karma'
     ];
-  $scope.detailData =
+  $scope.detailDataLink =
      ' <a href="#/households">'+
      '<i class="glyphicon glyphicon-list-alt"></i>'+
     ' <span>Data Details</span>'+

@@ -8,15 +8,21 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('EcCtrl', function ($scope) {
+  .controller('EcCtrl', function ($scope,$http,$rootScope,ElcoRegisterService,page) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-     $scope.detailData =
+     $scope.detailDataLink =
      ' <a href="#/elcos">'+
      '<i class="glyphicon glyphicon-list-alt"></i>'+
     ' <span>Data Details</span>'+
     '</a>';
+    
+    $scope.data = ElcoRegisterService.Data();
+    console.log($scope.data);
+    page.reportThisMonth($scope,$scope.data,$rootScope,'details.WomanREGDATE','thisMonth');
+    page.reportThisWeek($scope,$scope.data,$rootScope,'details.WomanREGDATE','thisWeek');
+    page.reportToday($scope,$scope.data,$rootScope,'details.WomanREGDATE','today'); 
   });

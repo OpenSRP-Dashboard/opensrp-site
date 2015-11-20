@@ -15,8 +15,8 @@
 					<div class="col-md-3">
 						<select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
 							<option value="01">District </option>
-							<option id="03" value="BANDARBAN">BANDARBAN</option>
-							<option id="04" value="BARGUNA">BARGUNA</option>
+							<option id="03"ng-click="search.FWWOMDISTRICT='BANDARBAN'">BANDARBAN</option>
+							<option id="04" ng-click="search.FWWOMDISTRICT='BARGUNA'">BARGUNA</option>
 						</select>
 					</div>
 					<div class=" col-md-3">
@@ -43,24 +43,24 @@
 						</div>
 					</div>
 					<div class="col-md-9">
-						<input id="f1_gn_q11_elem1" class="form-control" value=" NAME" name="f1_gn_q11_elem1">
+						<input id="f1_gn_q11_elem1" class="form-control" ng-model="search.PROVIDERID" value=" NAME" name="f1_gn_q11_elem1">
 					</div>
                 </div> <!-- main col right -->
             </div><!--/row-->
 			<div class="row">
                 <div class="col-xs-6 col-lg-4">
 					<div class="box1 selected ">
-						<a href="#"><img src="../../images/station_icon.png" class="imgs" alt="image"> </a>            
+						<a href="/#/hh"><img src="../../images/station_icon.png" class="imgs" alt="image"> </a>            
 					</div>
 				</div><!--/.col-xs-6.col-lg-4-->
 				<div class="col-xs-6 col-lg-4">
 					<div class="box2">
-						<a href="#"><img src="../../images/cupol_icon.png" class="imgs" alt="image">  </a>			  
+						<a href="/#/ec"><img src="../../images/cupol_icon.png" class="imgs" alt="image">  </a>			  
 					</div>
 				</div><!--/.col-xs-6.col-lg-4-->
             <div class="col-xs-6 col-lg-4">
 				<div class="box3 ">
-					<a href="#"><img src="../../images/p_icon.png" class="imgs" alt="image">  </a>              
+					<a href="/#/pw"><img src="../../images/p_icon.png" class="imgs" alt="image">  </a>              
 				</div>
 			</div><!--/.col-xs-6.col-lg-4-->
         </div>
@@ -69,15 +69,15 @@
 				<div class="count_box_user">
 					<div class="box_inner1">
 						<div class="box_top">  TODAY </div>
-						<div class="box_buttom">  50  </div>
+						<div class="box_buttom" ng-bind="today" >    </div>
 					</div>
 					<div class="box_inner1">
 						<div class="box_top"> THIS WEEK </div>
-						<div class="box_buttom"> 308 </div>
+						<div class="box_buttom" ng-bind="thisWeek">  </div>
 					</div>
 					<div class="box_inner1">
 						<div class="box_top">  THIS MONTH  </div>
-						<div class="box_buttom">  40  </div>
+						<div class="box_buttom" ng-bind="thisMonth">    </div>
 					</div>
 				</div>
             </div><!--/.col-xs-6.col-lg-4-->			
