@@ -3,24 +3,20 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close">
-                            </span>Content</a>
+                            <span data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close">
+                            </span>Content</span>
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                            <ul class="nav">
-                      <li>
-                      <a href="#glyphicons-glyphs">Available glyphs</a>
-                      </li>
-                      <li>
-                      <a href="#glyphicons-how-to-use">How to use</a>
-                      </li>
-                      </ul>
-                                </div>
-                            </div>
+                      <div class="panel-body">
+                        <ul class="nav">
+                           <li ng-bind-html="detailDataLink" > </li>
+                            
+                        </ul>
+                      </div>
+                    </div>
                 </div>
-                <div class="panel panel-default">
+               ,<!-- <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-th">
@@ -122,6 +118,8 @@
                             </table>
                         </div>
                     </div>
-                </div>
+                </div>-->
+                
+                
             </div>
         </div>	

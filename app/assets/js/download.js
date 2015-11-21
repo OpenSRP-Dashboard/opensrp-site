@@ -2,15 +2,15 @@ $(document).ready(function(){
     
     $("#HHDATA").on("click", function (event) {
         var data = HhData;
-        
+        alert(2323);
         if(data == '')
             return;
         
-        JSONToCSVConvertor(data, "Vehicle Report", true);
+        JSONToCSVConvertor(data, "Household form ", true);
     });
 });
 function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
-  console.log(JSONData);
+  
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
     var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
     
@@ -121,8 +121,7 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
     var fileName = "";
     //this will remove the blank-spaces from the title and replace it with an underscore
     fileName += ReportTitle.replace(/ /g,"_");   
-     console.log(fileName);
-    //Initialize file format you want csv or xls
+        //Initialize file format you want csv or xls
     var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
    
     // Now the little tricky part.

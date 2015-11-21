@@ -10,7 +10,9 @@
 angular.module('opensrpSiteApp')
    .service('LoginService', function ($q, $http, Authentication, Base64, OPENSRP_WEB_BASE_URL) {
         'use strict';
-
+        
+        
+      
         var login = function (username, password) {
             var authenticationURL = OPENSRP_WEB_BASE_URL + '/authenticate-user';
             var authorizationHeader = 'Basic ' + Base64.encode(username + ':' + password);

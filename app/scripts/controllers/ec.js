@@ -21,7 +21,7 @@ angular.module('opensrpSiteApp')
     '</a>';
     
     $scope.data = ElcoRegisterService.Data();
-    console.log($scope.data);
+   
     page.reportThisMonth($scope,$scope.data,$rootScope,'details.WomanREGDATE','thisMonth');
     page.reportThisWeek($scope,$scope.data,$rootScope,'details.WomanREGDATE','thisWeek');
     page.reportToday($scope,$scope.data,$rootScope,'details.WomanREGDATE','today'); 

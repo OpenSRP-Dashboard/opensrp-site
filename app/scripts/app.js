@@ -127,7 +127,7 @@ angular
               delete $http.defaults.headers.common['X-Requested-With'];
               delete $http.defaults.headers.common.Authorization;
           }
-          var url = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
+          /*var url = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
           $rootScope.Data = '';
           $.ajax({
             async:false,		   
@@ -141,8 +141,11 @@ angular
                
             },
             type:"get"				
-          });
+          });*/
       });
+      $rootScope.HHDATA= function(){
+        page.downloadHH(window.HhData,"Household form");
+      }
       
   
    

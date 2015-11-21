@@ -119,11 +119,13 @@ angular.module('opensrpSiteApp')
     $.ajax({
       async:false,		   
       dataType: "json",
+      cache: true,
       beforeSend: function (xhr) {
           xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
       },
       url:url,
-        success:function (data) {          
+        success:function (data) {
+          
           TotalCount(data.hhRegisterEntries.length,'H');
           thisMonth(data.hhRegisterEntries,today,monthId);
           thisWeek(data.hhRegisterEntries,today,weekId);
@@ -138,6 +140,7 @@ angular.module('opensrpSiteApp')
     $.ajax({
       async:false,		   
       dataType: "json",
+      cache: true,
       beforeSend: function (xhr) {
           xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
       },

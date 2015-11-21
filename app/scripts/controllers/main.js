@@ -21,16 +21,12 @@ angular.module('opensrpSiteApp')
       });
     };
        
-   /* var hhCount = $scope.hh.length;
-    var hhLenght =hhCount.split("");
-   console.log(hhCount);
-    */
+  
     var hhUrl = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
     var ecUrl = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username;
     Main.mainReportHH($scope,$rootScope,hhUrl,'FWNHREGDATE','thisMonthHH','thisWeekHH','todayHH');
     Main.mainReportEC($scope,$rootScope,ecUrl,'details.WomanREGDATE','thisMonthEC','thisWeekEC','todayEC');
-     $scope.HHDATA = function(){
-     
+     $scope.HHDATA = function(){     
       page.downloadHH(HhData,'Household Report');
     }
       

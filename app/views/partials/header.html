@@ -1,68 +1,4 @@
-<style>
-.menu{
-  padding-right: 93px;
-  
-}
-div.menu ul {
-  text-align: left;
-  display: inline;
-  margin: 0;
-  padding: 15px 4px 17px 0;
-  list-style: none;
-  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-}
-div.menu ul li {
-  font: bold 12px/18px sans-serif;
-  display: inline-block;
-  margin-right: -4px;
-  position: relative;
-  padding: 15px 20px;
-  color: #fff;
-  cursor: pointer;
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  -ms-transition: all 0.2s;
-  -o-transition: all 0.2s;
-  transition: all 0.2s;
-  
-}
-div.menu ul li:hover {
-  background: #555;
-  color: #fff;
-}
-div.menu ul li ul {
-  padding: 0;
-  position: absolute;
-  top: 48px;
-  left: 0;
-  width: 150px;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  display: none;
-  opacity: 0;
-  visibility: hidden;
-  -webkit-transiton: opacity 0.2s;
-  -moz-transition: opacity 0.2s;
-  -ms-transition: opacity 0.2s;
-  -o-transition: opacity 0.2s;
-  -transition: opacity 0.2s;
-}
-div.menu ul li ul li { 
-  background: #555; 
-  display: block; 
-  color: #fff;
-  text-shadow: 0 -1px 0 #000;
-}
-div ul li ul li:hover { background: #666; }
-div.menu ul li:hover ul {
-  display: block;
-  opacity: 1;
-  visibility: visible;
-}
-</style>
+
 <nav class="navbar navbar-default navbar-fixed-top">
 <div class="menu">
   <div class="navbar-header page-scroll">
@@ -72,31 +8,34 @@ div.menu ul li:hover ul {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html">
-          <img src="../../images/logo-mini.png" class="img-responsive" alt=""></a> </div>
-  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-  <ul><li>Home</li>
-    <li>About</li>
+          <a class="navbar-brand" href="/#/">
+          <img src="../../images/logo-mini.png" class="img-responsive" alt=""></a>
+  </div>
+  <div class="right-side">
+  <ul>
+    <li><a href="/#/"> <i class="glyphicon glyphicon-home"></i> <span>Home</span>  </a></li>    
     <li>
-      Data Export
+      <a href=""><i class="glyphicon glyphicon-download-alt"></i>  <span>Data Export </span> <i class="caret"></i></a>
       <ul>
-         <li ><a href="" id="HHDATA" download="s.csv">Household</a></li>
-				<li> <a href"" ng-click="ECDATA()"> Elco </a></li>
-        <li> <a href"" ng-click="PWDATA()">Pregnant Woman </a></li>
+         <li ><a href="" ng-click="HHDATA()">NEW HOUSEHOLD Form</a></li>
+				<li> <a href"" ng-click="ECDATA()"> CENSUS FORM </a></li>
+        <li> <a href"" ng-click="PWDATA()">PSRF FORM </a></li>
       </ul>
     </li>
-   <li ng-bind-html="detailDataLink" >                
-              </li>
-    
+  
+    <li>
+      <a href="/#/logout"> <i class="glyphicon glyphicon-log-out"></i> Logout </a>
+    </li>            
     <li>
       <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-expanded="false"><img src="../../images/pp.png" class="img-circle" width="30px"><i class="caret"></i></a> 
       <ul>
         <li><img src="../../images/pp.png" class="img-circle" alt="User Image" width="100px" /></li>
         <li class="dropdown-header">Dr Sumaiya Mamoozar</li>
-				<li><a href="#">View Profile</a></li>
+				<li><a href="/#/">View Profile</a></li>
       </ul>
     </li>
-  </ul>
+  </ul> 
+  
   </div>
  </div>
 </nav>

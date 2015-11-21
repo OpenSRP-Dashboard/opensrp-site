@@ -31,8 +31,7 @@ angular.module('opensrpSiteApp')
       var queryResult= jsonsql.query("select * from getData where (TODAY >='"+start+"' && TODAY <='"+end+"' && PROVIDERID =='"+$rootScope.username+"' ) ",getData);                   
       $scope.thisMonth = queryResult.length;
     }
-     console.log($scope.data);
-   
+     
     page.reportThisMonth($scope,$scope.data,$rootScope,'FWNHREGDATE','thisMonth');
     page.reportThisWeek($scope,$scope.data,$rootScope,'FWNHREGDATE','thisWeek');
     page.reportToday($scope,$scope.data,$rootScope,'FWNHREGDATE','today'); 
