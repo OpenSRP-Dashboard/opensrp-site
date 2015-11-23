@@ -14,6 +14,8 @@ angular.module('opensrpSiteApp')
       'AngularJS',
       'Karma'
     ];
+    
+     $scope.accessList = ['Household', 'Household Details', 'Elco', 'Elco Details','PW','PW Details','Data Export'];
      $scope.typeOptions = [
         {  name: 'Feature'}, 
         { name: 'Bug' }, 
