@@ -8,21 +8,9 @@
  * Service in the opensrpSiteApp.
  */
 angular.module('opensrpSiteApp')
-  .service('Role', function ($http,$rootScope,Base64,OPENSRP_WEB_BASE_URL) {
-    // AngularJS will instantiate a singleton by calling "new" on this function
-    /*var role = {
-      save: function(data) {        
-        var postData = {"userName": data.userName.name,"roleName": data.roleName  };            
-        var apiURLs = OPENSRP_WEB_BASE_URL+"/add-role";        
-        $http.post(apiURLs, postData).success(function (da) {});      
-        
-      }
-    };
-    return role;
-  */
-  
-  this.save = function(data){
-        console.log(data);
+  .service('Role', function ($http,$rootScope,Base64,OPENSRP_WEB_BASE_URL) {  
+      this.save = function(data){
+        //console.log(data);
         $("#submit").attr('disabled','disabled');
         $("#submit").html("Please Wait");
         var apiURLs = OPENSRP_WEB_BASE_URL+"/add-acl";       
@@ -40,7 +28,21 @@ angular.module('opensrpSiteApp')
             $( "#message" ).delay(3000).fadeOut( "slow" );
           }
           
-        });
+        });      
+      }
+      this.accessTokens = function($rootScope){
+        $rootScope.accessList = ['Household', 'Household Details', 'Elco', 'Elco Details','PW','PW Details','Data Export'];
+      }
       
+      this.roleAndAccesssByRoleName = function(roleName,$rootScope,$timeout){
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/role-access-tokens-by-name?roleName="+roleName;
+        $http.get(apiURLs, { cache: true}).success(function (data) {
+          $timeout(function () {
+            $rootScope.roleAndAccess = data;           
+            $rootScope.loading = false;
+            //console.log($rootScope.roleList);
+          }, 250);  
+        }); 
+        
       }
   });

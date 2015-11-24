@@ -66,7 +66,7 @@ angular
         controllerAs: 'role'
       })
       .when('/role/:param', {
-        templateUrl: 'views/role.html',
+        templateUrl: 'views/role-edit.html',
         controller: 'RoleCtrl',
         controllerAs: 'role'
       })
@@ -200,7 +200,16 @@ angular
         
       }
       
-  
+    $rootScope.aclLing =
+     ' <a href="#/acl">'+
+     '<i class="glyphicon glyphicon-list-alt"></i>'+
+    ' <span>Acl</span>'+
+    '</a>';
+    $rootScope.assingUserToRoll =
+     ' <a href="#/user-assign">'+
+     '<i class="glyphicon glyphicon-list-alt"></i>'+
+    ' <span>User Assign To Role</span>'+
+    '</a>';
    
   });
 /*_.mixin(_.str.exports());*/

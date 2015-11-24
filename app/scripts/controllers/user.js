@@ -14,12 +14,12 @@ angular.module('opensrpSiteApp')
       { name: 'Bug' }, 
       { name: 'Enhancement' }
     ];
-   $scope.formData = {};
-   $scope.save = function(){
-    User.role($scope.formData);
-   }
-   User.users($scope,$rootScope,$timeout);
-  User.roles($scope,$rootScope,$timeout);
+    $scope.formData = {};
+    $scope.save = function(){
+     User.role($scope.formData);
+    }
+    User.users($scope,$rootScope,$timeout);
+    User.roles($scope,$rootScope,$timeout);
    
-    //console.log($rootScope.userList);
+      //console.log($rootScope.userList);
   });

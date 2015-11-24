@@ -84,5 +84,16 @@ angular.module('opensrpSiteApp')
         }, 250);        
       }, true);      
     }
+    
+    this.checkboxChecked = function(access,role){
+      
+      for(var i=0; i< Object.keys(role.accessTokens).length ; i++){        
+        if (access == role.accessTokens[Object.keys(role.accessTokens)[i]]) {
+          return true;
+        }
+      }
+      return false;
+    }
+    
    
   });

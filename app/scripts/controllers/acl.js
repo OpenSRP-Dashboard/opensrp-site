@@ -8,11 +8,23 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('AclCtrl', function () {
+  .controller('AclCtrl', function ($scope,$http,$rootScope,$timeout,User,Role,Common) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+     $scope.createRole =
+     ' <a href="#/role">'+
+     '<i class="glyphicon glyphicon-list-alt"></i>'+
+    ' <span>Create Role</span>'+
+    '</a>';
+    $rootScope.loading = true;
+    Role.accessTokens($rootScope);
+    User.roles($scope,$rootScope,$timeout);
+    
+    $scope.checked = function(access,role){              
+     return Common.checkboxChecked(access,role);
+    }
     
   });

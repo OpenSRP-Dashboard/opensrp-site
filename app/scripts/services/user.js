@@ -51,7 +51,8 @@ angular.module('opensrpSiteApp')
         var householdData = $http.get(apiURLs, { cache: true}).success(function (data) {
           $timeout(function () {
             $rootScope.roleList = data;
-            console.log($rootScope.roleList);
+            $rootScope.loading = false;
+            //console.log($rootScope.roleList);
           }, 250);  
         }); 
       }
