@@ -14,7 +14,7 @@
               <hr/>              
               <table>
               <tr ng-repeat="role in roleList track by $index">
-                <td style="width: 10%"><a href="/#/role/{{role.roleName}}" >{{role.roleName}}</a></td>
+                <td style="width: 10%"><a href="/#/role/{{role.roleId}}" >{{role.roleName}}</a></td>
                 <td style="width: 10%" ng-repeat="access in accessList track by $index">
                   <input  ng-checked="checked(access,role)" type="checkbox"  class="role_method" ng-model="formData.accessTokens[$index]" ng-true-value="'{{access}}'"> 
                 </td>                

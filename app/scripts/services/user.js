@@ -42,17 +42,31 @@ angular.module('opensrpSiteApp')
         var householdData = $http.get(apiURLs, { cache: true}).success(function (data) {
           $timeout(function () {
             $rootScope.userList = data;
+            $rootScope.formData ={
+              userName : 'admin'
+            }
             //console.log($rootScope.userList);
           }, 250);  
         }); 
       }
-      this.roles = function ($scope,$rootScope,$timeout){
-        var apiURLs = OPENSRP_WEB_BASE_URL+"/all-roles"; 
-        var householdData = $http.get(apiURLs, { cache: true}).success(function (data) {
+      this.rolesAndAccessTokens = function ($scope,$rootScope,$timeout){
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/all-roles-access-tokens"; 
+        $http.get(apiURLs, { cache: true}).success(function (data) {
           $timeout(function () {
             $rootScope.roleList = data;
             $rootScope.loading = false;
             //console.log($rootScope.roleList);
+          }, 250);  
+        }); 
+      }
+      
+      this.rolesAndUser = function ($scope,$rootScope,$timeout){
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/all-roles-with-user"; 
+         $http.get(apiURLs, { cache: true}).success(function (data) {
+          $timeout(function () {
+            $rootScope.roleAndUser = data;
+            $rootScope.loading = false;
+            
           }, 250);  
         }); 
       }

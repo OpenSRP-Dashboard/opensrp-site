@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('opensrpSiteApp', ['ngBootstrap','ngAnimate','ngCookies','ngResource','ngRoute','angular-momentjs','ngSanitize','ngTouch','ui.bootstrap','ngDialog','angular-mapbox','nvd3','chart.js'])
+  .module('opensrpSiteApp', ['ngBootstrap','ngAnimate','ngCookies','ngResource','ngRoute','angular-momentjs','ngSanitize','ngTouch','ui.bootstrap','ngDialog','angular-mapbox','nvd3','chart.js','checklist-model'])
   .constant('AUTH_URL', 'http://192.168.21.167:1337/27.147.129.50:9979/authenticate-user')
   .constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.246:1234/192.168.21.246:9979')
   .constant("HH_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/hh?anm-id=')
@@ -60,7 +60,7 @@ angular
         controllerAs: 'pw',       
         
       })
-      .when('/role', {
+      .when('/add-role', {
         templateUrl: 'views/role.html',
         controller: 'RoleCtrl',
         controllerAs: 'role'
@@ -71,9 +71,19 @@ angular
         controllerAs: 'role'
       })
       .when('/user-assign', {
+        templateUrl: 'views/user-assign.html',
+        controller: 'UserCtrl',
+        controllerAs: 'user'
+      })
+      .when('/user', {
         templateUrl: 'views/user.html',
         controller: 'UserCtrl',
-        controllerAs: 'addacl'
+        controllerAs: 'user'
+      })
+      .when('/user/:param', {
+        templateUrl: 'views/user-assign-edit.html',
+        controller: 'UserCtrl',
+        controllerAs: 'user'
       })
       .when('/login', {
         templateUrl: 'views/login.html',
@@ -206,9 +216,9 @@ angular
     ' <span>Acl</span>'+
     '</a>';
     $rootScope.assingUserToRoll =
-     ' <a href="#/user-assign">'+
+     ' <a href="#/user">'+
      '<i class="glyphicon glyphicon-list-alt"></i>'+
-    ' <span>User Assign To Role</span>'+
+    ' <span>User</span>'+
     '</a>';
    
   });

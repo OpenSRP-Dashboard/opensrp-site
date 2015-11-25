@@ -20,17 +20,21 @@ angular.module('opensrpSiteApp')
     if (!param || param == '') {
       Role.accessTokens($rootScope);
       var param = $routeParams.param;
+      
       $scope.formData = {};
+      $scope.formData = {              
+              roleId : 22
+            }
       $scope.save = function() {
         Role.save($scope.formData);
       };
     }else{
-      $rootScope.loading = true;
+      $rootScope.loading = true;      
+      Role.roleAndAccesssByRoleName(param,$rootScope,$timeout,$scope);
+      $scope.edit = function() {
+        Role.edit($scope.formData);
+      };
       
-      Role.roleAndAccesssByRoleName(param,$rootScope,$timeout);
-      $scope.formData = {
-        roleName : param        
-      }
       $scope.checked = function(access){
         if (!angular.isUndefined($rootScope.roleAndAccess) || $rootScope.roleAndAccess != null) {
           return Common.checkboxChecked(access,$rootScope.roleAndAccess);

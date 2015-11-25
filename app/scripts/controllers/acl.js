@@ -15,13 +15,13 @@ angular.module('opensrpSiteApp')
       'Karma'
     ];
      $scope.createRole =
-     ' <a href="#/role">'+
+     ' <a href="#/add-role">'+
      '<i class="glyphicon glyphicon-list-alt"></i>'+
     ' <span>Create Role</span>'+
     '</a>';
     $rootScope.loading = true;
     Role.accessTokens($rootScope);
-    User.roles($scope,$rootScope,$timeout);
+    User.rolesAndAccessTokens($scope,$rootScope,$timeout);
     
     $scope.checked = function(access,role){              
      return Common.checkboxChecked(access,role);
