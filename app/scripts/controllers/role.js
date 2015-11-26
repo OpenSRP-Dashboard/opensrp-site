@@ -8,13 +8,13 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('RoleCtrl', function ($scope,$rootScope,$timeout,$routeParams,$http,Role,Common) {
+  .controller('RoleCtrl', function ($scope,$rootScope,$timeout,$routeParams,$http,AclService,Role,Common) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-    
+    $scope.can = AclService.can;
     var param = $routeParams.param;
      Role.accessTokens($rootScope);
     if (!param || param == '') {

@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('opensrpSiteApp', ['ngBootstrap','ngAnimate','ngCookies','ngResource','ngRoute','angular-momentjs','ngSanitize','ngTouch','ui.bootstrap','ngDialog','angular-mapbox','nvd3','chart.js','checklist-model'])
+  .module('opensrpSiteApp', ['ngBootstrap','ngAnimate','ngCookies','ngResource','ngRoute','angular-momentjs','ngSanitize','ngTouch','ui.bootstrap','ngDialog','angular-mapbox','nvd3','chart.js','checklist-model','mm.acl'])
   .constant('AUTH_URL', 'http://192.168.21.167:1337/27.147.129.50:9979/authenticate-user')
   .constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.246:1234/192.168.21.246:9979')
   .constant("HH_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/hh?anm-id=')
@@ -35,55 +35,163 @@ angular
       .when('/acl', {
         templateUrl: 'views/acl.html',
         controller: 'AclCtrl',
-        controllerAs: 'acl',       
+        controllerAs: 'acl',
+        resolve : {
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('Acl')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
+        }
         
       })
       .when('/hh', {
         templateUrl: 'views/hh.html',
         controller: 'HhCtrl',
         controllerAs: 'hh',
-        resolve:{ 'HHServiceData':function(HHRegisterService){ return HHRegisterService.promise;}
+        resolve : {
+          'HHServiceData':function(HHRegisterService){ return HHRegisterService.promise;},
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('Household')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
         }
+        
         
       })
       .when('/ec', {
         templateUrl: 'views/ec.html',
         controller: 'EcCtrl',
         controllerAs: 'ec',
-        resolve:{ 'ElcoServiceData':function(ElcoRegisterService){ return ElcoRegisterService.promise;}
+        resolve : {
+          'ElcoServiceData':function(ElcoRegisterService){ return ElcoRegisterService.promise;},
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('Household')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
         }
+        
         
       })
       .when('/pw', {
         templateUrl: 'views/pw.html',
         controller: 'PwCtrl',
-        controllerAs: 'pw',       
+        controllerAs: 'pw',
+        resolve : {
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('PW')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
+        }
         
       })
       .when('/add-role', {
         templateUrl: 'views/role.html',
         controller: 'RoleCtrl',
-        controllerAs: 'role'
+        controllerAs: 'role',
+        resolve : {
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('Add Role')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
+        }
       })
       .when('/role/:param', {
         templateUrl: 'views/role-edit.html',
         controller: 'RoleCtrl',
-        controllerAs: 'role'
+        controllerAs: 'role',
+        resolve : {
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('Role Edit')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
+        }
       })
       .when('/user-assign', {
         templateUrl: 'views/user-assign.html',
         controller: 'UserCtrl',
-        controllerAs: 'user'
+        controllerAs: 'user',
+        resolve : {
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('User Assign')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
+        }
       })
       .when('/user', {
         templateUrl: 'views/user.html',
         controller: 'UserCtrl',
-        controllerAs: 'user'
+        controllerAs: 'user',
+        resolve : {
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('User List')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
+        }
       })
       .when('/user/:param', {
         templateUrl: 'views/user-assign-edit.html',
         controller: 'UserCtrl',
-        controllerAs: 'user'
+        controllerAs: 'user',
+        resolve : {
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('User Assign Edit')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
+        }
       })
       .when('/login', {
         templateUrl: 'views/login.html',
@@ -99,32 +207,68 @@ angular
         templateUrl: 'views/households.html',
         controller: 'HouseholdCtrl',
         controllerAs: 'household',
-        resolve:{ 'HHServiceData':function(HHRegisterService){ return HHRegisterService.promise;}
+        resolve : {
+           'HHServiceData':function(HHRegisterService){ return HHRegisterService.promise;},
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('Household Details')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
         }
+        
       })
        .when('/elcos', {
         templateUrl: 'views/elcos.html',
         controller: 'ElcoCtrl',
         controllerAs: 'elco',
-        resolve:{ 'ElcoServiceData':function(ElcoRegisterService){ return ElcoRegisterService.promise;}
+        resolve : {
+          'ElcoServiceData':function(ElcoRegisterService){ return ElcoRegisterService.promise;},
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('Elco Details')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
         }
+        
       }).when('/fwa-performance', {
         templateUrl: 'views/fwa-performance.html',
         controller: 'FwaPerformanceCtrl',
         controllerAs: 'fwaperformance',
-        resolve:{ 'FWAPerformanceData':function(FWAPerformanceService){ return FWAPerformanceService.promise;}
+        resolve : {
+          'FWAPerformanceData':function(FWAPerformanceService){ return FWAPerformanceService.promise;},
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('Household')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
         }
+        
       })
       .otherwise({
         redirectTo: '/'
       });
       //$locationProvider.html5Mode(true);
   })  
-  .run(function ($rootScope, $location, $window, Authentication, $http,$q,Base64,OPENSRP_WEB_BASE_URL,page) {
+  .run(function ($rootScope, $location, $window, $timeout,AclService, Authentication, $http,$q,Base64,OPENSRP_WEB_BASE_URL,page) {
       'use strict';
 
       $rootScope.$on('$locationChangeStart', function () {
-          if (!Authentication.isAuthenticated()) {
+        if (!Authentication.isAuthenticated()) {
               //evt.preventDefault();
               $location.path('/login');
               if (!$rootScope.$$phase) {
@@ -136,9 +280,14 @@ angular
               }
               delete $http.defaults.headers.common['X-Requested-With'];
               delete $http.defaults.headers.common.Authorization;
-          }
-         
+        }
+        
+           
       });
+    
+       var aclData = {
+            member: ['login','logout']        
+          }
       
       $rootScope.HHDATAEXPORT= function(){
         $("#export").css("display","none");

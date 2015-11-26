@@ -61,7 +61,7 @@ angular.module('opensrpSiteApp')
         });     
       }
       this.accessTokens = function($rootScope){
-        $rootScope.accessList = ['Household', 'Household Details', 'Elco', 'Elco Details','PW','PW Details','Data Export'];
+        $rootScope.accessList = ['Household', 'Household Details', 'Elco', 'Elco Details','PW','PW Details','Data Export','User List','User Assign','User Assign Edit','Role Edit','Add Role','Acl'];
       }
       
       this.roleAndAccesssByRoleName = function(roleName,$rootScope,$timeout,$scope){

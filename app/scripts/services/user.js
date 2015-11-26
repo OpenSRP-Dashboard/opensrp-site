@@ -16,7 +16,7 @@ angular.module('opensrpSiteApp')
          var postData = {"userName": data.userName,"roleName": data.roleName.roleName  };
           $("#submit").attr('disabled','disabled');
           $("#submit").html("Please Wait");
-          var apiURLs = OPENSRP_WEB_BASE_URL+"/add-role";        
+          var apiURLs = OPENSRP_WEB_BASE_URL+"/assing-user-to-role";        
          $http.post(apiURLs, postData).success(function (data) {
               $("#submit").html("Submit");
                $('#submit').prop('disabled', false);

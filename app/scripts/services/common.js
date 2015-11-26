@@ -8,7 +8,7 @@
  * Service in the opensrpSiteApp.
  */
 angular.module('opensrpSiteApp')
-  .service('Common', function (filterFilter) {
+  .service('Common', function (filterFilter,AclService,OPENSRP_WEB_BASE_URL) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     function daysInMonth(month,year) {
       return new Date(year, month, 0).getDate();
@@ -94,6 +94,24 @@ angular.module('opensrpSiteApp')
       }
       return false;
     }
-    
+    this.acl = function($timeout,$rootScope,$http){
+
+      var apiURLs = OPENSRP_WEB_BASE_URL+"/role-access-tokens?userName="+$rootScope.username;
+      $http.get(apiURLs, { cache: true}).success(function (data) {
+        $timeout(function () {
+          $rootScope.aclAccess = data;                  
+          var aclData = {
+            member: ['login','logout']        
+          }
+          var member = 'member';
+          AclService.setAbilities(aclData);
+          for(var i=0; i< Object.keys($rootScope.aclAccess.accessTokens).length ; i++){
+            AclService.addAbility(member, $rootScope.aclAccess.accessTokens[Object.keys($rootScope.aclAccess.accessTokens)[i]])
+          }
+          
+          AclService.attachRole('member');
+        }, 250);  
+      });
+    }
    
   });

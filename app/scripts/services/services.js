@@ -8,7 +8,7 @@
  * Service in the opensrpSiteApp.
  */
 angular.module('opensrpSiteApp')
-  .service('Authentication', function ($rootScope,$http, $cookieStore, BasicAuth, Base64,OPENSRP_WEB_BASE_URL) {
+  .service('Authentication', function ($rootScope,$http,$timeout, $cookieStore,AclService, BasicAuth, Base64,OPENSRP_WEB_BASE_URL,Common) {
       'use strict';
 
       return {
@@ -24,13 +24,8 @@ angular.module('opensrpSiteApp')
                   return false;
               }
               $rootScope.username = Base64.decode(authdata).split(':')[0];
-               $rootScope.password = Base64.decode(authdata).split(':')[1];
-              /*var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username; 
-                var householdData = $http.get(apiURLs, { cache: true}).success(function (data) {
-                $rootScope.hhData = data.hhRegisterEntries;
-                 window.HhData = data.hhRegisterEntries;
-              });*/
-              
+              $rootScope.password = Base64.decode(authdata).split(':')[1];
+              Common.acl($timeout,$rootScope,$http);               
               return true;
           }
       };

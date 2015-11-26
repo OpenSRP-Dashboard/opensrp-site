@@ -7,14 +7,15 @@
               <div class="col-sm-2 col-md-2"></div>
               <div class="col-sm-9 col-md-9">
                 <div id="top" class="login-container">
+                  <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
                     <h2 class="form-signin-heading">User Assign to a Role</h2>
                     <p class="lead form-signin-heading"></p>
                     <form  ng-submit="save()">                      
                       <label>Role Name</label> 
-                      <select  class="form-control" name="roleName" ng-init="formData.roleName = options[0]" ng-model="formData.roleName" ng-options="option.roleName for option in roleList" > </select>
+                      <select  class="form-control" required name="roleName"  ng-model="formData.roleName" ng-options="option.roleName for option in roleList" > <option></option> </select>
                       <br />
                        <label>User Name</label> 
-                      <select  class="form-control" name="userName" ng-init="formData.userName = options[0]" ng-model="formData.userName" ng-options="option for option in userList" > </select>
+                      <select  class="form-control" required name="userName"  ng-model="formData.userName" ng-options="option for option in userList" > <option></option> </select>
                       
                       <br />
                       <div id="message"></div>

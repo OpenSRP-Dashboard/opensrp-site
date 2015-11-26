@@ -12,8 +12,8 @@
                   <p class="lead"></p>
                   <form  class="form-search-patient " ng-submit="save()">
                   <span id="validmessagename" style="color:#000000;display:none">You have typed invalid character. </span>                    
-                  <input type="text" class="form-control" id="name" name="roleName" ng-model="formData.roleName" placeholder="Role Name">
-                  <input type="hidden" class="form-control" id="roleId" name="roleId" ng-model="formData.roleId" placeholder="Role Name">
+                  <input type="text" class="form-control" ng-required="true" id="name" name="roleName" ng-model="formData.roleName" placeholder="Role Name">
+                  <input type="hidden" class="form-control"  id="roleId" name="roleId" ng-model="formData.roleId" placeholder="Role Name">
                   <br />
                   <label> Access Tokens : </label>
                   <span ng-repeat="access in accessList">
