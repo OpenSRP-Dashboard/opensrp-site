@@ -11,6 +11,30 @@ angular.module('opensrpSiteApp')
   .service('User', function ($http,$rootScope,Base64,OPENSRP_WEB_BASE_URL) {
     // AngularJS will instantiate a singleton by calling "new" on this function    
     
+      this.editRole = function(role,user,roleId){
+       
+         var postData = {"userName": user,"roleName": role.roleName,"roleId": roleId};
+         console.log(postData);
+          $("#submit").attr('disabled','disabled');
+          $("#submit").html("Please Wait");
+          var apiURLs = OPENSRP_WEB_BASE_URL+"/edit-assing-user-to-role";        
+         $http.post(apiURLs, postData).success(function (data) {
+              $("#submit").html("Submit");
+               $('#submit').prop('disabled', false);
+              if (data == 1) {
+                $("#message").html("<p class='lead'>Successfully edit user assign to role  </p>");
+                $( "#message" ).delay(3000).fadeOut( "slow" );              
+              }else{
+                 $("#message").html("<p class='lead'>Failed to update. Please try again. </p>");
+                $( "#message" ).delay(3000).fadeOut( "slow" );
+              }
+          
+          });
+        
+       
+      
+      }
+      
       this.role = function(data){
         console.log(data);
          var postData = {"userName": data.userName,"roleName": data.roleName.roleName  };
@@ -36,26 +60,36 @@ angular.module('opensrpSiteApp')
        
       
       }
-      
-      this.users = function ($scope,$rootScope,$timeout){
+      this.users = function ($scope,$rootScope,$timeout,user){
         var apiURLs = OPENSRP_WEB_BASE_URL+"/all-user-name"; 
         var householdData = $http.get(apiURLs, { cache: true}).success(function (data) {
           $timeout(function () {
             $rootScope.userList = data;
-            $rootScope.formData ={
-              userName : 'admin'
+            console.log(data);
+            for(var i =0;i<$scope.userList.length;i++){              
+              if (user == $scope.userList[i] ) {                               
+                break;
+              }             
             }
+             $rootScope.userName  = $scope.userList[i];
+           
             //console.log($rootScope.userList);
           }, 250);  
         }); 
       }
-      this.rolesAndAccessTokens = function ($scope,$rootScope,$timeout){
+      this.rolesAndAccessTokens = function ($scope,$rootScope,$timeout,role){
         var apiURLs = OPENSRP_WEB_BASE_URL+"/all-roles-access-tokens"; 
         $http.get(apiURLs, { cache: true}).success(function (data) {
           $timeout(function () {
             $rootScope.roleList = data;
             $rootScope.loading = false;
-            //console.log($rootScope.roleList);
+            $scope.roleList = data;           
+            for(var i =0;i<$scope.roleList.length;i++){             
+              if (role == $scope.roleList[i].roleName ) {                               
+                break;
+              }             
+            }
+            $rootScope.roleName = $scope.roleList[i];
           }, 250);  
         }); 
       }

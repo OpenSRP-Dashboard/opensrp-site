@@ -196,8 +196,7 @@ angular.module('opensrpSiteApp')
         TotalCount(data.ecRegisterEntries.length,'E');
         thisMonth(data.ecRegisterEntries,today,monthId);
         thisWeek(data.ecRegisterEntries,today,weekId);
-        toDay(data.ecRegisterEntries,today,dayId);
-        
+        toDay(data.ecRegisterEntries,today,dayId);        
         totalPW(data.ecRegisterEntries);
         thisMonthPW(data.ecRegisterEntries,today,'thisMonthPW');
         thisWeekPW(data.ecRegisterEntries,today,'thisWeekPW');

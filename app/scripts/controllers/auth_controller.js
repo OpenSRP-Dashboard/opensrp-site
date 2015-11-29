@@ -8,7 +8,7 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-   .controller('LoginCtrl', function ($scope, $location, $http, $window, Authentication, LoginService) {
+   .controller('LoginCtrl', function ($scope,$rootScope, $location, $http, $window,$timeout, Authentication, LoginService,Common) {
        $scope.loading = false;
 
         $scope.loginUser = function () {
@@ -17,8 +17,10 @@ angular.module('opensrpSiteApp')
 		//result=true;
                 
                 if (result === true) {
+                  
                     $scope.loading = false;
                     Authentication.authenticate($scope.username, $scope.password);
+                    Common.acl($timeout,$rootScope,$http,$scope.username); 
                     $window.location = '#/';
                     if (!$scope.$$phase) {
                         //this will kickstart angular to notice the change

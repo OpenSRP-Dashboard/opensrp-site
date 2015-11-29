@@ -163,7 +163,7 @@ angular
         templateUrl: 'views/user.html',
         controller: 'UserCtrl',
         controllerAs: 'user',
-        resolve : {
+       /* resolve : {
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('User List')){
               // Has proper permissions
@@ -174,13 +174,13 @@ angular
             
             }
           }]
-        }
+        }*/
       })
-      .when('/user/:param', {
+      .when('/user/:param/:role/:user', {
         templateUrl: 'views/user-assign-edit.html',
         controller: 'UserCtrl',
         controllerAs: 'user',
-        resolve : {
+        /*resolve : {
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('User Assign Edit')){
               // Has proper permissions
@@ -191,7 +191,7 @@ angular
             
             }
           }]
-        }
+        }*/
       })
       .when('/login', {
         templateUrl: 'views/login.html',

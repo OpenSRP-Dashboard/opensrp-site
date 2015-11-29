@@ -94,9 +94,9 @@ angular.module('opensrpSiteApp')
       }
       return false;
     }
-    this.acl = function($timeout,$rootScope,$http){
+    this.acl = function($timeout,$rootScope,$http,username){
 
-      var apiURLs = OPENSRP_WEB_BASE_URL+"/role-access-tokens?userName="+$rootScope.username;
+      var apiURLs = OPENSRP_WEB_BASE_URL+"/role-access-tokens?userName="+username;
       $http.get(apiURLs, { cache: true}).success(function (data) {
         $timeout(function () {
           $rootScope.aclAccess = data;                  

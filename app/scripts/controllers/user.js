@@ -15,23 +15,25 @@ angular.module('opensrpSiteApp')
       { name: 'Enhancement' }
     ];
     $scope.can = AclService.can;
-    var param = $routeParams.param;
+    var roleId = $routeParams.param;
     if ($location.path() == '/user-assign') {
       $rootScope.loading = true;      
       $scope.formData = {};
-      $scope.formData= {
-        roleName : 'admin'
-      }
+      
       $scope.save = function(){
        User.role($scope.formData);
       }
      
       User.users($scope,$rootScope,$timeout);
       User.rolesAndAccessTokens($scope,$rootScope,$timeout);
-    }else if(param){
-      $rootScope.loading = true;      
-      User.users($scope,$rootScope,$timeout);
-      User.rolesAndAccessTokens($scope,$rootScope,$timeout);
+    }else if(roleId){
+      $rootScope.loading = true;
+      $scope.save = function(){
+       User.editRole($scope.roleName,$scope.userName,roleId);
+      }
+      $scope.roleId = roleId;
+      User.users($scope,$rootScope,$timeout,$routeParams.user);
+      User.rolesAndAccessTokens($scope,$rootScope,$timeout,$routeParams.role);
     }else{
        $rootScope.loading = true;
        $scope.userAssign =

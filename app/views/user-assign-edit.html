@@ -11,11 +11,12 @@
                     <h2 class="form-signin-heading">Edit User Assign to a Role</h2>
                     <p class="lead form-signin-heading"></p>
                     <form  ng-submit="save()">                      
-                      <label>Role Name</label> 
-                      <select  class="form-control" name="roleName" ng-init="formData.roleName = options[0]" ng-model="formData.roleName" ng-options="option.roleName for option in roleList" > </select>
+                      <label>Role Name</label>
+                      <input type="hidden" class="form-control" id="roleId" name="roleId" ng-model="roleId" placeholder="Role Name">
+                      <select  class="form-control" name="roleName"  ng-model="roleName" ng-options="option.roleName for option in roleList" > </select>
                       <br />
                        <label>User Name</label> 
-                      <select  class="form-control" name="userName" ng-init="formData.userName = options[0]" ng-model="formData.userName" ng-options="option for option in userList" > </select>
+                      <select  class="form-control" name="userName" ng-model="userName" ng-options="option for option in userList" > </select>
                       
                       <br />
                       <div id="message"></div>
