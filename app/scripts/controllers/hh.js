@@ -21,7 +21,10 @@ angular.module('opensrpSiteApp')
     '</a>';
     
     //console.log(daysInMonth(1,2015));
-    $scope.data = HHRegisterService.Data();    
+    
+    $scope.data = HHRegisterService.Data();
+    
+    
     var date = new Date();
     var currentMonth = new Date(date.getFullYear(), date.getMonth(), 1);    
     var firstDay = moment(currentMonth).format('YYYY-MM-DD');
@@ -49,7 +52,8 @@ angular.module('opensrpSiteApp')
     
     page.reportThisMonth($scope,$scope.data,$rootScope,'FWNHREGDATE','thisMonth');
     page.reportThisWeek($scope,$scope.data,$rootScope,'FWNHREGDATE','thisWeek');
-    page.reportToday($scope,$scope.data,$rootScope,'FWNHREGDATE','today'); 
+    page.reportToday($scope,$scope.data,$rootScope,'FWNHREGDATE','today');
+    
     //thisMonth(getData,firstDay,toDay);
     
     

@@ -15,7 +15,16 @@ angular
   .constant("HH_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/hh?anm-id=')
   .constant("ELCO_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/ec?anm-id=')
   .constant("CORS_PROXY_URL",'http://hp:1337/')
-  
+  .config(['AclServiceProvider', function (AclServiceProvider) {
+    var myConfig = {
+      storage: 'localStorage',
+      storageKey: 'AppAcl'
+    };
+    AclServiceProvider.config(myConfig);
+  }])
+  .config(['AclServiceProvider', function (AclServiceProvider) {
+    AclServiceProvider.resume();
+  }])
   .config(['$httpProvider', function ($httpProvider) {           
       $httpProvider.defaults.cache = true;
   }])
@@ -58,10 +67,11 @@ angular
           'HHServiceData':function(HHRegisterService){ return HHRegisterService.promise;},
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('Household')){
-              // Has proper permissions
+              // Has proper permissions              
               return true;
             } else {
               // Does not have permission
+              
               return $q.reject('Unauthorized');
             
             }
@@ -163,7 +173,7 @@ angular
         templateUrl: 'views/user.html',
         controller: 'UserCtrl',
         controllerAs: 'user',
-       /* resolve : {
+        resolve : {
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('User List')){
               // Has proper permissions
@@ -174,13 +184,13 @@ angular
             
             }
           }]
-        }*/
+        }
       })
       .when('/user/:param/:role/:user', {
         templateUrl: 'views/user-assign-edit.html',
         controller: 'UserCtrl',
         controllerAs: 'user',
-        /*resolve : {
+        resolve : {
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('User Assign Edit')){
               // Has proper permissions
@@ -191,7 +201,7 @@ angular
             
             }
           }]
-        }*/
+        }
       })
       .when('/login', {
         templateUrl: 'views/login.html',

@@ -20,8 +20,8 @@ angular.module('opensrpSiteApp')
                   
                     $scope.loading = false;
                     Authentication.authenticate($scope.username, $scope.password);
-                    Common.acl($timeout,$rootScope,$http,$scope.username); 
-                    $window.location = '#/';
+                    Common.acl($timeout,$rootScope,$http,$scope.username,$window,Authentication,$location); 
+                    //$window.location = '#/';
                     if (!$scope.$$phase) {
                         //this will kickstart angular to notice the change
                         $scope.$apply();

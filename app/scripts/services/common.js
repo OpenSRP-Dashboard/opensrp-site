@@ -94,22 +94,32 @@ angular.module('opensrpSiteApp')
       }
       return false;
     }
-    this.acl = function($timeout,$rootScope,$http,username){
-
+    this.acl = function($timeout,$rootScope,$http,username,$window,Authentication,$location){
+      $rootScope.aclAccess = "";
       var apiURLs = OPENSRP_WEB_BASE_URL+"/role-access-tokens?userName="+username;
       $http.get(apiURLs, { cache: true}).success(function (data) {
         $timeout(function () {
-          $rootScope.aclAccess = data;                  
-          var aclData = {
+          $rootScope.aclAccess = data;          
+          window.aclData = {
             member: ['login','logout']        
           }
           var member = 'member';
-          AclService.setAbilities(aclData);
-          for(var i=0; i< Object.keys($rootScope.aclAccess.accessTokens).length ; i++){
-            AclService.addAbility(member, $rootScope.aclAccess.accessTokens[Object.keys($rootScope.aclAccess.accessTokens)[i]])
+          AclService.setAbilities(window.aclData);
+          if ($rootScope.aclAccess != '') {           
+            for(var i=0; i< Object.keys($rootScope.aclAccess.accessTokens).length ; i++){
+              AclService.addAbility(member, $rootScope.aclAccess.accessTokens[Object.keys($rootScope.aclAccess.accessTokens)[i]])
+            }
+            $window.location = '/#/';
+            /*$rootScope.formdata = {a:'1', b:'2'};
+             $location.path('/search').search($rootScope.formdata);
+             */
+          }else{
+            
+            Authentication.clearCredentials();   
+            $window.location = '/#/login';
           }
-          
           AclService.attachRole('member');
+          
         }, 250);  
       });
     }
