@@ -13,7 +13,7 @@
                   <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
                   <form  class="form-search-patient " ng-submit="edit()">
                   <span id="validmessagename" style="color:#000000;display:none">You have typed invalid character. </span>                    
-                  <input type="text" class="form-control" id="name" name="roleName" ng-model="formData.roleName" placeholder="Role Name">
+                  <input type="text" class="form-control" ng-readonly="true" id="name" name="roleName" ng-model="formData.roleName" placeholder="Role Name">
                   <input type="hidden" class="form-control" id="roleId" name="roleId" ng-model="formData.roleId" placeholder="Role Name">
                   <br />
                   <label> Access Tokens : </label>
@@ -21,6 +21,11 @@
                   <!--<input ng-checked="checked(access)" type="checkbox"  class="role_method" ng-model="formData.accessTokens[$index]" ng-true-value="'{{access}}'">{{access}}-->
                   <input type="checkbox" checklist-model="formData.accessTokens" checklist-value="access"> {{access}}
                  
+                  </span>
+                  <br />
+                  <label> Status : </label>
+                  <span ng-repeat="statusValue in statusData">
+                  <input type="checkbox" checklist-model="formData.status" checklist-value="statusValue">
                   </span>
                   <br />
                   <div id="message"></div>

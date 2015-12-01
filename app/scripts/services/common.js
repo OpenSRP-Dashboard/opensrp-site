@@ -114,7 +114,7 @@ angular.module('opensrpSiteApp')
              $location.path('/search').search($rootScope.formdata);
              */
           }else{
-            
+            $("#message").html("<p class='lead'>Please contact with administrator</p>");
             Authentication.clearCredentials();   
             $window.location = '/#/login';
           }

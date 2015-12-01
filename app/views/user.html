@@ -10,12 +10,15 @@
                   <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
                     <h2 class="form-signin-heading">User</h2>
                     <p class="lead form-signin-heading"></p>
+                    <div flash-message="50000" ></div>
+                     <div id="message"></div>
                     <div ng-bind-html="userAssign" ></div>
                     <table>
-                      <tr><td>Role Name</td><td>UserName</td></tr>
+                      <tr><td>Role Name</td><td>UserName</td><td>Status</td></tr>
                     <tr ng-repeat="role in roleAndUser track by $index">
-                      <td style="width: 10%"><a href="/#/user/{{role.roleId}}/{{role.roleName}}/{{role.userName}}" >{{role.roleName}}</a></td>
-                      <td style="width: 10%">{{role.userName}} </td>                
+                      <td style="width: 10%"><a href="/#/user/{{role.roleId}}/{{role.roleName}}/{{role.userName}}/{{role.status}}" >{{role.roleName}}</a></td>
+                      <td style="width: 10%">{{role.userName}} </td>
+                      <td style="width: 10%">{{role.status}}</td>
                     </tr>
                     </table>
                   </div>

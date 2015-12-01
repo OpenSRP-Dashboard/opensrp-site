@@ -8,16 +8,20 @@
               <div class="col-sm-9 col-md-9">
                 <div id="top" class="login-container">
                    <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
-                    <h2 class="form-signin-heading">Edit User Assign to a Role</h2>
+                    <h2 class="form-signin-heading">Edit User </h2>
                     <p class="lead form-signin-heading"></p>
                     <form  ng-submit="save()">                      
                       <label>Role Name</label>
                       <input type="hidden" class="form-control" id="roleId" name="roleId" ng-model="roleId" placeholder="Role Name">
-                      <select  class="form-control" name="roleName"  ng-model="roleName" ng-options="option.roleName for option in roleList" > </select>
+                      <select  class="form-control" name="roleName"  required ng-model="roleName" ng-options="option.roleName for option in roleList" ><option></option> </select>
                       <br />
                        <label>User Name</label> 
-                      <select  class="form-control" name="userName" ng-model="userName" ng-options="option for option in userList" > </select>
-                      
+                      <select  class="form-control" name="userName"  required ng-model="userName" ng-options="option for option in userList" ><option></option> </select>
+                      <br />
+                      <label> Status : </label>
+                       <span ng-repeat="status in statusData">
+                       <input type="checkbox" checklist-model="statusModel" checklist-value="status">
+                       </span>
                       <br />
                       <div id="message"></div>
                       <button type="submit" id="submit"  class="btn btn-lg btn-primary btn-block">Submit</button>

@@ -9,7 +9,7 @@
  */
 angular.module('opensrpSiteApp')
   .service('Role', function ($http,$rootScope,Base64,OPENSRP_WEB_BASE_URL) {  
-      this.save = function(data){
+      this.save = function(data,$window){
         console.log(data);
         $("#submit").attr('disabled','disabled');
         $("#submit").html("Please Wait");
@@ -20,6 +20,7 @@ angular.module('opensrpSiteApp')
           if (data == 1) {
             $("#message").html("<p class='lead'>Successfully created a role</p>");
             $( "#message" ).delay(3000).fadeOut( "slow" );
+            $window.location = '/#/acl';
           }else if (data == 2) {
             $("#message").html("<p class='lead'>This role already exists</p>");
             $( "#message" ).delay(3000).fadeOut( "slow" );
@@ -28,9 +29,9 @@ angular.module('opensrpSiteApp')
             $( "#message" ).delay(3000).fadeOut( "slow" );
           }
           
-        });      
+        });       
       }
-      this.edit = function(data){
+      this.edit = function(data,$window){
         
         //console.log(data.accessTokens.length)
         var dd = [];
@@ -38,9 +39,16 @@ angular.module('opensrpSiteApp')
         for(var i=0;i<data.accessTokens.length;i++){
           obj[i] = data.accessTokens[i];
         }
-        console.log(obj);
+        var statusValue = "";
+        if (data.status != "") {
+          statusValue = "Active";
+        }else{
+          statusValue = "InActive";
+        }        
         data.accessTokens = obj;
+        data.status = statusValue;       
         console.log(data);
+        
         $("#submit").attr('disabled','disabled');
         $("#submit").html("Please Wait");
         var apiURLs = OPENSRP_WEB_BASE_URL+"/edit-acl";       
@@ -50,6 +58,7 @@ angular.module('opensrpSiteApp')
           if (data == 1) {
             $("#message").html("<p class='lead'>Successfully created a role</p>");
             $( "#message" ).delay(3000).fadeOut( "slow" );
+            $window.location = '/#/acl';
           }else if (data == 2) {
             $("#message").html("<p class='lead'>This role already exists</p>");
             $( "#message" ).delay(3000).fadeOut( "slow" );
@@ -68,16 +77,23 @@ angular.module('opensrpSiteApp')
         var apiURLs = OPENSRP_WEB_BASE_URL+"/role-access-tokens-by-name?roleName="+roleName;
         $http.get(apiURLs, { cache: true}).success(function (data) {
           $timeout(function () {
-            $rootScope.roleAndAccess = data;            
+            $rootScope.roleAndAccess = data;
+            $scope.statusData = [
+              'status'
+            ];
             $rootScope.formData = {
               roleName : $rootScope.roleAndAccess.roleName ,
               roleId : $rootScope.roleAndAccess.roleId,
-              accessTokens : []
+              accessTokens : [],
+              status : []
             }
             for(var i=0; i< Object.keys(data.accessTokens).length ; i++){
               $rootScope.formData.accessTokens.push(data.accessTokens[Object.keys(data.accessTokens)[i]]);
             }
-             
+            console.log($rootScope.roleAndAccess.status);
+            if ($rootScope.roleAndAccess.status == 'Active') {
+               $rootScope.formData.status.push('status') ;
+            }
             //console.log(data);
             $rootScope.loading = false;
             //console.log($rootScope.roleList);

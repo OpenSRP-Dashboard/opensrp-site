@@ -8,13 +8,14 @@
               <div ng-bind-html="createRole" ></div>
               <table>
                 <tr>
-                    <td style="width: 10%">Role Name</td><td style="width: 10%" ng-repeat="access in accessList track by $index"> {{access}}</td>                  
+                    <td style="width: 20%">Role Name</td><td style="width: 20%">Role Status</td><td style="width: 10%" ng-repeat="access in accessList track by $index"> {{access}}</td>                  
                 </tr>                
               </table>
-              <hr/>              
+                    
               <table>
               <tr ng-repeat="role in roleList track by $index">
                 <td style="width: 10%"><a href="/#/role/{{role.roleId}}" >{{role.roleName}}</a></td>
+                <td style="width: 10%"> {{role.status}}</td>
                 <td style="width: 10%" ng-repeat="access in accessList track by $index">
                   <input  ng-checked="checked(access,role)" type="checkbox"  class="role_method" ng-model="formData.accessTokens[$index]" ng-true-value="'{{access}}'"> 
                 </td>                

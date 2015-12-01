@@ -11,19 +11,26 @@ angular.module('opensrpSiteApp')
   .service('User', function ($http,$rootScope,Base64,OPENSRP_WEB_BASE_URL) {
     // AngularJS will instantiate a singleton by calling "new" on this function    
     
-      this.editRole = function(role,user,roleId){
-       
-         var postData = {"userName": user,"roleName": role.roleName,"roleId": roleId};
+      this.editRole = function(role,user,roleId,status,$window,Flash){
+        var statusValue = "";
+        if (status != "") {
+          statusValue = "Active";
+        }else{
+          statusValue = "InActive";
+        }
+        console.log(role);
+         var postData = {"userName": user,"roleName": role.roleName,"roleId": roleId,"status": statusValue};
          console.log(postData);
           $("#submit").attr('disabled','disabled');
           $("#submit").html("Please Wait");
-          var apiURLs = OPENSRP_WEB_BASE_URL+"/edit-assing-user-to-role";        
-         $http.post(apiURLs, postData).success(function (data) {
+          var apiURLs = OPENSRP_WEB_BASE_URL+"/edit-user";        
+          $http.post(apiURLs, postData).success(function (data) {
               $("#submit").html("Submit");
                $('#submit').prop('disabled', false);
               if (data == 1) {
                 $("#message").html("<p class='lead'>Successfully edit user assign to role  </p>");
-                $( "#message" ).delay(3000).fadeOut( "slow" );              
+                $( "#message" ).delay(3000).fadeOut( "slow" );
+                $window.location = '/#/user';
               }else{
                  $("#message").html("<p class='lead'>Failed to update. Please try again. </p>");
                 $( "#message" ).delay(3000).fadeOut( "slow" );
@@ -35,18 +42,21 @@ angular.module('opensrpSiteApp')
       
       }
       
-      this.role = function(data){
+      this.role = function(data,$window,Flash){
         console.log(data);
-         var postData = {"userName": data.userName,"roleName": data.roleName.roleName  };
+         var postData = {"userName": data.userName,"roleName": data.roleName.roleName ,"status": data.status};
           $("#submit").attr('disabled','disabled');
           $("#submit").html("Please Wait");
-          var apiURLs = OPENSRP_WEB_BASE_URL+"/assing-user-to-role";        
+          var apiURLs = OPENSRP_WEB_BASE_URL+"/add-user";        
          $http.post(apiURLs, postData).success(function (data) {
               $("#submit").html("Submit");
                $('#submit').prop('disabled', false);
               if (data == 1) {
                 $("#message").html("<p class='lead'>Successfully assigned  </p>");
                 $( "#message" ).delay(3000).fadeOut( "slow" );
+                 var message = '<strong>Well done!</strong> You successfully read this important alert message.';
+                Flash.create('success', message, 'custom-class');
+                $window.location = '/#/user';
               }else if (data == 2) {
                 $("#message").html("<p class='lead'>This usern already assinged</p>");
                 $( "#message" ).delay(3000).fadeOut( "slow" );
@@ -77,8 +87,8 @@ angular.module('opensrpSiteApp')
           }, 250);  
         }); 
       }
-      this.rolesAndAccessTokens = function ($scope,$rootScope,$timeout,role){
-        var apiURLs = OPENSRP_WEB_BASE_URL+"/all-roles-access-tokens"; 
+      this.activeRolesAndAccessTokens = function ($scope,$rootScope,$timeout,role,status){
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/all-active-roles-access-tokens"; 
         $http.get(apiURLs, { cache: true}).success(function (data) {
           $timeout(function () {
             $rootScope.roleList = data;
@@ -89,7 +99,26 @@ angular.module('opensrpSiteApp')
                 break;
               }             
             }
+            $scope.statusData = [
+              'status'
+            ];
+            if (status == 'Active') {
+               $rootScope.statusModel = ['status'];
+            }
+           
             $rootScope.roleName = $scope.roleList[i];
+          }, 250);  
+        }); 
+      }
+      
+      this.rolesAndAccessTokens = function ($scope,$rootScope,$timeout,role,status){
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/all-roles-access-tokens"; 
+        $http.get(apiURLs, { cache: true}).success(function (data) {
+          $timeout(function () {
+            $rootScope.roleList = data;
+            $rootScope.loading = false;
+            $scope.roleList = data;          
+            
           }, 250);  
         }); 
       }

@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('opensrpSiteApp', ['ngBootstrap','ngAnimate','ngCookies','ngResource','ngRoute','angular-momentjs','ngSanitize','ngTouch','ui.bootstrap','ngDialog','angular-mapbox','nvd3','chart.js','checklist-model','mm.acl'])
+  .module('opensrpSiteApp', ['ngBootstrap','ngAnimate','ngCookies','ngResource','ngRoute','angular-momentjs','ngSanitize','ngTouch','ui.bootstrap','ngDialog','angular-mapbox','nvd3','chart.js','checklist-model','mm.acl','flash'])
   .constant('AUTH_URL', 'http://192.168.21.167:1337/27.147.129.50:9979/authenticate-user')
   .constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.246:1234/192.168.21.246:9979')
   .constant("HH_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/hh?anm-id=')
@@ -152,7 +152,7 @@ angular
           }]
         }
       })
-      .when('/user-assign', {
+      .when('/add-user', {
         templateUrl: 'views/user-assign.html',
         controller: 'UserCtrl',
         controllerAs: 'user',
@@ -186,7 +186,7 @@ angular
           }]
         }
       })
-      .when('/user/:param/:role/:user', {
+      .when('/user/:param/:role/:user/:status', {
         templateUrl: 'views/user-assign-edit.html',
         controller: 'UserCtrl',
         controllerAs: 'user',

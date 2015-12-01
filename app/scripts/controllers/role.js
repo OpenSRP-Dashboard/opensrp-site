@@ -8,7 +8,7 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('RoleCtrl', function ($scope,$rootScope,$timeout,$routeParams,$http,AclService,Role,Common) {
+  .controller('RoleCtrl', function ($scope,$rootScope,$window,$timeout,$routeParams,$http,AclService,Role,Common) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -26,20 +26,20 @@ angular.module('opensrpSiteApp')
               roleId : 22
             }
       $scope.save = function() {
-        Role.save($scope.formData);
+        Role.save($scope.formData,$window);
       };
     }else{
       $rootScope.loading = true;      
       Role.roleAndAccesssByRoleName(param,$rootScope,$timeout,$scope);
       $scope.edit = function() {
-        Role.edit($scope.formData);
+        Role.edit($scope.formData,$window);
       };
-      
+      /*
       $scope.checked = function(access){
         if (!angular.isUndefined($rootScope.roleAndAccess) || $rootScope.roleAndAccess != null) {
           return Common.checkboxChecked(access,$rootScope.roleAndAccess);
         }
         
-      }
+      }*/
     }
   });

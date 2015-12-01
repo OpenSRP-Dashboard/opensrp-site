@@ -13,6 +13,7 @@
 	    <div class="col-md-4 col-h">
                 <center><span class="text-center" ng-show="loading"><img src="images/spinner.gif"  alt="Opensrp"/> </span></center>
                 <p class="lead">Enter username and password</p>
+                <div id="message"></div>
                 <form class="form-signin" data-ng-submit="loginUser()">			
                     <input type="text" class="form-control" id="inputUser" placeholder="Username" data-ng-model="username" required>                                                
                     <input class="form-control" type="password" id="inputPassword" placeholder="Password" data-ng-model="password" required>
