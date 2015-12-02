@@ -27,9 +27,9 @@ angular.module('opensrpSiteApp')
           $http.post(apiURLs, postData).success(function (data) {
               $("#submit").html("Submit");
                $('#submit').prop('disabled', false);
-              if (data == 1) {
-                $("#message").html("<p class='lead'>Successfully edit user assign to role  </p>");
-                $( "#message" ).delay(3000).fadeOut( "slow" );
+              if (data == 1) {                
+                var message = '<strong>Successfully Successfully edit user .</strong> ';
+                Flash.create('success', message, 'custom-class');
                 $window.location = '/#/user';
               }else{
                  $("#message").html("<p class='lead'>Failed to update. Please try again. </p>");
@@ -51,10 +51,8 @@ angular.module('opensrpSiteApp')
          $http.post(apiURLs, postData).success(function (data) {
               $("#submit").html("Submit");
                $('#submit').prop('disabled', false);
-              if (data == 1) {
-                $("#message").html("<p class='lead'>Successfully assigned  </p>");
-                $( "#message" ).delay(3000).fadeOut( "slow" );
-                 var message = '<strong>Well done!</strong> You successfully read this important alert message.';
+              if (data == 1) {               
+                var message = '<strong>Successfully you have creaetd a user. </strong> ';
                 Flash.create('success', message, 'custom-class');
                 $window.location = '/#/user';
               }else if (data == 2) {

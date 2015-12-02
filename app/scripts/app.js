@@ -105,6 +105,7 @@ angular
         controller: 'PwCtrl',
         controllerAs: 'pw',
         resolve : {
+          'ElcoServiceData':function(ElcoRegisterService){ return ElcoRegisterService.promise;},
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('PW')){
               // Has proper permissions
@@ -232,7 +233,7 @@ angular
         }
         
       })
-       .when('/elcos', {
+      .when('/elcos', {
         templateUrl: 'views/elcos.html',
         controller: 'ElcoCtrl',
         controllerAs: 'elco',
@@ -250,7 +251,27 @@ angular
           }]
         }
         
-      }).when('/fwa-performance', {
+      })
+      .when('/pregnant-womens', {
+        templateUrl: 'views/pwdetails.html',
+        controller: 'PwdetailsCtrl',
+        controllerAs: 'pw-details',
+        resolve : {
+          'ElcoServiceData':function(ElcoRegisterService){ return ElcoRegisterService.promise;},
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('PW Details')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
+        }
+        
+      })
+      .when('/fwa-performance', {
         templateUrl: 'views/fwa-performance.html',
         controller: 'FwaPerformanceCtrl',
         controllerAs: 'fwaperformance',

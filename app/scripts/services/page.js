@@ -20,6 +20,7 @@ angular.module('opensrpSiteApp')
         $scope.totalItems = data.length;
         $scope.entryLimit = 8; // items per page
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
+        
         $scope.$watch('search', function (newVal, oldVal) {   
         $scope.filtered = filterFilter(data, newVal);
           /*$scope.datas = [];

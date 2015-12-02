@@ -16,7 +16,7 @@ angular.module('opensrpSiteApp')
     ];
     $scope.can = AclService.can;
     var roleId = $routeParams.param;
-    if ($location.path() == '/user-assign') {
+    if ($location.path() == '/add-user') {
       $rootScope.loading = true;      
       $scope.formData = {};
       
@@ -39,7 +39,7 @@ angular.module('opensrpSiteApp')
        $scope.userAssign =
       ' <a href="#/add-user">'+
       '<i class="glyphicon glyphicon-list-alt"></i>'+
-     ' <span>User assign to a role</span>'+
+     ' <span>Add User</span>'+
      '</a>';
       User.rolesAndUser($scope,$rootScope,$timeout);
       }

@@ -56,8 +56,7 @@ angular.module('opensrpSiteApp')
       };      
       $scope.$watch('search', function (newVal, oldVal) { 
         window.columnChartData= [];
-        $scope.filtered = filterFilter(data, newVal);
-       
+        $scope.filtered = filterFilter(data, newVal);       
         window.getHHData = JSON.parse(JSON.stringify($scope.filtered));
         for(var outer = 0;outer < monthLists.length;outer++){
           var weeks =  getWeeksInMonth(moment(monthLists[outer]).format('MM'),moment(monthLists[outer]).format('YYYY'),moment(monthLists[outer]).format('YYYY-MM-DD'));
@@ -94,7 +93,7 @@ angular.module('opensrpSiteApp')
       }
       return false;
     }
-    this.acl = function($timeout,$rootScope,$http,username,$window,Authentication,$location){
+    this.acl = function($timeout,$rootScope,$http,username,$window,Authentication,$location,$scope){
       $rootScope.aclAccess = "";
       var apiURLs = OPENSRP_WEB_BASE_URL+"/role-access-tokens?userName="+username;
       $http.get(apiURLs, { cache: true}).success(function (data) {
@@ -109,6 +108,7 @@ angular.module('opensrpSiteApp')
             for(var i=0; i< Object.keys($rootScope.aclAccess.accessTokens).length ; i++){
               AclService.addAbility(member, $rootScope.aclAccess.accessTokens[Object.keys($rootScope.aclAccess.accessTokens)[i]])
             }
+            $scope.loading = false;
             $window.location = '/#/';
             /*$rootScope.formdata = {a:'1', b:'2'};
              $location.path('/search').search($rootScope.formdata);
