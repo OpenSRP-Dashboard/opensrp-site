@@ -8,13 +8,13 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('HhCtrl', function ($scope,$http,$rootScope,$timeout,HHRegisterService,page,HH,Common) {
+  .controller('HhCtrl', function ($scope,$http,$rootScope,$timeout,HHRegisterService,page,HH,Common,AclService) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-     $scope.detailDataLink =
+    $scope.detailDataLink =
      ' <a href="#/households">'+
      '<i class="glyphicon glyphicon-list-alt"></i>'+
     ' <span>Data Details</span>'+
@@ -23,7 +23,7 @@ angular.module('opensrpSiteApp')
     //console.log(daysInMonth(1,2015));
     
     $scope.data = HHRegisterService.Data();
-    
+    $scope.can = AclService.can;
     
     var date = new Date();
     var currentMonth = new Date(date.getFullYear(), date.getMonth(), 1);    

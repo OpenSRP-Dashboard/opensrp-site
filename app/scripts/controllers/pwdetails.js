@@ -8,12 +8,13 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('PwdetailsCtrl', function ($scope,$http,ElcoRegisterService,page) {
+  .controller('PwdetailsCtrl', function ($scope,$http,ElcoRegisterService,page,AclService) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
-    ];    
+    ];
+    $scope.can = AclService.can;
     $scope.detailDataLink =
      ' <a href="#/pregnant-womens">'+
      '<i class="glyphicon glyphicon-list-alt"></i>'+

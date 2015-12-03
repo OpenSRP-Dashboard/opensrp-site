@@ -8,7 +8,7 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
- .controller('HouseholdCtrl', function ($scope,$rootScope,$http,HHRegisterService,page,mapboxService) {
+ .controller('HouseholdCtrl', function ($scope,$rootScope,$http,HHRegisterService,page,mapboxService,AclService) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -19,6 +19,7 @@ angular.module('opensrpSiteApp')
      '<i class="glyphicon glyphicon-list-alt"></i>'+
     ' <span>Data Details</span>'+
     '</a>';
+  $scope.can = AclService.can;
   mapboxService.init({ accessToken: 'pk.eyJ1IjoicHJvYmlyMTIzIiwiYSI6IjhwRDJyZ0EifQ.KzOVb_vdS3CMYzUKMww59g' });
   $scope.latitude = function(location){      
       return location.split(" ")[0];

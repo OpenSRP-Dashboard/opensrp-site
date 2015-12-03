@@ -9,17 +9,17 @@
  */
 angular.module('opensrpSiteApp')
   .service('Role', function ($http,$rootScope,Base64,OPENSRP_WEB_BASE_URL) {  
-      this.save = function(data,$window){
-        console.log(data);
+      this.save = function(data,$window,Flash){
+        
         $("#submit").attr('disabled','disabled');
         $("#submit").html("Please Wait");
         var apiURLs = OPENSRP_WEB_BASE_URL+"/add-acl";       
         $http.post(apiURLs, data).success(function (data) {
           $("#submit").html("Submit");
            $('#submit').prop('disabled', false);
-          if (data == 1) {
-            $("#message").html("<p class='lead'>Successfully created a role</p>");
-            $( "#message" ).delay(3000).fadeOut( "slow" );
+          if (data == 1) {            
+            var message = '<strong>Successfully created a role. </strong> ';
+            Flash.create('success', message, 'custom-class');
             $window.location = '/#/acl';
           }else if (data == 2) {
             $("#message").html("<p class='lead'>This role already exists</p>");
@@ -31,7 +31,7 @@ angular.module('opensrpSiteApp')
           
         });       
       }
-      this.edit = function(data,$window){
+      this.edit = function(data,$window,Flash){
         
         //console.log(data.accessTokens.length)
         var dd = [];
@@ -56,8 +56,9 @@ angular.module('opensrpSiteApp')
           $("#submit").html("Submit");
            $('#submit').prop('disabled', false);
           if (data == 1) {
-            $("#message").html("<p class='lead'>Successfully created a role</p>");
-            $( "#message" ).delay(3000).fadeOut( "slow" );
+            
+            var message = '<strong>Successfully edit a role. </strong> ';
+            Flash.create('success', message, 'custom-class');
             $window.location = '/#/acl';
           }else if (data == 2) {
             $("#message").html("<p class='lead'>This role already exists</p>");
@@ -90,7 +91,7 @@ angular.module('opensrpSiteApp')
             for(var i=0; i< Object.keys(data.accessTokens).length ; i++){
               $rootScope.formData.accessTokens.push(data.accessTokens[Object.keys(data.accessTokens)[i]]);
             }
-            console.log($rootScope.roleAndAccess.status);
+            $scope.disabled = false;
             if ($rootScope.roleAndAccess.status == 'Active') {
                $rootScope.formData.status.push('status') ;
             }

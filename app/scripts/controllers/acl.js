@@ -8,12 +8,13 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('AclCtrl', function ($scope,$http,$rootScope,$timeout,User,Role,Common) {
+  .controller('AclCtrl', function ($scope,$http,$rootScope,$timeout,User,Role,Common,AclService) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+    $scope.can = AclService.can;
      $scope.createRole =
      ' <a href="#/add-role">'+
      '<i class="glyphicon glyphicon-list-alt"></i>'+

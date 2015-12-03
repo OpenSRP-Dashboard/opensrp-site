@@ -14,6 +14,8 @@ angular.module('opensrpSiteApp')
       { name: 'Bug' }, 
       { name: 'Enhancement' }
     ];
+    
+    $scope.disabled = true;
     $scope.can = AclService.can;
     var roleId = $routeParams.param;
     if ($location.path() == '/add-user') {

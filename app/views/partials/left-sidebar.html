@@ -10,15 +10,17 @@
                     <div id="collapseOne" class="panel-collapse collapse in">
                       <div class="panel-body">
                         <ul class="nav">
-                           <li ng-bind-html="detailDataLink" > </li>
-                           <li ng-bind-html="aclLing" > </li>
-                           <li ng-bind-html="assingUserToRoll" > </li>
+                          <li ng-show="can('PW Details')" ><a href="#/households"><i class="glyphicon glyphicon-list-alt"></i> <span> Household Details</span> </a> </li>
+                          <li ng-show="can('Elco Details')" ><a href="#/elcos"><i class="glyphicon glyphicon-list-alt"></i> <span> Elco Details</span> </a> </li>
+                          <li ng-show="can('PW Details')" ><a href="#/pregnant-womens"><i class="glyphicon glyphicon-list-alt"></i> <span> Pregnant Women Details</span> </a> </li>                          
+                          <li ng-show="can('Acl')" ><a href="#/acl"><i class="glyphicon glyphicon-list-alt"></i><span> Acl</span></a> </li>
+                          <li ng-show="can('User List')"><a href="#/user"><i class="glyphicon glyphicon-list-alt"></i><span> User</span></a> </li>
                             
                         </ul>
                       </div>
                     </div>
                 </div>
-               ,<!-- <div class="panel panel-default">
+               <!-- <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-th">

@@ -87,11 +87,12 @@ angular
         resolve : {
           'ElcoServiceData':function(ElcoRegisterService){ return ElcoRegisterService.promise;},
           'acl' : ['$q', 'AclService', function($q, AclService){
-            if(AclService.can('Household')){
+            if(AclService.can('Elco')){
               // Has proper permissions
               return true;
             } else {
               // Does not have permission
+              
               return $q.reject('Unauthorized');
             
             }
@@ -290,6 +291,11 @@ angular
         }
         
       })
+       .when('/un-authorized', {
+        templateUrl: 'views/unauthorized.html',
+        controller: 'UnauthorizedCtrl',
+        controllerAs: 'unauthorized',        
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -298,9 +304,10 @@ angular
   .run(function ($rootScope, $location, $window, $timeout,AclService, Authentication, $http,$q,Base64,OPENSRP_WEB_BASE_URL,page) {
       'use strict';
 
-      $rootScope.$on('$locationChangeStart', function () {
+      $rootScope.$on('$locationChangeStart', function (current, previous, rejection) {
         if (!Authentication.isAuthenticated()) {
               //evt.preventDefault();
+             
               $location.path('/login');
               if (!$rootScope.$$phase) {
                   //this will kickstart angular if to notice the change
@@ -311,11 +318,11 @@ angular
               }
               delete $http.defaults.headers.common['X-Requested-With'];
               delete $http.defaults.headers.common.Authorization;
-        }
-        
-           
+        }  
       });
-    
+       $rootScope.$on('$routeChangeError', function (current, previous, rejection) {        
+        $location.path('/un-authorized');    
+       });
        var aclData = {
             member: ['login','logout']        
           }

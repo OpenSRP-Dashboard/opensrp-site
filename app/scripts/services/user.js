@@ -79,8 +79,8 @@ angular.module('opensrpSiteApp')
                 break;
               }             
             }
-             $rootScope.userName  = $scope.userList[i];
-           
+            $rootScope.userName  = $scope.userList[i];
+            $scope.disabled = false;
             //console.log($rootScope.userList);
           }, 250);  
         }); 
@@ -103,7 +103,7 @@ angular.module('opensrpSiteApp')
             if (status == 'Active') {
                $rootScope.statusModel = ['status'];
             }
-           
+           $scope.disabled = false;
             $rootScope.roleName = $scope.roleList[i];
           }, 250);  
         }); 
@@ -127,7 +127,7 @@ angular.module('opensrpSiteApp')
           $timeout(function () {
             $rootScope.roleAndUser = data;
             $rootScope.loading = false;
-            
+            $scope.disabled = false;
           }, 250);  
         }); 
       }

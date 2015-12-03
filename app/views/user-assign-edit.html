@@ -7,7 +7,7 @@
               <div class="col-sm-2 col-md-2"></div>
               <div class="col-sm-9 col-md-9">
                 <div id="top" class="login-container">
-                   <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
+                  
                     <h2 class="form-signin-heading">Edit User </h2>
                     <p class="lead form-signin-heading"></p>
                     <form  ng-submit="save()">                      
@@ -24,8 +24,9 @@
                        </span>
                       <br />
                       <div id="message"></div>
-                      <button type="submit" id="submit"  class="btn btn-lg btn-primary btn-block">Submit</button>
+                      <button type="submit" id="submit"  ng-disabled ="disabled" class="btn btn-lg btn-primary btn-block">Submit</button>
                      </form>
+                     <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
                   </div>
                 </div>
             </div>

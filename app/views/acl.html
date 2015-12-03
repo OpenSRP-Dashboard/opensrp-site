@@ -3,8 +3,8 @@
     <div class="container">
         <div class="row">
             <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include>           
-            <div class="col-sm-9 col-md-9">              
-              <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
+            <div class="col-sm-9 col-md-9">
+              <div flash-message="5000" ></div>
               <div ng-bind-html="createRole" ></div>
               <table>
                 <tr>
@@ -21,6 +21,7 @@
                 </td>                
               </tr>
               </table>
+              <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
             </div><!-- content accordion  end -->
         </div>
     </div>    

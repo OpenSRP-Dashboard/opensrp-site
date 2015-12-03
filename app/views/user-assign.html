@@ -7,10 +7,11 @@
               <div class="col-sm-2 col-md-2"></div>
               <div class="col-sm-9 col-md-9">
                 <div id="top" class="login-container">
-                  <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
+                 
                     <h2 class="form-signin-heading">Add User</h2>
                     <p class="lead form-signin-heading"></p>
-                    <form  ng-submit="save()">                      
+                    <form  ng-submit="save()">
+                      
                       <label>Role Name</label> 
                       <select  class="form-control" required name="roleName"  ng-model="formData.roleName" ng-options="option.roleName for option in roleList" > <option></option> </select>
                       <br />
@@ -21,8 +22,9 @@
                       <input type="checkbox"  class="role_method" ng-model="formData.status" ng-false-value ="'InActive'" ng-true-value="'Active'">
                       <br />
                       <div id="message"></div>
-                      <button type="submit" id="submit"  class="btn btn-lg btn-primary btn-block">Submit</button>
+                      <button type="submit" ng-disabled ="disabled" id="submit"  class="btn btn-lg btn-primary btn-block">Submit</button>
                      </form>
+                     <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
                   </div>
                 </div>
             </div>

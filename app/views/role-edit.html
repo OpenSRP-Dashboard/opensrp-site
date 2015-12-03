@@ -10,7 +10,7 @@
                 <div id="top" class="login-container">
                   <h2 class="form-signin-heading">Edit Role</h2>
                   <p class="lead"></p>
-                  <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
+                  
                   <form  class="form-search-patient " ng-submit="edit()">
                   <span id="validmessagename" style="color:#000000;display:none">You have typed invalid character. </span>                    
                   <input type="text" class="form-control" ng-readonly="true" id="name" name="roleName" ng-model="formData.roleName" placeholder="Role Name">
@@ -29,8 +29,9 @@
                   </span>
                   <br />
                   <div id="message"></div>
-                  <button id="submit"  class="btn btn-lg btn-primary btn-block"  type="submit"> Submit</button>
+                  <button id="submit" ng-disabled ="disabled" class="btn btn-lg btn-primary btn-block"  type="submit"> Submit</button>
                   </form>
+                  <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
                 </div>
               </div>
             </div>
