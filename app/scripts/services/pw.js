@@ -21,11 +21,10 @@ angular.module('opensrpSiteApp')
         var currentMonth = new Date(date.getFullYear(), date.getMonth(), 1);
         var start = moment(currentMonth).format('YYYY-MM-DD');
         var end = moment(date).format('YYYY-MM-DD');
-        window.getData = JSON.parse(JSON.stringify($scope.filtered));
-       // var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"' && ELCODETAILS[0].FWWOMCOUNTRY == 'Bangladesh' && PROVIDERID =='"+$rootScope.username+"' ) ",getData);
-         var queryResult= jsonsql.query("select * from getData where (details.today  >='"+start+"' && details.today  <='"+end+"'  && details.FWPSRPREGSTS == 1 ) ",getData);                      
+        window.getData = JSON.parse(JSON.stringify($scope.filtered));       
+        var queryResult= jsonsql.query("select * from getData where (details.today  >='"+start+"' && details.today  <='"+end+"'  && details.FWPSRPREGSTS == 1 ) ",getData);                      
         $scope[ngBind] = queryResult.length;
-        console.log( queryResult.length);
+        
         
       }, true);
         
@@ -41,7 +40,7 @@ angular.module('opensrpSiteApp')
         var end = moment(date).format('YYYY-MM-DD');
         var start = moment(date.setDate(date.getDate()-7)).format('YYYY-MM-DD');       
         window.getData = JSON.parse(JSON.stringify($scope.filtered));
-        var queryResult= jsonsql.query("select * from getData where (details.today  >='"+start+"' && details.today  <='"+end+"'  && details.FWPSRPREGSTS != 1  ) ",getData);                      
+        var queryResult= jsonsql.query("select * from getData where (details.today  >='"+start+"' && details.today  <='"+end+"'  && details.FWPSRPREGSTS == 1  ) ",getData);                      
         $scope[ngBind] = queryResult.length;
         
         

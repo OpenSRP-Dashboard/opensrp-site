@@ -36,7 +36,25 @@ angular.module('opensrpSiteApp')
           end = end + 7;
           if(end>numDays)
               end=numDays;    
-      }        
+      }
+      if (weeks.length == 6) {        
+        var firstWeek = weeks[0];
+        var lastWeek = weeks[5];        
+        var date1 = new Date(firstWeek.start);
+        var date2 = new Date(firstWeek.end);
+        var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        if (diffDays == 0) {
+          weeks[1].start = firstWeek.end;
+          delete weeks[0];
+        }else{
+          weeks[4].end = lastWeek.end;
+          delete weeks[5];
+        }
+        
+        
+      }
+      
        return weeks;
     }   
     function waitForElement($scope){
@@ -61,9 +79,48 @@ angular.module('opensrpSiteApp')
         for(var outer = 0;outer < monthLists.length;outer++){
           var weeks =  getWeeksInMonth(moment(monthLists[outer]).format('MM'),moment(monthLists[outer]).format('YYYY'),moment(monthLists[outer]).format('YYYY-MM-DD'));
           for(var inner=0;inner<weeks.length;inner++){
+            if (!angular.isUndefined(weeks[inner])) {
             var start = weeks[inner].start;         
             var queryResult= jsonsql.query("select * from getHHData where ("+DATE+" >='"+ weeks[inner].start+"' && "+DATE+" <='"+ weeks[inner].end+"') ",getHHData);                   
-            columnChartData.push({init:queryResult.length});          
+            columnChartData.push({init:queryResult.length});
+            }
+          }
+        }
+        //waitForElement($scope);
+        $timeout(function () {
+          var monthNames = ["January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"];
+          $scope.labels = [monthNames[monthLists[0].getMonth()], monthNames[monthLists[1].getMonth()], monthNames[monthLists[2].getMonth()], monthNames[monthLists[3].getMonth()]];
+          $scope.series = ['1st Week ', '2nd Week ','3rd Week', '4th Week ','5th Week '];
+          
+          $scope.chartData = [
+            [columnChartData[0].init, columnChartData[5].init, columnChartData[10].init, columnChartData[15].init],
+            [columnChartData[1].init, columnChartData[6].init, columnChartData[11].init, columnChartData[16].init],
+            [columnChartData[2].init, columnChartData[7].init, columnChartData[12].init, columnChartData[17].init],
+            [columnChartData[3].init, columnChartData[8].init, columnChartData[13].init, columnChartData[18].init],
+            [columnChartData[4].init, columnChartData[9].init, columnChartData[14].init, columnChartData[19].init]
+          ];
+        }, 250);        
+      }, true);      
+    }    
+    this.chartDataCalForPw = function($scope,monthLists,data,DATE,$timeout){
+      $scope.search = {};
+      $scope.resetFilters = function () {    
+        $scope.search = {};
+      };      
+      $scope.$watch('search', function (newVal, oldVal) { 
+        window.columnChartData= [];
+        $scope.filtered = filterFilter(data, newVal);       
+        window.getHHData = JSON.parse(JSON.stringify($scope.filtered));
+        for(var outer = 0;outer < monthLists.length;outer++){
+          var weeks =  getWeeksInMonth(moment(monthLists[outer]).format('MM'),moment(monthLists[outer]).format('YYYY'),moment(monthLists[outer]).format('YYYY-MM-DD'));         
+          for(var inner=0;inner<weeks.length;inner++){
+            if (!angular.isUndefined(weeks[inner])) {
+              var start = weeks[inner].start;         
+              var queryResult= jsonsql.query("select * from getHHData where ("+DATE+" >='"+ weeks[inner].start+"' && "+DATE+" <='"+ weeks[inner].end+"' && details.FWPSRPREGSTS == 1) ",getHHData);                   
+              columnChartData.push({init:queryResult.length});      
+            }
+               
           }
         }
         //waitForElement($scope);
@@ -114,8 +171,8 @@ angular.module('opensrpSiteApp')
              $location.path('/search').search($rootScope.formdata);
              */
           }else{
-            $("#message").html("<p class='lead'>Please contact with administrator</p>");
-            Authentication.clearCredentials();   
+            //$("#message").html("<p class='lead'>Please contact with administrator</p>");
+            //Authentication.clearCredentials();   
             $window.location = '/#/login';
           }
           AclService.attachRole('member');
