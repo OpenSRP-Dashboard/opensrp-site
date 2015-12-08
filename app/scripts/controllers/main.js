@@ -21,7 +21,12 @@ angular.module('opensrpSiteApp')
           plain: true
       });
     };
-      
+    
+    var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/anc?anm-id="+$rootScope.username; 
+    var elcoData = $http.get(apiURLs, { cache: true}).success(function (data) {            
+        
+    });
+        
   
     var hhUrl = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
     var ecUrl = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username;
