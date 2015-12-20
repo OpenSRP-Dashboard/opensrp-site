@@ -110,9 +110,9 @@ angular.module('opensrpSiteApp')
       $scope.$watch('search', function (newVal, oldVal) {   
         $scope.filtered = filterFilter(data, newVal);
         var date = new Date();
-        var today = moment(date).format('YYYY-MM-DD');             
+        var currentDay = moment(date).format('YYYY-MM-DD');              
         window.getData = JSON.parse(JSON.stringify($scope.filtered));
-        var queryResult= jsonsql.query("select * from getData where ("+today+" =='"+today+"') ",getData);                   
+        var queryResult= jsonsql.query("select * from getData where ("+today+" =='"+currentDay+"') ",getData);                   
         $scope[ngBind] = queryResult.length;        
         
       }, true);

@@ -42,10 +42,10 @@ angular.module('opensrpSiteApp')
     }
     
     var monthLists = [];
-    monthLists[0] = new Date(date.getFullYear(), date.getMonth(), 1);
-    monthLists[1] = new Date(date.getFullYear(), date.getMonth()-1, 1);
-    monthLists[2] = new Date(date.getFullYear(), date.getMonth()-2, 1);
-    monthLists[3] = new Date(date.getFullYear(), date.getMonth()-3, 1);
+    monthLists[3] = new Date(date.getFullYear(), date.getMonth(), 1);
+    monthLists[2] = new Date(date.getFullYear(), date.getMonth()-1, 1);
+    monthLists[1] = new Date(date.getFullYear(), date.getMonth()-2, 1);
+    monthLists[0] = new Date(date.getFullYear(), date.getMonth()-3, 1);
    
     
     Common.chartDataCal($scope,monthLists,window.getHHata,'FWNHREGDATE',$timeout);

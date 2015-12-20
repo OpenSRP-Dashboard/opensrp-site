@@ -1,14 +1,32 @@
 $(document).ready(function(){
     
     $("#HHDATA").on("click", function (event) {
-        var data = HhData;
-        alert(2323);
+        var data = HhData;        
         if(data == '')
             return;
         
         JSONToCSVConvertor(data, "Household form ", true);
     });
 });
+function integerFiltering(age){
+  if (age == "NaN") {
+    return "";
+  }else{
+    return parseInt(age);
+  }
+  
+}
+function checkNullValue(value){
+  if (value == "" || value == null || value == "undefined" || value == 'null' || value == 'NaN') {
+    return "";
+  }else{
+    return value;
+  }
+  
+}
+function convertString(value){
+  return String(value);
+}
 function newHhFormExport(JSONData, ReportTitle, ShowLabel) {
   
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
@@ -17,7 +35,7 @@ function newHhFormExport(JSONData, ReportTitle, ShowLabel) {
     var CSV = '';    
     //Set Report title in first row or line
      
-    CSV += ReportTitle + '\r\n\n';
+    //CSV += ReportTitle + '\r\n\n';
 
     //This condition will generate the Label/Header
     if (ShowLabel) {
@@ -73,40 +91,54 @@ function newHhFormExport(JSONData, ReportTitle, ShowLabel) {
         for (var index=0 ; index< Data[i].ELCODETAILS.length;index++) {         
           if (Data[i].ELCODETAILS[index].form_name =='FWNewHH') {
             var row = "";
-            row += '"' + Data[i].PROVIDERID + '",';
-            row += '"' + Data[i].TODAY + '",';
-            row += '"' + Data[i].START + '",';
-            row += '"' + Data[i].END + '",';
-            row += '"' + Data[i].FWNHREGDATE + '",';
-            row += '"' + Data[i].FWGOBHHID + '",';
-            row += '"' + Data[i].FWJIVHHID + '",';
-            row += '"' + Data[i].FWUNION + '",';
-            row += '"' + Data[i].FWWARD + '",';
-            row += '"' + Data[i].FWSUBUNIT + '",';
-            row += '"' + Data[i].FWMAUZA_PARA + '",';
-            row += '"' + Data[i].FWHOHFNAME + '",';
-            row += '"' + Data[i].FWHOHBIRTHDATE + '",';
-            row += '"' + Data[i].FWHOHGENDER + '",';
-            row += '"' + Data[i].FWNHHMBRNUM + '",';
-            row += '"' + Data[i].FWNHHMWRA + '",';
-            row += '"' + Data[i].ELCODETAILS[index].TODAY + '",';
-            row += '"' + Data[i].ELCODETAILS[index].FWWOMFNAME + '",';
-            row += '"' + Data[i].ELCODETAILS[index].FWBIRTHDATE + '",';
-            row += '"' + Data[i].ELCODETAILS[index].FWWOMAGE + '",';
-            row += '"' + Data[i].ELCODETAILS[index].FWNHWOMSTRMEN + '",';
-            row += '"' + Data[i].ELCODETAILS[index].FWNHWOMHUSLIV + '",';
-            row += '"' + Data[i].ELCODETAILS[index].FWNHWOMHUSALV + '",';
-            row += '"' + Data[i].ELCODETAILS[index].FWNHWOMHUSSTR + '",';
-            row += '"' + Data[i].ELCODETAILS[index].FWELIGIBLE + '",';
-            row += '"' + Data[i].ELCODETAILS[index].FWWOMANYID + '",';
-            row += '"' + Data[i].ELCODETAILS[index].FWWOMNID + '",';
-            row += '""' + Data[i].ELCODETAILS[index].FWWOMBID + '"",';
+            row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';
+            row += '"' + checkNullValue(Data[i].TODAY) + '",';
+            row += '"' + checkNullValue(Data[i].START) + '",';
+            row += '"' + checkNullValue(Data[i].END) + '",';
+            row += '"' + checkNullValue(Data[i].FWNHREGDATE) + '",';
+            row += '"' + checkNullValue(Data[i].FWGOBHHID) + '",';
+            row += '"' + checkNullValue(Data[i].FWJIVHHID) + '",';
+            row += '"' + checkNullValue(Data[i].FWUNION) + '",';
+            row += '"' + checkNullValue(Data[i].FWWARD) + '",';
+            row += '"' + checkNullValue(Data[i].FWSUBUNIT) + '",';
+            row += '"' + checkNullValue(Data[i].FWMAUZA_PARA) + '",';
+            row += '"' + checkNullValue(Data[i].FWHOHFNAME) + '",';
+            row += '"' + checkNullValue(Data[i].FWHOHBIRTHDATE) + '",';
+            row += '"' + checkNullValue(Data[i].FWHOHGENDER) + '",';
+            row += '"' + checkNullValue(Data[i].FWNHHMBRNUM) + '",';
+            row += '"' + checkNullValue(Data[i].FWNHHMWRA) + '",';
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].TODAY) + '",';
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWWOMFNAME) + '",';
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWBIRTHDATE) + '",';
+            row += '"' + checkNullValue((Data[i].ELCODETAILS[index].FWWOMAGE)) + '",';
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWNHWOMSTRMEN) + '",';
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWNHWOMHUSLIV) + '",';
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWNHWOMHUSALV) + '",';
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWNHWOMHUSSTR) + '",';
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWELIGIBLE) + '",';
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWWOMANYID) + '",';
+            if (convertString(Data[i].ELCODETAILS[index].FWWOMNID) ==null || convertString(Data[i].ELCODETAILS[index].FWWOMNID) =="") {
+              row += ",";
+            }else{
+              row +=  "'"+ convertString(Data[i].ELCODETAILS[index].FWWOMNID)+"',";
+            }
+            if (convertString(Data[i].ELCODETAILS[index].FWWOMBID) ==null || convertString(Data[i].ELCODETAILS[index].FWWOMBID) == "") {
+              row += ",";
+            }else{
+              row += "'" + convertString(Data[i].ELCODETAILS[index].FWWOMBID)+"',";
+            }
+            
             row += '"' + Data[i].ELCODETAILS[index].FWHUSNAME + '",';            
             row += '"' + Data[i].ELCO + '",';
-            var gps = Data[i].ELCODETAILS[index].FWWOMGPS;
-            var location = gps.split(" ");
-            row += '"' + location[0] + '",';
-            row += '"' + location[1] + '",';            
+            var gps = checkNullValue(Data[i].ELCODETAILS[index].FWWOMGPS);
+            var location = gps.split(" ");           
+            if (location.length > 1 ) {
+              row += '"' + location[0] + '",';
+              row += '"' + location[1] + '",'; 
+            }else{
+              row += ",";
+              row += ",";
+            }
             CSV += row + '\r\n';
           } 
         }
@@ -147,7 +179,7 @@ function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
     var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
     var CSV = '';    
     //Set Report title in first row or line
-    CSV += ReportTitle + '\r\n\n';
+   // CSV += ReportTitle + '\r\n\n';
     //This condition will generate the Label/Header
     if (ShowLabel) {
         var row = "";        
@@ -168,7 +200,7 @@ function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
         row += 'FD Worker ID' + ',';//15
         row += 'FWA Worker ID' + ','; //16
         row += 'Form Status at Submission' + ',';//17
-        row += 'SCHEDULED_DATE_PSRF_FD' + ',';//18
+        row += 'SCHEDULED_DATE_PSRF_FWA' + ',';//18
         row += 'FWPSRDATE' + ',';//19
         row += 'FWPSRSTS' + ',';//20
         row += 'FWPSRLMP' + ',';//21
@@ -211,54 +243,65 @@ function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
       if(Data[i].PSRFDETAILS.length !=0){        
         for (var index=0 ; index< Data[i].PSRFDETAILS.length;index++) {
             var row = "";
-            row += '"' + Data[i].PSRFDETAILS[index].start + '",';//1
-            row += '"' + Data[i].PSRFDETAILS[index].end + '",';//2
-            row += '"' + Data[i].PSRFDETAILS[index].today +'",';//3
-            row += '"' + Data[i].GOBHHID + '",';//4
-            row += '"' + Data[i].JiVitAHHID + '",';//5
-            row += '"' + Data[i].FWWOMUNION + '",';//6
-            row += '"' + Data[i].FWWOMWARD + '",';//7
-            row += '"' + Data[i].FWWOMSUBUNIT + '",';//8
-            row += '"' + Data[i].FWWOMMAUZA_PARA + '",';//9
-            row += '"' + Data[i].FWWOMRETYPENID + '",';//10
-            row += '"' + Data[i].FWWOMRETYPEBID + '",';//11
-            row += '"' + Data[i].FWWOMAGE + '",';//12
-            row += '"' + Data[i].FWWOMFNAME + '",';//13
-            row += '"' + Data[i].FWHUSNAME + '",';//14            
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].start) + '",';//1
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].end) + '",';//2
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].today) +'",';//3
+            row += '"' + checkNullValue(Data[i].GOBHHID) + '",';//4
+            row += '"' + checkNullValue(Data[i].JiVitAHHID) + '",';//5
+            row += '"' + checkNullValue(Data[i].FWWOMUNION) + '",';//6
+            row += '"' + checkNullValue(Data[i].FWWOMWARD) + '",';//7
+            row += '"' + checkNullValue(Data[i].FWWOMSUBUNIT) + '",';//8
+            row += '"' + checkNullValue(Data[i].FWWOMMAUZA_PARA) + '",';//9
+            if (convertString(Data[i].FWWOMRETYPENID) =='null' || convertString(Data[i].FWWOMRETYPENID) =="") {
+              row += ",";
+            }else{
+              row +=  "'"+ convertString(Data[i].FWWOMRETYPENID.FWWOMRETYPENID)+"',";
+            }
+            if (convertString(Data[i].FWWOMRETYPEBID) =='null' || convertString(Data[i].FWWOMRETYPEBID) == "") {
+              row += ",";
+            }else{
+              row += "'" + convertString(Data[i].FWWOMRETYPEBID)+"',";
+            }
+            
+            //row += '"' + Data[i].FWWOMRETYPENID + '",';//10
+            //row += '"' + Data[i].FWWOMRETYPEBID + '",';//11
+            row += '"' + checkNullValue(Data[i].FWWOMAGE) + '",';//12
+            row += '"' + checkNullValue(Data[i].FWWOMFNAME) + '",';//13
+            row += '"' + checkNullValue(Data[i].FWHUSNAME) + '",';//14            
             row += '"' + fd + '",';//15
-            row += '"' + Data[i].PROVIDERID + '",';//16
+            row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//16
             row += '"' + fd  + '",';//17
-            row += '"' + Data[i].PSRFDETAILS[index].start  + '",';//18
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRDATE + '",'; //19FWPSRSTS
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRSTS   + '",';//20
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRLMP + '",';//21
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRPREGSTS + '",';//22
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRWOMPREGWTD  + '",';//23
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRHUSPREGWTD + '",';//24
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSREVRPREG + '",';//25
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRTOTBIRTH + '",';//26
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRNBDTH + '",';//27
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRPRSB + '",';//28
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRPRMC + '",';//29
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRPREGTWYRS + '",';//30
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRPRVPREGCOMP + '",';//31
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRPRCHECKS + '",';//32
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRANM + '",';//33
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRHBP + '",';//34
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRDBT + '",';//35
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRTHY + '",';//36
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRVDGMEM + '",';//37
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRWOMEDU + '",';//38
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRHHLAT + '",';//39
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRHHRICE + '",';//40
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRPHONE + '",';//41
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRPHONENUM + '",';//42
-            row += '"' + Data[i].PSRFDETAILS[index].FWPSRMUAC + '",';//43
-            row += '"' + Data[i].details.FWVG + '",';//44
-            row += '"' + Data[i].details.FWHRP + '",';//45
-            row += '"' + Data[i].details.FWHR_PSR + '",';//46
-            row += '"' + Data[i].details.FWFLAGVALUE + '",';//47
-            row += '"' + Data[i].details.FWSORTVALUE + '",';//48           
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].start)  + '",';//18
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRDATE) + '",'; //19FWPSRSTS
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRSTS) + '",';//20
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRLMP) + '",';//21
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRPREGSTS) + '",';//22
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRWOMPREGWTD)  + '",';//23
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRHUSPREGWTD) + '",';//24
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSREVRPREG) + '",';//25
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRTOTBIRTH) + '",';//26
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRNBDTH)+ '",';//27
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRPRSB) + '",';//28
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRPRMC) + '",';//29
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRPREGTWYRS) + '",';//30
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRPRVPREGCOMP) + '",';//31
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRPRCHECKS) + '",';//32
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRANM) + '",';//33
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRHBP) + '",';//34
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRDBT) + '",';//35
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRTHY) + '",';//36
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRVDGMEM) + '",';//37
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRWOMEDU) + '",';//38
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRHHLAT) + '",';//39
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRHHRICE) + '",';//40
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRPHONE) + '",';//41
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRPHONENUM) + '",';//42
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRMUAC) + '",';//43
+            row += '"' + checkNullValue(Data[i].details.FWVG) + '",';//44
+            row += '"' + checkNullValue(Data[i].details.FWHRP) + '",';//45
+            row += '"' + checkNullValue(Data[i].details.FWHR_PSR) + '",';//46
+            row += '"' + checkNullValue(Data[i].details.FWFLAGVALUE) + '",';//47
+            row += '"' + checkNullValue(Data[i].details.FWSORTVALUE) + '",';//48           
             //row.slice(0, row.length - 1);        
             //add a line break after each row
             CSV += row + '\r\n';
@@ -302,7 +345,7 @@ function censusFornExport(JSONData, ReportTitle, ShowLabel) {
     var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;    
     var CSV = '';    
     //Set Report title in first row or line     
-    CSV += ReportTitle + '\r\n\n';
+    //CSV += ReportTitle + '\r\n\n';
     //This condition will generate the Label/Header
     if (ShowLabel) {
         var row = "";        
@@ -354,34 +397,45 @@ function censusFornExport(JSONData, ReportTitle, ShowLabel) {
           if (Data[i].ELCODETAILS[index].form_name =='Census') {
             var row = "";
             row += '"' + comming + '",'; //1
-            row += '"' + Data[i].ELCODETAILS[index].start + '",'; //2
-            row += '"' + Data[i].ELCODETAILS[index].TODAY + '",'; //3
-            row += '"' + Data[i].ELCODETAILS[index].start + '",'; //4
-            row += '"' + Data[i].ELCODETAILS[index].end + '",';//5
-            row += '"' + Data[i].ELCODETAILS[index].FWCENDATE + '",';//6
-            row += '"' + Data[i].ELCODETAILS[index].FWCENSTAT + '",';//7
-            row += '"' + Data[i].ELCODETAILS[index].GOBHHID + '",'; //8
-            row += '"' + Data[i].ELCODETAILS[index].JiVitAHHID + '",'; //9
-            row += '"' + Data[i].ELCODETAILS[index].FWWOMUNION + '",'; //10
-            row += '"' + Data[i].ELCODETAILS[index].FWWOMWARD + '",'; //11
-            row += '"' + Data[i].ELCODETAILS[index].FWWOMSUBUNIT + '",'; //12
-            row += '"' + Data[i].ELCODETAILS[index].FWWOMMAUZA_PARA + '",'; //13
-            row += '"' + Data[i].ELCODETAILS[index].ELCO + '",'; //14
-            row += '"' + Data[i].ELCODETAILS[index].existing_ELCO + '",'; //15
-            row += '"' + Data[i].ELCODETAILS[index].new_ELCO + '",'; //16
-            row += '"' + Data[i].ELCODETAILS[index].FWCENDATE + '",'; // 17
-            row += '"' + Data[i].ELCODETAILS[index].FWWOMFNAME + '",'; //18
-            row += '"' + Data[i].ELCODETAILS[index].FWBIRTHDATE + '",'; //19
-            row += '"' + Data[i].ELCODETAILS[index].FWWOMAGE + '",'; //20
-            row += '"' + Data[i].ELCODETAILS[index].FWNHWOMSTRMEN + '",'; //21
-            row += '"' + Data[i].ELCODETAILS[index].FWNHWOMHUSLIV + '",'; //22
-            row += '"' + Data[i].ELCODETAILS[index].FWNHWOMHUSALV + '",'; //23
-            row += '"' + Data[i].ELCODETAILS[index].FWNHWOMHUSSTR + '",'; //24
-            row += '"' + Data[i].ELCODETAILS[index].FWELIGIBLE + '",'; //25
-            row += '"' + Data[i].ELCODETAILS[index].FWWOMANYID + '",'; //26
-            row += '"' + Data[i].ELCODETAILS[index].FWWOMRETYPENID + '",'; //27
-            row += '""' + Data[i].ELCODETAILS[index].FWWOMRETYPEBID + '"",'; //28
-            row += '"' + Data[i].ELCODETAILS[index].FWHUSNAME + '",'; //29 
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].start) + '",'; //2
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].TODAY) + '",'; //3
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].start) + '",'; //4
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].end) + '",';//5
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWCENDATE) + '",';//6
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWCENSTAT) + '",';//7
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].GOBHHID) + '",'; //8
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].JiVitAHHID) + '",'; //9
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWWOMUNION) + '",'; //10
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWWOMWARD) + '",'; //11
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWWOMSUBUNIT) + '",'; //12
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWWOMMAUZA_PARA) + '",'; //13
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].ELCO) + '",'; //14
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].existing_ELCO) + '",'; //15
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].new_ELCO) + '",'; //16
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWCENDATE) + '",'; // 17
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWWOMFNAME) + '",'; //18
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWBIRTHDATE) + '",'; //19
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWWOMAGE) + '",'; //20
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWNHWOMSTRMEN) + '",'; //21
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWNHWOMHUSLIV) + '",'; //22
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWNHWOMHUSALV) + '",'; //23
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWNHWOMHUSSTR) + '",'; //24            
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWELIGIBLE) + '",'; //25
+           
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWWOMANYID) + '",'; //26
+            
+            if (convertString(Data[i].ELCODETAILS[index].FWWOMRETYPENID) =='null' || convertString(Data[i].ELCODETAILS[index].FWWOMRETYPENID) =="") {
+              row += ",";
+            }else{
+              row +=  "'"+ convertString(Data[i].ELCODETAILS[index].FWWOMRETYPENID)+"',";
+            }
+            if (convertString(Data[i].ELCODETAILS[index].FWWOMRETYPEBID) =='null' || convertString(Data[i].ELCODETAILS[index].FWWOMRETYPEBID) == "") {
+              row += ",";
+            }else{
+              row += "'" + convertString(Data[i].ELCODETAILS[index].FWWOMRETYPEBID)+"',";
+            }
+            
+            row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWHUSNAME) + '",'; //29 
             CSV += row + '\r\n';
           } 
         }

@@ -344,7 +344,7 @@ angular
                 window.HhData = data.hhRegisterEntries;
                 $("#wait").css("display","none");
                 $("#export").css("display","block");
-               page.downloadHH(window.HhData,"Household form");
+               page.downloadHH(window.HhData,"New Household Registration form");
             },
             type:"get"				
           });
@@ -367,7 +367,7 @@ angular
                 window.ecData = data.ecRegisterEntries;                
                 $("#wait").css("display","none");
                 $("#export").css("display","block");
-               page.downloadpw( window.ecData,"Psfr form");
+               page.downloadpw( window.ecData,"PSRF form");
             },
             type:"get"				
           });
@@ -390,7 +390,7 @@ angular
                 window.HhData = data.hhRegisterEntries;
                 $("#wait").css("display","none");
                 $("#export").css("display","block");
-               page.downloadCS(window.HhData,"Census form");
+               page.downloadCS(window.HhData,"Census New Women Registration form");
             },
             type:"get"				
           });
