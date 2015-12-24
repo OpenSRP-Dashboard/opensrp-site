@@ -8,7 +8,7 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
- .controller('HouseholdCtrl', function ($scope,$rootScope,$http,HHRegisterService,page,mapboxService,AclService) {
+ .controller('HouseholdCtrl', function ($scope,$rootScope,$http,HHRegisterService,page,mapboxService,AclService,$filter,Common) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -28,8 +28,9 @@ angular.module('opensrpSiteApp')
       return location.split(" ")[1];
   }
   $scope.data = HHRegisterService.Data();
-  page.pagination($scope,$scope.data);
   
+  page.pagination($scope,$scope.data,$filter);
+  Common.location($scope);
   $scope.download= function(){
       //JSONToCSVConvertor($scope.data, "Vehicle Report", true);
     page.download($scope, $scope.data,'Household Report');

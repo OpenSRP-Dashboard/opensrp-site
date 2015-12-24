@@ -8,7 +8,7 @@
  * Service in the opensrpSiteApp.
  */
 angular.module('opensrpSiteApp')
-  .service('Common', function (filterFilter,AclService,OPENSRP_WEB_BASE_URL) {
+  .service('Common', function ($q, $http,filterFilter,AclService,OPENSRP_WEB_BASE_URL) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     function daysInMonth(month,year) {
       return new Date(year, month, 0).getDate();
@@ -180,5 +180,19 @@ angular.module('opensrpSiteApp')
         }, 250);  
       });
     }
+    
+    this.location = function($scope){
+      var url = OPENSRP_WEB_BASE_URL+"/dashboard-location/all-location-tree";
+      var householdData = $http.get(url, { cache: true}).success(function (data) {
+           // console.log(data.map.data.myArrayList);    
+            window.getData = JSON.parse(JSON.stringify(data.map.data.myArrayList));
+            //window.getData = data.map.data.myArrayList;
+            window.p = jsonsql.query("select * from getData where ( tag == 'District'  ) ",getData);
+            $scope.districts=p;
+            console.log(p.length);
+        }); 
+       
+    }
+    
    
   });

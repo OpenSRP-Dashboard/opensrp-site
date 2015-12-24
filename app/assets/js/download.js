@@ -255,7 +255,7 @@ function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
             if (convertString(Data[i].FWWOMRETYPENID) =='null' || convertString(Data[i].FWWOMRETYPENID) =="") {
               row += ",";
             }else{
-              row +=  "'"+ convertString(Data[i].FWWOMRETYPENID.FWWOMRETYPENID)+"',";
+              row +=  "'"+ convertString(Data[i].FWWOMRETYPENID)+"',";
             }
             if (convertString(Data[i].FWWOMRETYPEBID) =='null' || convertString(Data[i].FWWOMRETYPEBID) == "") {
               row += ",";

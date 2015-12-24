@@ -9,7 +9,7 @@
  */
 angular.module('opensrpSiteApp')   
    .service('page', function (filterFilter) {
-      this.pagination = function($scope,data){
+      this.pagination = function($scope,data,$filter){
         $scope.search = {};
         $scope.resetFilters = function () {    
           $scope.search = {};
@@ -18,31 +18,17 @@ angular.module('opensrpSiteApp')
         $scope.sortReverse  = false;
         $scope.currentPage = 1;
         $scope.totalItems = data.length;
-        $scope.entryLimit = 15; // items per page
+        console.log("Befor Filter Length")
+        console.log($scope.totalItems)
+        $scope.entryLimit = 10; // items per page
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
         
         $scope.$watch('search', function (newVal, oldVal) {   
-        $scope.filtered = filterFilter(data, newVal);
-          /*$scope.datas = [];
-          $scope.indicator = 0;
-          
-          angular.forEach(data, function(item, key) {            
-            if(parseInt(item.FWWOMAGE) == parseInt(newVal.FWWOMAGE)) {
-                $scope.indicator = 1;
-                    $scope.datas.push(item);
-                }
-            });
-            if (parseInt(newVal.FWWOMAGE)) {
-              $scope.data = $scope.datas;            
-            } else {
-              $scope.data = $scope.data;            
-            }
-            var d = $scope.data;
-            
-            console.log($scope.data);*/
-            $scope.totalItems = $scope.filtered.length;
-            $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
-            $scope.currentPage = 1;
+        //$scope.filtered = filterFilter(data, newVal);          
+          $scope.filtered = $filter('filter')(data,newVal, true); 
+          $scope.totalItems = $scope.filtered.length;          
+          $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
+          $scope.currentPage = 1;
         }, true);        
         
     };

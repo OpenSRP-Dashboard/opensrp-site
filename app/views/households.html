@@ -17,12 +17,13 @@
                               <div class="location" >
                                   <span class="glyphicon glyphicon-map-marker"></span>LOCATION								</div>
                             </div>
-              
+              <div ng-model="districts"></div>
                             <div class="col-md-3">
                               <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
-                                <option value="01">District </option>
-                                    <option id="03" value="BANDARBAN">BANDARBAN</option>
-                                <option id="04" value="BARGUNA">BARGUNA</option>
+                                <option value="01" >District </option>
+                                <span ng-repeat="district in districts">
+                                  <option id="03" ng-click="search.FWWOMDISTRICT='{{district}}'" value="{{district}}">{{district}}</option>                                
+                                </span>
                               </select>
                             </div>
               
@@ -45,7 +46,7 @@
                            
                                     </div><!--/row-->
                           
-                          
+                         
                           <div class="row"> <!-- main col left --> 
                            <div class="starter-template3">
                   
@@ -125,7 +126,7 @@
                         </div>                       
                     </div>
                     
-                    <div class="panel panel-default" ng-repeat="hhRegisterEntry in data | filter:search | orderBy:sortType:sortReverse | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                    <div class="panel panel-default" ng-repeat="hhRegisterEntry in data | filter:search:true | orderBy:sortType:sortReverse | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
                         <div class="panel-heading2" role="tab" id="headingTwo2">
                             <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion2" href="#{{hhRegisterEntry.CASEID}}" aria-expanded="false" aria-controls="collapseTwo">
                                 <thead>
