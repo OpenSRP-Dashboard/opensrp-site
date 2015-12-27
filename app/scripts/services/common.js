@@ -183,16 +183,21 @@ angular.module('opensrpSiteApp')
     
     this.location = function($scope){
       var url = OPENSRP_WEB_BASE_URL+"/dashboard-location/all-location-tree";
-      var householdData = $http.get(url, { cache: true}).success(function (data) {
-           // console.log(data.map.data.myArrayList);    
-            window.getData = JSON.parse(JSON.stringify(data.map.data.myArrayList));
-            //window.getData = data.map.data.myArrayList;
-            window.p = jsonsql.query("select * from getData where ( tag == 'District'  ) ",getData);
-            $scope.districts=p;
-            console.log(p.length);
-        }); 
-       
+      var householdData = $http.get(url, { cache: true}).success(function (data) {              
+        window.householdList = JSON.parse(JSON.stringify(data.map.data.myArrayList));           
+        window.districtList = jsonsql.query("select * from householdList where ( tag == 'District'  ) ",householdList);
+        $scope.districts=districtList;        
+      });
     }
     
+    this.users = function($scope){
+      var url = OPENSRP_WEB_BASE_URL+"/all-user-name";
+      $http.get(url, { cache: true}).success(function (data) {              
+        window.userData = JSON.parse(JSON.stringify(data));           
+       // window.userList = jsonsql.query("select * from userData where ( tag == 'District'  ) ",userData);
+       console.log(userData);
+        $scope.users=userData;        
+      });      
+    }
    
   });

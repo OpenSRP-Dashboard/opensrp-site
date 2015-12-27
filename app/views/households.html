@@ -2,243 +2,219 @@
 
 <!--<link rel="stylesheet" href="assets/css/MarkerCluster.css" />
 <link rel="stylesheet" href="assets/css/MarkerCluster.Default.css" /> -->
-<section>
-  
-    <div class="container">
-        <div class="row">
-            <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include>            
-            <div class="col-sm-9 col-md-9">
-              <div show-during-resolve class="loader">   
+<section>  
+  <div class="container">
+    <div class="row">
+      <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include>            
+      <div class="col-sm-9 col-md-9">
+          <div show-during-resolve class="loader">   
               <center><img src="images/spinner.gif"  alt="Opensrp"/></center>
-            </div>
-                              <div class="row"> <!-- main col left --> 
-                           <div class="starter-template3">		
-                            <div class="col-md-3">
-                              <div class="location" >
-                                  <span class="glyphicon glyphicon-map-marker"></span>LOCATION								</div>
-                            </div>
+          </div>
+          <div class="row"> <!-- main col left --> 
+            <div class="starter-template3">		
+              <div class="col-md-3"><div class="location" > <span class="glyphicon glyphicon-map-marker"></span>LOCATION</div></div>
               <div ng-model="districts"></div>
-                            <div class="col-md-3">
-                              <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
-                                <option value="01" >District </option>
-                                <span ng-repeat="district in districts">
-                                  <option id="03" ng-click="search.FWWOMDISTRICT='{{district}}'" value="{{district}}">{{district}}</option>                                
-                                </span>
-                              </select>
-                            </div>
+              <div class="col-md-3">
+                <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1" >
+                  <option ng-click="search.details.existing_District=''" value="">Select District </option>
+                  <option ng-repeat="district in districts"  ng-click="search.details.existing_District='{{district.name}}'" value="{{district.name}}">{{district.name}}</option>
+                  <option  ng-click="search.details.existing_District='fff'" value="fff">fff</option>
+                  <option  ng-click="search.details.existing_District='ddd'" value="ddd">ddd</option>
+                </select>
+              </div>
+              <div class=" col-md-3">
+                <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
+                  <option ng-click="search.details.existing_Upazilla=''"  value="">Select Upazilla </option>
+                  <option ng-repeat="thana in thanas"  ng-click="search.details.existing_Upazilla='{{thana.name}}'" value="{{thana.name}}">{{thana.name}}</option>
+                </select>
+              </div>
               
-                            <div class=" col-md-3">
-                              <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
-                                <option value="01">Upazila </option>
-                                    <option id="03" value="BANDARBAN">BANDARBAN</option>
-                                <option id="04" value="BARGUNA">BARGUNA</option>
-                              </select>
-                            </div>
-              
-                            <div class=" col-md-3">
-                              <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
-                                <option value="01">Union </option>
-                                    <option id="03" value="BANDARBAN">BANDARBAN</option>
-                                <option id="04" value="BARGUNA">BARGUNA</option>
-                              </select>
-                            </div>
-                                       </div> <!-- main col right -->
-                           
-                                    </div><!--/row-->
+              <div class=" col-md-3">
+                <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
+                   <option ng-click="search.details.existing_Union=''" value="">Select Union </option>
+                  <option ng-repeat="union in unions"  ng-click="search.details.existing_Union='{{union.name}}'" value="{{union.name}}">{{union.name}}</option>
+                </select>
+              </div>
+            </div> <!-- main col right -->                           
+          </div><!--/row-->
                           
                          
-                          <div class="row"> <!-- main col left --> 
-                           <div class="starter-template3">
-                  
-                            <div class="col-md-3">
-                              <div class="location" >
-                                  <span class="glyphicon glyphicon-user"></span>WORKER NAME								</div>
-                            </div>
-              
-                            <div class="col-md-9">
-                              <input id="f1_gn_q11_elem1" ng-model="search.PROVIDERID" class="form-control" value=" NAME" name="f1_gn_q11_elem1">
-                            </div>
-                                       </div> <!-- main col right -->
-                                    </div><!--/row-->
+          <div class="row"> <!-- main col left --> 
+            <div class="starter-template3">                  
+              <div class="col-md-3">
+                <div class="location" ><span class="glyphicon glyphicon-user"></span>WORKER NAME</div>
+              </div>              
+              <div class="col-md-9">
+                <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
+                   <option value="">Select User </option>
+                  <option ng-repeat="user in users"  ng-click="search.PROVIDERID='{{user}}'" value="{{user}}">{{user}}</option>
+                </select>
+                
+              </div>
+            </div> <!-- main col right -->
+          </div><!--/row-->
                           
-                  <div class="row">
-                          <div class="col-xs-6 col-lg-4">
-                            <div class="box1 active ">
-                            <a href="/#/hh"><img src="../../images/station_icon.png" class="imgs" alt="image"> </a>            
-                       </div>
-                     </div><!--/.col-xs-6.col-lg-4-->
-                        <div class="col-xs-6 col-lg-4">
-                            <div class="box2">
-                            <a href="/#/ec"><img src="../../images/cupol_icon.png" class="imgs" alt="image">  </a>			  
-                      </div>
-                          </div><!--/.col-xs-6.col-lg-4-->
-                          <div class="col-xs-6 col-lg-4">
-                            <div class="box3 ">
-                            <a href="/#/pw"><img src="../../images/p_icon.png" class="imgs" alt="image">  </a>              
-                      </div>
-                    </div><!--/.col-xs-6.col-lg-4-->
-                          </div>
+          <div class="row">
+            <div class="col-xs-6 col-lg-4">
+              <div class="box1 active "><a href="/#/hh"><img src="../../images/station_icon.png" class="imgs" alt="image"> </a></div>
+            </div><!--/.col-xs-6.col-lg-4-->
+            <div class="col-xs-6 col-lg-4">
+              <div class="box2"><a href="/#/ec"><img src="../../images/cupol_icon.png" class="imgs" alt="image">  </a> </div>
+            </div><!--/.col-xs-6.col-lg-4-->
+            <div class="col-xs-6 col-lg-4">
+              <div class="box3 "><a href="/#/pw"><img src="../../images/p_icon.png" class="imgs" alt="image">  </a> </div>
+            </div><!--/.col-xs-6.col-lg-4-->
+          </div>
 		
 		
-                  <div class="row">
-                    <div class="col-xs-12 col-lg-12">
+          <div class="row">
+            <div class="col-xs-12 col-lg-12">
                 <!-- content accordion  start -->           
-                <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
-                    <div class="panel panel-default">
-                        <div class="panel-heading2" role="tab" id="headingOne">
-                            <table>
-                                <thead> <!--table head-->
-                                    <tr style="background:none">
-                                        <th style="width:228px; font-size:12px;">
-                                            <a href="/#/households" ng-click="sortType = 'FWGOBHHID'; sortReverse = !sortReverse">HHID-GoB/JiVitA
-                                                <span ng-show="sortType == 'FWGOBHHID' && !sortReverse" class="fa fa-caret-down"></span>
-                                                <span ng-show="sortType == 'FWGOBHHID' && sortReverse" class="fa fa-caret-up"></span>
-                                            </a>                        
-                                        </th>
-                                        <th style="width:157px;">
-                                            <a href="/#/households" ng-click="sortType = 'FWHOHFNAME'; sortReverse = !sortReverse">Household Head
-                                                <span ng-show="sortType == 'FWHOHFNAME' && !sortReverse" class="fa fa-caret-down"></span>
-                                                <span ng-show="sortType == 'FWHOHFNAME' && sortReverse" class="fa fa-caret-up"></span>
-                                            </a>
-                                        </th>
-                                        <th style="width:150px;">
-                                            <a href="/#/households" ng-click="sortType = 'MWRA'; sortReverse = !sortReverse">No of MWRA
-                                                <span ng-show="sortType == 'MWRA' && !sortReverse" class="fa fa-caret-down"></span>
-                                                <span ng-show="sortType == 'MWRA' && sortReverse" class="fa fa-caret-up"></span>
-                                            </a>
-                                        </th>
-                                        <th style="width:154px;">
-                                            <a href="/#/households" ng-click="sortType = 'TODAY'; sortReverse = !sortReverse">last Visit Date
-                                                <span ng-show="sortType == 'TODAY' && !sortReverse" class="fa fa-caret-down"></span>
-                                                <span ng-show="sortType == 'TODAY' && sortReverse" class="fa fa-caret-up"></span>
-                                            </a>
-                                    
-                                        </th>
-                                        <th>
-                                            <a href="/#/households"  ng-click="sortType = 'STATUS'; sortReverse = !sortReverse">Current Visit Status
-                                                <span ng-show="sortType == 'STATUS' && !sortReverse" class="fa fa-caret-down"></span>
-                                                <span ng-show="sortType == 'STATUS' && sortReverse" class="fa fa-caret-up"></span>
-                                            </a>                            
-                                        </th>                        
-                                    </tr>
-                                </thead><!--//table head-->
-                            </table>                        
-                        </div>                       
-                    </div>
+              <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                  <div class="panel-heading2" role="tab" id="headingOne">
+                    <table>
+                      <thead> <!--table head-->
+                        <tr style="background:none">
+                          <th style="width:228px; font-size:12px;">
+                            <a href="/#/households" ng-click="sortType = 'FWGOBHHID'; sortReverse = !sortReverse">HHID-GoB/JiVitA
+                              <span ng-show="sortType == 'FWGOBHHID' && !sortReverse" class="fa fa-caret-down"></span>
+                              <span ng-show="sortType == 'FWGOBHHID' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>                        
+                          </th>
+                          <th style="width:157px;">
+                            <a href="/#/households" ng-click="sortType = 'FWHOHFNAME'; sortReverse = !sortReverse">Household Head
+                              <span ng-show="sortType == 'FWHOHFNAME' && !sortReverse" class="fa fa-caret-down"></span>
+                              <span ng-show="sortType == 'FWHOHFNAME' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                          </th>
+                          <th style="width:150px;">
+                            <a href="/#/households" ng-click="sortType = 'MWRA'; sortReverse = !sortReverse">No of MWRA
+                              <span ng-show="sortType == 'MWRA' && !sortReverse" class="fa fa-caret-down"></span>
+                              <span ng-show="sortType == 'MWRA' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                          </th>
+                          <th style="width:154px;">
+                            <a href="/#/households" ng-click="sortType = 'TODAY'; sortReverse = !sortReverse">last Visit Date
+                              <span ng-show="sortType == 'TODAY' && !sortReverse" class="fa fa-caret-down"></span>
+                              <span ng-show="sortType == 'TODAY' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>                                    
+                          </th>
+                          <th>
+                            <a href="/#/households"  ng-click="sortType = 'STATUS'; sortReverse = !sortReverse">Current Visit Status
+                              <span ng-show="sortType == 'STATUS' && !sortReverse" class="fa fa-caret-down"></span>
+                              <span ng-show="sortType == 'STATUS' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>                            
+                          </th>                        
+                        </tr>
+                      </thead><!--//table head-->
+                    </table>                        
+                  </div>                       
+                </div>
                     
-                    <div class="panel panel-default" ng-repeat="hhRegisterEntry in data | filter:search:true | orderBy:sortType:sortReverse | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
-                        <div class="panel-heading2" role="tab" id="headingTwo2">
-                            <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion2" href="#{{hhRegisterEntry.CASEID}}" aria-expanded="false" aria-controls="collapseTwo">
-                                <thead>
-                                    <tr>
-                                        <th style="width:150px;">                                           
-                                            <div class="btn-group-md">
-                                                <img src="images/photo.png" alt=""> &nbsp; &nbsp;&nbsp;{{hhRegisterEntry.FWGOBHHID}}/{{hhRegisterEntry.FWJIVHHID}}
-                                            </div>
-                                            
-                                        </th>                                       
-                                        <th style="width:100px;">{{hhRegisterEntry.FWHOHFNAME}}</th>
-                                        <th style="width:100px;">{{hhRegisterEntry.MWRA}}</th>
-                                        <th style="width:100px;">{{hhRegisterEntry.TODAY}}</th>
-                                        <th style="width:100px;">Due</th> 
-                                    </tr>
-                                </thead>
-                            </table><!--//table body-->
+                <div class="panel panel-default" ng-repeat="hhRegisterEntry in data | filter:search:true | orderBy:sortType:sortReverse | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                <div class="panel-heading2" role="tab" id="headingTwo2">
+                  <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion2" href="#{{hhRegisterEntry.CASEID}}" aria-expanded="false" aria-controls="collapseTwo">
+                    <thead>
+                      <tr>
+                        <th style="width:150px;">                                           
+                        <div class="btn-group-md">
+                          <img src="images/photo.png" alt=""> &nbsp; &nbsp;&nbsp;{{hhRegisterEntry.FWGOBHHID}}/{{hhRegisterEntry.FWJIVHHID}}
+                        </div>              
+                        </th>                                       
+                        <th style="width:100px;">{{hhRegisterEntry.FWHOHFNAME}}</th>
+                        <th style="width:100px;">{{hhRegisterEntry.MWRA}}</th>
+                        <th style="width:100px;">{{hhRegisterEntry.TODAY}}</th>
+                        <th style="width:100px;">Due</th> 
+                      </tr>
+                    </thead>
+                  </table><!--//table body-->
+                </div>
+                <div id="{{hhRegisterEntry.CASEID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">                    
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-md-2 col-lg-2 " align="center">
+                        <span>{{hhRegisterEntry.FWGOBHHID}} / {{hhRegisterEntry.FWJIVHHID}}</span>
+                        <img alt="User Pic" src="images/photo2.png" class="img-circle img-responsive">
+                      </div>
+                      <div class=" col-md-4 col-lg-4 ">                                           
+                        <div>
+                          <div><strong> Name of HH Head:</strong> {{hhRegisterEntry.FWHOHFNAME}}</div>
+                          <div> <strong>HHID- GoB/JiVitA:</strong> {{hhRegisterEntry.FWGOBHHID}} / {{hhRegisterEntry.FWJIVHHID}}</div>
+                          <div> <strong>No of MWRA: </strong>{{hhRegisterEntry.MWRA}}</div>                       
+                          <div><strong>Last Visit Date:</strong> {{hhRegisterEntry.TODAY}}</div>
+                          <div><strong>Current  Status:</strong> Due</div>
+                          <div><strong>Location:</strong> {{hhRegisterEntry.details.location_name}}</div>
                         </div>
-                        <div id="{{hhRegisterEntry.CASEID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">                    
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-2 col-lg-2 " align="center">
-                                         <span>{{hhRegisterEntry.FWGOBHHID}} / {{hhRegisterEntry.FWJIVHHID}}</span>
-                                        <img alt="User Pic" src="images/photo2.png" class="img-circle img-responsive">
-                                    </div>
-                                    <div class=" col-md-4 col-lg-4 ">                                           
-                                        <div>
-                                            <div><strong> Name of HH Head:</strong> {{hhRegisterEntry.FWHOHFNAME}}</div>
-                                            <div> <strong>HHID- GoB/JiVitA:</strong> {{hhRegisterEntry.FWGOBHHID}} / {{hhRegisterEntry.FWJIVHHID}}</div>
-                                            <div> <strong>No of MWRA: </strong>{{hhRegisterEntry.MWRA}}</div>                       
-                                            <div><strong>Last Visit Date:</strong> {{hhRegisterEntry.TODAY}}</div>
-                                            <div><strong>Current  Status:</strong> Due</div>
-                                            <div><strong>Location:</strong> {{hhRegisterEntry.details.location_name}}</div>
-                                        </div>
-                                    </div>
-                                    <div class=" col-md-6 col-lg-6 ">                                           
-                                        <div>
-                                            <!--<mapbox map-id="probir123.ifhlcpgl" lat="{{latitude(hhRegisterEntry.FWNHHHGPS)}}" lng="{{longitude(hhRegisterEntry.FWNHHHGPS)}}" style="width:100%; height:120px; margin-top: 10px;">                                                
-                                                <marker lat="{{latitude(hhRegisterEntry.FWNHHHGPS)}}" lng="{{longitude(hhRegisterEntry.FWNHHHGPS)}}"><h1>This is an unstyled marker</h1></marker>
-                                            </mapbox> -->
-                                            
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="row">
-                                   
-                                    <div class="panel panel-default" ng-repeat="elco in hhRegisterEntry.ELCODETAILS">
-                                        <div class="panel-heading2" role="tab" id="headingTwo3">
-                                            <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion3" href="#{{elco.id}}" aria-expanded="false" aria-controls="collapseThree">
-                                                <thead ng-if="$first">
-                                                    <tr>
-                                                        <th style="width:100px;">MWRA Name</th>
-                                                        <th style="width:100px;">Age</th>
-                                                        <th style="width:100px;">Husband Name</th>
-                                                        <th style="width:100px;">ELCO status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>                                                                                                            
-                                                        <td style="width:100px;">{{elco.FWWOMFNAME}}</td>
-                                                        <td style="width:100px;">{{elco.FWWOMAGE}}</td>
-                                                        <td style="width:100px;">{{elco.FWHUSNAME}}</td>
-                                                        <td style="width:100px;" ng-if="elco.FWELIGIBLE =='0'">No</td>
-                                                        <td style="width:100px;" ng-if="elco.FWELIGIBLE =='1'">Yes</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table><!--//table body-->
-                                        </div>
-                                        <div id="{{elco.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">                    
-                                            <div class="panel-body">
-                                                <div class="row">
-                                                    <div class="col-md-2 col-lg-2 " align="center">
-                                                         <span>{{elco.FWWOMFNAME}}</span>
-                                                        <img alt="User Pic" src="images/photo2.png" class="img-circle img-responsive">
-                                                    </div>
-                                                    <div class=" col-md-4 col-lg-4 ">                                           
-                                                        <div>
-                                                            <div><strong>HHID:</strong> {{hhRegisterEntry.FWHOHFNAME}}</div>
-                                                            <div> <strong>Husband Name:</strong> {{elco.FWHUSNAME}}</div>
-                                                            <div> <strong>Age: </strong>{{elco.FWWOMAGE}}</div>
-                                                            <div ng-if="elco.FWELIGIBLE =='0'"><strong>Current  Status:</strong> No</div>
-                                                            <div ng-if="elco.FWELIGIBLE =='1'"><strong>Current  Status:</strong> Yes</div>
-                                                            <div><strong>NID:</strong> {{elco.FWWOMNID}}</div>
-                                                            <div><strong>BID:</strong> {{elco.FWWOMBID}}</div>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>                     
-                                        </div> 
-                                    </div>
-                                </div>
-                                
-                            </div>                     
-                        </div>
+                      </div>
+                      <div class=" col-md-6 col-lg-6 ">                                           
+                        <div>
+                           <!--<mapbox map-id="probir123.ifhlcpgl" lat="{{latitude(hhRegisterEntry.FWNHHHGPS)}}" lng="{{longitude(hhRegisterEntry.FWNHHHGPS)}}" style="width:100%; height:120px; margin-top: 10px;">                                                
+                            <marker lat="{{latitude(hhRegisterEntry.FWNHHHGPS)}}" lng="{{longitude(hhRegisterEntry.FWNHHHGPS)}}"><h1>This is an unstyled marker</h1></marker>
+                          </mapbox> -->                                            
+                          </div>
+                      </div>                                    
                     </div>
+                    <div class="row">                                   
+                      <div class="panel panel-default" ng-repeat="elco in hhRegisterEntry.ELCODETAILS">
+                        <div class="panel-heading2" role="tab" id="headingTwo3">
+                          <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion3" href="#{{elco.id}}" aria-expanded="false" aria-controls="collapseThree">
+                            <thead ng-if="$first">
+                              <tr>
+                                <th style="width:100px;">MWRA Name</th>
+                                <th style="width:100px;">Age</th>
+                                <th style="width:100px;">Husband Name</th>
+                                <th style="width:100px;">ELCO status</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>                                                                                                            
+                                <td style="width:100px;">{{elco.FWWOMFNAME}}</td>
+                                <td style="width:100px;">{{elco.FWWOMAGE}}</td>
+                                <td style="width:100px;">{{elco.FWHUSNAME}}</td>
+                                <td style="width:100px;" ng-if="elco.FWELIGIBLE =='0'">No</td>
+                                <td style="width:100px;" ng-if="elco.FWELIGIBLE =='1'">Yes</td>
+                              </tr>
+                            </tbody>
+                          </table><!--//table body-->
+                        </div>
+                        <div id="{{elco.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">                    
+                          <div class="panel-body">
+                            <div class="row">
+                              <div class="col-md-2 col-lg-2 " align="center">
+                                <span>{{elco.FWWOMFNAME}}</span>
+                                <img alt="User Pic" src="images/photo2.png" class="img-circle img-responsive">
+                              </div>
+                              <div class=" col-md-4 col-lg-4 ">                                           
+                                <div>
+                                  <div><strong>HHID:</strong> {{hhRegisterEntry.FWHOHFNAME}}</div>
+                                  <div> <strong>Husband Name:</strong> {{elco.FWHUSNAME}}</div>
+                                  <div> <strong>Age: </strong>{{elco.FWWOMAGE}}</div>
+                                  <div ng-if="elco.FWELIGIBLE =='0'"><strong>Current  Status:</strong> No</div>
+                                  <div ng-if="elco.FWELIGIBLE =='1'"><strong>Current  Status:</strong> Yes</div>
+                                  <div><strong>NID:</strong> {{elco.FWWOMNID}}</div>
+                                  <div><strong>BID:</strong> {{elco.FWWOMBID}}</div>
+                                </div>
+                              </div>                                                    
+                            </div>
+                          </div>                     
+                        </div> 
+                      </div>
+                    </div>                                
+                  </div>                     
                 </div>
-                </div>
+              </div>
             </div>
-               <div class="row">
-                <div class="col-md-3 col-lg-10 ">
-                  <pagination page="currentPage" boundary-links="true" max-size="8" total-items="totalItems" items-per-page="entryLimit"></pagination>
-                </div>
-                <!--<div class="col-md-3 col-lg-2 ">
-                <button id="login" ng-click="download()" class="btn btn-lg btn-primary btn-block" type="submit">Export</button>
-               </div>-->
-               </div>
-            </div><!-- content accordion  end -->
+          </div>
         </div>
+        <div class="row">
+          <div class="col-md-3 col-lg-10 ">
+            <pagination page="currentPage" boundary-links="true" max-size="8" total-items="totalItems" items-per-page="entryLimit"></pagination>
+          </div>                
+        </div>
+      </div><!-- content accordion  end -->
     </div>
-    
+  </div>    
 </section>
 
 

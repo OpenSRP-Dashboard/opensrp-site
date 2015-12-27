@@ -22,9 +22,8 @@ angular.module('opensrpSiteApp')
       });
     };
     
-    var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/anc?anm-id="+$rootScope.username; 
-    var elcoData = $http.get(apiURLs, { cache: true}).success(function (data) {            
-        
+   var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/anc?anm-id="+$rootScope.username; 
+    var elcoData = $http.get(apiURLs, { cache: true}).success(function (data) {       
     });
         
   

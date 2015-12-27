@@ -14,17 +14,34 @@ angular.module('opensrpSiteApp')
         $scope.resetFilters = function () {    
           $scope.search = {};
         };
+       
         $scope.sortType     = 'FWWOMFNAME'; // set the default sort type
         $scope.sortReverse  = false;
         $scope.currentPage = 1;
-        $scope.totalItems = data.length;
-        console.log("Befor Filter Length")
-        console.log($scope.totalItems)
+        $scope.totalItems = data.length;        
         $scope.entryLimit = 10; // items per page
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
         
         $scope.$watch('search', function (newVal, oldVal) {   
-        //$scope.filtered = filterFilter(data, newVal);          
+        //$scope.filtered = filterFilter(data, newVal);
+          $scope.unions = "";
+          $scope.thanas = "";
+          if (newVal.details && newVal.details.existing_District) {
+            window.allData = window.householdList;            
+            window.thanaList = jsonsql.query("select * from allData where ( tag =='Upazilla' && parent._value == '"+newVal.details.existing_District+"'  ) ",allData);
+            $scope.thanas = thanaList;            
+          }
+          if (newVal.details && newVal.details.existing_Upazilla) {
+            if ($scope.thanas.length == 0) {
+              $scope.unions = "";
+              delete newVal.details.existing_Union ;
+              delete newVal.details.existing_Upazilla ;
+            }else{
+              window.allData = window.householdList;            
+              window.unionsList = jsonsql.query("select * from allData where ( tag =='Union' && parent._value == '"+newVal.details.existing_Upazilla+"'  ) ",allData);
+              $scope.unions = unionsList;
+            }            
+          }
           $scope.filtered = $filter('filter')(data,newVal, true); 
           $scope.totalItems = $scope.filtered.length;          
           $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
