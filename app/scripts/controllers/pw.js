@@ -8,7 +8,7 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('PwCtrl', function ($scope,$http,$rootScope,$timeout,PW,ElcoRegisterService,Common,AclService) {
+  .controller('PwCtrl', function ($scope,$http,$rootScope,$timeout,PW,EC,ElcoRegisterService,Common,AclService,$filter) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -21,10 +21,11 @@ angular.module('opensrpSiteApp')
     ' <span>Data Details</span>'+
     '</a>';
     $scope.data = ElcoRegisterService.Data();    
-    PW.reportThisMonth($scope, $scope.data,$rootScope,'details.WomanREGDATE','thisMonth');
-    PW.reportThisWeek($scope, $scope.data,$rootScope,'details.WomanREGDATE','thisWeek');
-    PW.reportToday($scope,$scope.data,$rootScope,'details.WomanREGDATE','today');
-    
+    EC.reportThisMonth($scope, $scope.data,$rootScope,'details.WomanREGDATE','thisMonth',$filter);
+    EC.reportThisWeek($scope, $scope.data,$rootScope,'details.WomanREGDATE','thisWeek',$filter);
+    EC.reportToday($scope,$scope.data,$rootScope,'details.WomanREGDATE','today',$filter);
+    Common.locations($scope);
+    Common.users($scope);
     var date = new Date();
     var monthLists = [];
     monthLists[3] = new Date(date.getFullYear(), date.getMonth(), 1);

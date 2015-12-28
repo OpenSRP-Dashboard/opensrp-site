@@ -17,25 +17,24 @@
 						</div>
 					</div>
 					<div class="col-md-3">
-						<select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
-							<option value="01">District </option>
-							<option id="03"ng-click="search.FWWOMDISTRICT='BANDARBAN'">BANDARBAN</option>
-							<option id="04" ng-click="search.FWWOMDISTRICT='BARGUNA'">BARGUNA</option>
-						</select>
+						<select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1" >
+                <option ng-click="search.FWWOMDISTRICT=''" value="">Select District </option>
+                <option ng-repeat="district in districts"  ng-click="search.FWWOMDISTRICT='{{district.name}}'" value="{{district.name}}">{{district.name}}</option>
+                <option  ng-click="search.FWWOMDISTRICT='fff'" value="fff">fff</option>
+                <option  ng-click="search.FWWOMDISTRICT='ddd'" value="ddd">ddd</option>
+              </select>
 					</div>
 					<div class=" col-md-3">
 						<select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
-							<option value="01">Upazila </option>
-							<option id="03" value="BANDARBAN">BANDARBAN</option>
-							<option id="04" value="BARGUNA">BARGUNA</option>
-						</select>
+                <option ng-click="search.FWWOMUPAZILLA=''"  value="">Select Upazilla </option>
+                <option ng-repeat="thana in thanas"  ng-click="search.FWWOMUPAZILLA='{{thana.name}}'" value="{{thana.name}}">{{thana.name}}</option>
+              </select>
 					</div>
 					<div class=" col-md-3">
 						<select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
-							<option value="01">Union </option>
-							<option id="03" value="BANDARBAN">BANDARBAN</option>
-							<option id="04" value="BARGUNA">BARGUNA</option>
-						</select>
+                <option ng-click="search.FWWOMUNION=''" value="">Select Union </option>
+                <option ng-repeat="union in unions"  ng-click="search.FWWOMUNION='{{union.name}}'" value="{{union.name}}">{{union.name}}</option>
+              </select>
 					</div>
                 </div> <!-- main col right -->
             </div><!--/row-->
@@ -47,7 +46,10 @@
 						</div>
 					</div>
 					<div class="col-md-9">
-						<input id="f1_gn_q11_elem1" class="form-control" ng-model="search.PROVIDERID" value=" NAME" name="f1_gn_q11_elem1">
+						<select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
+                <option value="">Select User </option>
+                <option ng-repeat="user in users"  ng-click="search.PROVIDERID='{{user}}'" value="{{user}}">{{user}}</option>
+              </select>
 					</div>
                 </div> <!-- main col right -->
             </div><!--/row-->

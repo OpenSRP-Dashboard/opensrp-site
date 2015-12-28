@@ -3,182 +3,162 @@
 
 
 <section>
-    <div class="container">
-        <div class="row">
-            <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include>
-            
-            <div class="col-sm-9 col-md-9">
-              <div show-during-resolve class="loader">   
-                <center><img src="images/spinner.gif"  alt="Opensrp"/></center>
-              </div>
-                <div class="row"> <!-- main col left --> 
-                           <div class="starter-template3">		
-                            <div class="col-md-3">
-                              <div class="location" >
-                                  <span class="glyphicon glyphicon-map-marker"></span>LOCATION								</div>
-                            </div>
-              
-                            <div class="col-md-3">
-                              <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
-                                <option value="01">District </option>
-                                    <option id="03" value="BANDARBAN">BANDARBAN</option>
-                                <option id="04" value="BARGUNA">BARGUNA</option>
-                              </select>
-                            </div>
-              
-                            <div class=" col-md-3">
-                              <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
-                                <option value="01">Upazila </option>
-                                    <option id="03" value="BANDARBAN">BANDARBAN</option>
-                                <option id="04" value="BARGUNA">BARGUNA</option>
-                              </select>
-                            </div>
-              
-                            <div class=" col-md-3">
-                              <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
-                                <option value="01">Union </option>
-                                    <option id="03" value="BANDARBAN">BANDARBAN</option>
-                                <option id="04" value="BARGUNA">BARGUNA</option>
-                              </select>
-                            </div>
-                                       </div> <!-- main col right -->
-                           
-                                    </div><!--/row-->
-                          
-                          
-                          <div class="row"> <!-- main col left --> 
-                           <div class="starter-template3">
-                  
-                            <div class="col-md-3">
-                              <div class="location" >
-                                  <span class="glyphicon glyphicon-user"></span>WORKER NAME								</div>
-                            </div>
-              
-                            <div class="col-md-9">
-                              <input id="f1_gn_q11_elem1" class="form-control" ng-model="search.PROVIDERID" value=" NAME" name="f1_gn_q11_elem1">
-                            </div>
-                                       </div> <!-- main col right -->
-                                    </div><!--/row-->
-                          
-                  <div class="row">
-                    <div class="col-xs-6 col-lg-4">
-                            <div class="box2">
-                            <a href="/#/ec"><img src="../../images/cupol_icon.png" class="imgs" alt="image">  </a>			  
-                      </div>
-                          </div><!--/.col-xs-6.col-lg-4-->
-                          <div class="col-xs-6 col-lg-4">
-                            <div class="box1 active ">
-                            <a href="/#/hh"><img src="../../images/station_icon.png" class="imgs" alt="image"> </a>            
-                       </div>
-                     </div><!--/.col-xs-6.col-lg-4-->
-                          
-                          <div class="col-xs-6 col-lg-4">
-                            <div class="box3 ">
-                            <a href="/#/pw"><img src="../../images/p_icon.png" class="imgs" alt="image">  </a>              
-                      </div>
-                    </div><!--/.col-xs-6.col-lg-4-->
-                          </div>
-		
-                
-                <!-- content accordion  start -->
-                <div class="row">
-                    <div class="col-xs-12 col-lg-12">
-                <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
-                    <div class="panel panel-default">
-                        <div class="panel-heading2" role="tab" id="headingOne">
-                            <table>
-                                <thead> <!--table head-->
-                                    <tr style="background:none">
-                                        <th style="width:205px; font-size:12px;">
-                                            <a href="/#/elcos" ng-click="sortType = 'FWWOMFNAME'; sortReverse = !sortReverse">MWRA Name
-                                                <span ng-show="sortType == 'FWWOMFNAME' && !sortReverse" class="fa fa-caret-down"></span>
-                                                <span ng-show="sortType == 'FWWOMFNAME' && sortReverse" class="fa fa-caret-up"></span>
-                                            </a>                        
-                                        </th>
-                                       
-                                        <th style="width:101px;">
-                                            <a href="/#/elcos" ng-click="sortType = 'FWWOMAGE'; sortReverse = !sortReverse">Age
-                                                <span ng-show="sortType == 'FWWOMAGE' && !sortReverse" class="fa fa-caret-down"></span>
-                                                <span ng-show="sortType == 'FWWOMAGE' && sortReverse" class="fa fa-caret-up"></span>
-                                            </a>
-                                        </th>
-                                        <th style="width:150px;">
-                                            <a href="/#/elcos" ng-click="sortType = 'FWHUSNAME'; sortReverse = !sortReverse">Husband Name
-                                                <span ng-show="sortType == 'FWHUSNAME' && !sortReverse" class="fa fa-caret-down"></span>
-                                                <span ng-show="sortType == 'FWHUSNAME' && sortReverse" class="fa fa-caret-up"></span>
-                                            </a>
-                                    
-                                        </th>
-                                        <th style="width:100px;">
-                                            <a href="/#/elcos"  ng-click="sortType = 'FWNHREGDATE'; sortReverse = !sortReverse">ELCO status
-                                                <span ng-show="sortType == 'FWNHREGDATE' && !sortReverse" class="fa fa-caret-down"></span>
-                                                <span ng-show="sortType == 'FWNHREGDATE' && sortReverse" class="fa fa-caret-up"></span>
-                                            </a>                            
-                                        </th>                        
-                                    </tr>
-                                </thead><!--//table head-->
-                            </table>                        
-                        </div>                       
-                    </div>
-                    
-                    <div class="panel panel-default" ng-repeat="elcoRegisterEntry in data | filter:search | orderBy:sortType:sortReverse | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
-                        <div class="panel-heading2" role="tab" id="headingTwo2">
-                            <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion2" href="#{{elcoRegisterEntry.CASEID}}" aria-expanded="false" aria-controls="collapseTwo">
-                                <thead>
-                                    <tr>
-                                        <th style="width:48px;">                                           
-                                            <div class="btn-group-md">
-                                                <img src="images/photo.png" alt="">
-                                            </div>                                           
-                                        </th>  
-                                        <th style="width:100px;">{{elcoRegisterEntry.FWWOMFNAME}}</th>                                        
-                                        <th style="width:100px;">{{elcoRegisterEntry.FWWOMAGE}}</th>
-                                        <th style="width:100px;">{{elcoRegisterEntry.FWHUSNAME}}</th>
-                                        <th style="width:100px;">Yes</th> 
-                                    </tr>
-                                </thead>
-                            </table><!--//table body-->
-                        </div>
-                        <div id="{{elcoRegisterEntry.CASEID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">                    
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-3 col-lg-3 " align="center">
-                                        {{elcoRegisterEntry.FWWOMFNAME}}
-                                        <img alt="User Pic" src="images/photo2.png" class="img-circle img-responsive"> </div>
-                                        <div class=" col-md-4 col-lg-4 "> 
-                                            <div><strong> HHID:</strong> {{elcoRegisterEntry.GOBHHID}}</div>
-                                            <div> <strong>Husband Name:</strong> {{elcoRegisterEntry.FWHUSNAME}}</div>
-                                            <div> <strong>DOB: </strong>{{elcoRegisterEntry.FWBIRTHDATE}}</div>                       
-                                            <div><strong>Age:</strong> {{elcoRegisterEntry.FWWOMAGE}}</div>
-                                            <div ng-if="elcoRegisterEntry.FWELIGIBLE =='0'"><strong>ELCO Status: </strong>No</div
-                                            <div ng-if="elcoRegisterEntry.FWELIGIBLE =='1'"><strong>ELCO Status: </strong> Yes</div>
-                                            <div><strong>NID:</strong> {{elcoRegisterEntry.FWWOMNID}}</div>
-                                            <div><strong>BRID:</strong> {{elcoRegisterEntry.PROVIDERID}}</div>
-                                        </div>
-                                    </div>
-                                </div>                     
-                            </div>
-                        </div
-                </div>
-                    </div>
-                    </div>
-                <div class="row">
-                <div class="col-md-3 col-lg-10 ">
-                    <pagination page="currentPage" boundary-links="true" max-size="8" total-items="totalItems" items-per-page="entryLimit"></pagination>
-                    
-                </div>
-                <!--
-                <div class="col-md-3 col-lg-2 ">
-                <button id="login" ng-click="download()" class="btn btn-lg btn-primary btn-block" type="submit">Export</button>
-               </div>-->
-                </div>
-                    
-                </div><!-- content accordion  end -->
-            </div>
+  <div class="container">
+    <div class="row">
+      <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include>            
+      <div class="col-sm-9 col-md-9">
+        <div show-during-resolve class="loader">   
+          <center><img src="images/spinner.gif"  alt="Opensrp"/></center>
         </div>
+        <div class="row"> <!-- main col left --> 
+          <div class="starter-template3">		
+            <div class="col-md-3">
+              <div class="location" ><span class="glyphicon glyphicon-map-marker"></span>LOCATION	</div>
+            </div>              
+            <div class="col-md-3">
+              <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1" >
+                <option ng-click="search.FWWOMDISTRICT=''" value="">Select District </option>
+                <option ng-repeat="district in districts"  ng-click="search.FWWOMDISTRICT='{{district.name}}'" value="{{district.name}}">{{district.name}}</option>
+                <option  ng-click="search.FWWOMDISTRICT='fff'" value="fff">fff</option>
+                <option  ng-click="search.FWWOMDISTRICT='ddd'" value="ddd">ddd</option>
+              </select>
+            </div>              
+            <div class=" col-md-3">
+              <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
+                <option ng-click="search.FWWOMUPAZILLA=''"  value="">Select Upazilla </option>
+                <option ng-repeat="thana in thanas"  ng-click="search.FWWOMUPAZILLA='{{thana.name}}'" value="{{thana.name}}">{{thana.name}}</option>
+              </select>
+            </div>              
+            <div class=" col-md-3">
+              <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
+                <option ng-click="search.FWWOMUNION=''" value="">Select Union </option>
+                <option ng-repeat="union in unions"  ng-click="search.FWWOMUNION='{{union.name}}'" value="{{union.name}}">{{union.name}}</option>
+              </select>
+            </div>
+          </div> <!-- main col right -->                           
+        </div><!--/row--> 
+        <div class="row"> <!-- main col left --> 
+          <div class="starter-template3">                  
+            <div class="col-md-3">
+              <div class="location" ><span class="glyphicon glyphicon-user"></span>WORKER NAME</div>
+            </div>              
+            <div class="col-md-9">
+              <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
+                <option value="">Select User </option>
+                <option ng-repeat="user in users"  ng-click="search.PROVIDERID='{{user}}'" value="{{user}}">{{user}}</option>
+              </select>
+            </div>
+          </div> <!-- main col right -->
+        </div><!--/row--> 
+        <div class="row">
+          <div class="col-xs-6 col-lg-4">
+            <div class="box2">
+              <a href="/#/ec"><img src="../../images/cupol_icon.png" class="imgs" alt="image">  </a>			  
+            </div>
+          </div><!--/.col-xs-6.col-lg-4-->
+          <div class="col-xs-6 col-lg-4">
+            <div class="box1 active ">
+              <a href="/#/hh"><img src="../../images/station_icon.png" class="imgs" alt="image"> </a>            
+            </div>
+          </div><!--/.col-xs-6.col-lg-4-->
+                          
+          <div class="col-xs-6 col-lg-4">
+            <div class="box3 ">
+              <a href="/#/pw"><img src="../../images/p_icon.png" class="imgs" alt="image">  </a>              
+            </div>
+          </div><!--/.col-xs-6.col-lg-4-->
+        </div>
+                <!-- content accordion  start -->
+        <div class="row">
+          <div class="col-xs-12 col-lg-12">
+            <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+              <div class="panel panel-default">
+                <div class="panel-heading2" role="tab" id="headingOne">
+                  <table>
+                    <thead> <!--table head-->
+                      <tr style="background:none">
+                        <th style="width:205px; font-size:12px;">
+                          <a href="/#/elcos" ng-click="sortType = 'FWWOMFNAME'; sortReverse = !sortReverse">MWRA Name
+                            <span ng-show="sortType == 'FWWOMFNAME' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'FWWOMFNAME' && sortReverse" class="fa fa-caret-up"></span>
+                          </a>                        
+                        </th>                                       
+                        <th style="width:101px;">
+                          <a href="/#/elcos" ng-click="sortType = 'FWWOMAGE'; sortReverse = !sortReverse">Age
+                            <span ng-show="sortType == 'FWWOMAGE' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'FWWOMAGE' && sortReverse" class="fa fa-caret-up"></span>
+                          </a>
+                        </th>
+                        <th style="width:150px;">
+                          <a href="/#/elcos" ng-click="sortType = 'FWHUSNAME'; sortReverse = !sortReverse">Husband Name
+                            <span ng-show="sortType == 'FWHUSNAME' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'FWHUSNAME' && sortReverse" class="fa fa-caret-up"></span>
+                          </a>      
+                        </th>
+                        <th style="width:100px;">
+                          <a href="/#/elcos"  ng-click="sortType = 'FWNHREGDATE'; sortReverse = !sortReverse">ELCO status
+                            <span ng-show="sortType == 'FWNHREGDATE' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'FWNHREGDATE' && sortReverse" class="fa fa-caret-up"></span>
+                          </a>                            
+                        </th>                        
+                      </tr>
+                    </thead><!--//table head-->
+                  </table>                        
+                </div>                       
+              </div>                    
+              <div class="panel panel-default" ng-repeat="elcoRegisterEntry in data | filter:search | orderBy:sortType:sortReverse | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                <div class="panel-heading2" role="tab" id="headingTwo2">
+                  <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion2" href="#{{elcoRegisterEntry.CASEID}}" aria-expanded="false" aria-controls="collapseTwo">
+                    <thead>
+                      <tr>
+                        <th style="width:48px;">                                           
+                          <div class="btn-group-md">
+                            <img src="images/photo.png" alt="">
+                          </div>                                           
+                        </th>  
+                        <th style="width:100px;">{{elcoRegisterEntry.FWWOMFNAME}}</th>                                        
+                        <th style="width:100px;">{{elcoRegisterEntry.FWWOMAGE}}</th>
+                        <th style="width:100px;">{{elcoRegisterEntry.FWHUSNAME}}</th>
+                        <th style="width:100px;">Yes</th> 
+                      </tr>
+                    </thead>
+                  </table><!--//table body-->
+                </div>
+                <div id="{{elcoRegisterEntry.CASEID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">                    
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-md-3 col-lg-3 " align="center">{{elcoRegisterEntry.FWWOMFNAME}}<img alt="User Pic" src="images/photo2.png" class="img-circle img-responsive"> </div>
+                        <div class=" col-md-4 col-lg-4 "> 
+                          <div><strong> HHID:</strong> {{elcoRegisterEntry.GOBHHID}}</div>
+                          <div> <strong>Husband Name:</strong> {{elcoRegisterEntry.FWHUSNAME}}</div>
+                          <div> <strong>DOB: </strong>{{elcoRegisterEntry.FWBIRTHDATE}}</div>                       
+                          <div><strong>Age:</strong> {{elcoRegisterEntry.FWWOMAGE}}</div>
+                          <div><strong>ELCO Status: </strong>{{elcoRegisterEntry.FWELIGIBLE}}</div
+                         
+                          <div><strong>NID:</strong> {{elcoRegisterEntry.FWWOMNID}} </div>
+                          <div><strong>BRID:</strong> {{elcoRegisterEntry.FWWOMBID}}</div>
+                        </div>
+                    </div>
+                  </div>                     
+                </div>
+              </div
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 col-lg-10 ">
+            <pagination page="currentPage" boundary-links="true" max-size="8" total-items="totalItems" items-per-page="entryLimit"></pagination>
+          </div>               
+          <div class="col-md-3 col-lg-2 ">
+            <!--<button id="login" ng-click="download()" class="btn btn-lg btn-primary btn-block" type="submit">Export</button> -->
+          </div>
+        </div>
+                    
+      </div><!-- content accordion  end -->
+    </div>
+  </div>
     
 </section>
-
 <data-ng-include src="'views/partials/footer.html'" style="clear: both;" class="navbar"></data-ng-include>
 
 

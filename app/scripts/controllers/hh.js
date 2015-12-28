@@ -8,7 +8,7 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('HhCtrl', function ($scope,$http,$rootScope,$timeout,HHRegisterService,page,HH,Common,AclService) {
+  .controller('HhCtrl', function ($scope,$http,$rootScope,$timeout,HHRegisterService,page,HH,Common,AclService,$filter) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -50,10 +50,11 @@ angular.module('opensrpSiteApp')
     
     Common.chartDataCal($scope,monthLists,window.getHHata,'FWNHREGDATE',$timeout);
     
-    page.reportThisMonth($scope,$scope.data,$rootScope,'FWNHREGDATE','thisMonth');
-    page.reportThisWeek($scope,$scope.data,$rootScope,'FWNHREGDATE','thisWeek');
-    page.reportToday($scope,$scope.data,$rootScope,'FWNHREGDATE','today');
-    
+    HH.reportThisMonth($scope,$scope.data,$rootScope,'FWNHREGDATE','thisMonth',$filter);
+    HH.reportThisWeek($scope,$scope.data,$rootScope,'FWNHREGDATE','thisWeek',$filter);
+    HH.reportToday($scope,$scope.data,$rootScope,'FWNHREGDATE','today',$filter);
+    Common.locations($scope);
+    Common.users($scope);
     //thisMonth(getData,firstDay,toDay);
     
     

@@ -28,9 +28,8 @@ angular.module('opensrpSiteApp')
       return location.split(" ")[1];
   }
   $scope.data = HHRegisterService.Data();
-  console.log($scope.data);
-  page.pagination($scope,$scope.data,$filter);
-  Common.location($scope);
+  HHRegisterService.dataFilter($scope,$scope.data,$filter);
+  Common.locations($scope);
   Common.users($scope);
   $scope.download= function(){
       //JSONToCSVConvertor($scope.data, "Vehicle Report", true);

@@ -8,7 +8,7 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('ElcoCtrl', function ($scope,$http,ElcoRegisterService,page,AclService) {    
+  .controller('ElcoCtrl', function ($scope,$http,ElcoRegisterService,page,AclService,$filter,Common) {    
     $scope.numberPattern = /^\d*$/;
     $scope.data = ElcoRegisterService.Data();
     console.log($scope.data);
@@ -19,5 +19,9 @@ angular.module('opensrpSiteApp')
      '<i class="glyphicon glyphicon-list-alt"></i>'+
     ' <span>Data Details</span>'+
     '</a>';
-     page.pagination($scope,$scope.data);
+    Common.locations($scope);
+    Common.users($scope);
+    ElcoRegisterService.dataFilter($scope,$scope.data,$filter);
+    
+    
   });

@@ -181,11 +181,11 @@ angular.module('opensrpSiteApp')
       });
     }
     
-    this.location = function($scope){
+    this.locations = function($scope){
       var url = OPENSRP_WEB_BASE_URL+"/dashboard-location/all-location-tree";
       var householdData = $http.get(url, { cache: true}).success(function (data) {              
-        window.householdList = JSON.parse(JSON.stringify(data.map.data.myArrayList));           
-        window.districtList = jsonsql.query("select * from householdList where ( tag == 'District'  ) ",householdList);
+        window.locationList = JSON.parse(JSON.stringify(data.map.data.myArrayList));           
+        window.districtList = jsonsql.query("select * from locationList where ( tag == 'District'  ) ",locationList);
         $scope.districts=districtList;        
       });
     }
@@ -199,5 +199,52 @@ angular.module('opensrpSiteApp')
         $scope.users=userData;        
       });      
     }
+    
+    this.hh_location_tree = function(newVal,$scope){
+      $scope.unions = "";
+      $scope.thanas = "";                        
+      if (newVal.details && newVal.details.existing_District ) {
+        window.allLocation = window.locationList;            
+        window.thanaList = jsonsql.query("select * from allLocation where ( tag =='Upazilla' && parent._value == '"+newVal.details.existing_District+"'  ) ",allLocation);
+        $scope.thanas = thanaList;            
+      }
+      if (newVal.details && newVal.details.existing_Upazilla) {
+        if ($scope.thanas.length == 0) {
+          $scope.unions = "";
+          delete newVal.details.existing_Union ;
+          delete newVal.details.existing_Upazilla ;
+        }else{
+          window.allData = window.householdList;            
+          window.unionsList = jsonsql.query("select * from allLocation where ( tag =='Union' && parent._value == '"+newVal.details.existing_Upazilla+"'  ) ",allLocation);
+          $scope.unions = unionsList;
+        }            
+      }
+      if (newVal.details && newVal.details.existing_District == "") {
+        delete newVal.details.existing_District;
+      } 
+    }
+    this.ec_location_tree = function(newVal,$scope){
+      $scope.unions = "";
+      $scope.thanas = "";                
+      if (newVal && newVal.FWWOMDISTRICT ) {
+        window.allLocation = window.locationList;            
+        window.thanaList = jsonsql.query("select * from allLocation where ( tag =='Upazilla' && parent._value == '"+newVal.FWWOMDISTRICT+"'  ) ",allLocation);
+        $scope.thanas = thanaList;            
+      }
+      if (newVal && newVal.FWWOMUPAZILLA) {
+        if ($scope.thanas.length == 0) {
+          $scope.unions = "";
+          delete newVal.FWWOMUNION ;
+          delete newVal.FWWOMUPAZILLA ;
+        }else{                               
+          window.unionsList = jsonsql.query("select * from allLocation where ( tag =='Union' && parent._value == '"+newVal.FWWOMUPAZILLA+"'  ) ",allLocation);
+          $scope.unions = unionsList;
+        }            
+      }
+      if (newVal && newVal.FWWOMDISTRICT == "") {
+        delete newVal.FWWOMDISTRICT;
+      }
+    }
+    
    
   });

@@ -9,13 +9,13 @@
  */
 angular.module('opensrpSiteApp')   
    .service('page', function (filterFilter) {
-      this.pagination = function($scope,data,$filter){
+      this.dataFilter = function($scope,data,$filter,defaultSort,object){
         $scope.search = {};
         $scope.resetFilters = function () {    
           $scope.search = {};
         };
        
-        $scope.sortType     = 'FWWOMFNAME'; // set the default sort type
+        $scope.sortType     = defaultSort; // set the default sort type
         $scope.sortReverse  = false;
         $scope.currentPage = 1;
         $scope.totalItems = data.length;        
@@ -25,10 +25,11 @@ angular.module('opensrpSiteApp')
         $scope.$watch('search', function (newVal, oldVal) {   
         //$scope.filtered = filterFilter(data, newVal);
           $scope.unions = "";
-          $scope.thanas = "";
-          if (newVal.details && newVal.details.existing_District) {
-            window.allData = window.householdList;            
-            window.thanaList = jsonsql.query("select * from allData where ( tag =='Upazilla' && parent._value == '"+newVal.details.existing_District+"'  ) ",allData);
+          $scope.thanas = "";          
+          if (newVal.details && newVal.details.existing_District ) {
+            var key = Object.keys(newVal.details);
+            window.allLocation = window.locationList;            
+            window.thanaList = jsonsql.query("select * from allLocation where ( tag =='Upazilla' && parent._value == '"+newVal.details[key[0]]+"'  ) ",allLocation);
             $scope.thanas = thanaList;            
           }
           if (newVal.details && newVal.details.existing_Upazilla) {
@@ -37,25 +38,28 @@ angular.module('opensrpSiteApp')
               delete newVal.details.existing_Union ;
               delete newVal.details.existing_Upazilla ;
             }else{
+              
               window.allData = window.householdList;            
-              window.unionsList = jsonsql.query("select * from allData where ( tag =='Union' && parent._value == '"+newVal.details.existing_Upazilla+"'  ) ",allData);
+              window.unionsList = jsonsql.query("select * from allLocation where ( tag =='Union' && parent._value == '"+newVal.details[key[1]]+"'  ) ",allLocation);
               $scope.unions = unionsList;
             }            
           }
+          if (newVal.details && newVal.details.existing_District == "") {
+            delete newVal.details.existing_District;
+          }          
           $scope.filtered = $filter('filter')(data,newVal, true); 
           $scope.totalItems = $scope.filtered.length;          
           $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
           $scope.currentPage = 1;
-        }, true);        
-        
-    };
-    this.download = function($scope,data,title){        
+        }, true);
+      };
+      this.download = function($scope,data,title){        
         if ($scope.filtered) {
             newHhFormExport($scope.filtered, title, true);
         }else{
             newHhFormExport(data, title, true);
         }
-    }
+      }
     
     this.downloadHH = function(data,title){     
       newHhFormExport(data, title, true);       
@@ -71,7 +75,7 @@ angular.module('opensrpSiteApp')
       $scope.search = {};
       $scope.resetFilters = function () {    
         $scope.search = {};
-      };
+    };
       $scope.$watch('search', function (newVal, oldVal) {   
         $scope.filtered = filterFilter(data, newVal);
         var date = new Date();

@@ -89,9 +89,9 @@
                             </a>
                           </th>
                           <th style="width:150px;">
-                            <a href="/#/households" ng-click="sortType = 'MWRA'; sortReverse = !sortReverse">No of MWRA
-                              <span ng-show="sortType == 'MWRA' && !sortReverse" class="fa fa-caret-down"></span>
-                              <span ng-show="sortType == 'MWRA' && sortReverse" class="fa fa-caret-up"></span>
+                            <a href="/#/households" ng-click="sortType = 'FWNHHMWRA'; sortReverse = !sortReverse">No of MWRA
+                              <span ng-show="sortType == 'FWNHHMWRA' && !sortReverse" class="fa fa-caret-down"></span>
+                              <span ng-show="sortType == 'FWNHHMWRA' && sortReverse" class="fa fa-caret-up"></span>
                             </a>
                           </th>
                           <th style="width:154px;">
@@ -123,7 +123,7 @@
                         </div>              
                         </th>                                       
                         <th style="width:100px;">{{hhRegisterEntry.FWHOHFNAME}}</th>
-                        <th style="width:100px;">{{hhRegisterEntry.MWRA}}</th>
+                        <th style="width:100px;">{{hhRegisterEntry.FWNHHMWRA}}</th>
                         <th style="width:100px;">{{hhRegisterEntry.TODAY}}</th>
                         <th style="width:100px;">Due</th> 
                       </tr>
@@ -141,7 +141,7 @@
                         <div>
                           <div><strong> Name of HH Head:</strong> {{hhRegisterEntry.FWHOHFNAME}}</div>
                           <div> <strong>HHID- GoB/JiVitA:</strong> {{hhRegisterEntry.FWGOBHHID}} / {{hhRegisterEntry.FWJIVHHID}}</div>
-                          <div> <strong>No of MWRA: </strong>{{hhRegisterEntry.MWRA}}</div>                       
+                          <div> <strong>No of MWRA: </strong>{{hhRegisterEntry.FWNHHMWRA}}</div>                       
                           <div><strong>Last Visit Date:</strong> {{hhRegisterEntry.TODAY}}</div>
                           <div><strong>Current  Status:</strong> Due</div>
                           <div><strong>Location:</strong> {{hhRegisterEntry.details.location_name}}</div>
