@@ -216,7 +216,7 @@ angular
         controllerAs: 'logout'
       })
        .when('/households', {
-        templateUrl: 'views/households.html',
+        templateUrl: 'views/household_details.html',
         controller: 'HouseholdCtrl',
         controllerAs: 'household',
         resolve : {
@@ -235,7 +235,7 @@ angular
         
       })
       .when('/elcos', {
-        templateUrl: 'views/elcos.html',
+        templateUrl: 'views/elco_details.html',
         controller: 'ElcoCtrl',
         controllerAs: 'elco',
         resolve : {
@@ -254,7 +254,7 @@ angular
         
       })
       .when('/pregnant-womens', {
-        templateUrl: 'views/pwdetails.html',
+        templateUrl: 'views/pw_details.html',
         controller: 'PwdetailsCtrl',
         controllerAs: 'pw-details',
         resolve : {

@@ -43,8 +43,9 @@ angular.module('opensrpSiteApp')
                 Common.hh_location_tree(newVal,$scope);                
                 $scope.filtered = $filter('filter')(data,newVal, true); 
                 var date = new Date();
-                var end = moment(date).format('YYYY-MM-DD');
-                var start = moment(date.setDate(date.getDate()-7)).format('YYYY-MM-DD');       
+                var Dates = new Date().getWeek();
+                var end = moment(Dates[1]).format('YYYY-MM-DD');
+                var start = moment(Dates[0]).format('YYYY-MM-DD');       
                 window.getData = JSON.parse(JSON.stringify($scope.filtered));
                 var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"') ",getData);                   
                 $scope[ngBind] = queryResult.length;

@@ -37,8 +37,9 @@ angular.module('opensrpSiteApp')
       $scope.$watch('search', function (newVal, oldVal) {   
         $scope.filtered = filterFilter(data, newVal);
         var date = new Date();
-        var end = moment(date).format('YYYY-MM-DD');
-        var start = moment(date.setDate(date.getDate()-7)).format('YYYY-MM-DD');       
+        var end = moment(Dates[1]).format('YYYY-MM-DD');
+         var Dates = new Date().getWeek();
+        var start = moment(Dates[0]).format('YYYY-MM-DD');       
         window.getData = JSON.parse(JSON.stringify($scope.filtered));
         var queryResult= jsonsql.query("select * from getData where (details.today  >='"+start+"' && details.today  <='"+end+"'  && details.FWPSRPREGSTS == 1  ) ",getData);                      
         $scope[ngBind] = queryResult.length;

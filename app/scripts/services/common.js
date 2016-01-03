@@ -8,18 +8,33 @@
  * Service in the opensrpSiteApp.
  */
 angular.module('opensrpSiteApp')
-  .service('Common', function ($q, $http,filterFilter,AclService,OPENSRP_WEB_BASE_URL) {
+  .service('Common', function ($q,$rootScope, $http,filterFilter,AclService,OPENSRP_WEB_BASE_URL) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     function daysInMonth(month,year) {
       return new Date(year, month, 0).getDate();
-    }    
+    }
+    Date.prototype.getWeek = function(start)
+    {
+        //Calcing the starting point
+      start = start || 0;
+      var today = new Date(this.setHours(0, 0, 0, 0));
+      var day = today.getDay() - start;
+      var date = today.getDate() - day;
+  
+          // Grabbing Start/End Dates
+      var StartDate = new Date(today.setDate(date));
+      var EndDate = new Date(today.setDate(date + 6));
+      return [StartDate, EndDate];
+    }
+
+
     function getWeeksInMonth(month, year,date){
       var weeks=[],firstDate=new Date(year, month, 1), lastDate=new Date(year, month+1, 0), numDays= daysInMonth(month,year);
       var thisDate = new Date(date);           
       var start=1;
       var end=7-firstDate.getDay();     
       while(start<=numDays){
-        var startWeek = "";
+        /*var startWeek = "";
          var endWeek = "";
         if (start<10) {          
           startWeek = '0'+start;
@@ -31,13 +46,23 @@ angular.module('opensrpSiteApp')
         }else{
           endWeek = end;
         }
-          weeks.push({start:year+"-"+month+"-"+startWeek,end:year+"-"+month+"-"+endWeek});
-          start = end + 1;
-          end = end + 7;
-          if(end>numDays)
-              end=numDays;    
+        
+        weeks.push({start:year+"-"+month+"-"+startWeek,end:year+"-"+month+"-"+endWeek});*/
+        start = start || 0;
+        var today = new Date(year+"-"+month+"-"+start);
+        var day = today.getDay() - start;
+        var dates = today.getDate() - day;
+        var StartDate = new Date(today.setDate(dates));
+        var EndDate = new Date(today.setDate(dates + 6));
+        weeks.push({start:moment(StartDate).format('YYYY-MM-DD'),end:moment(EndDate).format('YYYY-MM-DD')});
+            // Grabbing Start/End Dates     
+        start  = start+7;
+        if (start >=numDays) {
+          start = numDays;
+        }
       }
-      if (weeks.length == 6) {        
+       console.log(weeks);
+      /*if (weeks.length == 6) {        
         var firstWeek = weeks[0];
         var lastWeek = weeks[5];        
         var date1 = new Date(firstWeek.start);
@@ -50,10 +75,9 @@ angular.module('opensrpSiteApp')
         }else{
           weeks[4].end = lastWeek.end;
           delete weeks[5];
-        }
+        }      
         
-        
-      }
+      }*/
       
        return weeks;
     }   
@@ -71,13 +95,16 @@ angular.module('opensrpSiteApp')
       $scope.search = {};
       $scope.resetFilters = function () {    
         $scope.search = {};
-      };      
+      };
+      
       $scope.$watch('search', function (newVal, oldVal) { 
         window.columnChartData= [];
         $scope.filtered = filterFilter(data, newVal);       
         window.getHHData = JSON.parse(JSON.stringify($scope.filtered));
+        
         for(var outer = 0;outer < monthLists.length;outer++){
-          var weeks =  getWeeksInMonth(moment(monthLists[outer]).format('MM'),moment(monthLists[outer]).format('YYYY'),moment(monthLists[outer]).format('YYYY-MM-DD'));
+          var weeks =  getWeeksInMonth(moment(monthLists[outer]).format('MM'),moment(monthLists[outer]).format('YYYY'),moment(monthLists[outer]).format('YYYY-MM-DD'));         
+         
           for(var inner=0;inner<weeks.length;inner++){
             if (!angular.isUndefined(weeks[inner])) {
             var start = weeks[inner].start;         
@@ -183,20 +210,24 @@ angular.module('opensrpSiteApp')
     
     this.locations = function($scope){
       var url = OPENSRP_WEB_BASE_URL+"/dashboard-location/all-location-tree";
+       $rootScope.loading = true;
       var householdData = $http.get(url, { cache: true}).success(function (data) {              
         window.locationList = JSON.parse(JSON.stringify(data.map.data.myArrayList));           
         window.districtList = jsonsql.query("select * from locationList where ( tag == 'District'  ) ",locationList);
-        $scope.districts=districtList;        
+        $scope.districts=districtList;
+         $rootScope.loading = false;
       });
     }
     
     this.users = function($scope){
       var url = OPENSRP_WEB_BASE_URL+"/all-user-name";
+      $rootScope.loading = true;
       $http.get(url, { cache: true}).success(function (data) {              
         window.userData = JSON.parse(JSON.stringify(data));           
        // window.userList = jsonsql.query("select * from userData where ( tag == 'District'  ) ",userData);
        console.log(userData);
-        $scope.users=userData;        
+        $scope.users=userData;
+         $rootScope.loading = false;
       });      
     }
     
@@ -221,7 +252,10 @@ angular.module('opensrpSiteApp')
       }
       if (newVal.details && newVal.details.existing_District == "") {
         delete newVal.details.existing_District;
-      } 
+      }
+      if (newVal.PROVIDERID =="") {
+       delete newVal.PROVIDERID;
+      }
     }
     this.ec_location_tree = function(newVal,$scope){
       $scope.unions = "";
@@ -243,6 +277,9 @@ angular.module('opensrpSiteApp')
       }
       if (newVal && newVal.FWWOMDISTRICT == "") {
         delete newVal.FWWOMDISTRICT;
+      }
+      if (newVal.PROVIDERID =="") {
+       delete newVal.PROVIDERID;
       }
     }
     

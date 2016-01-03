@@ -39,11 +39,14 @@ angular.module('opensrpSiteApp')
                 $scope.search = {};
               };
               $scope.$watch('search', function (newVal, oldVal) {
-                Common.ec_location_tree(newVal,$scope);                
+                Common.ec_location_tree(newVal,$scope);
+                var Dates = new Date().getWeek();
                 $scope.filtered = $filter('filter')(data,newVal, true); 
                 var date = new Date();
-                var end = moment(date).format('YYYY-MM-DD');
-                var start = moment(date.setDate(date.getDate()-7)).format('YYYY-MM-DD');       
+                var end = moment(Dates[1]).format('YYYY-MM-DD');
+                var start = moment(Dates[0]).format('YYYY-MM-DD');
+               
+                //alert(Dates[0].toLocaleDateString() + ' to '+ Dates[1].toLocaleDateString())
                 window.getData = JSON.parse(JSON.stringify($scope.filtered));
                 var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"') ",getData);                   
                 $scope[ngBind] = queryResult.length;

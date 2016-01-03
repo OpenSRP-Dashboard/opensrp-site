@@ -21,6 +21,8 @@ angular.module('opensrpSiteApp')
     '</a>';
     Common.locations($scope);
     Common.users($scope);
+    window.getData = JSON.parse(JSON.stringify(ElcoRegisterService.Data()));       
+    $scope.data= jsonsql.query("select * from getData where (FWWOMAGE != 'NaN' ) ",getData);
     ElcoRegisterService.dataFilter($scope,$scope.data,$filter);
     
     

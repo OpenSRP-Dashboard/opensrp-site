@@ -39,7 +39,7 @@ angular.module('opensrpSiteApp')
               $scope.$watch('search', function (newVal, oldVal) {   
               //$scope.filtered = filterFilter(data, newVal);
                 Common.hh_location_tree(newVal,$scope)
-                
+                console.log(newVal);
                 $scope.filtered = $filter('filter')(data,newVal, true); 
                 $scope.totalItems = $scope.filtered.length;          
                 $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);

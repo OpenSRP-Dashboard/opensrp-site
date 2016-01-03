@@ -29,7 +29,7 @@ angular.module('opensrpSiteApp')
                 $scope.search = {};
               };
              
-              $scope.sortType     = 'FWWOMFNAME'; // set the default sort type
+              $scope.sortType     = 'FWWOMAGE'; // set the default sort type
               $scope.sortReverse  = false;
               $scope.currentPage = 1;
               $scope.totalItems = data.length;        

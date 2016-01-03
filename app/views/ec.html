@@ -20,8 +20,7 @@
 						<select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1" >
                 <option ng-click="search.FWWOMDISTRICT=''" value="">Select District </option>
                 <option ng-repeat="district in districts"  ng-click="search.FWWOMDISTRICT='{{district.name}}'" value="{{district.name}}">{{district.name}}</option>
-                <option  ng-click="search.FWWOMDISTRICT='fff'" value="fff">fff</option>
-                <option  ng-click="search.FWWOMDISTRICT='ddd'" value="ddd">ddd</option>
+                
               </select>
 					</div>
 					<div class=" col-md-3">
@@ -47,7 +46,7 @@
 					</div>
 					<div class="col-md-9">
 						<select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
-                <option value="">Select User </option>
+                <option ng-click="search.PROVIDERID=''" value="">Select User </option>
                 <option ng-repeat="user in users"  ng-click="search.PROVIDERID='{{user}}'" value="{{user}}">{{user}}</option>
               </select>
 					</div>

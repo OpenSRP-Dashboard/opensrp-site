@@ -18,8 +18,7 @@
                 <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1" >
                   <option ng-click="search.FWWOMDISTRICT=''" value="">Select District </option>
                   <option ng-repeat="district in districts"  ng-click="search.FWWOMDISTRICT='{{district.name}}'" value="{{district.name}}">{{district.name}}</option>
-                  <option  ng-click="search.FWWOMDISTRICT='fff'" value="fff">fff</option>
-                  <option  ng-click="search.FWWOMDISTRICT='ddd'" value="ddd">ddd</option>
+                  
                 </select>
               </div>              
               <div class=" col-md-3">
@@ -43,7 +42,7 @@
               </div>             
               <div class="col-md-9">
                 <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
-                  <option value="">Select User </option>
+                  <option ng-click="search.PROVIDERID=''" value="">Select User </option>
                   <option ng-repeat="user in users"  ng-click="search.PROVIDERID='{{user}}'" value="{{user}}">{{user}}</option>
                 </select>
               </div>
@@ -124,7 +123,7 @@
                 <div class="panel-body">
                   <div class="row">
                     <div class="col-md-3 col-lg-3 " align="center">{{elcoRegisterEntry.FWWOMFNAME}}<img alt="User Pic" src="images/photo2.png" class="img-circle img-responsive"> </div>
-                    <div class=" col-md-4 col-lg-4 "> 
+                    <div class=" col-md-4 col-lg-8 "> 
                       <div><strong> HHID:</strong> {{elcoRegisterEntry.GOBHHID}}</div>
                       <div> <strong>Husband Name:</strong> {{elcoRegisterEntry.FWHUSNAME}}</div>
                       <div> <strong>DOB: </strong>{{elcoRegisterEntry.FWBIRTHDATE}}</div>                       
@@ -142,7 +141,7 @@
         </div>      
         <div class="row">
           <div class="col-md-3 col-lg-10 ">
-            <pagination page="currentPage" boundary-links="true" max-size="8" total-items="totalItems" items-per-page="entryLimit"></pagination>
+            <pagination page="currentPage" boundary-links="true" max-size="6" total-items="totalItems" items-per-page="entryLimit"></pagination>
           </div>
                 <!--
                 <div class="col-md-3 col-lg-2 ">
