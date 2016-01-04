@@ -20,10 +20,12 @@ angular.module('opensrpSiteApp')
      '<i class="glyphicon glyphicon-list-alt"></i>'+
     ' <span>Data Details</span>'+
     '</a>';
-    $scope.data = ElcoRegisterService.Data();    
-    EC.reportThisMonth($scope, $scope.data,$rootScope,'details.WomanREGDATE','thisMonth',$filter);
-    EC.reportThisWeek($scope, $scope.data,$rootScope,'details.WomanREGDATE','thisWeek',$filter);
-    EC.reportToday($scope,$scope.data,$rootScope,'details.WomanREGDATE','today',$filter);
+    
+    window.getData = JSON.parse(JSON.stringify(ElcoRegisterService.Data()));       
+    $scope.data= jsonsql.query("select * from getData where (details.FWPSRPREGSTS == 1 ) ",getData);
+    EC.reportThisMonth($scope, $scope.data,$rootScope,'details.FWPSRDATE','thisMonth',$filter);
+    EC.reportThisWeek($scope, $scope.data,$rootScope,'details.FWPSRDATE','thisWeek',$filter);
+    EC.reportToday($scope,$scope.data,$rootScope,'details.FWPSRDATE','today',$filter);
     Common.locations($scope);
     Common.users($scope);
     var date = new Date();
@@ -32,5 +34,5 @@ angular.module('opensrpSiteApp')
     monthLists[2] = new Date(date.getFullYear(), date.getMonth()-1, 1);
     monthLists[1] = new Date(date.getFullYear(), date.getMonth()-2, 1);
     monthLists[0] = new Date(date.getFullYear(), date.getMonth()-3, 1);
-    Common.chartDataCalForPw($scope,monthLists,$scope.data,'details.today',$timeout);
+    Common.chartDataCalForPw($scope,monthLists,$scope.data,'details.FWPSRDATE',$timeout);
   });

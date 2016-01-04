@@ -16,25 +16,55 @@ angular.module('opensrpSiteApp')
     Date.prototype.getWeek = function(start)
     {
         //Calcing the starting point
-      start = start || 0;
-      var today = new Date(this.setHours(0, 0, 0, 0));
-      var day = today.getDay() - start;
-      var date = today.getDate() - day;
-  
-          // Grabbing Start/End Dates
-      var StartDate = new Date(today.setDate(date));
-      var EndDate = new Date(today.setDate(date + 6));
-      return [StartDate, EndDate];
-    }
-
+      start = start || 0;      
+      var todayDate = new Date(this.setHours(0, 0, 0, 0));      
+      var today =  todayDate.getUTCDate();
+      var month = todayDate.getUTCMonth()+1;
+      var year = todayDate.getUTCFullYear();
+      var numDays= daysInMonth(month,year);
+     
+       console.log(today + " :"+month +":"+ year+ ": "+numDays);
+       while(today >1){
+        if (today%7 ==0) {
+          today = today+1;
+         break;
+        }
+        today=today-1;
+       }
+       console.log(today)
+       var endDay ;
+      if (numDays-today >7) {
+        endDay = today+6;
+      }else{
+        endDay = numDays;
+      }
+      if (today<10) {          
+          today = '0'+today;
+      }else{
+          today = today;
+      }
+      if (endDay<10) {          
+          endDay = '0'+endDay;
+      }else{
+          endDay = endDay;
+      }
+      if (month<10) {          
+          month = '0'+month;
+      }else{
+          month = month;
+      }
+        
+      return [year+"-"+month+"-"+today, year+"-"+month+"-"+endDay];
+      
+    }    
 
     function getWeeksInMonth(month, year,date){
-      var weeks=[],firstDate=new Date(year, month, 1), lastDate=new Date(year, month+1, 0), numDays= daysInMonth(month,year);
+      var weeks=[],firstDate=new Date(year, month, 1), numDays= daysInMonth(month,year);
       var thisDate = new Date(date);           
       var start=1;
-      var end=7-firstDate.getDay();     
+      var end=7;     
       while(start<=numDays){
-        /*var startWeek = "";
+        var startWeek = "";
          var endWeek = "";
         if (start<10) {          
           startWeek = '0'+start;
@@ -46,65 +76,43 @@ angular.module('opensrpSiteApp')
         }else{
           endWeek = end;
         }
-        
-        weeks.push({start:year+"-"+month+"-"+startWeek,end:year+"-"+month+"-"+endWeek});*/
-        start = start || 0;
-        var today = new Date(year+"-"+month+"-"+start);
-        var day = today.getDay() - start;
-        var dates = today.getDate() - day;
-        var StartDate = new Date(today.setDate(dates));
-        var EndDate = new Date(today.setDate(dates + 6));
-        weeks.push({start:moment(StartDate).format('YYYY-MM-DD'),end:moment(EndDate).format('YYYY-MM-DD')});
-            // Grabbing Start/End Dates     
-        start  = start+7;
-        if (start >=numDays) {
-          start = numDays;
-        }
+          weeks.push({start:year+"-"+month+"-"+startWeek,end:year+"-"+month+"-"+endWeek});
+          start = end + 1;
+          end = end + 7;
+          if(end>numDays)
+              end=numDays;    
       }
-       console.log(weeks);
-      /*if (weeks.length == 6) {        
-        var firstWeek = weeks[0];
-        var lastWeek = weeks[5];        
-        var date1 = new Date(firstWeek.start);
-        var date2 = new Date(firstWeek.end);
-        var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-        if (diffDays == 0) {
-          weeks[1].start = firstWeek.end;
-          delete weeks[0];
-        }else{
-          weeks[4].end = lastWeek.end;
-          delete weeks[5];
-        }      
-        
-      }*/
       
        return weeks;
     }   
     function waitForElement($scope){
       if(typeof window.columnChartData !== "undefined"){
-        
-        
       }else{
             setTimeout(function(){
                 waitForElement();
             },250);
         }
     }
-    this.chartDataCal = function($scope,monthLists,data,DATE,$timeout){
+    this.chartDataCal = function($scope,monthList,data,DATE,$timeout){
       $scope.search = {};
       $scope.resetFilters = function () {    
         $scope.search = {};
       };
       
+       
       $scope.$watch('search', function (newVal, oldVal) { 
         window.columnChartData= [];
         $scope.filtered = filterFilter(data, newVal);       
         window.getHHData = JSON.parse(JSON.stringify($scope.filtered));
-        
+        var date = new Date();
+        var monthLists = [];
+        monthLists[3] = new Date(date.getFullYear(), date.getMonth(), 1);
+        monthLists[2] = new Date(date.getFullYear(), date.getMonth()-1, 1);
+        monthLists[1] = new Date(date.getFullYear(), date.getMonth()-2, 1);
+        monthLists[0] = new Date(date.getFullYear(), date.getMonth()-3, 1);
         for(var outer = 0;outer < monthLists.length;outer++){
           var weeks =  getWeeksInMonth(moment(monthLists[outer]).format('MM'),moment(monthLists[outer]).format('YYYY'),moment(monthLists[outer]).format('YYYY-MM-DD'));         
-         
+         //console.log(weeks)
           for(var inner=0;inner<weeks.length;inner++){
             if (!angular.isUndefined(weeks[inner])) {
             var start = weeks[inner].start;         
@@ -113,7 +121,7 @@ angular.module('opensrpSiteApp')
             }
           }
         }
-        //waitForElement($scope);
+       
         $timeout(function () {
           var monthNames = ["January", "February", "March", "April", "May", "June",
           "July", "August", "September", "October", "November", "December"];
@@ -128,7 +136,8 @@ angular.module('opensrpSiteApp')
             [columnChartData[4].init, columnChartData[9].init, columnChartData[14].init, columnChartData[19].init]
           ];
         }, 250);        
-      }, true);      
+      }, true);
+      
     }    
     this.chartDataCalForPw = function($scope,monthLists,data,DATE,$timeout){
       $scope.search = {};
@@ -225,7 +234,7 @@ angular.module('opensrpSiteApp')
       $http.get(url, { cache: true}).success(function (data) {              
         window.userData = JSON.parse(JSON.stringify(data));           
        // window.userList = jsonsql.query("select * from userData where ( tag == 'District'  ) ",userData);
-       console.log(userData);
+       
         $scope.users=userData;
          $rootScope.loading = false;
       });      

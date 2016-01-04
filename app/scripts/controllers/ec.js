@@ -31,7 +31,7 @@ angular.module('opensrpSiteApp')
     Common.locations($scope);
     Common.users($scope);
     Common.chartDataCal($scope,monthLists,$scope.data,'WomanREGDATE',$timeout)
-    EC.reportThisMonth($scope,$scope.data,$rootScope,'WomanREGDATE','thisMonth', $filter);
-    EC.reportThisWeek($scope,$scope.data,$rootScope,'WomanREGDATE','thisWeek', $filter);
-    EC.reportToday($scope,$scope.data,$rootScope,'WomanREGDATE','today', $filter); 
+    EC.reportThisMonth($scope,$scope.data,$rootScope,'WomanREGDATE','thisMonth', $filter,0);
+    EC.reportThisWeek($scope,$scope.data,$rootScope,'WomanREGDATE','thisWeek', $filter,0);
+    EC.reportToday($scope,$scope.data,$rootScope,'WomanREGDATE','today', $filter,0); 
   });

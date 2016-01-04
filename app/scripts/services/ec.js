@@ -40,7 +40,7 @@ angular.module('opensrpSiteApp')
               };
               $scope.$watch('search', function (newVal, oldVal) {
                 Common.ec_location_tree(newVal,$scope);
-                var Dates = new Date().getWeek();
+                var Dates = new Date().getWeek();                
                 $scope.filtered = $filter('filter')(data,newVal, true); 
                 var date = new Date();
                 var end = moment(Dates[1]).format('YYYY-MM-DD');
