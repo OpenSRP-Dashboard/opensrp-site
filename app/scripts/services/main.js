@@ -32,8 +32,10 @@ angular.module('opensrpSiteApp')
   }
   function thisWeek(getData,today,ngBind){
     var date = new Date();
-    var end = moment(date).format('YYYY-MM-DD');
-    var start = moment(date.setDate(date.getDate()-7)).format('YYYY-MM-DD');    
+    var Dates = new Date().getWeek();
+    var end = moment(Dates[1]).format('YYYY-MM-DD');
+    var start = moment(Dates[0]).format('YYYY-MM-DD');   
+    
     window.getData = JSON.parse(JSON.stringify(getData));
     var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"') ",getData);                   
     $("#"+ngBind).html(queryResult.length);
@@ -63,8 +65,9 @@ angular.module('opensrpSiteApp')
   
   function thisWeekPW(getData,today,ngBind){
     var date = new Date();
-    var end = moment(date).format('YYYY-MM-DD');
-    var start = moment(date.setDate(date.getDate()-7)).format('YYYY-MM-DD');       
+    var Dates = new Date().getWeek();
+    var end = moment(Dates[1]).format('YYYY-MM-DD');
+    var start = moment(Dates[0]).format('YYYY-MM-DD');      
     window.getData = JSON.parse(JSON.stringify(getData));
     var queryResult= jsonsql.query("select * from getData where (PSRFDETAILS != '' &&  PSRFDETAILS[0].today  >='"+start+"' && PSRFDETAILS[0].today  <='"+end+"'  && details.FWPSRPREGSTS == 1  ) ",getData);                      
     
