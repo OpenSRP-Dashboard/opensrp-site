@@ -23,7 +23,7 @@ angular.module('opensrpSiteApp')
       var year = todayDate.getUTCFullYear();
       var numDays= daysInMonth(month,year);
      
-       console.log(today + " :"+month +":"+ year+ ": "+numDays);
+     
        while(today >1){
         if (today%7 ==0) {
           today = today+1;
@@ -250,21 +250,41 @@ angular.module('opensrpSiteApp')
       }
       if (newVal.details && newVal.details.existing_Upazilla) {
         if ($scope.thanas.length == 0) {
+          //if user selcet thana "please select thana "
           $scope.unions = "";
           delete newVal.details.existing_Union ;
           delete newVal.details.existing_Upazilla ;
         }else{
+          // if user select a specific thana
           window.allData = window.householdList;            
           window.unionsList = jsonsql.query("select * from allLocation where ( tag =='Union' && parent._value == '"+newVal.details.existing_Upazilla+"'  ) ",allLocation);
           $scope.unions = unionsList;
-        }            
+          if (newVal.details.existing_Union) {
+            // if user select union then select any thana 
+            var union_thana  = jsonsql.query("select * from allLocation where (  parent._value == '"+newVal.details.existing_Upazilla+"' && tag =='Union' && name == '"+newVal.details.existing_Union+"'  ) ",allLocation);
+            if (union_thana == "") {
+              delete newVal.details.existing_Union ;
+            }
+          }
+          
+        }
+        
       }
+      
+      
       if (newVal.details && newVal.details.existing_District == "") {
         delete newVal.details.existing_District;
+      }
+      if (newVal.details && newVal.details.existing_Upazilla == "") {
+        delete newVal.details.existing_Upazilla;
+      }      
+      if (newVal.details && newVal.details.existing_Union == "") {        
+        delete newVal.details.existing_Union;
       }
       if (newVal.PROVIDERID =="") {
        delete newVal.PROVIDERID;
       }
+      console.log(newVal);
     }
     this.ec_location_tree = function(newVal,$scope){
       $scope.unions = "";
@@ -282,14 +302,28 @@ angular.module('opensrpSiteApp')
         }else{                               
           window.unionsList = jsonsql.query("select * from allLocation where ( tag =='Union' && parent._value == '"+newVal.FWWOMUPAZILLA+"'  ) ",allLocation);
           $scope.unions = unionsList;
+          if (newVal.FWWOMUNION) {
+            // if user select union then select any thana 
+            var union_thana  = jsonsql.query("select * from allLocation where ( parent._value == '"+ newVal.FWWOMUPAZILLA +"' && tag =='Union' && name == '"+newVal.FWWOMUNION+"'  ) ",allLocation);
+            if (union_thana == "") {
+              delete newVal.FWWOMUNION ;
+            }
+          }
         }            
       }
       if (newVal && newVal.FWWOMDISTRICT == "") {
         delete newVal.FWWOMDISTRICT;
       }
+      if (newVal && newVal.FWWOMUPAZILLA == "") {
+        delete newVal.FWWOMUPAZILLA;
+      }
+      if (newVal && newVal.FWWOMUNION == "") {
+        delete newVal.FWWOMUNION;
+      }
       if (newVal.PROVIDERID =="") {
        delete newVal.PROVIDERID;
       }
+      
     }
     
    

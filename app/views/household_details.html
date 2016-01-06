@@ -99,12 +99,12 @@
                               <span ng-show="sortType == 'TODAY' && sortReverse" class="fa fa-caret-up"></span>
                             </a>                                    
                           </th>
-                          <th>
+                          <!--<th>
                             <a href="/#/households"  ng-click="sortType = 'STATUS'; sortReverse = !sortReverse">Current Visit Status
                               <span ng-show="sortType == 'STATUS' && !sortReverse" class="fa fa-caret-down"></span>
                               <span ng-show="sortType == 'STATUS' && sortReverse" class="fa fa-caret-up"></span>
                             </a>                            
-                          </th>                        
+                          </th>    -->                    
                         </tr>
                       </thead><!--//table head-->
                     </table>                        
@@ -124,7 +124,7 @@
                         <th style="width:100px;">{{hhRegisterEntry.FWHOHFNAME}}</th>
                         <th style="width:100px;">{{hhRegisterEntry.FWNHHMWRA}}</th>
                         <th style="width:100px;">{{hhRegisterEntry.TODAY}}</th>
-                        <th style="width:100px;">Due</th> 
+                       <!-- <th style="width:100px;"></th>  -->
                       </tr>
                     </thead>
                   </table><!--//table body-->
@@ -142,7 +142,7 @@
                           <div> <strong>HHID- GoB/JiVitA:</strong> {{hhRegisterEntry.FWGOBHHID}} / {{hhRegisterEntry.FWJIVHHID}}</div>
                           <div> <strong>No of MWRA: </strong>{{hhRegisterEntry.FWNHHMWRA}}</div>                       
                           <div><strong>Last Visit Date:</strong> {{hhRegisterEntry.TODAY}}</div>
-                          <div><strong>Current  Status:</strong> Due</div>
+                         
                           <div><strong>Location:</strong> {{hhRegisterEntry.details.location_name}}</div>
                         </div>
                       </div>
