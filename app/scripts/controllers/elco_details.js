@@ -11,7 +11,7 @@ angular.module('opensrpSiteApp')
   .controller('ElcoCtrl', function ($scope,$http,ElcoRegisterService,page,AclService,$filter,Common) {    
     $scope.numberPattern = /^\d*$/;
     $scope.data = ElcoRegisterService.Data();
-    console.log($scope.data);
+    
     var dta = $scope.data;
     $scope.can = AclService.can;
     $scope.detailDataLink =

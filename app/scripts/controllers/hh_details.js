@@ -20,13 +20,6 @@ angular.module('opensrpSiteApp')
     ' <span>Data Details</span>'+
     '</a>';
   $scope.can = AclService.can;
-  mapboxService.init({ accessToken: 'pk.eyJ1IjoicHJvYmlyMTIzIiwiYSI6IjhwRDJyZ0EifQ.KzOVb_vdS3CMYzUKMww59g' });
-  $scope.latitude = function(location){      
-      return location.split(" ")[0];
-  }
-  $scope.longitude = function(location){      
-      return location.split(" ")[1];
-  }
   $scope.data = HHRegisterService.Data();
   HHRegisterService.dataFilter($scope,$scope.data,$filter);
   Common.locations($scope);

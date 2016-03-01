@@ -15,6 +15,7 @@ angular.module('opensrpSiteApp')
       'Karma'
     ];
     $scope.can = AclService.can;
+    console.log($scope.can + " --the can variable from acl from /controllers/acl.js");
      $scope.createRole =
      ' <a href="#/add-role">'+
      '<i class="glyphicon glyphicon-list-alt"></i>'+

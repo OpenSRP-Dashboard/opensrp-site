@@ -13,7 +13,7 @@ angular.module('opensrpSiteApp')
     return function (input, start) {
       if (input) {
           start = +start;
-         
+          console.log("inside filter/search.js");
           return input.slice(start);
         }
         

@@ -15,7 +15,7 @@ angular.module('opensrpSiteApp')
               $scope.search = {};
               $scope.resetFilters = function () {    
                 $scope.search = {};
-            };
+              };
             $scope.$watch('search', function (newVal, oldVal) {   
                //$scope.filtered = filterFilter(data, newVal);
                 Common.ec_location_tree(newVal,$scope);                

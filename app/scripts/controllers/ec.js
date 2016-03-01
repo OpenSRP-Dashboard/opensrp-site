@@ -26,7 +26,7 @@ angular.module('opensrpSiteApp')
     monthLists[2] = new Date(date.getFullYear(), date.getMonth()-1, 1);
     monthLists[1] = new Date(date.getFullYear(), date.getMonth()-2, 1);
     monthLists[0] = new Date(date.getFullYear(), date.getMonth()-3, 1);
-    
+    console.log("inside controller");
     $scope.data = ElcoRegisterService.Data();
     Common.locations($scope);
     Common.users($scope);
