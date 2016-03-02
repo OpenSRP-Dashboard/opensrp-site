@@ -47,7 +47,7 @@ function newHhFormExport(JSONData, ReportTitle, ShowLabel) {
             //Now convert each value to string and comma-seprated
             row += index + ',';
         }*/
-        row += 'workerID' + ',';
+        row += 'FWA WORKER ID' + ',';
         row += 'today_newhh_FW' + ',';
         row += 'start_newhh_FW' + ',';
         row += 'end_newhh_FW' + ',';
@@ -79,6 +79,10 @@ function newHhFormExport(JSONData, ReportTitle, ShowLabel) {
         row += 'ELCO' + ',';
         row += 'Latitude' + ',';
         row += 'Longitude' + ',';
+        row += 'RECEIVED TIME AT SERVER' + ',';
+        row += 'FD WORKER ID' + ',';       
+        row += 'INSTANCE ID' + ',';
+        row += 'ENTITY ID' + ',';
         row = row.slice(0, -1);
         
         //append Label row with line break
@@ -138,7 +142,11 @@ function newHhFormExport(JSONData, ReportTitle, ShowLabel) {
             }else{
               row += ",";
               row += ",";
-            }
+            }            
+            row += '"' + checkNullValue(Data[i].details.received_time) + '",';
+            row += '"' + checkNullValue(Data[i].external_user_ID) + '",';
+            row += '"' + checkNullValue(Data[i].INSTANCEID) + '",';
+            row += '"' + checkNullValue(Data[i].CASEID) + '",';
             CSV += row + '\r\n';
           } 
         }
@@ -231,11 +239,13 @@ function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
         row += 'FWHR_PSR' + ',';//46
         row += 'FWFLAGVALUE' + ',';//47
         row += 'FWSORTVALUE' + ',';//48
+        row += 'RECEIVED_TIME_AT_SERVER' + ','; //49       
+        row += 'INSTANCEID' + ','; //50
+        row += 'CASEID' + ','; //51
         row = row.slice(0, -1);        
         //append Label row with line break
         CSV += row + '\r\n';
     }
-    var fd = '';
     //1st loop is to extract each row
     for (var i = 0; i < Data.length; i++) {      
        
@@ -268,9 +278,9 @@ function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
             row += '"' + checkNullValue(Data[i].FWWOMAGE) + '",';//12
             row += '"' + checkNullValue(Data[i].FWWOMFNAME) + '",';//13
             row += '"' + checkNullValue(Data[i].FWHUSNAME) + '",';//14            
-            row += '"' + fd + '",';//15
+            row += '"' + checkNullValue(Data[i].details.external_user_ID) + '",';//15
             row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//16
-            row += '"' + fd  + '",';//17
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].current_formStatus)  + '",';//17
             row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].start)  + '",';//18
             row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRDATE) + '",'; //19FWPSRSTS
             row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRSTS) + '",';//20
@@ -302,9 +312,13 @@ function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
             row += '"' + checkNullValue(Data[i].details.FWHR_PSR) + '",';//46
             row += '"' + checkNullValue(Data[i].details.FWFLAGVALUE) + '",';//47
             row += '"' + checkNullValue(Data[i].details.FWSORTVALUE) + '",';//48           
+            row += '"' + checkNullValue(Data[i].details.received_time) + '",';//49
+            row += '"' + checkNullValue(Data[i].INSTANCEID) + '",';//50 
+            row += '"' + checkNullValue(Data[i].CASEID) + '",';//51
             //row.slice(0, row.length - 1);        
             //add a line break after each row
             CSV += row + '\r\n';
+        //row += '"' + checkNullValue(Data[i].details}) + '",';//48 
         }
       } 
     }
@@ -383,7 +397,12 @@ function censusFornExport(JSONData, ReportTitle, ShowLabel) {
         row += 'FWWOMANYID' + ','; //26
         row += 'FWWOMNID' + ','; //27
         row += 'FWWOMBID' + ','; //28
-        row += 'FWHUSNAME' + ','; //29        
+        row += 'FWHUSNAME' + ','; //29       
+        row += 'RECEIVED TIME AT SERVER' + ','; //30
+        row += 'FD WORKER ID' + ','; //31
+        row += 'FWA WORKER ID' + ','; //32    
+        row += 'INSTANCE ID' + ','; //33
+        row += 'ENTITY ID' + ','; //34
         row = row.slice(0, -1);        
         //append Label row with line break
         CSV += row + '\r\n';
@@ -396,7 +415,7 @@ function censusFornExport(JSONData, ReportTitle, ShowLabel) {
         for (var index=0 ; index< Data[i].ELCODETAILS.length;index++) {
           if (Data[i].ELCODETAILS[index].form_name =='Census') {
             var row = "";
-            row += '"' + comming + '",'; //1
+            row += '"' + checkNullValue(Data[i].current_formStatus) + '",'; //1   
             row += '"' + checkNullValue(Data[i].ELCODETAILS[index].start) + '",'; //2
             row += '"' + checkNullValue(Data[i].ELCODETAILS[index].TODAY) + '",'; //3
             row += '"' + checkNullValue(Data[i].ELCODETAILS[index].start) + '",'; //4
@@ -436,6 +455,11 @@ function censusFornExport(JSONData, ReportTitle, ShowLabel) {
             }
             
             row += '"' + checkNullValue(Data[i].ELCODETAILS[index].FWHUSNAME) + '",'; //29 
+            row += '"' + checkNullValue(Data[i].details.received_time) + '",'; //30
+            row += '"' + checkNullValue(Data[i].external_user_ID) + '",'; //31
+            row += '"' + checkNullValue(Data[i].PROVIDERID) + '",'; //32
+            row += '"' + checkNullValue(Data[i].INSTANCEID) + '",'; //33
+            row += '"' + checkNullValue(Data[i].CASEID) + '",'; //34
             CSV += row + '\r\n';
           } 
         }
