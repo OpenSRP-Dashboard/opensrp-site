@@ -374,6 +374,7 @@ angular
           });
         
       }
+      //adding function in $rootscope makes it available everywhere
       $rootScope.CENCUSDATAEXPORT= function(){
        $("#export").css("display","none");
         $("#wait").css("display","block");       
