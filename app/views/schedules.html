@@ -1,16 +1,31 @@
 <data-ng-include src="'views/partials/header.html'"></data-ng-include>
-<section>
-    <div class="container">
-        <div class="row">
-            <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include>           
-            <div class="col-sm-9 col-md-9">
-              <div flash-message="5000" ></div>
+<script type="text/javascript" src="assets/js/download.js"></script>
+            
+             <br/> 
+             <br/>
+             <br/>
+             <br/>           
+
+             <table class="table table-striped collapsed" >
+                  <tr>
+                    <td>Schedule id from db</td>
+                    <td>Schedule type</td>
+                    <td>anmIdentifier</td>
+                    <td>scheduleName</td>                        
+                  </tr>
+              </table>
+
+              <div class="" ng-repeat="schedule in data">
+                <div class="" role="tab" id="headingTwo2">
+                  <table class="" >
+                      <tr>
+                        <td>{{schedule.id}}</td>
+                        <td>{{schedule.value.type}}</td>
+                        <td>{{schedule.value.anmIdentifier
+                        }}</td>
+                        <td>{{schedule.value.scheduleName}}</td>                        
+                      </tr>
+                  </table><!--//table body-->
+                </div>
+              </div>
               
-              <div>From schedules.html</div>
-              
-              
-              <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
-            </div><!-- content accordion  end -->
-        </div>
-    </div>    
-</section>

@@ -8,7 +8,7 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('ScheduleLogCtrl', function ($scope,$http,$rootScope,$timeout,ElcoRegisterService,page,EC,Common,AclService, $filter) {
+  .controller('ScheduleLogCtrl', function ($scope,$http,$rootScope,$timeout,scheduleLogService,page,EC,Common,AclService, $filter) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -20,5 +20,7 @@ angular.module('opensrpSiteApp')
     ' <span>Data Details</span>'+
     '</a>';
     $scope.can = AclService.can;
+    $scope.data = scheduleLogService.Data();
+    console.log($scope.data);
     console.log("inside ScheduleLogCtrl");
   });

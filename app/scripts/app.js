@@ -12,7 +12,7 @@ angular
   .module('opensrpSiteApp', ['ngBootstrap','ngAnimate','ngCookies','ngResource','ngRoute','angular-momentjs','ngSanitize','ngTouch','ui.bootstrap','ngDialog','angular-mapbox','nvd3','chart.js','checklist-model','mm.acl','flash'])
   .constant('AUTH_URL', 'http://192.168.21.167:1337/27.147.129.50:9979/authenticate-user')
   //.constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.246:1234/192.168.21.246:9979')
-  .constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.246:1234/27.147.129.50:9979')
+  .constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.218:1234/192.168.21.218:9979')
   .constant("HH_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/hh?anm-id=')
   .constant("ELCO_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/ec?anm-id=')
   .constant("CORS_PROXY_URL",'http://hp:1337/')
@@ -206,6 +206,25 @@ angular
           }]
         }
       })
+      .when('/schedule-log', {
+        templateUrl: 'views/schedules.html',
+        controller: 'ScheduleLogCtrl',
+        controllerAs: 'scheduleLog',
+        resolve : {
+          'ElcoServiceData':function(scheduleLogService){ return scheduleLogService.promise;},
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('Acl')){
+              // Has proper permissions
+              //console.log('is it true?');
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
+        }        
+      })
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
@@ -240,7 +259,10 @@ angular
         controller: 'ElcoCtrl',
         controllerAs: 'elco',
         resolve : {
-          'ElcoServiceData':function(ElcoRegisterService){ return ElcoRegisterService.promise;},
+          'ElcoServiceData':function(ElcoRegisterService){ 
+            console.log("inside ElcoServiceData of resolve of /elcos");
+            return ElcoRegisterService.promise;
+          },
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('Elco Details')){
               // Has proper permissions
@@ -399,6 +421,58 @@ angular
         
       }
       
+      $rootScope.checkFunction = function(){
+        console.log("log from newly added checkFunction in app.js");
+        
+        //var url = "http://192.168.21.218:1234/192.168.21.218:9979/registers/hh?anm-id=sohel";
+        var url = "http://192.168.21.218:1234/192.168.21.218:5984/opensrp/_design/ScheduleLog/_view/testViewForDashboard";
+
+        /*$.ajax({
+            async:false,       
+            dataType: "json",
+            url:url,
+            //username:"sohel",
+            //password:"Sohel@123",
+            success:function (data) {
+               //console.log(data.rows[0].value.actionType);
+               console.log("data on success - " + data);
+               console.log(typeof data);
+            },
+            error: function(a,b,c){
+               console.log("jqXHR on error - " + a);
+               console.log("textStatus on error - " + b);
+               console.log("errorThrown on error - " + c);
+            },
+            complete:function(){
+              console.log("call completed");
+            },
+            type:"get"        
+        });
+*/
+        //$http.get(appSettings.db + '/_design/expenses/_view/byName')
+        //$http.get("http://192.168.21.218:1234/192.168.21.218:5984/opensrp/_design/ScheduleLog/_view/testViewForDashboard")
+        //     .success(function (data) {
+        //        console.log("http get successful.");
+        //      });
+        //};
+
+        var couchUrl = "http://192.168.21.218:1234/192.168.21.218:5984/opensrp/_design/ScheduleLog/_view/testViewForDashboard";
+        console.log("now will issue a http get request.");
+        $http({
+            method: 'GET',
+            url: couchUrl
+        }).then(
+            function successCallback(response) {
+                console.log("success occurred ");
+                console.log(response.statusText);
+            },
+            function errorCallback(response) {
+                console.log("error occurred.");
+                console.log(response.status + " -- " + response.statusText);
+            }
+          );
+      }
+
     $rootScope.aclLing =
      ' <a href="#/acl">'+
      '<i class="glyphicon glyphicon-list-alt"></i>'+
