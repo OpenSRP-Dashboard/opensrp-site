@@ -211,11 +211,11 @@ angular
         controller: 'ScheduleLogCtrl',
         controllerAs: 'scheduleLog',
         resolve : {
-          'ElcoServiceData':function(scheduleLogService){ return scheduleLogService.promise;},
+          'scheduleLogServiceData':function(scheduleLogService){ return scheduleLogService.promise;},
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('Acl')){
               // Has proper permissions
-              //console.log('is it true?');
+              console.log('is it true?');
               return true;
             } else {
               // Does not have permission
@@ -261,7 +261,7 @@ angular
         resolve : {
           'ElcoServiceData':function(ElcoRegisterService){ 
             console.log("inside ElcoServiceData of resolve of /elcos");
-            return ElcoRegisterService.promise;
+            return ElcoRegisterService.promise; // promise returns a fucntion that returns a $q
           },
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('Elco Details')){
@@ -334,6 +334,10 @@ angular
               $location.path('/login');
               if (!$rootScope.$$phase) {
                   //this will kickstart angular if to notice the change
+
+                  //$$phase is a flag set while angular is in a $digest cycle.
+                  //Sometimes (in rare cases), you want to check $$phase on the 
+                  //scope before doing an $apply. An error occurs if you try to $apply during a $digest:
                   $rootScope.$apply();
               }
               else {
@@ -421,41 +425,11 @@ angular
         
       }
       
-      $rootScope.checkFunction = function(){
+      /*$rootScope.checkFunction = function(){
         console.log("log from newly added checkFunction in app.js");
         
         //var url = "http://192.168.21.218:1234/192.168.21.218:9979/registers/hh?anm-id=sohel";
         var url = "http://192.168.21.218:1234/192.168.21.218:5984/opensrp/_design/ScheduleLog/_view/testViewForDashboard";
-
-        /*$.ajax({
-            async:false,       
-            dataType: "json",
-            url:url,
-            //username:"sohel",
-            //password:"Sohel@123",
-            success:function (data) {
-               //console.log(data.rows[0].value.actionType);
-               console.log("data on success - " + data);
-               console.log(typeof data);
-            },
-            error: function(a,b,c){
-               console.log("jqXHR on error - " + a);
-               console.log("textStatus on error - " + b);
-               console.log("errorThrown on error - " + c);
-            },
-            complete:function(){
-              console.log("call completed");
-            },
-            type:"get"        
-        });
-*/
-        //$http.get(appSettings.db + '/_design/expenses/_view/byName')
-        //$http.get("http://192.168.21.218:1234/192.168.21.218:5984/opensrp/_design/ScheduleLog/_view/testViewForDashboard")
-        //     .success(function (data) {
-        //        console.log("http get successful.");
-        //      });
-        //};
-
         var couchUrl = "http://192.168.21.218:1234/192.168.21.218:5984/opensrp/_design/ScheduleLog/_view/testViewForDashboard";
         console.log("now will issue a http get request.");
         $http({
@@ -471,7 +445,7 @@ angular
                 console.log(response.status + " -- " + response.statusText);
             }
           );
-      }
+      }*/
 
     $rootScope.aclLing =
      ' <a href="#/acl">'+

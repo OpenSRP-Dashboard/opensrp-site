@@ -15,7 +15,7 @@ angular.module('opensrpSiteApp')
     }
     Date.prototype.getWeek = function(start)
     {
-        //Calcing the starting point
+      //Calcing the starting point
       start = start || 0;      
       var todayDate = new Date(this.setHours(0, 0, 0, 0));      
       var today =  todayDate.getUTCDate();
@@ -31,8 +31,8 @@ angular.module('opensrpSiteApp')
         }
         today=today-1;
        }
-       console.log(today)
-       var endDay ;
+      console.log(today);
+      var endDay ;
       if (numDays-today >7) {
         endDay = today+6;
       }else{

@@ -14,6 +14,8 @@ angular.module('opensrpSiteApp')
       if (input) {
           start = +start;
           console.log("inside filter/search.js");
+          //console.log(input);
+          console.log(start);
           return input.slice(start);
         }
         

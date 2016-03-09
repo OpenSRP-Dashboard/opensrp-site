@@ -20,7 +20,9 @@ angular.module('opensrpSiteApp')
     ' <span>Data Details</span>'+
     '</a>';
     $scope.can = AclService.can;
-    $scope.data = scheduleLogService.Data();
-    console.log($scope.data);
+    $scope.schedules = scheduleLogService.Data();
     console.log("inside ScheduleLogCtrl");
+    console.log(AclService);
+    $scope.sortType = 'id';
+    $scope.sortReverse  = false;
   });

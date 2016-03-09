@@ -1,31 +1,86 @@
 <data-ng-include src="'views/partials/header.html'"></data-ng-include>
 <script type="text/javascript" src="assets/js/download.js"></script>
-            
-             <br/> 
-             <br/>
-             <br/>
-             <br/>           
 
-             <table class="table table-striped collapsed" >
-                  <tr>
-                    <td>Schedule id from db</td>
-                    <td>Schedule type</td>
-                    <td>anmIdentifier</td>
-                    <td>scheduleName</td>                        
-                  </tr>
-              </table>
 
-              <div class="" ng-repeat="schedule in data">
-                <div class="" role="tab" id="headingTwo2">
-                  <table class="" >
-                      <tr>
-                        <td>{{schedule.id}}</td>
-                        <td>{{schedule.value.type}}</td>
-                        <td>{{schedule.value.anmIdentifier
-                        }}</td>
-                        <td>{{schedule.value.scheduleName}}</td>                        
+<section>
+  <div class="container">
+    <div class="row">
+      <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include>            
+      <div class="col-sm-9 col-md-9">
+        <div show-during-resolve class="loader">   
+          <center><img src="images/spinner.gif"  alt="Opensrp"/></center>
+        </div>
+                
+        <!-- content accordion  start -->
+        <div class="row">
+          <div class="col-xs-12 col-lg-12">
+            <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+              <div class="panel panel-default">
+                <div class="panel-heading2" role="tab" id="headingOne">
+                  <table>
+                    <thead> <!--table head-->
+                      <tr style="background:none">
+                        <th style="width:205px; font-size:12px;">
+                          <a href="/#/schedule-log" ng-click="sortType = 'id'; sortReverse = !sortReverse">Schedule id
+                            <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+                          </a>                        
+                        </th>
+                        <th style="width:205px; font-size:12px;">
+                          <a href="/#/schedule-log" ng-click="sortType = 'value.anmIdentifier'; sortReverse = !sortReverse">ANM
+                            <span ng-show="sortType == 'value.anmIdentifier' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'value.anmIdentifier' && sortReverse" class="fa fa-caret-up"></span>
+                          </a>                        
+                        </th>
+                        <th style="width:205px; font-size:12px;">
+                          <a href="/#/schedule-log" ng-click="sortType = 'value.scheduleName'; sortReverse = !sortReverse">Name of Schedule
+                            <span ng-show="sortType == 'value.scheduleName' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'value.scheduleName' && sortReverse" class="fa fa-caret-up"></span>
+                          </a>                        
+                        </th>                                                   
                       </tr>
+                    </thead><!--//table head-->
+                  </table>                        
+                </div>                       
+              </div>                    
+              <div class="panel panel-default" ng-repeat="schedule in schedules | orderBy:sortType:sortReverse ">
+                <div class="panel-heading2" role="tab" id="headingTwo2">
+                  <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion2" href="#{{schedule.id}}" aria-expanded="false" aria-controls="collapseTwo">
+                    <thead>
+                      <tr>  
+                        <th style="width:75px;">{{schedule.id}}</th>                                     
+                        <th style="width:75px;">{{schedule.value.anmIdentifier}}</th>
+                        <th style="width:75px;">{{schedule.value.scheduleName}}</th>
+                        
+                      </tr>
+                    </thead>
                   </table><!--//table body-->
                 </div>
+                <div id="{{schedule.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">                    
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-md-3 col-lg-3 " align="center">{{elcoRegisterEntry.FWWOMFNAME}}<img alt="User Pic" src="images/photo2.png" class="img-circle img-responsive"> </div>
+                        <div class=" col-md-4 col-lg-8 "> 
+                          <div><strong> Schedule Id</strong> {{schedule.id}}</div>
+                          <div> <strong>Schedule Type</strong> {{schedule.value.type}}</div>
+                          <div> <strong>ANM</strong>{{schedule.value.anmIdentifier}}</div>             
+                          <div><strong>Schedule Name</strong> {{schedule.value.scheduleName}}</div>
+                        </div>
+                    </div>
+                  </div>                     
+                </div>
               </div>
-              
+            </div>
+          </div>
+        </div>
+                    
+      </div><!-- content accordion  end -->
+    </div>
+  </div>
+    
+</section>
+<data-ng-include src="'views/partials/footer.html'" style="clear: both;" class="navbar"></data-ng-include>
+
+
+
+
