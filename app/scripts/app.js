@@ -12,7 +12,8 @@ angular
   .module('opensrpSiteApp', ['ngBootstrap','ngAnimate','ngCookies','ngResource','ngRoute','angular-momentjs','ngSanitize','ngTouch','ui.bootstrap','ngDialog','angular-mapbox','nvd3','chart.js','checklist-model','mm.acl','flash'])
   .constant('AUTH_URL', 'http://192.168.21.167:1337/27.147.129.50:9979/authenticate-user')
   //.constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.246:1234/192.168.21.246:9979')
-  .constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.218:1234/192.168.21.218:9979')
+  //ip for jivita server - 192.168.19.90
+  .constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.18:1337/192.168.21.218:9979')
   .constant("HH_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/hh?anm-id=')
   .constant("ELCO_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/ec?anm-id=')
   .constant("CORS_PROXY_URL",'http://hp:1337/')
@@ -215,7 +216,7 @@ angular
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('Acl')){
               // Has proper permissions
-              console.log('is it true?');
+              console.log('is it true?' + AclService.can('Elco Details'));
               return true;
             } else {
               // Does not have permission

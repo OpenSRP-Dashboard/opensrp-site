@@ -23,15 +23,15 @@ angular.module('opensrpSiteApp')
     };
     
    var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/anc?anm-id="+$rootScope.username; 
-    var elcoData = $http.get(apiURLs, { cache: true}).success(function (data) {       
-    });
+    /*var elcoData = $http.get(apiURLs, { cache: true}).success(function (data) {       
+    });*/
         
   
     var hhUrl = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
     var ecUrl = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username;
-    Main.mainReportHH($scope,$rootScope,hhUrl,'FWNHREGDATE','thisMonthHH','thisWeekHH','todayHH');
-    Main.mainReportEC($scope,$rootScope,ecUrl,'WomanREGDATE','thisMonthEC','thisWeekEC','todayEC');
-     $scope.HHDATA = function(){     
+    Main.mainReportHH($scope,$rootScope,hhUrl,'TODAY');
+    Main.mainReportECAndPW($scope,$rootScope,ecUrl,'TODAY');
+    $scope.HHDATA = function(){     
       page.downloadHH(HhData,'Household Report');
     }
       

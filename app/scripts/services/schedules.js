@@ -15,7 +15,7 @@ angular.module('opensrpSiteApp')
         //var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username;  192.168.19.96:5984
         //var apiURLs = "http://192.168.21.18:5984/opensrp/_design/ScheduleLog/_view/testViewForDashboard";
         var hhTestUrl = "http://192.168.21.246:5984/opensrp/_design/HouseHold/_view/all";
-        var couchUrl = "http://192.168.21.218:1234/192.168.21.218:5984/opensrp/_design/ScheduleLog/_view/testViewForDashboard";
+        var couchUrl = "http://192.168.21.18:1337/192.168.21.218:5984/opensrp/_design/ScheduleLog/_view/testViewForDashboard";
         var scheduleData = $http.get(couchUrl, { 
               cache: true, 
               withCredentials: false,

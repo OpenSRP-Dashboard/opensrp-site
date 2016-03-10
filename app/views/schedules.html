@@ -1,7 +1,6 @@
 <data-ng-include src="'views/partials/header.html'"></data-ng-include>
 <script type="text/javascript" src="assets/js/download.js"></script>
 
-
 <section>
   <div class="container">
     <div class="row">
@@ -10,7 +9,7 @@
         <div show-during-resolve class="loader">   
           <center><img src="images/spinner.gif"  alt="Opensrp"/></center>
         </div>
-                
+                       
         <!-- content accordion  start -->
         <div class="row">
           <div class="col-xs-12 col-lg-12">
@@ -43,7 +42,7 @@
                   </table>                        
                 </div>                       
               </div>                    
-              <div class="panel panel-default" ng-repeat="schedule in schedules | orderBy:sortType:sortReverse ">
+              <div class="panel panel-default" ng-repeat="schedule in schedules | orderBy:sortType:sortReverse | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
                 <div class="panel-heading2" role="tab" id="headingTwo2">
                   <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion2" href="#{{schedule.id}}" aria-expanded="false" aria-controls="collapseTwo">
                     <thead>
@@ -59,11 +58,10 @@
                 <div id="{{schedule.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">                    
                   <div class="panel-body">
                     <div class="row">
-                      <div class="col-md-3 col-lg-3 " align="center">{{elcoRegisterEntry.FWWOMFNAME}}<img alt="User Pic" src="images/photo2.png" class="img-circle img-responsive"> </div>
                         <div class=" col-md-4 col-lg-8 "> 
                           <div><strong> Schedule Id</strong> {{schedule.id}}</div>
                           <div> <strong>Schedule Type</strong> {{schedule.value.type}}</div>
-                          <div> <strong>ANM</strong>{{schedule.value.anmIdentifier}}</div>             
+                          <div> <strong>ANM</strong> {{schedule.value.anmIdentifier}}</div>             
                           <div><strong>Schedule Name</strong> {{schedule.value.scheduleName}}</div>
                         </div>
                     </div>
@@ -74,13 +72,16 @@
           </div>
         </div>
                     
+        <div class="row">
+          <div class="col-md-3 col-lg-10 ">
+            <pagination page="currentPage" boundary-links="true" max-size="7" total-items="totalItems" items-per-page="entryLimit"></pagination>
+          </div>               
+          <div class="col-md-3 col-lg-2 ">
+            <!--<button id="login" ng-click="download()" class="btn btn-lg btn-primary btn-block" type="submit">Export</button> -->
+          </div>
+        </div>
       </div><!-- content accordion  end -->
     </div>
   </div>
     
 </section>
-<data-ng-include src="'views/partials/footer.html'" style="clear: both;" class="navbar"></data-ng-include>
-
-
-
-

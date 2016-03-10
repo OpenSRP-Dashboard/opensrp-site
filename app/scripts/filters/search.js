@@ -16,6 +16,7 @@ angular.module('opensrpSiteApp')
           console.log("inside filter/search.js");
           //console.log(input);
           console.log(start);
+          //console.log(input.slice(start, start+10))
           return input.slice(start);
         }
         

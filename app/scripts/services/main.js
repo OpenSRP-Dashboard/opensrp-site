@@ -12,8 +12,8 @@ angular.module('opensrpSiteApp')
     // AngularJS will instantiate a singleton by calling "new" on this function
    
     var households = [];
-    var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username; 
-   /* var mainData = $http.get(apiURLs, { cache: true},true).success(function (data) {      
+    /*var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username; 
+    var mainData = $http.get(apiURLs, { cache: true},true).success(function (data) {      
             households.push({"data":data.hhRegisterEntries});
             var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username;
             var elcoData = $http.get(apiURLs, { cache: true}).success(function (data) { 
@@ -21,150 +21,150 @@ angular.module('opensrpSiteApp')
           });
     });
     */
-   function thisMonth(getData,today,ngBind){
+   function thisMonthHH(today,ngBind){
+    var date = new Date();
+    var currentMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+    var start = moment(currentMonth).format('YYYY-MM-DD');
+    var end = moment(date).format('YYYY-MM-DD');      
+    var queryResult= jsonsql.query("select * from getHHData where ("+today+" >='"+start+"' && "+today+" <='"+end+"') ", getHHData);                   
+    $("#"+ngBind).html(queryResult.length);
+  }
+
+  function thisMonthEC(today,ngBind){
     var date = new Date();
     var currentMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     var start = moment(currentMonth).format('YYYY-MM-DD');
     var end = moment(date).format('YYYY-MM-DD');
-    window.getData = JSON.parse(JSON.stringify(getData));       
-    var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"') ",getData);                   
+    //window.getData = JSON.parse(JSON.stringify(getData));       
+    var queryResult= jsonsql.query("select * from getEligibleCouplesData where ("+today+" >='"+start+"' && "+today+" <='"+end+"') ", getEligibleCouplesData);                   
     $("#"+ngBind).html(queryResult.length);
   }
-  function thisWeek(getData,today,ngBind){
+
+  function thisMonthPW(today,ngBind){
+    var date = new Date();
+    var currentMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+    var start = moment(currentMonth).format('YYYY-MM-DD');
+    var end = moment(date).format('YYYY-MM-DD');
+    //window.getData = JSON.parse(JSON.stringify(getData));       
+    //var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"' && PROVIDERID =='"+$rootScope.username+"' ) ",getData);                   
+    var queryResult= jsonsql.query("select * from getPregnantWomenData where ( PSRFDETAILS[0].today  >='"+start+"' && PSRFDETAILS[0].today  <='"+end+"') ", getPregnantWomenData);                      
+    $("#"+ngBind).html(queryResult.length);
+  }
+
+  function thisWeekHH(today,ngBind){
     var date = new Date();
     var Dates = new Date().getWeek();
     var end = moment(Dates[1]).format('YYYY-MM-DD');
     var start = moment(Dates[0]).format('YYYY-MM-DD');   
     
-    window.getData = JSON.parse(JSON.stringify(getData));
-    var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"') ",getData);                   
+    console.log(end + " " + start);    
+    //console.log(getData);
+
+    var queryResult= jsonsql.query("select * from getHHData where ("+today+" >='"+start+"' && "+today+" <='"+end+"') ", getHHData);                   
     $("#"+ngBind).html(queryResult.length);
+    console.log("length" + queryResult.length);
   }
-  
-  function toDay(getData,today,ngBind){
+
+  function thisWeekEC(today,ngBind){
     var date = new Date();
-    var currentDay = moment(date).format('YYYY-MM-DD');             
-    window.getData = JSON.parse(JSON.stringify(getData));
-    var queryResult= jsonsql.query("select * from getData where ("+today+" =='"+currentDay+"') ",getData);                   
+    var Dates = new Date().getWeek();
+    var end = moment(Dates[1]).format('YYYY-MM-DD');
+    var start = moment(Dates[0]).format('YYYY-MM-DD');   
     
-    $("#"+ngBind).html(queryResult.length);  
-  }
-  
-  
-  function thisMonthPW(getData,today,ngBind){
-    var date = new Date();
-    var currentMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-    var start = moment(currentMonth).format('YYYY-MM-DD');
-    var end = moment(date).format('YYYY-MM-DD');
-    window.getData = JSON.parse(JSON.stringify(getData));       
-    //var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"' && PROVIDERID =='"+$rootScope.username+"' ) ",getData);                   
-    var queryResult= jsonsql.query("select * from getData where (PSRFDETAILS != '' && PSRFDETAILS[0].today  >='"+start+"' && PSRFDETAILS[0].today  <='"+end+"'  && details.FWPSRPREGSTS == 1 ) ",getData);                      
+    //console.log(end + " " + start);
+
+    //window.getData = JSON.parse(JSON.stringify(getData));
+    //console.log(getData);
+    var queryResult= jsonsql.query("select * from getEligibleCouplesData where ("+today+" >='"+start+"' && "+today+" <='"+end+"') ", getEligibleCouplesData);                   
     $("#"+ngBind).html(queryResult.length);
+    //console.log("length" + queryResult.length);
   }
-  
-  
-  function thisWeekPW(getData,today,ngBind){
+
+  function thisWeekPW(today,ngBind){
     var date = new Date();
     var Dates = new Date().getWeek();
     var end = moment(Dates[1]).format('YYYY-MM-DD');
     var start = moment(Dates[0]).format('YYYY-MM-DD');      
-    window.getData = JSON.parse(JSON.stringify(getData));
-    var queryResult= jsonsql.query("select * from getData where (PSRFDETAILS != '' &&  PSRFDETAILS[0].today  >='"+start+"' && PSRFDETAILS[0].today  <='"+end+"'  && details.FWPSRPREGSTS == 1  ) ",getData);                      
+    //window.getData = JSON.parse(JSON.stringify(getData));
+    var queryResult= jsonsql.query("select * from getPregnantWomenData where (PSRFDETAILS[0].today  >='"+start+"' && PSRFDETAILS[0].today  <='"+end+"' ) ", getPregnantWomenData);                      
     
     $("#"+ngBind).html(queryResult.length);
   }
   
-  function toDayPW(getData,today,ngBind){
+  function toDayHH(today,ngBind){
+    var date = new Date();
+    var currentDay = moment(date).format('YYYY-MM-DD');    
+    var queryResult= jsonsql.query("select * from getHHData where ("+today+" =='"+currentDay+"') ",  getHHData);    
+    $("#"+ngBind).html(queryResult.length );  
+  }
+
+  function toDayEC(today, ngBind){
     var date = new Date();
     var currentDay = moment(date).format('YYYY-MM-DD');             
-    window.getData = JSON.parse(JSON.stringify(getData));
-    var queryResult= jsonsql.query("select * from getData where (PSRFDETAILS != '' && PSRFDETAILS[0].today  >='"+currentDay+"' && details.FWPSRPREGSTS == 1  ) ",getData);                      
+    //window.getData = JSON.parse(JSON.stringify(getData));
+    var queryResult= jsonsql.query("select * from getEligibleCouplesData where ("+today+" =='"+currentDay+"') ",getEligibleCouplesData);                   
+    
     $("#"+ngBind).html(queryResult.length);  
   }
-  function TotalCount(total,type){
-    var stringLength = total+"";
-    var Lenght = stringLength.split("");
-    if (Lenght.length == 1) {
-      $("#L"+type).html(0);
-      $("#M"+type+"1").html(0);
-      $("#M"+type+"2").html(0);
-      $("#M"+type+"3").html(0);
-      $("#R"+type).html(Lenght[0]);
-      
-    }else if(Lenght.length == 2){
-      $("#L"+type).html(0);
-      $("#M"+type+"1").html(0);
-      $("#M"+type+"2").html(0);
-      $("#M"+type+"3").html(Lenght[0]);
-      $("#R"+type).html(Lenght[1]);
-    }else if(Lenght.length == 3){
-      $("#L"+type).html(0);
-      $("#M"+type+"1").html(0);
-      $("#M"+type+"2").html(Lenght[0]);
-      $("#M"+type+"3").html(Lenght[1]);
-      $("#R"+type).html(Lenght[2]);
-      
-    }else if (Lenght.length == 4) {      
-      $("#L"+type).html(0);
-      $("#M"+type+"1").html(Lenght[0]);
-      $("#M"+type+"2").html(Lenght[1]);
-      $("#M"+type+"3").html(Lenght[2]);
-      $("#R"+type).html(Lenght[3]);
-    }else{
-      
-      $("#L"+type).html(Lenght[0]);
-      $("#M"+type+"1").html(Lenght[1]);
-      $("#M"+type+"2").html(Lenght[2]);
-      $("#M"+type+"3").html(Lenght[3]);
-      $("#R"+type).html(Lenght[4]);
-    }
-   
+
+  function toDayPW(ngBind){
+    var date = new Date();
+    var currentDay = moment(date).format('YYYY-MM-DD');             
+    //window.getData = JSON.parse(JSON.stringify(getData));
+    //console.log("currentDay " + currentDay);
+    //var queryResult= jsonsql.query("select * from getPregnantWomenData where PSRFDETAILS[0].today =='"+currentDay+"' ", getPregnantWomenData);
+     var queryResult= jsonsql.query("select * from getPregnantWomenData where (PSRFDETAILS[0].today  =='"+currentDay+"' ) ",getPregnantWomenData);
+     $("#"+ngBind).html(queryResult.length);  
   }
-  
-  function totalPW(data){
-     window.getData = JSON.parse(JSON.stringify(data));       
-    //var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"' && PROVIDERID =='"+$rootScope.username+"' ) ",getData);                   
-    var queryResult= jsonsql.query("select * from getData where (PSRFDETAILS != '' && PSRFDETAILS[0].FWPSRPREGSTS == 1) ",getData);                   
-    var stringLength = queryResult.length+"";
-    var Lenght = stringLength.split("");   
-    var type ='W';
-    if (Lenght.length == 1) {
+
+  function TotalCount(type){
+    // getPregnantWomenData, getHHData, getEligibleCouplesData
+    console.log("this is from TotalCount");
+    if(type == 'H'){
+      var stringLength = window.getHHData.length + ""; //total+"";
+    }else if(type == 'E'){
+      var stringLength = window.getEligibleCouplesData.length + "";
+    }else if(type == 'W'){
+      var stringLength = window.getPregnantWomenData.length + "";
+    }
+    //var stringLength = total+"";
+    var Length = stringLength.split("");
+    if (Length.length == 1) {
       $("#L"+type).html(0);
       $("#M"+type+"1").html(0);
       $("#M"+type+"2").html(0);
       $("#M"+type+"3").html(0);
-      $("#R"+type).html(Lenght[0]);
+      $("#R"+type).html(Length[0]);
       
-    }else if(Lenght.length == 2){
+    }else if(Length.length == 2){
       $("#L"+type).html(0);
       $("#M"+type+"1").html(0);
       $("#M"+type+"2").html(0);
-      $("#M"+type+"3").html(Lenght[0]);
-      $("#R"+type).html(Lenght[1]);
-    }else if(Lenght.length == 3){
+      $("#M"+type+"3").html(Length[0]);
+      $("#R"+type).html(Length[1]);
+    }else if(Length.length == 3){
       $("#L"+type).html(0);
       $("#M"+type+"1").html(0);
-      $("#M"+type+"2").html(Lenght[0]);
-      $("#M"+type+"3").html(Lenght[1]);
-      $("#R"+type).html(Lenght[2]);
+      $("#M"+type+"2").html(Length[0]);
+      $("#M"+type+"3").html(Length[1]);
+      $("#R"+type).html(Length[2]);
       
-    }else if (Lenght.length == 4) {      
+    }else if (Length.length == 4) {      
       $("#L"+type).html(0);
-      $("#M"+type+"1").html(Lenght[0]);
-      $("#M"+type+"2").html(Lenght[1]);
-      $("#M"+type+"3").html(Lenght[2]);
-      $("#R"+type).html(Lenght[3]);
+      $("#M"+type+"1").html(Length[0]);
+      $("#M"+type+"2").html(Length[1]);
+      $("#M"+type+"3").html(Length[2]);
+      $("#R"+type).html(Length[3]);
     }else{      
-      $("#L"+type).html(Lenght[0]);
-      $("#M"+type+"1").html(Lenght[1]);
-      $("#M"+type+"2").html(Lenght[2]);
-      $("#M"+type+"3").html(Lenght[3]);
-      $("#R"+type).html(Lenght[4]);
-    }
-   
+      $("#L"+type).html(Length[0]);
+      $("#M"+type+"1").html(Length[1]);
+      $("#M"+type+"2").html(Length[2]);
+      $("#M"+type+"3").html(Length[3]);
+      $("#R"+type).html(Length[4]);
+    }   
   }
-  
-  this.mainReportHH = function($scope,$rootScope,url,today,monthId,weekId,dayId){   
+
+  this.mainReportHH = function($scope,$rootScope,url,today){   
     $.ajax({
       async:false,		   
       dataType: "json",
@@ -174,18 +174,19 @@ angular.module('opensrpSiteApp')
       },
       url:url,
         success:function (data) {
-          window.getHHata = data.hhRegisterEntries
-          TotalCount(data.hhRegisterEntries.length,'H');
-          thisMonth(data.hhRegisterEntries,today,monthId);
-          thisWeek(data.hhRegisterEntries,today,weekId);
-          toDay(data.hhRegisterEntries,today,dayId);
+          window.getHHData = JSON.parse(JSON.stringify(data.hhRegisterEntries));
+          console.log("total number of data from HH register " + window.getHHData.length);
+          TotalCount('H');
+          thisMonthHH(today,'thisMonthHH');
+          thisWeekHH(today,'thisWeekHH');
+          toDayHH(today,'todayHH');
       },
       type:"get"				
     });	   
   }
   
   
-  this.mainReportEC = function($scope,$rootScope,url,today,monthId,weekId,dayId){   
+  this.mainReportECAndPW = function($scope,$rootScope,url,today){   
     $.ajax({
       async:false,		   
       dataType: "json",
@@ -196,15 +197,23 @@ angular.module('opensrpSiteApp')
       url:url,
       success:function (data) {
         $rootScope.ECR = data.ecRegisterEntries;
-        TotalCount(data.ecRegisterEntries.length,'E');
-        thisMonth(data.ecRegisterEntries,today,monthId);
-        thisWeek(data.ecRegisterEntries,today,weekId);
-        toDay(data.ecRegisterEntries,today,dayId);        
-        totalPW(data.ecRegisterEntries);
-        thisMonthPW(data.ecRegisterEntries,today,'thisMonthPW');
-        thisWeekPW(data.ecRegisterEntries,today,'thisWeekPW');
-        toDayPW(data.ecRegisterEntries,today,'todayPW');
-        
+        //JSON.parse(JSON.stringify(getData));       
+        window.getECAndPWData = JSON.parse(JSON.stringify(data.ecRegisterEntries));       
+        console.log("total data from ec register " + window.getECAndPWData.length); 
+        window.getPregnantWomenData = jsonsql.query("select * from getECAndPWData where (PSRFDETAILS != '' && details.FWPSRPREGSTS == 1 )", getECAndPWData);
+        console.log("number of pw " + window.getPregnantWomenData.length);
+        window.getEligibleCouplesData = jsonsql.query("select * from getECAndPWData where (FWELIGIBLE == 1 )", getECAndPWData);
+        console.log("number of ec " + window.getEligibleCouplesData .length);
+
+        TotalCount('E');
+        thisMonthEC(today,'thisMonthEC');
+        thisWeekEC(today,'thisWeekEC');
+        toDayEC(today, 'todayEC');        
+        //totalPW(data.ecRegisterEntries);
+        TotalCount('W');
+        thisMonthPW(today,'thisMonthPW');
+        thisWeekPW(today,'thisWeekPW');
+        toDayPW('todayPW');        
       },
       type:"get"				
     });			
