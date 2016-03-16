@@ -48,11 +48,11 @@ angular.module('opensrpSiteApp')
     monthLists[0] = new Date(date.getFullYear(), date.getMonth()-3, 1);
    
     
-    Common.chartDataCal($scope,monthLists,window.getHHata,'FWNHREGDATE',$timeout);
+    Common.chartDataCal($scope,monthLists,window.getHHata,'TODAY',$timeout);
     
-    HH.reportThisMonth($scope,$scope.data,$rootScope,'FWNHREGDATE','thisMonth',$filter);
-    HH.reportThisWeek($scope,$scope.data,$rootScope,'FWNHREGDATE','thisWeek',$filter);
-    HH.reportToday($scope,$scope.data,$rootScope,'FWNHREGDATE','today',$filter);
+    HH.reportThisMonth($scope,$scope.data,$rootScope,'TODAY','thisMonth',$filter);
+    HH.reportThisWeek($scope,$scope.data,$rootScope,'TODAY','thisWeek',$filter);
+    HH.reportToday($scope,$scope.data,$rootScope,'TODAY','today',$filter);
     Common.locations($scope);
     Common.users($scope);
     //thisMonth(getData,firstDay,toDay);

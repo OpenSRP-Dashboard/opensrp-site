@@ -22,10 +22,10 @@ angular.module('opensrpSiteApp')
     '</a>';
     
     window.getData = JSON.parse(JSON.stringify(ElcoRegisterService.Data()));       
-    $scope.data= jsonsql.query("select * from getData where (details.FWPSRPREGSTS == 1 ) ",getData);
-    EC.reportThisMonth($scope, $scope.data,$rootScope,'details.FWPSRDATE','thisMonth',$filter);
-    EC.reportThisWeek($scope, $scope.data,$rootScope,'details.FWPSRDATE','thisWeek',$filter);
-    EC.reportToday($scope,$scope.data,$rootScope,'details.FWPSRDATE','today',$filter);
+    $scope.data= jsonsql.query("select * from getData where (PSRFDETAILS != '' && details.FWPSRPREGSTS == 1 ) ",getData);
+    EC.reportThisMonth($scope, $scope.data,$rootScope,'PSRFDETAILS[0].today','thisMonth',$filter);
+    EC.reportThisWeek($scope, $scope.data,$rootScope,'PSRFDETAILS[0].today','thisWeek',$filter);
+    EC.reportToday($scope,$scope.data,$rootScope,'PSRFDETAILS[0].today','today',$filter);
     Common.locations($scope);
     Common.users($scope);
     var date = new Date();

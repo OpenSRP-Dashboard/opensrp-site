@@ -37,6 +37,8 @@ angular.module('opensrpSiteApp')
     var end = moment(date).format('YYYY-MM-DD');
     //window.getData = JSON.parse(JSON.stringify(getData));       
     var queryResult= jsonsql.query("select * from getEligibleCouplesData where ("+today+" >='"+start+"' && "+today+" <='"+end+"') ", getEligibleCouplesData);                   
+    //console.log("thisMonthEC from main");
+    //console.log(queryResult);
     $("#"+ngBind).html(queryResult.length);
   }
 
@@ -47,7 +49,7 @@ angular.module('opensrpSiteApp')
     var end = moment(date).format('YYYY-MM-DD');
     //window.getData = JSON.parse(JSON.stringify(getData));       
     //var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"' && PROVIDERID =='"+$rootScope.username+"' ) ",getData);                   
-    var queryResult= jsonsql.query("select * from getPregnantWomenData where ( PSRFDETAILS[0].today  >='"+start+"' && PSRFDETAILS[0].today  <='"+end+"') ", getPregnantWomenData);                      
+    var queryResult= jsonsql.query("select * from getPregnantWomenData where ( PSRFDETAILS[0].today  >='"+start+"' && PSRFDETAILS[0].today <='"+end+"') ", getPregnantWomenData);
     $("#"+ngBind).html(queryResult.length);
   }
 

@@ -22,8 +22,8 @@ angular.module('opensrpSiteApp')
     '</a>';
     Common.locations($scope);
     Common.users($scope);
-    window.getData = JSON.parse(JSON.stringify(ElcoRegisterService.Data()));       
-    $scope.data= jsonsql.query("select * from getData where (FWWOMAGE != 'NaN' ) ",getData);
+    window.getData = JSON.parse(JSON.stringify(ElcoRegisterService.Data()));        
+    $scope.data= jsonsql.query("select * from getData where (FWWOMAGE != 'NaN' && FWELIGIBLE == 1 ) ",getData);
     ElcoRegisterService.dataFilter($scope,$scope.data,$filter);
     
   });

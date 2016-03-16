@@ -26,7 +26,11 @@ angular.module('opensrpSiteApp')
                 var end = moment(date).format('YYYY-MM-DD');
                 window.getData = JSON.parse(JSON.stringify($scope.filtered));
                // var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"' && ELCODETAILS[0].FWWOMCOUNTRY == 'Bangladesh' && PROVIDERID =='"+$rootScope.username+"' ) ",getData);
-                var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"') ",getData);                   
+
+                //window.getData = jsonsql.query("select * from getData where (FWELIGIBLE == 1 )", getData);
+                var queryResult= jsonsql.query("select * from getData where ("+today+" >='"+start+"' && "+today+" <='"+end+"' ) ",getData);
+                //console.log(start + " -- " + end + " -- " + today);
+                //console.log(queryResult);
                 $scope[ngBind] = queryResult.length;
                 
                 
@@ -66,7 +70,7 @@ angular.module('opensrpSiteApp')
                 var date = new Date();
                 var currentDay = moment(date).format('YYYY-MM-DD');              
                 window.getData = JSON.parse(JSON.stringify($scope.filtered));
-                var queryResult= jsonsql.query("select * from getData where ("+today+" =='"+currentDay+"') ",getData);                   
+                var queryResult= jsonsql.query("select * from getData where ("+today+" =='"+currentDay+"' ) ",getData);                   
                 $scope[ngBind] = queryResult.length;        
                 
               }, true);
