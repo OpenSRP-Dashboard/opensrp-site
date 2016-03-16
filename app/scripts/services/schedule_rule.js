@@ -10,4 +10,10 @@
 angular.module('opensrpSiteApp')
   .service('ScheduleRule', function () {
     // AngularJS will instantiate a singleton by calling "new" on this function
+    
+    
+    this.save = function(data,$window,Flash){
+        console.log(data)
+             
+      }
   });
