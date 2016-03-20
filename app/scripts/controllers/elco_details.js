@@ -25,5 +25,6 @@ angular.module('opensrpSiteApp')
     window.getData = JSON.parse(JSON.stringify(ElcoRegisterService.Data()));        
     $scope.data= jsonsql.query("select * from getData where (FWWOMAGE != 'NaN' && FWELIGIBLE == 1 ) ",getData);
     ElcoRegisterService.dataFilter($scope,$scope.data,$filter);
+    $scope.baseURL = "http://192.168.21.18:1337/192.168.21.218:9979";
     
   });
