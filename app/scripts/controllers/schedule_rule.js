@@ -14,40 +14,28 @@ angular.module('opensrpSiteApp')
       'AngularJS',
       'Karma'
     ];
-    function person(firstName,lastName,age,eyeColor) {
-      this.firstName = firstName;
-      for(var i =0;i<4;i++){
-      this.rule = function (name) {
-        this.startFormName = name;
-        this.endFormName= name;
-        this.defination = function(){
-          this.name= "pro";
-          this.value = 12;
-        }
-      }
-      }
-    }
-    function defination(){
-      this.name = "pro";
-      this.value = 12;
-    }
+    
+    
      $scope.save = function() {
-      var myForm = document.forms.rule_def;
-      
-      var myControls = myForm.elements['name1[]'];
-     var numOfEntry = $('.clonedInput').length;
-     var json = [               
-                 {firstName:"John", lastName:new defination(), age:50, eyeColor:"blue"}
-                 
-                 ];
-     json.push({firstName:"John", lastName:new defination(), age:50, eyeColor:"blue"})
-     var mainJson = {name:"Mamemem",rule:json}
-     console.log(mainJson)
-     /* for (var i = 0; i < myControls.length; i++) {
-        console.log(i)
-        var aControl = myControls[i].value;
-        console.log(aControl);
-    }*/
-        ScheduleRule.save($scope.formData,$window,Flash);
-      };
+      var formData = document.forms.rule_def;
+      var numOfRule = $('.clonedInput').length;
+      var rules = [];
+      for(var i=1;i<=numOfRule;i++){
+        var numOfDefination = $('.defination'+i).length;
+        var definations = [];
+        for(var j=1;j<=numOfDefination;j++){          
+          var name = formData.elements['name'+i+'[]'];
+          var value = formData.elements['value'+i+'[]'];
+          if (numOfDefination ==1) {
+             var defination = {name:name.value,value:value.value}; 
+          }else{            
+           var defination = {name:name[j-1].value,value:value[j-1].value}; 
+          }
+          definations.push(defination)
+        }         
+        rules.push({startFormName:formData.elements['startFormName'+i+'[]'].value,endFormName:formData.elements['endFormName'+i+'[]'].value, defination:definations});
+      }
+      var scheduleRule = {name:$scope.name,rule:rules,createdBy:"proshanto",createdDate:new Date()}     
+      ScheduleRule.save(scheduleRule,$window,Flash);
+    };
   });

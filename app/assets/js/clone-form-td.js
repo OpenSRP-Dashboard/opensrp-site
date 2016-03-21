@@ -2,19 +2,19 @@
 $(function () {
     $('#btnAdd').click(function () {
         var num     = $('.clonedInput').length;// how many "duplicatable" input fields we currently have      
-           // the numeric ID of the new input field being added       
-		    var numOfEntry = $('.clonedInput');
+                 
+		    var numOfRule = $('.clonedInput'); // // get how many rule have been created
         var newEntryCreateCondition ;
         
         for(var i=0;i<num;i++){
-          var  newNum  ;
+          var  newNum  ;// the numeric ID of the new input field being added 
           /**
           if delete a rule from middle & again want to create a rule then deleted number rule must be created
           unless number ordering missaligned.
           below loop ensure number ordering.
         */
           for(var j=0;j<num;j++){
-            var entry = numOfEntry[j].id;          
+            var entry = numOfRule[j].id;          
             var splitEntry = entry.split("rule");            
             if (splitEntry[1] == i+1) {
               newEntryCreateCondition = true;
@@ -35,7 +35,7 @@ $(function () {
         
         $("#rule").append('<div id="rule'+newNum+'" class="clonedInput">'+
           '<h3 id="reference'+newNum+'" name="reference" class="heading-reference">Rule #'+newNum+'</h3>'+		
-          '<lable>Start Form Name:</label><input type="text" name="startFormName_'+newNum+'[]" />'+
+          '<lable>Start Form Name:</label><input type="text" name="startFormName'+newNum+'[]" />'+
           '<lable>End Form Name:</label><input type="text" name="endFormName'+newNum+'[]" />'+
           '<a href="#" class="ruleDelete" id="ruleDel'+newNum+'"> Delete</a>'+
           '<p>Defination</p>'+
@@ -48,9 +48,17 @@ $(function () {
 
 	$(document).on('click','.btnRule',function(){	    
 		var id = $(this).attr('id').split("_")[1];		       		     
-		$("#defination_space_"+id).append('<div class="defination" style="border:1px solid #fff;margin-right:5px;;margin-bottom:20px"><lable> Name:</label><input type="text" name="name'+id+'[]"/>'+
+		$("#defination_space_"+id).append('<div class="defination'+id+'" style="border:1px solid #fff;margin-right:5px;;margin-bottom:20px"><lable> Name:</label><input type="text" name="name'+id+'[]"/>'+
             '<lable>Value:</label> <input type="text" name="value'+id+'[]"/><a href="#" class="delete" id="def'+id+'"> Delete</a> </div>'
 			);
+		
+	})
+
+  $(document).on('click','.ruleDelete',function(){	    
+		var id = $(this).attr('id');
+    var num = $('.clonedInput').length;
+    console.log(num);
+    console.log(id);
 		
 	})
 });
