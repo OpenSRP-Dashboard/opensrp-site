@@ -57,9 +57,25 @@ $(function () {
   $(document).on('click','.ruleDelete',function(){	    
 		var id = $(this).attr('id');
     var num = $('.clonedInput').length;
-    console.log(num);
-    console.log(id);
-		
+    var cl = $('.clonedInput');
+    for(var i=0;i<num;i++){
+      console.log(cl[i].id);
+      if (cl[i].id !="rule1") {
+        $('#'+cl[i].id).remove();
+        var p= parseInt(i+1);
+        $("#rule").append('<div id="rule'+p+'" class="clonedInput">'+
+          '<h3 id="reference'+i+1+'" name="reference" class="heading-reference">Rule #'+p+'</h3>'+		
+          '<lable>Start Form Name:</label><input type="text" name="startFormName'+p+'[]" value=""/>'+
+          '<lable>End Form Name:</label><input type="text" name="endFormName'+p+'[]" value=""/>'+
+          '<a href="#" class="ruleDelete" id="ruleDel'+p+'"> Delete</a>'+
+          '<p>Defination</p>'+
+          '<div id="defination_space_'+p+'"></div>'+
+          '<div style="clear:both;padding-top:25px;"></div>'+        
+          '<input type="button" class="btnRule" id="btnRule_'+p+'" value="add defination">'+
+        '</div>'
+        ); 
+      }
+    }
 	})
 });
 
