@@ -320,6 +320,7 @@ angular
         controller: 'ScheduleRuleCtrl',
         controllerAs: 'rule',
         resolve : {
+          'scheduleRuleServiceData':function(ScheduleRule){ return ScheduleRule.promise;},
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('Add Role')){
               // Has proper permissions

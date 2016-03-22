@@ -1,36 +1,87 @@
 <data-ng-include src="'views/partials/header.html'"></data-ng-include>
 <section>
-  <div show-during-resolve class="loader">   
+<div show-during-resolve class="loader">   
   <center><img src="images/spinner.gif"  alt="Opensrp"/></center>
 </div>
     <div class="container">
-        <div class="row">
-            <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include>
-            <div class="row"> <!-- main col left --> 
-              <div class="col-sm-2 col-md-2"></div>
-              <div class="col-sm-9 col-md-9">
-                <div id="top" class="login-container">
-                  
-                    <h2 class="form-signin-heading">User</h2>
-                    <p class="lead form-signin-heading"></p>
-                    <div flash-message="5000" ></div>
-                     <div id="message"></div>
-                    <div ng-bind-html="userAssign" ></div>
-                    
-                    <table>
-                      <tr><td>User Name</td><td>Role Name</td><td>Status</td></tr>
-                    <tr ng-repeat="role in roleAndUser track by $index">                      
-                      <td style="width: 10%"><a href="/#/user/{{role.roleId}}/{{role.roleName}}/{{role.userName}}/{{role.status}}" >{{role.userName}}</a> </td>
-                      <td style="width: 10%"><a href="/#/user/{{role.roleId}}/{{role.roleName}}/{{role.userName}}/{{role.status}}" >{{role.roleName}}</a></td>
-                      <td style="width: 10%">{{role.status}}</td>
-                    </tr>
-                    </table>
-                    <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
+      <div class="row">
+        <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include>
+        <div class="row"> <!-- main col left --> 
+          <div class="col-sm-2 col-md-2"></div>
+          <div class="col-sm-9 col-md-9">
+            <div class="row">
+              <div class="col-xs-12 col-lg-12">
+                <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default">
+                    <div class="panel-heading2" role="tab" id="headingOne">
+                      <table>
+                        <thead> <!--table head-->
+                          <tr style="background:none">
+                            <th style="width:205px; font-size:12px;">
+                              <a href="/#/elcos" ng-click="sortType = 'FWWOMFNAME'; sortReverse = !sortReverse">MWRA Name
+                                <span ng-show="sortType == 'FWWOMFNAME' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'FWWOMFNAME' && sortReverse" class="fa fa-caret-up"></span>
+                              </a>                        
+                            </th>                                       
+                            <th style="width:101px;">
+                              <a href="/#/elcos" ng-click="sortType = 'FWWOMAGE'; sortReverse = !sortReverse">Age
+                                <span ng-show="sortType == 'FWWOMAGE' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'FWWOMAGE' && sortReverse" class="fa fa-caret-up"></span>
+                              </a>
+                            </th>
+                            <th style="width:150px;">
+                              <a href="/#/elcos" ng-click="sortType = 'FWHUSNAME'; sortReverse = !sortReverse">Husband Name
+                                <span ng-show="sortType == 'FWHUSNAME' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'FWHUSNAME' && sortReverse" class="fa fa-caret-up"></span>
+                              </a>    
+                            </th>                                                  
+                          </tr>
+                        </thead><!--//table head-->
+                      </table>                        
+                    </div>                       
+                  </div>                    
+                  <div class="panel panel-default" ng-repeat="elcoRegisterEntry in data | filter:search | orderBy:sortType:sortReverse | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                  <div class="panel-heading2" role="tab" id="headingTwo2">
+                  <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion2" href="#{{elcoRegisterEntry.CASEID}}" aria-expanded="false" aria-controls="collapseTwo">
+                    <thead>
+                      <tr>
+                        <th style="width:48px;">                                           
+                          <div class="btn-group-md"> <img src="images/photo.png" alt=""></div>                                           
+                        </th>  
+                        <th style="width:100px;">{{elcoRegisterEntry.FWWOMFNAME}}</th>                                        
+                        <th style="width:100px;">{{elcoRegisterEntry.FWWOMAGE}}</th>
+                        <th style="width:100px;">{{elcoRegisterEntry.FWHUSNAME}}</th>                     
+                      </tr>
+                    </thead>
+                  </table><!--//table body-->
+                  </div>
+                    <div id="{{elcoRegisterEntry.CASEID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">                    
+                      <div class="panel-body">
+                        <div class="row">
+                          <div class="col-md-3 col-lg-3 " align="center">{{elcoRegisterEntry.FWWOMFNAME}}<img alt="User Pic" src="images/photo2.png" class="img-circle img-responsive"> </div>
+                          <div class=" col-md-4 col-lg-8 "> 
+                            <div><strong> HHID:</strong> {{elcoRegisterEntry.GOBHHID}}</div>
+                            <div> <strong>Husband Name:</strong> {{elcoRegisterEntry.FWHUSNAME}}</div>
+                            <div> <strong>DOB: </strong>{{elcoRegisterEntry.FWBIRTHDATE}}</div>              
+                            <div><strong>Age:</strong> {{elcoRegisterEntry.FWWOMAGE}}</div>
+                            <div><strong>NID:</strong> {{elcoRegisterEntry.FWWOMNID}}</div>
+                            <div><strong>BRID:</strong> {{elcoRegisterEntry.FWWOMBID}}</div>
+                          </div>
+                        </div>
+                      </div>                     
+                    </div>
                   </div>
                 </div>
+              </div>      
+              <div class="row">
+                <div class="col-md-3 col-lg-10 ">
+                  <pagination page="currentPage" boundary-links="true" max-size="6" total-items="totalItems" items-per-page="entryLimit"></pagination>
+                </div>                
+              </div>                    
             </div>
-            
-        </div>
+          </div>        
+        </div>            
+      </div>
     </div>    
 </section>
 

@@ -8,15 +8,17 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('ScheduleRuleCtrl', function ($scope,$rootScope,$window,$timeout,$routeParams,$http,AclService,ScheduleRule,Flash) {
+  .controller('ScheduleRuleCtrl', function ($scope,$rootScope,$window,$timeout,$routeParams,$http,AclService,ScheduleRule,Flash,ElcoRegisterService,$filter) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
     
-    
-     $scope.save = function() {
+    $scope.can = AclService.can;
+    $scope.data = ScheduleRule.Data();
+    ElcoRegisterService.dataFilter($scope,$scope.data,$filter);
+    $scope.save = function() {
       var formData = document.forms.rule_def;
       var numOfRule = $('.clonedInput').length;
       var rules = [];
