@@ -31,6 +31,10 @@ angular.module('opensrpSiteApp')
     var ecUrl = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username;
     Main.mainReportHH($scope,$rootScope,hhUrl,'TODAY');
     Main.mainReportECAndPW($scope,$rootScope,ecUrl,'TODAY');
+    var elcoFromCouch = "http://192.168.21.86:1337/192.168.21.218:5984/opensrp/_design/Elco/_view/all";
+    var hhFromCouch = "http://192.168.21.86:1337/192.168.21.218:5984/opensrp/_design/HouseHold/_view/all";
+    Main.testFetchFromCouch(elcoFromCouch);
+    Main.testFetchFromCouch(hhFromCouch);
     $scope.HHDATA = function(){     
       page.downloadHH(HhData,'Household Report');
     }

@@ -56,7 +56,7 @@ function newHhFormExport(JSONData, ReportTitle, ShowLabel) {
         row += 'FWJIVHHID' + ',';
         row += 'FWUNION' + ',';
         row += 'FWWARD' + ',';
-        row += 'FWSUBUNIT' + ',';
+        row += 'FWSUBUNIT' + ','; //10
         row += 'FWMAUZA_PARA' + ',';
         row += 'FWHOHFNAME' + ',';
         row += 'FWHOHBIRTHDATE' + ',';
@@ -66,7 +66,7 @@ function newHhFormExport(JSONData, ReportTitle, ShowLabel) {
         row += 'REGDATE' + ',';
         row += 'FWWOMFNAME' + ',';
         row += 'FWBIRTHDATE' + ',';
-        row += 'FWWOMAGE' + ',';
+        row += 'FWWOMAGE' + ','; //20
         row += 'FWCWOMSTRMEN' + ',';
         row += 'FWCWOMHUSLIV' + ',';
         row += 'FWCWOMHUSALV' + ',';
@@ -76,13 +76,13 @@ function newHhFormExport(JSONData, ReportTitle, ShowLabel) {
         row += 'FWWOMNID' + ',';
         row += 'FWWOMBID' + ',';
         row += 'FWHUSNAME' + ',';
-        row += 'ELCO' + ',';
+        row += 'ELCO' + ','; //30
         row += 'Latitude' + ',';
         row += 'Longitude' + ',';
         row += 'RECEIVED TIME AT SERVER' + ',';
         row += 'FD WORKER ID' + ',';       
         row += 'INSTANCE ID' + ',';
-        row += 'ENTITY ID' + ',';
+        row += 'ENTITY ID' + ','; //36
         row = row.slice(0, -1);
         
         //append Label row with line break
@@ -92,6 +92,46 @@ function newHhFormExport(JSONData, ReportTitle, ShowLabel) {
     //1st loop is to extract each row
     for (var i = 0; i < Data.length; i++) {
         //2nd loop will extract each column and convert it in string comma-seprated
+        if(Data[i].ELCODETAILS.length == 0 ){
+            var row = "";
+            row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';
+            row += '"' + checkNullValue(Data[i].TODAY) + '",';
+            row += '"' + checkNullValue(Data[i].START) + '",';
+            row += '"' + checkNullValue(Data[i].END) + '",';
+            row += '"' + checkNullValue(Data[i].FWNHREGDATE) + '",';
+            row += '"' + checkNullValue(Data[i].FWGOBHHID) + '",';
+            row += '"' + checkNullValue(Data[i].FWJIVHHID) + '",';
+            row += '"' + checkNullValue(Data[i].FWUNION) + '",';
+            row += '"' + checkNullValue(Data[i].FWWARD) + '",';
+            row += '"' + checkNullValue(Data[i].FWSUBUNIT) + '",';   //10
+            row += '"' + checkNullValue(Data[i].FWMAUZA_PARA) + '",';
+            row += '"' + checkNullValue(Data[i].FWHOHFNAME) + '",';
+            row += '"' + checkNullValue(Data[i].FWHOHBIRTHDATE) + '",';
+            row += '"' + checkNullValue(Data[i].FWHOHGENDER) + '",';
+            row += '"' + checkNullValue(Data[i].FWNHHMBRNUM) + '",';
+            row += '"' + checkNullValue(Data[i].FWNHHMWRA) + '",';
+            row += ',';
+            row += ',';
+            row += ',';
+            row += ','; //20
+            row += ',';
+            row += ',';
+            row += ',';
+            row += ',';
+            row += ',';
+            row += ',';
+            row += ",";
+            row += ",";                        
+            row += ",";            
+            row += '"' + Data[i].ELCO + '",'; //30
+            row += ",";
+            row += ",";           
+            row += '"' + checkNullValue(Data[i].details.received_time) + '",';
+            row += '"' + checkNullValue(Data[i].external_user_ID) + '",';
+            row += '"' + checkNullValue(Data[i].INSTANCEID) + '",';
+            row += '"' + checkNullValue(Data[i].CASEID) + '",'; //36
+            CSV += row + '\r\n';          
+        } 
         for (var index=0 ; index< Data[i].ELCODETAILS.length;index++) {         
           if (Data[i].ELCODETAILS[index].form_name =='FWNewHH') {
             var row = "";
@@ -148,7 +188,7 @@ function newHhFormExport(JSONData, ReportTitle, ShowLabel) {
             row += '"' + checkNullValue(Data[i].INSTANCEID) + '",';
             row += '"' + checkNullValue(Data[i].CASEID) + '",';
             CSV += row + '\r\n';
-          } 
+          }
         }
     }
     if (CSV == '') {        
@@ -235,7 +275,7 @@ function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
         row += 'FWPSRPHONENUM' + ',';//42
         row += 'FWPSRMUAC' + ',';//43
         row += 'FWVG' + ',';//44
-        row += 'VWHRP' + ','; //45       
+        row += 'FWHRP' + ','; //45       
         row += 'FWHR_PSR' + ',';//46
         row += 'FWFLAGVALUE' + ',';//47
         row += 'FWSORTVALUE' + ',';//48
@@ -286,7 +326,7 @@ function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
             row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRSTS) + '",';//20
             row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRLMP) + '",';//21
             row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRPREGSTS) + '",';//22
-            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRWOMPREGWTD)  + '",';//23
+            row += '"' + checkNullValue(Data[i].details.FWPSRPREGWTD)  + '",';//23
             row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRHUSPREGWTD) + '",';//24
             row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSREVRPREG) + '",';//25
             row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRTOTBIRTH) + '",';//26
@@ -307,11 +347,11 @@ function psrfFromExport(JSONData, ReportTitle, ShowLabel) {
             row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRPHONE) + '",';//41
             row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRPHONENUM) + '",';//42
             row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWPSRMUAC) + '",';//43
-            row += '"' + checkNullValue(Data[i].details.FWVG) + '",';//44
-            row += '"' + checkNullValue(Data[i].details.FWHRP) + '",';//45
-            row += '"' + checkNullValue(Data[i].details.FWHR_PSR) + '",';//46
-            row += '"' + checkNullValue(Data[i].details.FWFLAGVALUE) + '",';//47
-            row += '"' + checkNullValue(Data[i].details.FWSORTVALUE) + '",';//48           
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWVG) + '",';//44
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWHRP) + '",';//45
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWHR_PSR) + '",';//46
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWFLAGVALUE) + '",';//47
+            row += '"' + checkNullValue(Data[i].PSRFDETAILS[index].FWSORTVALUE) + '",';//48           
             row += '"' + checkNullValue(Data[i].details.received_time) + '",';//49
             row += '"' + checkNullValue(Data[i].INSTANCEID) + '",';//50 
             row += '"' + checkNullValue(Data[i].CASEID) + '",';//51
