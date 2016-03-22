@@ -15,7 +15,7 @@ angular.module('opensrpSiteApp')
         //var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username;  192.168.19.96:5984
         //var apiURLs = "http://192.168.21.18:5984/opensrp/_design/ScheduleLog/_view/testViewForDashboard";
         var hhTestUrl = "http://192.168.21.246:5984/opensrp/_design/HouseHold/_view/all";
-        var couchUrl = "http://192.168.21.18:1337/192.168.21.218:5984/opensrp/_design/ScheduleLog/_view/testViewForDashboard";
+        var couchUrl = "http://192.168.21.86:1337/192.168.21.218:5984/opensrp/_design/ScheduleLog/_view/testViewForDashboard";
         var scheduleData = $http.get(couchUrl, { 
               cache: true, 
               withCredentials: false,
@@ -60,29 +60,54 @@ angular.module('opensrpSiteApp')
             },
             Data: function () {        
                 return schedules;
-            }
-            /*dataFilter: function($scope,data,$filter){
+            },
+            dataFilter: function($scope,data,$filter){
               $scope.search = {};
               $scope.resetFilters = function () {    
                 $scope.search = {};
               };
              
-              $scope.sortType     = 'FWWOMAGE'; // set the default sort type
+              $scope.sortType     = 'value.anmIdentifier'; // set the default sort type
               $scope.sortReverse  = false;
               $scope.currentPage = 1;
               $scope.totalItems = data.length;        
               $scope.entryLimit = 10; // items per page
-              $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
+              //$scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
               
               $scope.$watch('search', function (newVal, oldVal) {              
-                Common.ec_location_tree(newVal,$scope);
+                //Common.ec_location_tree(newVal,$scope);
                 
                 $scope.filtered = $filter('filter')(data,newVal, true); 
                 $scope.totalItems = $scope.filtered.length;          
                 $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
                 $scope.currentPage = 1;
+                console.log(newVal);
+                console.log("items for newVal - " + $scope.totalItems);
               }, true);
             },
+            anmList: function($scope,data){
+              var anms = new Array();
+
+              for(var i =0; i < data.length; i++){
+                if(anms.indexOf(data[i].value.anmIdentifier) == -1){
+                  anms.push(data[i].value.anmIdentifier);
+                }
+              }
+
+              $scope.anms = anms;  
+              console.log("number of anm - " + anms.length);            
+            },
+            testFilterFunc: function($scope,data,$filter){
+              //$scope.testFilter.a = 'p';
+              $scope.testFilter = {};
+             
+              $scope.$watch('testFilter', function (newVal, oldVal) {   
+                console.log("watch added for testFilter");       
+                console.log(data);      
+                console.log(newVal);                              
+                $scope.filtered = $filter('filter')(data,newVal, true); 
+              }, true);
+            }/*,
             download : function($scope,data,title){        
             if ($scope.filtered) {
                 newHhFormExport($scope.filtered, title, true);

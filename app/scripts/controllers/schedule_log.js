@@ -29,5 +29,18 @@ angular.module('opensrpSiteApp')
     /*$scope.totalItems = $scope.schedules.length;
     $scope.currentPage = 1;
     console.log*/
-    ElcoRegisterService.dataFilter($scope,$scope.schedules,$filter);
+
+    $scope.pageChanged = function() {
+      console.log('Page changed to: ' + $scope.currentPage);
+    };
+
+    scheduleLogService.dataFilter($scope,$scope.schedules,$filter);
+    console.log($scope.sortType + " -current sortType");
+
+    $scope.filterTest = [{"a":"p", "b":"q"},{"a":"p", "b":"q"},{"a":"r", "b":"s"},
+                          {"a":"r", "b":"s"},{"a":"p", "b":"s"}];
+
+    scheduleLogService.testFilterFunc($scope,$scope.filterTest,$filter);
+    scheduleLogService.anmList($scope, $scope.schedules);
+
   });
