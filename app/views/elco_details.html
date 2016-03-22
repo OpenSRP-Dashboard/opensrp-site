@@ -121,15 +121,15 @@
                 <div id="{{elcoRegisterEntry.CASEID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">                    
                   <div class="panel-body">
                     <div class="row">
-                      <div ng-show="elcoRegisterEntry.attachments != ''">    
+                      <div ng-show="elcoRegisterEntry.multimediaAttachments != ''">    
 
-                      <div class="col-md-3 col-lg-2 " align="center">Image for {{elcoRegisterEntry.attachments[0].fileCategory}}<img alt="User Pic" ng-attr-src="{{baseURL + elcoRegisterEntry.attachments[0].filePath}}" class="img-circle img-responsive">                      
+                      <div class="col-md-3 col-lg-2 " align="center">Image for {{elcoRegisterEntry.multimediaAttachments[0].fileCategory}}<img alt="User Pic" ng-attr-src="{{baseURL + elcoRegisterEntry.multimediaAttachments[0].filePath}}" class="img-circle img-responsive">                      
                       </div>
                       
-                      <div ng-show="elcoRegisterEntry.attachments.length == 2" class="col-md-3 col-lg-2 " align="center">Image for {{elcoRegisterEntry.attachments[1].fileCategory}}<img alt="User Pic" ng-attr-src="{{baseURL + elcoRegisterEntry.attachments[1].filePath}}" class="img-circle img-responsive">                      
+                      <div ng-show="elcoRegisterEntry.multimediaAttachments.length == 2" class="col-md-3 col-lg-2 " align="center">Image for {{elcoRegisterEntry.multimediaAttachments[1].fileCategory}}<img alt="User Pic" ng-attr-src="{{baseURL + elcoRegisterEntry.multimediaAttachments[1].filePath}}" class="img-circle img-responsive">                      
                       </div>
                       </div>
-
+                      
                       <div class=" col-md-4 col-lg-5 "> 
                         <div><strong> HHID:</strong> {{elcoRegisterEntry.GOBHHID}}</div>
                         <div> <strong>Husband Name:</strong> {{elcoRegisterEntry.FWHUSNAME}}</div>

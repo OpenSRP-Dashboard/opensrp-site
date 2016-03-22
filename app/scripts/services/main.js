@@ -218,8 +218,19 @@ angular.module('opensrpSiteApp')
         toDayPW('todayPW');        
       },
       type:"get"				
-    });			
-   
-  }
-    
+    });			   
+  }  
+
+  this.testFetchFromCouch = function(url){   
+    $.ajax({
+      async:false,       
+      dataType: "json",
+      cache: true,
+      url:url,
+      success:function (data) {
+          console.log("call to " + url + " succeded");
+      },
+      type:"get"        
+    });    
+  }  
 });
