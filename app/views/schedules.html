@@ -9,7 +9,17 @@
         <div show-during-resolve class="loader">   
           <center><img src="images/spinner.gif"  alt="Opensrp"/></center>
         </div>
-                       
+         <div class="row"> <!-- main col left --> 
+          <div class="starter-template3">               
+            <div class="col-md-3">  
+              <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1" >
+                <option ng-click="search.value.anmIdentifier=''" value="">Select ANM </option>
+                <option ng-repeat="anm in anms"  ng-click="search.value.anmIdentifier='{{anm}}'" value="{{anm}}">{{anm}}</option>
+                
+              </select>
+            </div>
+          </div> <!-- main col right -->                           
+        </div><!--/row-->               
         <!-- content accordion  start -->
         <div class="row">
           <div class="col-xs-12 col-lg-12">
@@ -41,8 +51,9 @@
                     </thead><!--//table head-->
                   </table>                        
                 </div>                       
-              </div>                    
-              <div class="panel panel-default" ng-repeat="schedule in schedules | orderBy:sortType:sortReverse | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+              </div>            
+              <div class="panel panel-default" ng-repeat="schedule in schedules | filter:search | orderBy:sortType:sortReverse | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">        
+              <!-- <div class="panel panel-default" ng-repeat="schedule in schedules.slice((currentPage-1)*entryLimit, currentPage*entryLimit ) | orderBy:sortType:sortReverse  | filter:search"> -->
                 <div class="panel-heading2" role="tab" id="headingTwo2">
                   <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion2" href="#{{schedule.id}}" aria-expanded="false" aria-controls="collapseTwo">
                     <thead>
@@ -71,9 +82,22 @@
             </div>
           </div>
         </div>
-                    
+
+        <!-- <div ng-click="testFilter.a = 'p'">
+          oka
+        </div>
+
+        <div ng-repeat="obj in filterTest | filter:testFilter" >
+          <div >a - {{obj.a}} || b - {{obj.b}}</div>
+        </div>
+
+        <div ng-repeat="anm in anms" >
+          <div >{{anm}}</div>
+        </div> -->
+
         <div class="row">
           <div class="col-md-3 col-lg-10 ">
+            <!-- <pagination page="currentPage" boundary-links="true" ng-change="pageChanged()" max-size="7" total-items="totalItems" items-per-page="entryLimit" ng-model="currentPage"></pagination> -->
             <pagination page="currentPage" boundary-links="true" max-size="7" total-items="totalItems" items-per-page="entryLimit"></pagination>
           </div>               
           <div class="col-md-3 col-lg-2 ">
