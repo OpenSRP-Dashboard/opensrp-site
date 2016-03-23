@@ -333,6 +333,24 @@ angular
           }]
         }
       })
+      .when('/schedule-rule/edit/:id', {
+        templateUrl: 'views/schedule_rule_edit.html',
+        controller: 'ScheduleRuleCtrl',
+        controllerAs: 'rule',
+        resolve : {
+          'scheduleRuleServiceData':function(ScheduleRule){ return ScheduleRule.promise;},
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('Add Role')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
+        }
+      })
       .when('/schedule-rule/add', {
         templateUrl: 'views/schedule_rule_add.html',
         controller: 'ScheduleRuleCtrl',

@@ -19,9 +19,8 @@ angular.module('opensrpSiteApp')
               }
             })
             .success(function (data) {                         
-              scheduleRules = data.rows;              
-              console.log(data.rows.length + " - number of schedules received.");
-              console.log(scheduleRules);
+              scheduleRules = data.rows;             
+              
         }); 
         
         return {

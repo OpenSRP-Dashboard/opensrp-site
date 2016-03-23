@@ -17,24 +17,25 @@
                       <table>
                         <thead> <!--table head-->
                           <tr style="background:none">
-                            <th style="width:205px; font-size:12px;">
+                            <th style="width:30%; font-size:12px;">
                               <a href="/#/schedule-rule" ng-click="sortType = 'name'; sortReverse = !sortReverse">Schedule Name
                                 <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
                                 <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
                               </a>                        
                             </th>                                       
-                            <th style="width:101px;">
+                            <th style="width:30%;">
                               <a href="/#/schedule-rule" ng-click="sortType = 'createdBy'; sortReverse = !sortReverse">Created By
                                 <span ng-show="sortType == 'createdBy' && !sortReverse" class="fa fa-caret-down"></span>
                                 <span ng-show="sortType == 'createdBy' && sortReverse" class="fa fa-caret-up"></span>
                               </a>
                             </th>
-                            <th style="width:150px;">
+                            <th style="width:30%;">
                               <a href="/#/schedule-rule" ng-click="sortType = 'createdDate'; sortReverse = !sortReverse">Created Date
                                 <span ng-show="sortType == 'createdDate' && !sortReverse" class="fa fa-caret-down"></span>
                                 <span ng-show="sortType == 'createdDate' && sortReverse" class="fa fa-caret-up"></span>
                               </a>    
-                            </th>                                                  
+                            </th>
+                            <th style="width:10%;"></th>
                           </tr>
                         </thead><!--//table head-->
                       </table>                        
@@ -45,9 +46,10 @@
                   <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion2" href="#{{scheduleRule.id}}" aria-expanded="false" aria-controls="collapseTwo">
                     <thead>
                       <tr>                        
-                        <th style="width:100px;">{{scheduleRule.key.name}}</th>                                        
-                        <th style="width:100px;">{{scheduleRule.key.createdBy}}</th>
-                        <th style="width:100px;">{{scheduleRule.key.createdDate}}</th>                     
+                        <th style="width:30%">{{scheduleRule.key.name}}</th>                                        
+                        <th style="width:30%;">{{scheduleRule.key.createdBy}}</th>
+                        <th style="width:30%;">{{scheduleRule.key.createdDate}}</th>
+                        <th style="width:10%;"><a href="/#/schedule-rule/edit/{{scheduleRule.id}}">Edit</a></th>
                       </tr>
                     </thead>
                   </table><!--//table body-->
@@ -55,8 +57,10 @@
                     <div id="{{scheduleRule.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">                    
                       <div class="panel-body">
                         <div class="row">                          
-                          <div class=" col-md-4 col-lg-8 ">                            
-                            <div  ng-repeat="rule in scheduleRule.key.rule">                              
+                          <div class=" col-md-4 col-lg-8 ">
+                            <h2><a href="/#/schedule-rule/edit/{{scheduleRule.id}}">Edit</a></h2>
+                            <div  ng-repeat="rule in scheduleRule.key.rule">
+                              
                               <div class="col-md-6">
                                   <b>Start Form Name:</b> {{rule.startFormName}}
                                   <br />
