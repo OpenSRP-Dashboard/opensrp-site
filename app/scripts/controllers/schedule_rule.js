@@ -14,7 +14,7 @@ angular.module('opensrpSiteApp')
       'AngularJS',
       'Karma'
     ];
-    
+    var c = 1;
     $scope.can = AclService.can;
     $scope.data = ScheduleRule.Data();
     ElcoRegisterService.dataFilter($scope,$scope.data,$filter);
