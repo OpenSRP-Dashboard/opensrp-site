@@ -42,8 +42,10 @@ angular.module('opensrpSiteApp')
                   }
                 })
                 .success(function (data) {                         
-                  $rootScope.rules = data.rows;
-                  $rootScope.name= data.rows.value.name;
+                  $rootScope.rules = data.rows[0].value;
+                  console.log(data.rows[0].value.rule)
+                  $rootScope.name= data.rows[0].value.name;
+                  console.log($rootScope.name);
                   console.log($rootScope.rules)
                   $rootScope.loading = false;               
                   
