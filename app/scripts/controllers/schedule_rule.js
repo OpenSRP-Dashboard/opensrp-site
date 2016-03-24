@@ -8,7 +8,7 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('ScheduleRuleCtrl', function ($scope,$rootScope,$window,$timeout,$routeParams,$http,AclService,ScheduleRule,Flash,ElcoRegisterService,$filter) {
+  .controller('ScheduleRuleCtrl', function ($scope,$rootScope,$window,$location,$timeout,$routeParams,$http,AclService,ScheduleRule,Flash,ElcoRegisterService,$filter) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -16,14 +16,14 @@ angular.module('opensrpSiteApp')
     ];
     var c = 1;
     var id = $routeParams.id;    
-    $scope.can = AclService.can;
-    
+    $scope.can = AclService.can;     
     if (id) {
-      console.log(333333333)
-    }else{
-       console.log(333333333000000000)
-      $scope.data = ScheduleRule.Data();
-      ElcoRegisterService.dataFilter($scope,$scope.data,$filter);
+      console.log(id);
+     $rootScope.loading = true;
+      ScheduleRule.scheduleRuleById($scope,$rootScope,$timeout,id);
+      
+      
+    }else if($location.path() =='/schedule-rule/add'){
       $scope.save = function() {
         var formData = document.forms.rule_def;
         var numOfRule = $('.clonedInput').length;
@@ -49,7 +49,10 @@ angular.module('opensrpSiteApp')
         var scheduleRule = {name:$scope.name,rule:rules,createdBy:$rootScope.username,createdDate:new Date()}
         console.log(scheduleRule);
         ScheduleRule.save(scheduleRule,$window,Flash);
-      };
-    
+      };    
+    }else{
+      console.log(2222222222222222222222222)
+      $scope.data = ScheduleRule.Data();     
+      ElcoRegisterService.dataFilter($scope,$scope.data,$filter);
     }
   });
