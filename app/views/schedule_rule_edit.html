@@ -1,1 +1,45 @@
-<p>This is the Schedule_Rule_edit view.</p>
+<data-ng-include src="'views/partials/header.html'"></data-ng-include>
+<script type="text/javascript" src="assets/js/clone-form-td.js"></script>
+<div show-during-resolve class="loader">   
+  <center><img src="images/spinner.gif"  alt="Opensrp"/></center>
+</div>
+<section>
+    <div class="container">
+        <div class="row">
+            <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include>
+            <div class="row"> <!-- main col left --> 
+              <div class="col-sm-2 col-md-2"></div>
+              <div class="col-sm-9 col-md-9">
+                <div id="top" class="login-container">
+                  <h2 class="form-signin-heading">Add Schedule Rule</h2>
+                  <p class="lead"></p>
+                   <form id="rule_def" ng-submit="save()">
+                    <label>Schedule Rule Name:</label><input ng-model="name" type="text">			
+                      <div ng-repeat="rule in rules">
+                        <div id="rule">
+                          <div id="rule1" class="clonedInput">
+                            <h3 id="reference" name="reference" class="heading-reference">Rule #1</h3>
+                            <label>Start Form Name</label>
+                            <input type="text" name="startFormName1[]" />
+                            <label>End Form Name</label>
+                            <input type="text" name="endFormName1[]" />
+                            <p>Defination</p>
+                            <div id="defination_space_1">                     
+                            </div>
+                           <div style="clear:both;padding-top:25px;"></div>				
+                          <input type="button" class="btnRule" id="btnRule_1" value="add defination">
+                          </div><!-- end #entry1 -->
+                        </div>
+                    </div>
+                  <div id="addDelButtons">
+                      <input type="button" id="btnAdd" value="add Rule">
+                  </div>
+                  <div id="message"></div>
+                  <button id="submit"  class="btn btn-lg btn-primary btn-block"  type="submit"> Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>            
+        </div>
+    </div>    
+</section>

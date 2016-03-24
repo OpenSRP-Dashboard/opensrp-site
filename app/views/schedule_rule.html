@@ -17,55 +17,68 @@
                       <table>
                         <thead> <!--table head-->
                           <tr style="background:none">
-                            <th style="width:205px; font-size:12px;">
-                              <a href="/#/elcos" ng-click="sortType = 'FWWOMFNAME'; sortReverse = !sortReverse">MWRA Name
-                                <span ng-show="sortType == 'FWWOMFNAME' && !sortReverse" class="fa fa-caret-down"></span>
-                                <span ng-show="sortType == 'FWWOMFNAME' && sortReverse" class="fa fa-caret-up"></span>
+                            <th style="width:30%; font-size:12px;">
+                              <a href="/#/schedule-rule" ng-click="sortType = 'name'; sortReverse = !sortReverse">Schedule Name
+                                <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
                               </a>                        
                             </th>                                       
-                            <th style="width:101px;">
-                              <a href="/#/elcos" ng-click="sortType = 'FWWOMAGE'; sortReverse = !sortReverse">Age
-                                <span ng-show="sortType == 'FWWOMAGE' && !sortReverse" class="fa fa-caret-down"></span>
-                                <span ng-show="sortType == 'FWWOMAGE' && sortReverse" class="fa fa-caret-up"></span>
+                            <th style="width:30%;">
+                              <a href="/#/schedule-rule" ng-click="sortType = 'createdBy'; sortReverse = !sortReverse">Created By
+                                <span ng-show="sortType == 'createdBy' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'createdBy' && sortReverse" class="fa fa-caret-up"></span>
                               </a>
                             </th>
-                            <th style="width:150px;">
-                              <a href="/#/elcos" ng-click="sortType = 'FWHUSNAME'; sortReverse = !sortReverse">Husband Name
-                                <span ng-show="sortType == 'FWHUSNAME' && !sortReverse" class="fa fa-caret-down"></span>
-                                <span ng-show="sortType == 'FWHUSNAME' && sortReverse" class="fa fa-caret-up"></span>
+                            <th style="width:30%;">
+                              <a href="/#/schedule-rule" ng-click="sortType = 'createdDate'; sortReverse = !sortReverse">Created Date
+                                <span ng-show="sortType == 'createdDate' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'createdDate' && sortReverse" class="fa fa-caret-up"></span>
                               </a>    
-                            </th>                                                  
+                            </th>
+                            <th style="width:10%;"></th>
                           </tr>
                         </thead><!--//table head-->
                       </table>                        
                     </div>                       
                   </div>                    
-                  <div class="panel panel-default" ng-repeat="elcoRegisterEntry in data | filter:search | orderBy:sortType:sortReverse | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                  <div class="panel panel-default" ng-repeat="scheduleRule in data | filter:search | orderBy:sortType:sortReverse | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
                   <div class="panel-heading2" role="tab" id="headingTwo2">
-                  <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion2" href="#{{elcoRegisterEntry.CASEID}}" aria-expanded="false" aria-controls="collapseTwo">
+                  <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion2" href="#{{scheduleRule.id}}" aria-expanded="false" aria-controls="collapseTwo">
                     <thead>
-                      <tr>
-                        <th style="width:48px;">                                           
-                          <div class="btn-group-md"> <img src="images/photo.png" alt=""></div>                                           
-                        </th>  
-                        <th style="width:100px;">{{elcoRegisterEntry.FWWOMFNAME}}</th>                                        
-                        <th style="width:100px;">{{elcoRegisterEntry.FWWOMAGE}}</th>
-                        <th style="width:100px;">{{elcoRegisterEntry.FWHUSNAME}}</th>                     
+                      <tr>                        
+                        <th style="width:30%">{{scheduleRule.key.name}}</th>                                        
+                        <th style="width:30%;">{{scheduleRule.key.createdBy}}</th>
+                        <th style="width:30%;">{{scheduleRule.key.createdDate}}</th>
+                        <th style="width:10%;"><a href="/#/schedule-rule/edit/{{scheduleRule.id}}">Edit</a></th>
                       </tr>
                     </thead>
                   </table><!--//table body-->
                   </div>
-                    <div id="{{elcoRegisterEntry.CASEID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">                    
+                    <div id="{{scheduleRule.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">                    
                       <div class="panel-body">
-                        <div class="row">
-                          <div class="col-md-3 col-lg-3 " align="center">{{elcoRegisterEntry.FWWOMFNAME}}<img alt="User Pic" src="images/photo2.png" class="img-circle img-responsive"> </div>
-                          <div class=" col-md-4 col-lg-8 "> 
-                            <div><strong> HHID:</strong> {{elcoRegisterEntry.GOBHHID}}</div>
-                            <div> <strong>Husband Name:</strong> {{elcoRegisterEntry.FWHUSNAME}}</div>
-                            <div> <strong>DOB: </strong>{{elcoRegisterEntry.FWBIRTHDATE}}</div>              
-                            <div><strong>Age:</strong> {{elcoRegisterEntry.FWWOMAGE}}</div>
-                            <div><strong>NID:</strong> {{elcoRegisterEntry.FWWOMNID}}</div>
-                            <div><strong>BRID:</strong> {{elcoRegisterEntry.FWWOMBID}}</div>
+                        <div class="row">                          
+                          <div class=" col-md-4 col-lg-8 ">
+                            <h2><a href="/#/schedule-rule/edit/{{scheduleRule.id}}">Edit</a></h2>
+                            <div  ng-repeat="rule in scheduleRule.key.rule">
+                              
+                              <div class="col-md-6">
+                                  <b>Start Form Name:</b> {{rule.startFormName}}
+                                  <br />
+                                  <b>End Form Name:</b> {{rule.endFormName}}
+                              </div>
+                              <div class=" col-md-6">
+                                [
+                                <div ng-repeat="defination in rule.defination"> 
+                                <div class="rule">
+                                {<br /><b> Name: </b>{{defination.name}}<br />
+                                  <b>Value:</b> {{defination.value}}<br/>
+                                }
+                                </div>
+                                </div>
+                                ]
+                              </div>
+                              <div style="clear: both"</div>
+                            </div>                              
                           </div>
                         </div>
                       </div>                     
