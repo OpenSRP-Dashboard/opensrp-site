@@ -105,8 +105,11 @@
                   <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion2" href="#{{elcoRegisterEntry.CASEID}}" aria-expanded="false" aria-controls="collapseTwo">
                     <thead>
                       <tr>
-                        <th style="width:48px;">                                           
-                          <div class="btn-group-md">
+                        <th style="width:48px;">
+                          <div class="btn-group-md" ng-show="elcoRegisterEntry.multimediaAttachments != ''" class="btn-group-md">
+                          <img width="55" height="55" alt="User Pic" ng-attr-src="{{baseURL + elcoRegisterEntry.multimediaAttachments[0].filePath}}">
+                          </div>                                           
+                          <div ng-show="elcoRegisterEntry.multimediaAttachments == ''" class="btn-group-md">
                             <img src="images/photo.png" alt="">
                           </div>                                           
                         </th>  
@@ -123,10 +126,10 @@
                     <div class="row">
                       <div ng-show="elcoRegisterEntry.multimediaAttachments != ''">    
 
-                      <div class="col-md-3 col-lg-2 " align="center">Image for {{elcoRegisterEntry.multimediaAttachments[0].fileCategory}}<img alt="User Pic" ng-attr-src="{{baseURL + elcoRegisterEntry.multimediaAttachments[0].filePath}}" class="img-circle img-responsive">                      
+                      <div class="col-md-3 col-lg-2 " align="center">Image for DP<img alt="User Pic" ng-attr-src="{{baseURL + elcoRegisterEntry.multimediaAttachments[0].filePath}}" class="img-responsive">                      
                       </div>
                       
-                      <div ng-show="elcoRegisterEntry.multimediaAttachments.length == 2" class="col-md-3 col-lg-2 " align="center">Image for {{elcoRegisterEntry.multimediaAttachments[1].fileCategory}}<img alt="User Pic" ng-attr-src="{{baseURL + elcoRegisterEntry.multimediaAttachments[1].filePath}}" class="img-circle img-responsive">                      
+                      <div ng-show="elcoRegisterEntry.multimediaAttachments.length == 2" class="col-md-3 col-lg-2" align="center">Image for NID<img alt="User Pic" ng-attr-src="{{baseURL + elcoRegisterEntry.multimediaAttachments[1].filePath}}" class="img-responsive">                      
                       </div>
                       </div>
                       

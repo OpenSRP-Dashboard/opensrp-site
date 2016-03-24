@@ -95,9 +95,25 @@ angular.module('opensrpSiteApp')
   
   function toDayHH(today,ngBind){
     var date = new Date();
-    var currentDay = moment(date).format('YYYY-MM-DD');    
+    var currentDay = moment(date).format('YYYY-MM-DD'); 
+    //var currentDay = moment(date).format('YYYY-MM-DD hh:mm:ss');    
+    //console.log("date after formatting - " + currentDay);   
+    
+    /*var start = new Date();
+    start.setHours(0,0,0,0);
+    start = moment(start).format('YYYY-MM-DD HH:mm:ss');
+
+    var end = new Date();
+    end.setHours(23,59,59,999);
+    end = moment(end).format('YYYY-MM-DD HH:mm:ss');
+    console.log(start + " -->> " + end);*/
+
     var queryResult= jsonsql.query("select * from getHHData where ("+today+" =='"+currentDay+"') ",  getHHData);    
     $("#"+ngBind).html(queryResult.length );  
+
+    /*var queryResult1= jsonsql.query("select * from getHHData where (details.received_time >= '"+ start +"' && details.received_time <='" + end + "') ",  getHHData);
+    console.log("hi - " + queryResult1.length);*/
+
   }
 
   function toDayEC(today, ngBind){
@@ -172,7 +188,7 @@ angular.module('opensrpSiteApp')
       dataType: "json",
       cache: true,
       beforeSend: function (xhr) {
-          xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
+        xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
       },
       url:url,
         success:function (data) {

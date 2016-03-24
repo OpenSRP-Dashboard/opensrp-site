@@ -8,7 +8,7 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('PwdetailsCtrl', function ($scope,$http,ElcoRegisterService,page,AclService,Common,$filter) {
+  .controller('PwdetailsCtrl', function ($scope,$http,ElcoRegisterService,page,AclService,Common,$filter,OPENSRP_WEB_BASE_URL) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -25,4 +25,5 @@ angular.module('opensrpSiteApp')
     window.getData = JSON.parse(JSON.stringify(ElcoRegisterService.Data()));       
     $scope.data= jsonsql.query("select * from getData where (details.FWPSRPREGSTS == 1 ) ",getData);
     ElcoRegisterService.dataFilter($scope,$scope.data,$filter);
+    $scope.baseURL = OPENSRP_WEB_BASE_URL;
   });

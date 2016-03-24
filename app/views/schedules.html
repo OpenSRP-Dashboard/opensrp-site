@@ -10,14 +10,25 @@
           <center><img src="images/spinner.gif"  alt="Opensrp"/></center>
         </div>
          <div class="row"> <!-- main col left --> 
-          <div class="starter-template3">               
+          <div class="starter-template3">   
+          <div class="row">            
             <div class="col-md-3">  
               <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1" >
                 <option ng-click="search.value.anmIdentifier=''" value="">Select ANM </option>
-                <option ng-repeat="anm in anms"  ng-click="search.value.anmIdentifier='{{anm}}'" value="{{anm}}">{{anm}}</option>
-                
+                <option ng-repeat="anm in anms"  ng-click="search.value.anmIdentifier='{{anm}}'" value="{{anm}}">{{anm}}</option>                
               </select>
             </div>
+            <div class="col-md-3">  
+              <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1" >
+                <option ng-click="search.value.currentWindow=''" value="">Select Window </option>
+                <option ng-repeat="currentWindow in currentWindows"  ng-click="search.value.currentWindow='{{currentWindow}}'" value="{{currentWindow}}">{{currentWindow}}</option>
+              </select>
+            </div>
+            </div>
+            <div class="row">
+              <input class="form-control" type="daterange" ng-model="dateRange" min-date="2014-02-23">   
+            </div> 
+            <div>{{dateRange | json}}</div>        
           </div> <!-- main col right -->                           
         </div><!--/row-->               
         <!-- content accordion  start -->
@@ -52,15 +63,16 @@
                   </table>                        
                 </div>                       
               </div>            
-              <div class="panel panel-default" ng-repeat="schedule in schedules | filter:search | orderBy:sortType:sortReverse | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">        
+              <!-- filter: dateRangeFilter('scheduleGenerateDate', startDate, endDate)" |  -->
+              <div class="panel panel-default" ng-repeat="schedule in schedules | filter:search | filter: dateRangeFilter(dateRange.startDate, dateRange.endDate) | orderBy:sortType:sortReverse | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">        
               <!-- <div class="panel panel-default" ng-repeat="schedule in schedules.slice((currentPage-1)*entryLimit, currentPage*entryLimit ) | orderBy:sortType:sortReverse  | filter:search"> -->
                 <div class="panel-heading2" role="tab" id="headingTwo2">
                   <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion2" href="#{{schedule.id}}" aria-expanded="false" aria-controls="collapseTwo">
                     <thead>
                       <tr>  
-                        <th style="width:75px;">{{schedule.id}}</th>                                     
-                        <th style="width:75px;">{{schedule.value.anmIdentifier}}</th>
-                        <th style="width:75px;">{{schedule.value.scheduleName}}</th>
+                        <th class="col-lg-2">{{schedule.id}}</th>                 
+                        <th class="col-lg-2">{{schedule.value.anmIdentifier}}</th>
+                        <th class="col-lg-3" style="text-align:center">{{schedule.value.scheduleName}} + {{schedule.value.scheduleGenerateDate}}</th>
                         
                       </tr>
                     </thead>
@@ -74,6 +86,7 @@
                           <div> <strong>Schedule Type</strong> {{schedule.value.type}}</div>
                           <div> <strong>ANM</strong> {{schedule.value.anmIdentifier}}</div>             
                           <div><strong>Schedule Name</strong> {{schedule.value.scheduleName}}</div>
+                          <div><strong>Schedule generation date</strong> {{schedule.value.scheduleGenerateDate}}</div>                          
                         </div>
                     </div>
                   </div>                     
