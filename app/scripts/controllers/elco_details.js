@@ -8,7 +8,7 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('ElcoCtrl', function ($scope,$rootScope,$http,ElcoRegisterService,page,AclService,$filter,Common) {    
+  .controller('ElcoCtrl', function ($scope,$rootScope,$http,ElcoRegisterService,page,AclService,$filter,Common,OPENSRP_WEB_BASE_URL) {    
     console.log("inside ElcoCtrl");
     $scope.numberPattern = /^\d*$/;
     $scope.data = ElcoRegisterService.Data();
@@ -25,6 +25,6 @@ angular.module('opensrpSiteApp')
     window.getData = JSON.parse(JSON.stringify(ElcoRegisterService.Data()));        
     $scope.data= jsonsql.query("select * from getData where (FWWOMAGE != 'NaN' && FWELIGIBLE == 1 ) ",getData);
     ElcoRegisterService.dataFilter($scope,$scope.data,$filter);
-    $scope.baseURL = "http://192.168.21.86:1337/192.168.21.218:9979";
+    $scope.baseURL = OPENSRP_WEB_BASE_URL;
     
   });

@@ -84,17 +84,27 @@ angular.module('opensrpSiteApp')
                 console.log(newVal);
                 console.log("items for newVal - " + $scope.totalItems);
               }, true);
+              /*$scope.$watch('dateRange', function (newVal, oldVal) {              
+                //Common.ec_location_tree(newVal,$scope);
+                //
+                console.log("inside dateRange watch");
+              }, true);*/
             },
             anmList: function($scope,data){
               var anms = new Array();
+              var currentWindows = new Array();
 
               for(var i =0; i < data.length; i++){
                 if(anms.indexOf(data[i].value.anmIdentifier) == -1){
                   anms.push(data[i].value.anmIdentifier);
                 }
+                if(currentWindows.indexOf(data[i].value.currentWindow) == -1){
+                  currentWindows.push(data[i].value.currentWindow);
+                }
               }
 
               $scope.anms = anms;  
+              $scope.currentWindows = currentWindows;
               console.log("number of anm - " + anms.length);            
             },
             testFilterFunc: function($scope,data,$filter){

@@ -117,9 +117,15 @@
                     <thead>
                       <tr>
                         <th style="width:150px;">                                           
-                        <div class="btn-group-md">
+                        <!-- <div class="btn-group-md">
                           <img src="images/photo.png" alt=""> &nbsp; &nbsp;&nbsp;{{hhRegisterEntry.FWGOBHHID}}/{{hhRegisterEntry.FWJIVHHID}}
-                        </div>              
+                        </div> -->              
+                        <div class="btn-group-md" ng-show="hhRegisterEntry.multimediaAttachments != ''" class="btn-group-md">
+                        <img width="55" height="55" alt="User Pic" ng-attr-src="{{baseURL + hhRegisterEntry.multimediaAttachments[0].filePath}}">
+                        </div>                                           
+                        <div ng-show="hhRegisterEntry.multimediaAttachments == ''" class="btn-group-md">
+                          <img src="images/photo.png" alt="">
+                        </div>
                         </th>                                       
                         <th style="width:100px;">{{hhRegisterEntry.FWHOHFNAME}}</th>
                         <th style="width:100px;">{{hhRegisterEntry.ELCO}}</th>
@@ -132,9 +138,14 @@
                 <div id="{{hhRegisterEntry.CASEID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">                    
                   <div class="panel-body">
                     <div class="row">
-                      <div class="col-md-2 col-lg-2 " align="center">
+                      <!-- <div class="col-md-2 col-lg-2 " align="center">
                         <span>{{hhRegisterEntry.FWGOBHHID}} / {{hhRegisterEntry.FWJIVHHID}}</span>
                         <img alt="User Pic" src="images/photo2.png" class="img-circle img-responsive">
+                      </div> -->
+                      <div ng-show="hhRegisterEntry.multimediaAttachments != ''">    
+
+                      <div class="col-md-3 col-lg-2 " align="center">Image for DP<img alt="User Pic" ng-attr-src="{{baseURL + hhRegisterEntry.multimediaAttachments[0].filePath}}" class="img-responsive">                      
+                      </div>
                       </div>
                       <div class=" col-md-4 col-lg-8 ">                                           
                         <div>
@@ -154,7 +165,7 @@
                       </div>                                    
                     </div>
                     <div class="row">                                   
-                      <div class="panel panel-default" ng-repeat="elco in hhRegisterEntry.ELCODETAILS">
+                      <div class="panel panel-default" ng-repeat="elco in hhRegisterEntry.ELCODETAILS | filter:{FWWOMFNAME : ''}">
                         <div class="panel-heading2" role="tab" id="headingTwo3">
                           <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion3" href="#{{elco.id}}" aria-expanded="false" aria-controls="collapseThree">
                             <thead ng-if="$first">

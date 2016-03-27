@@ -43,4 +43,43 @@ angular.module('opensrpSiteApp')
     scheduleLogService.testFilterFunc($scope,$scope.filterTest,$filter);
     scheduleLogService.anmList($scope, $scope.schedules);
 
+    var x = new Date($scope.schedules[0].value.scheduleGenerateDate);
+    var y = moment(x).format('YYYY-MM-DD'); 
+    console.log("scheduleGenerateDate before formatting - " + x + " -after formatting- " + y);
+    //console.log("received format " + $scope.schedules[0].value.scheduleGenerateDate);
+    $scope.startDate = new Date('March 23, 2016');    
+    $scope.endDate = new Date('March 24, 2016');
+
+    $scope.dateRange = {
+      startDate: moment($scope.startDate).format('YYYY-MM-DD'),
+      endDate: moment($scope.endDate).format('YYYY-MM-DD')
+    };
+    //dateRange.startDate = moment($scope.startDate).format('YYYY-MM-DD'); 
+    //dateRange.endDate = moment($scope.endDate).format('YYYY-MM-DD'); 
+    //startDate, endDate
+
+    $scope.dateRangeFilter = function (startDate, endDate) {
+      return function (item) {
+          if (item.value.scheduleGenerateDate === null) return false;
+   
+          /*var itemDate = moment(item.value.scheduleGenerateDate).format('YYYY-MM-DD');
+          var s = moment(startDate).format('YYYY-MM-DD'); 
+          var e = moment(endDate).format('YYYY-MM-DD'); 
+          console.log("datefilter - " + itemDate);
+          if (itemDate >= s && itemDate <= e) return true;
+          return false;*/
+          var itemDate = moment(item.value.scheduleGenerateDate).format('YYYY-MM-DD');
+          var s = moment(startDate).format('YYYY-MM-DD'); 
+          var e = moment(endDate).format('YYYY-MM-DD'); 
+          //console.log("datefilter - " + itemDate);
+          if (itemDate >= s && itemDate <= e) //return true;{
+          {
+            return true;
+          }
+          console.log("is it triggerd? :/");
+          //$scope.totalItems--;
+          //$scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
+          return false;
+      }
+    }
   });
