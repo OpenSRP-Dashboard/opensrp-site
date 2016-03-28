@@ -8,9 +8,9 @@
  * Service in the opensrpSiteApp.
  */
 angular.module('opensrpSiteApp')
-  .service('ScheduleRule', function ($http,$rootScope,Base64,OPENSRP_WEB_BASE_URL) {   
+  .service('ScheduleRule', function ($http,$rootScope,Base64,OPENSRP_WEB_BASE_URL,COUCHURL) {   
         var scheduleRules = null;
-        var couchUrl = "http://192.168.21.246:1234/192.168.21.246:5984/schedule/_design/ScheduleRules/_view/all_rule";
+        var couchUrl = COUCHURL+"/schedule/_design/ScheduleRules/_view/all_rule";
         
         
         return {
@@ -32,7 +32,7 @@ angular.module('opensrpSiteApp')
                 return scheduleRules;
             },
             scheduleRuleById: function($scope,$rootScope,$timeout,id){
-              var url = 'http://192.168.21.246:1234/192.168.21.246:5984/schedule/_design/ScheduleRules/_view/by_Id?key="' + id + '"';              
+              var url = COUCHURL+'/schedule/_design/ScheduleRules/_view/by_Id?key="' + id + '"';              
               $timeout(function () {
                 var scheduleRuleData = $http.get(url, { 
                   cache: true, 
@@ -59,14 +59,14 @@ angular.module('opensrpSiteApp')
               $("#submit").html("Submit");
               $('#submit').prop('disabled', false);
               if (data == 1) {            
-                var message = '<strong>Successfully created a schedule rule. </strong> ';
+                var message = '<strong>Successfully you have created a schedule rule. </strong> ';
                 Flash.create('success', message, 'custom-class');
                 $window.location = '/#/schedule-rule';
               }else if (data == 2) {
-                $("#message").html("<p class='lead'>This schedule rule already exists</p>");
+                $("#message").html("<p class='lead'>Sorry this is already exists.</p>");
                 $( "#message" ).delay(3000).fadeOut( "slow" );
               }else{
-                 $("#message").html("<p class='lead'>Failed to create schedule rule</p>");
+                 $("#message").html("<p class='lead'>An Error occured.Please try again.</p>");
                 $( "#message" ).delay(3000).fadeOut( "slow" );
               }
               
@@ -80,14 +80,11 @@ angular.module('opensrpSiteApp')
               $("#submit").html("Submit");
               $('#submit').prop('disabled', false);
               if (data == 1) {            
-                var message = '<strong>Successfully created a schedule rule. </strong> ';
+                var message = '<strong>Successfully you have edited this schedule rule. </strong> ';
                 Flash.create('success', message, 'custom-class');
                 $window.location = '/#/schedule-rule';
-              }else if (data == 2) {
-                $("#message").html("<p class='lead'>This schedule rule already exists</p>");
-                $( "#message" ).delay(3000).fadeOut( "slow" );
               }else{
-                 $("#message").html("<p class='lead'>Failed to create schedule rule</p>");
+                 $("#message").html("<p class='lead'>An Error occured.Please try again. </p>");
                 $( "#message" ).delay(3000).fadeOut( "slow" );
               }
               
