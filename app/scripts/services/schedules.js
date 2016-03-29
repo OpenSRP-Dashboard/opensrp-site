@@ -29,30 +29,7 @@ angular.module('opensrpSiteApp')
               //window.geScheduleData = data.rows;
               console.log(data.rows.length + " - number of schedules received.");
               //return data.rows;
-        }); 
-        // this ajax call below works
-        /*$.ajax({
-            async:false,       
-            dataType: "json",
-            url:hhTestUrl,
-            //username:"sohel",
-            //password:"Sohel@123",
-            success:function (data) {
-               //console.log(data.rows[0].value.actionType);
-               console.log("data on success - " + data.total_rows);
-               //console.log(typeof data);
-               //schedules = data.rows;
-            },
-            error: function(a,b,c){
-               console.log("jqXHR on error - " + a);
-               console.log("textStatus on error - " + b);
-               console.log("errorThrown on error - " + c);
-            },
-            complete:function(){
-              console.log("call completed from scheduleLog service.");
-            },
-            type:"get"        
-        });*/
+        });
         return {
             promise: scheduleData,
             setData: function (data) {
@@ -60,35 +37,33 @@ angular.module('opensrpSiteApp')
             },
             Data: function () {        
                 return schedules;
-            },
-            dataFilter: function($scope,data,$filter){
+            },            
+            dataFilter: function($scope){
               $scope.search = {};
-              $scope.resetFilters = function () {    
-                $scope.search = {};
-              };
-             
+
+              var callIndex = 0;
+
               $scope.sortType     = 'value.anmIdentifier'; // set the default sort type
               $scope.sortReverse  = false;
               $scope.currentPage = 1;
-              $scope.totalItems = data.length;        
+              $scope.totalItems = $scope.schedules.length;        
               $scope.entryLimit = 10; // items per page
-              //$scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
               
               $scope.$watch('search', function (newVal, oldVal) {              
-                //Common.ec_location_tree(newVal,$scope);
-                
-                $scope.filtered = $filter('filter')(data,newVal, true); 
-                $scope.totalItems = $scope.filtered.length;          
-                $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
-                $scope.currentPage = 1;
-                console.log(newVal);
-                console.log("items for newVal - " + $scope.totalItems);
+                console.log("inside search watch");
+                $scope.combinedFilter();
               }, true);
-              /*$scope.$watch('dateRange', function (newVal, oldVal) {              
-                //Common.ec_location_tree(newVal,$scope);
-                //
+              $scope.$watch('dateRange', function (newVal, oldVal) {           
                 console.log("inside dateRange watch");
-              }, true);*/
+
+                if(callIndex == 1){
+                  $scope.combinedFilter();
+                }
+                if(callIndex == 0){
+                  callIndex = 1;
+                  console.log("calling finalFilter for the first time blocked.");                                      
+                }                
+              }, true);
             },
             anmList: function($scope,data){
               var anms = new Array();
@@ -105,26 +80,8 @@ angular.module('opensrpSiteApp')
 
               $scope.anms = anms;  
               $scope.currentWindows = currentWindows;
-              console.log("number of anm - " + anms.length);            
-            },
-            testFilterFunc: function($scope,data,$filter){
-              //$scope.testFilter.a = 'p';
-              $scope.testFilter = {};
-             
-              $scope.$watch('testFilter', function (newVal, oldVal) {   
-                console.log("watch added for testFilter");       
-                console.log(data);      
-                console.log(newVal);                              
-                $scope.filtered = $filter('filter')(data,newVal, true); 
-              }, true);
-            }/*,
-            download : function($scope,data,title){        
-            if ($scope.filtered) {
-                newHhFormExport($scope.filtered, title, true);
-            }else{
-                newHhFormExport(data, title, true);
+              //console.log("number of anm - " + anms.length);            
             }
-          };*/
         };
    
     // AngularJS will instantiate a singleton by calling "new" on this function

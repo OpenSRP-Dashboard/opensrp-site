@@ -8,7 +8,7 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('ScheduleLogCtrl', function ($scope,$http,$rootScope,$timeout,scheduleLogService,page,EC,Common,AclService, $filter, ElcoRegisterService) {
+  .controller('ScheduleLogCtrl', function ($scope,$http,$rootScope,$timeout,scheduleLogService,page,EC,Common,AclService, $filter) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -34,52 +34,48 @@ angular.module('opensrpSiteApp')
       console.log('Page changed to: ' + $scope.currentPage);
     };
 
-    scheduleLogService.dataFilter($scope,$scope.schedules,$filter);
+    scheduleLogService.dataFilter($scope);
     console.log($scope.sortType + " -current sortType");
 
-    $scope.filterTest = [{"a":"p", "b":"q"},{"a":"p", "b":"q"},{"a":"r", "b":"s"},
-                          {"a":"r", "b":"s"},{"a":"p", "b":"s"}];
-
-    scheduleLogService.testFilterFunc($scope,$scope.filterTest,$filter);
     scheduleLogService.anmList($scope, $scope.schedules);
 
     var x = new Date($scope.schedules[0].value.scheduleGenerateDate);
     var y = moment(x).format('YYYY-MM-DD'); 
-    console.log("scheduleGenerateDate before formatting - " + x + " -after formatting- " + y);
-    //console.log("received format " + $scope.schedules[0].value.scheduleGenerateDate);
-    $scope.startDate = new Date('March 23, 2016');    
-    $scope.endDate = new Date('March 24, 2016');
 
     $scope.dateRange = {
-      startDate: moment($scope.startDate).format('YYYY-MM-DD'),
-      endDate: moment($scope.endDate).format('YYYY-MM-DD')
+      startDate: moment(new Date('March 1, 2016')).format('YYYY-MM-DD'),
+      endDate: moment(new Date()).format('YYYY-MM-DD')
     };
-    //dateRange.startDate = moment($scope.startDate).format('YYYY-MM-DD'); 
-    //dateRange.endDate = moment($scope.endDate).format('YYYY-MM-DD'); 
-    //startDate, endDate
 
-    $scope.dateRangeFilter = function (startDate, endDate) {
-      return function (item) {
-          if (item.value.scheduleGenerateDate === null) return false;
-   
-          /*var itemDate = moment(item.value.scheduleGenerateDate).format('YYYY-MM-DD');
-          var s = moment(startDate).format('YYYY-MM-DD'); 
-          var e = moment(endDate).format('YYYY-MM-DD'); 
-          console.log("datefilter - " + itemDate);
-          if (itemDate >= s && itemDate <= e) return true;
-          return false;*/
-          var itemDate = moment(item.value.scheduleGenerateDate).format('YYYY-MM-DD');
-          var s = moment(startDate).format('YYYY-MM-DD'); 
-          var e = moment(endDate).format('YYYY-MM-DD'); 
-          //console.log("datefilter - " + itemDate);
-          if (itemDate >= s && itemDate <= e) //return true;{
-          {
-            return true;
-          }
-          console.log("is it triggerd? :/");
-          //$scope.totalItems--;
-          //$scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
-          return false;
+    $scope.combinedFilter = function(){
+      console.log("inside combinedFilter.");
+      
+      $scope.filtered = $filter('filter')($scope.schedules,$scope.search, true);   
+      console.log("number of items after filtering against search " + $scope.filtered.length);
+
+      var s = moment($scope.dateRange.startDate).format('YYYY-MM-DD'); 
+      var e = moment($scope.dateRange.endDate).format('YYYY-MM-DD');          
+      
+      var filteredNew = [];
+      for (var i = 0; i < $scope.filtered.length; i++) {
+        var itemDate = moment($scope.filtered[i].value.scheduleGenerateDate).format('YYYY-MM-DD');
+        if (itemDate >= s && itemDate <= e) 
+        {
+          //console.log($scope.filtered[i].value.scheduleGenerateDate);
+          filteredNew.push($scope.filtered[i]);                            
+        }
       }
+      $scope.filtered = filteredNew;
+      console.log("number of items after filtering against dateRange " + $scope.filtered.length); 
+      
+      $scope.totalItems = $scope.filtered.length;          
+      $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
+      $scope.currentPage = 1;
     }
+
+    $scope.removePropertyFromFilter = function(propertyName){
+      console.log("it reached here - " + propertyName);
+      delete $scope.search.value[propertyName];
+    }
+    
   });
