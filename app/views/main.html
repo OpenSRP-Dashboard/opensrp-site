@@ -18,7 +18,22 @@
 <div show-during-resolve class="loader">   
   <center><img src="images/spinner.gif"  alt="Opensrp"/></center>
 </div>
-
+ <div>  
+<mapbox map-id="probir123.ifhlcpgl" on-reposition="mapMovedCallback" on-zoom="mapZoomedCallback" zoom="12" lat="23.8103" lng="90.41" width="99%" height="500" style="margin-top: 10px;margin-left: 10px">                                                
+  <div ng-repeat="household in households | filter: filterTerm""> 
+    <marker lat="{{household.value[0]}}" lng="{{household.value[1]}}"  color="#39cccc" symbol="village" icon="village">
+      <span style="clear:both;display:block"><b>ELCO:</b> {{household.value[2]}}</span>            
+      <span style="clear:both;display:block"><b>FWMAUZA PARA:</b> {{household.value[3]}}</span>
+      <span style="clear:both;display:block"> <b>DIVISION:</b> {{household.value[4]}}</span>
+      <span style="clear:both;display:block"> <b>DISTRICT:</b> {{household.value[5]}}</span>
+      <span style="clear:both;display:block"> <b>UPAZILLA:</b> {{household.value[6]}}</span>
+      <span style="clear:both;display:block"> <b>UNION:</b> {{household.value[7]}}</span>
+      <span style="clear:both;display:block"><b> WARD:</b> {{household.value[8]}}</span>
+    </marker>
+  </div> 
+</mapbox>
+<input type="text" class="form-control" placeholder="Search household" ng-model="filterTerm">
+   </div>
     <div class='container sp'>
 			<div class="row ">
 				<div class="col-lg-3 col-xs-6">
@@ -174,12 +189,9 @@
 				</div>
 			</div>
 
-    <div>
-       <mapbox map-id="probir123.ifhlcpgl"  zoom="12" lat="23.8103" lng="90.41" width="99%" height="500" style="margin-top: 10px;margin-left: 10px">                                                
-         <marker lat="23.8103" lng="90.41"  color="#39cccc" symbol="grocery" icon="grocery"><h1>This is an unstyled marker</h1></marker>
-         
-       </mapbox>                                            
-   </div>
+   
+    
+    
 <!--<div ng-show='stateIsLoading'>
   <strong>Loading.</strong>
 </div> -->

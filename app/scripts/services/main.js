@@ -248,5 +248,23 @@ angular.module('opensrpSiteApp')
       },
       type:"get"        
     });    
-  }  
+  }
+  
+  this.houseHoldList = function($scope,$rootScope,$timeout){
+    var url = 'http://192.168.21.246:1234/192.168.21.218:5984/opensrp/_design/HouseHold/_view/getAllHH';              
+    $timeout(function () {
+        $http.get(url, { 
+          cache: true, 
+          withCredentials: false,                  
+          headers: {
+                    'Authorization' : ''
+          }
+        })
+        .success(function (data) {                         
+          $rootScope.households = data.rows;          
+          console.log($rootScope.households)
+          $rootScope.loading = false; 
+        });
+      }, 250); 
+    }
 });

@@ -8,7 +8,7 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('MainCtrl', function ($scope,$http,$rootScope,$q,Base64,OPENSRP_WEB_BASE_URL,mapboxService,ngDialog,Main,page,AclService) {
+  .controller('MainCtrl', function ($scope,$http,$rootScope,$q,Base64,OPENSRP_WEB_BASE_URL,mapboxService,ngDialog,Main,page,AclService,$timeout) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -35,8 +35,13 @@ angular.module('opensrpSiteApp')
     var hhFromCouch = "http://192.168.21.86:1337/192.168.21.218:5984/opensrp/_design/HouseHold/_view/all";
     //Main.testFetchFromCouch(elcoFromCouch);
     //Main.testFetchFromCouch(hhFromCouch);
+    Main.houseHoldList($scope,$rootScope,$timeout);
     $scope.HHDATA = function(){     
       page.downloadHH(HhData,'Household Report');
     }
-      
+    
+    $scope.mySplit = function(string, nb) {
+    var array = string.split(' ');
+    return array[nb];
+} 
   });
