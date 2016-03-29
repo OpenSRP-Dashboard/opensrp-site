@@ -13,21 +13,26 @@
                 <div id="top" class="login-container">
                   <h2 class="form-signin-heading">Add Schedule Rule</h2>
                   <p class="lead"></p>
-                   <form id="rule_def" ng-submit="save()">
-                    <label>Schedule Rule Name:</label><input ng-model="name" type="text">			
+                   <form id="rule_def" ng-submit="edit()">
+                    <label>Schedule Rule Name:</label><input ng-model="name" type="text">
+                    <input ng-model="id" type="hidden">	
                       <div ng-repeat="rule in rules">
                         <div id="rule">
-                          <div id="rule1" class="clonedInput">
-                            <h3 id="reference" name="reference" class="heading-reference">Rule #1</h3>
+                          <div id="rule{{$index+1}}" class="clonedInput">
+                            <h3 id="reference" name="reference" class="heading-reference">Rule #{{$index+1}}</h3>
                             <label>Start Form Name</label>
-                            <input type="text" name="startFormName1[]" />
+                            <input type="text" name="startFormName{{$index+1}}[]" value="{{rule.startFormName}}" />
                             <label>End Form Name</label>
-                            <input type="text" name="endFormName1[]" />
+                            <input type="text" name="endFormName{{$index+1}}[]" value="{{rule.endFormName}}"/>
                             <p>Defination</p>
-                            <div id="defination_space_1">                     
+                            <div id="defination_space_{{$parent.$index+1}}" ng-repeat="def in rule.defination">
+                              <div class="defination{{$parent.$index+1}}" style="border:1px solid #fff;margin-right:5px;margin-bottom:20px">
+                                <label> Name:</label><input type="text" name="name{{$parent.$index+1}}[]" value="{{def.name}}"/>
+                               <label>Value:</label> <input type="text" name="value{{$parent.$index+1}}[]" value="{{def.value}}"/><a href="#" class="delete" id="def{{$parent.$index+1}}"> Delete</a>
+                              </div>
                             </div>
                            <div style="clear:both;padding-top:25px;"></div>				
-                          <input type="button" class="btnRule" id="btnRule_1" value="add defination">
+                          <input type="button"  onclick="def(this.id)" class="btnRule" id="btnRule_{{$index+1}}" value="add defination">
                           </div><!-- end #entry1 -->
                         </div>
                     </div>

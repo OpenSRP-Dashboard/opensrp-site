@@ -8,7 +8,7 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('MainCtrl', function ($scope,$http,$rootScope,$q,Base64,OPENSRP_WEB_BASE_URL,ngDialog,Main,page,AclService) {
+  .controller('MainCtrl', function ($scope,$http,$rootScope,$q,Base64,OPENSRP_WEB_BASE_URL,mapboxService,ngDialog,Main,page,AclService) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -21,7 +21,7 @@ angular.module('opensrpSiteApp')
           plain: true
       });
     };
-    
+    mapboxService.init({ accessToken: 'pk.eyJ1IjoicHJvYmlyMTIzIiwiYSI6IjhwRDJyZ0EifQ.KzOVb_vdS3CMYzUKMww59g' });
    var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/anc?anm-id="+$rootScope.username; 
     /*var elcoData = $http.get(apiURLs, { cache: true}).success(function (data) {       
     });*/

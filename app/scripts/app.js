@@ -16,9 +16,9 @@ angular
   .constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.86:1337/192.168.21.218:9979')
   .constant("HH_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/hh?anm-id=')
   .constant("ELCO_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/ec?anm-id=')
-  .constant("CORS_PROXY_URL",'http://hp:1337/')
+  .constant("COUCHURL",'http://192.168.21.246:1234/192.168.21.246:5984')
   .config(['AclServiceProvider', function (AclServiceProvider) {
-    var myConfig = {
+  var myConfig = {
       storage: 'localStorage',
       storageKey: 'AppAcl'
     };
@@ -341,7 +341,7 @@ angular
         resolve : {
           'scheduleRuleServiceData':function(ScheduleRule){ return ScheduleRule.promise;},
           'acl' : ['$q', 'AclService', function($q, AclService){
-            if(AclService.can('Add Role')){
+            if(AclService.can('Rule List')){
               // Has proper permissions
               return true;
             } else {
@@ -358,7 +358,7 @@ angular
         controllerAs: 'rule',
         resolve : {          
           'acl' : ['$q', 'AclService', function($q, AclService){
-            if(AclService.can('Add Role')){
+            if(AclService.can('Edit Rule')){
               // Has proper permissions
               return true;
             } else {
@@ -375,7 +375,7 @@ angular
         controllerAs: 'rule',
         resolve : {
           'acl' : ['$q', 'AclService', function($q, AclService){
-            if(AclService.can('Add Role')){
+            if(AclService.can('Add Rule')){
               // Has proper permissions
               return true;
             } else {

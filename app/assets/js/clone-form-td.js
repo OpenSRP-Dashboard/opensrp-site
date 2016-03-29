@@ -5,7 +5,7 @@ $(function () {
                  
 		    var numOfRule = $('.clonedInput'); // // get how many rule have been created
         var newEntryCreateCondition ;
-        
+        console.log(numOfRule);
         for(var i=0;i<num;i++){
           var  newNum  ;// the numeric ID of the new input field being added 
           /**
@@ -41,18 +41,12 @@ $(function () {
           '<p>Defination</p>'+
           '<div id="defination_space_'+newNum+'"></div>'+
           '<div style="clear:both;padding-top:25px;"></div>'+        
-          '<input type="button" class="btnRule" id="btnRule_'+newNum+'" value="add defination">'+
+          '<input type="button"  onclick="def(this.id)" class="btnRule" id="btnRule_'+newNum+'" value="add defination">'+
         '</div>'
         ); 
     });
 
-	$(document).on('click','.btnRule',function(){	    
-		var id = $(this).attr('id').split("_")[1];		       		     
-		$("#defination_space_"+id).append('<div class="defination'+id+'" style="border:1px solid #fff;margin-right:5px;;margin-bottom:20px"><lable> Name:</label><input type="text" name="name'+id+'[]"/>'+
-            '<lable>Value:</label> <input type="text" name="value'+id+'[]"/><a href="#" class="delete" id="def'+id+'"> Delete</a> </div>'
-			);
-		
-	})
+	
 });
 
 $(document).ready(function () {	
@@ -68,8 +62,15 @@ $(document).ready(function () {
     $(document.body).on("click",'.delete', function (event) {	
     event.preventDefault();    
     var id= this.id.split("def");
-    $(this).parent().parent().parent('.defination'+id[1]).remove();	
+    $(this).parent('.defination'+id[1]).remove();	
     });
 	
 });
 
+function def(idName){
+  
+  var id = idName.split("_")[1];		       		     
+		$("#defination_space_"+id).append('<div class="defination'+id+'" style="border:1px solid #fff;margin-right:5px;;margin-bottom:20px"><label> Name:</label><input type="text" name="name'+id+'[]"/>'+
+            '<label>Value:</label> <input type="text" name="value'+id+'[]"/><a href="#" class="delete" id="def'+id+'"> Delete</a> </div>'
+		);
+}
