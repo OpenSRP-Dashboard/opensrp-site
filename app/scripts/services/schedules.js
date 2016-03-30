@@ -8,14 +8,12 @@
  * Service in the opensrpSiteApp.
  */
 angular.module('opensrpSiteApp')
-  .service('scheduleLogService', function ($http,$rootScope,Base64,OPENSRP_WEB_BASE_URL,Common) {
+  .service('scheduleLogService', function ($http,$rootScope,Base64,OPENSRP_WEB_BASE_URL,Common, COUCHURL) {
         console.log("inside scheduleLogService");
         var schedules = null;
-        //"http://192.168.21.218:1234/192.168.21.218:5984/opensrp/_design/ScheduleLog/_view/testViewForDashboard";
-        //var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username;  192.168.19.96:5984
-        //var apiURLs = "http://192.168.21.18:5984/opensrp/_design/ScheduleLog/_view/testViewForDashboard";
+
         var hhTestUrl = "http://192.168.21.246:5984/opensrp/_design/HouseHold/_view/all";
-        var couchUrl = "http://192.168.21.86:1337/192.168.21.218:5984/opensrp/_design/ScheduleLog/_view/testViewForDashboard";
+        var couchUrl = COUCHURL + "/opensrp/_design/ScheduleLog/_view/testViewForDashboard";
         var scheduleData = $http.get(couchUrl, { 
               cache: true, 
               withCredentials: false,

@@ -8,7 +8,7 @@
  * Service in the opensrpSiteApp.
  */
 angular.module('opensrpSiteApp')
-  .service('Main', function ($http,$rootScope,$q,Base64,OPENSRP_WEB_BASE_URL,page) {
+  .service('Main', function ($http,$rootScope,$q,Base64,OPENSRP_WEB_BASE_URL,page, COUCHURL) {
     // AngularJS will instantiate a singleton by calling "new" on this function
    
     var households = [];
@@ -251,7 +251,7 @@ angular.module('opensrpSiteApp')
   }
   
   this.houseHoldList = function($scope,$rootScope,$timeout){
-    var url = 'http://192.168.21.246:1234/192.168.21.218:5984/opensrp/_design/HouseHold/_view/getAllHH';              
+    var url = COUCHURL + '/opensrp/_design/HouseHold/_view/getAllHH';              
     $timeout(function () {
         $http.get(url, { 
           cache: true, 
