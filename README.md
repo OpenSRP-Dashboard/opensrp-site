@@ -13,26 +13,28 @@ Running `grunt test` will run the unit tests with karma.
 
 ## Install for ubuntu 12.04,14.04
   Install NodeJS:
-  Version : v0.12.7
-  AngularJS v1.5.0
-  export PATH=$PATH:/opt/node-v0.12.7/bin
-  npm install -g handlebars 
-  npm install -g karma 
-  npm install -g grunt-cli 
-  npm install -g corsproxy
-  npm install -g yo 
-  npm install -g bower
-  npm install -g generator-angular && npm install -g generator-karma
-  http://stackoverflow.com/questions/13767725/unable-to-install-gem-failed-to-build-gem-native-extension-cannot-load-such
-  sudo gem install compass
-  git clone https://github.com/OpenSRP-Dashboard/opensrp-site.git
-  go to project directory
-  npm install
-  bower install
+  1. Version : v0.12.7
+  2. AngularJS v1.5.0
+  3. export PATH=$PATH:/opt/node-v0.12.7/bin
+  4. npm install -g handlebars 
+  5. npm install -g karma 
+  6. npm install -g grunt-cli 
+  7. npm install -g corsproxy
+  8. npm install -g yo 
+  9. npm install -g bower
+  10. npm install -g generator-angular && npm install -g generator-karma
+  11. http://stackoverflow.com/questions/13767725/unable-to-install-gem-failed-to-build-gem-native-extension-cannot-load-such
+  12. sudo gem install compass
+  13. git clone https://github.com/OpenSRP-Dashboard/opensrp-site.git
+  14. go to project directory
+  15. npm install
+  16. bower install
+  
   For run
-  grunt serve
+  17. grunt serve
+  
   For deployment
-  grunt dist 
+  18grunt dist 
   
 
 ## Features
