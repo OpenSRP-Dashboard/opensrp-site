@@ -265,7 +265,7 @@ angular.module('opensrpSiteApp')
   }
   
   this.houseHoldList = function($scope,$rootScope,$timeout){
-    var url = COUCHURL + '/opensrp/_design/HouseHold/_view/getAllHH';              
+    var url = COUCHURL + '/opensrp/_design/HouseHold/_view/get_all_household';              
     $timeout(function () {
         $http.get(url, { 
           cache: true, 
