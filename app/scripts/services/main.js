@@ -245,9 +245,23 @@ angular.module('opensrpSiteApp')
       url:url,
       success:function (data) {
           console.log("call to " + url + " succeded");
+          return data.rows;
       },
       type:"get"        
-    });    
+    });  
+    /*var data = $http.get( url, { 
+          cache: true, 
+          withCredentials: false,
+          headers: {
+            'Authorization' : ''
+          }
+        })
+        .success(function (data) { 
+          console.log("inside success of testFetchFromCouch.");           
+          console.log(data.rows.length + " - number of users received.");
+          //return data.rows;
+    });
+    return data;*/
   }
   
   this.houseHoldList = function($scope,$rootScope,$timeout){
