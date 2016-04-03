@@ -216,14 +216,14 @@ angular.module('opensrpSiteApp')
       success:function (data) {
         $rootScope.ECR = data.ecRegisterEntries;
         //JSON.parse(JSON.stringify(getData));       
-        window.getECAndPWData = JSON.parse(JSON.stringify(data.ecRegisterEntries));       
+        //window.getECAndPWData = JSON.parse(JSON.stringify(data.ecRegisterEntries));       
         console.log("total data from ec register " + window.getECAndPWData.length); 
         window.getPregnantWomenData = jsonsql.query("select * from getECAndPWData where (PSRFDETAILS != '' && details.FWPSRPREGSTS == 1 )", getECAndPWData);
         console.log("number of pw " + window.getPregnantWomenData.length);
         window.getEligibleCouplesData = jsonsql.query("select * from getECAndPWData where (FWELIGIBLE == 1 )", getECAndPWData);
         console.log("number of ec " + window.getEligibleCouplesData .length);
 
-        TotalCount('E');
+        //TotalCount('E');
         thisMonthEC(today,'thisMonthEC');
         thisWeekEC(today,'thisWeekEC');
         toDayEC(today, 'todayEC');        
@@ -262,7 +262,24 @@ angular.module('opensrpSiteApp')
         })
         .success(function (data) {                         
           $rootScope.households = data.rows;          
-          console.log($rootScope.households)
+          $rootScope.loading = false; 
+        });
+      }, 250); 
+    }
+    
+    this.elcoCount = function($scope,$rootScope,$timeout){
+    var url = COUCHURL + '/opensrp/_design/Elco/_view/count_elco';              
+    $timeout(function () {
+        $http.get(url, { 
+          cache: true, 
+          withCredentials: false,                  
+          headers: {
+                    'Authorization' : ''
+          }
+        })
+        .success(function (data) { 
+          window.getEligibleCouplesData = data.rows;
+          TotalCount('E');
           $rootScope.loading = false; 
         });
       }, 250); 

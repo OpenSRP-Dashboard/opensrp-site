@@ -19,7 +19,7 @@
   <center><img src="images/spinner.gif"  alt="Opensrp"/></center>
 </div>
  <div>  
-<mapbox map-id="probir123.ifhlcpgl" on-reposition="mapMovedCallback" on-zoom="mapZoomedCallback" zoom="12" lat="23.8103" lng="90.41" width="99%" height="500" style="margin-top: 10px;margin-left: 10px">                                                
+<mapbox map-id="probir123.ifhlcpgl"  zoom="12" lat="23.8103" lng="90.41" width="99%" height="500" style="margin-top: 10px;margin-left: 10px">                                                
   <div ng-repeat="household in households | filter: filterTerm""> 
     <marker lat="{{household.value[0]}}" lng="{{household.value[1]}}"  color="#39cccc" symbol="village" icon="village">
       <span style="clear:both;display:block"><b>ELCO:</b> {{household.value[2]}}</span>            
@@ -32,6 +32,7 @@
     </marker>
   </div> 
 </mapbox>
+
 <input type="text" class="form-control" placeholder="Search household" ng-model="filterTerm">
    </div>
     <div class='container sp'>
