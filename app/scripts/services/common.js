@@ -188,7 +188,8 @@ angular.module('opensrpSiteApp')
     }
     this.acl = function($timeout,$rootScope,$http,username,$window,Authentication,$location,$scope){
       $rootScope.aclAccess = "";
-      var apiURLs = OPENSRP_WEB_BASE_URL+"/role-access-tokens?userName="+username;
+      //var apiURLs = OPENSRP_WEB_BASE_URL+"/role-access-tokens?userName="+username;
+      var apiURLs = OPENSRP_WEB_BASE_URL+"/role-access-token?userName="+username;
       $http.get(apiURLs, { cache: true}).success(function (data) {
         $timeout(function () {
           $rootScope.aclAccess = data;          
@@ -198,9 +199,13 @@ angular.module('opensrpSiteApp')
           var member = 'member';
           AclService.setAbilities(window.aclData);
           if ($rootScope.aclAccess != '') {           
-            for(var i=0; i< Object.keys($rootScope.aclAccess.accessTokens).length ; i++){
-              AclService.addAbility(member, $rootScope.aclAccess.accessTokens[Object.keys($rootScope.aclAccess.accessTokens)[i]])
+            for(var i = 0; i < data.length; i++){
+              console.log(data[i] + " -privilege name");
+              AclService.addAbility(member, data[i]);
             }
+            /*for(var i=0; i< Object.keys($rootScope.aclAccess.accessTokens).length ; i++){
+              AclService.addAbility(member, $rootScope.aclAccess.accessTokens[Object.keys($rootScope.aclAccess.accessTokens)[i]])
+            }*/
             $scope.loading = false;
             $window.location = '/#/';
             /*$rootScope.formdata = {a:'1', b:'2'};
