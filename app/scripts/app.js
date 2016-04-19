@@ -13,10 +13,10 @@ angular
   .constant('AUTH_URL', 'http://192.168.21.167:1337/27.147.129.50:9979/authenticate-user')
   //.constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.246:1234/192.168.21.246:9979')
   //ip for jivita server - 192.168.19.90
-  .constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.246:1234/192.168.21.246:9979')
+  .constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.86:1337/192.168.21.86:9979')
   .constant("HH_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/hh?anm-id=')
   .constant("ELCO_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/ec?anm-id=')
-  .constant("COUCHURL",'http://192.168.21.246:1234/192.168.21.218:5984')
+  .constant("COUCHURL",'http://192.168.21.86:1337/192.168.21.86:5984')
   .config(['AclServiceProvider', function (AclServiceProvider) {
   var myConfig = {
       storage: 'localStorage',
@@ -115,7 +115,7 @@ angular
               return true;
             } else {
               // Does not have permission
-              return $q.reject('Unauthorized');
+              return $q.reject('Un/authorized');
             
             }
           }]
@@ -127,6 +127,25 @@ angular
         controller: 'RoleCtrl',
         controllerAs: 'role',
         resolve : {
+          'userData':function(Role){ return Role.promise;},
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('Add Role')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
+        }
+      })      
+      .when('/roles', {
+        templateUrl: 'views/roles.html',
+        controller: 'RoleCtrl',
+        controllerAs: 'role',
+        resolve : {
+          'userData':function(Role){ return Role.promise;},
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('Add Role')){
               // Has proper permissions
@@ -231,7 +250,7 @@ angular
         controller: 'TestCtrl',
         controllerAs: 'TestCtrl',
         resolve : {
-          //'scheduleLogServiceData':function(scheduleLogService){ return scheduleLogService.promise;},
+          'userData':function(testService){ return testService.promise;},
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('Acl')){
               // Has proper permissions
@@ -244,6 +263,63 @@ angular
             }
           }]
         }        
+      })
+      .when('/privileges', {
+        templateUrl: 'views/privileges.html',
+        controller: 'PrivilegeCtrl',
+        controllerAs: 'PrivilegeCtrl',
+        resolve : {
+          'userData':function(privilegeService){ return privilegeService.promise;},
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('Acl')){
+              // Has proper permissions
+              //console.log('is it true?' + AclService.can('Elco Details'));
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+              //return true;
+            
+            }
+          }]
+        }        
+      })
+      .when('/privileges/add', {
+        templateUrl: 'views/privilege_add.html',
+        controller: 'PrivilegeCtrl',
+        controllerAs: 'PrivilegeCtrl',
+        resolve : {
+          //'userData':function(testService){ return testService.promise;},
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('Acl')){
+              // Has proper permissions
+              //console.log('is it true?' + AclService.can('Elco Details'));
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
+        }        
+      })
+      .when('/privileges/:id', {
+        templateUrl: 'views/privilege_edit.html',
+        controller: 'PrivilegeCtrl',
+        controllerAs: 'PrivilegeCtrl',
+        resolve : {          
+          'acl' : ['$q', 'AclService', function($q, AclService){
+          if(AclService.can('Acl')){
+            // Has proper permissions
+            //console.log('is it true?' + AclService.can('Elco Details'));
+            return true;
+          } else {
+            // Does not have permission
+            return $q.reject('Unauthorized');
+          
+          }
+          }]
+        }
       })
       .when('/login', {
         templateUrl: 'views/login.html',
@@ -432,7 +508,7 @@ angular
         var url = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
           $rootScope.Data = '';
           $.ajax({
-            async:false,		   
+            async:false,       
             dataType: "json",
             cache:true,
             beforeSend: function (xhr) {
@@ -445,7 +521,7 @@ angular
                 $("#export").css("display","block");
                page.downloadHH(window.HhData,"New Household Registration form");
             },
-            type:"get"				
+            type:"get"        
           });
         
       }
@@ -455,7 +531,7 @@ angular
         var url = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username;
           $rootScope.Data = '';
           $.ajax({
-            async:false,		   
+            async:false,       
             dataType: "json",
             cache:true,
             beforeSend: function (xhr) {
@@ -468,7 +544,7 @@ angular
                 $("#export").css("display","block");
                page.downloadpw( window.ecData,"PSRF form");
             },
-            type:"get"				
+            type:"get"        
           });
         
       }
@@ -479,7 +555,7 @@ angular
         var url = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
           $rootScope.Data = '';
           $.ajax({
-            async:false,		   
+            async:false,       
             dataType: "json",
             cache:true,
             beforeSend: function (xhr) {
@@ -492,7 +568,7 @@ angular
                 $("#export").css("display","block");
                page.downloadCS(window.HhData,"Census New Women Registration form");
             },
-            type:"get"				
+            type:"get"        
           });
         
       }

@@ -26,8 +26,8 @@ angular.module('opensrpSiteApp')
        User.role($scope.formData,$window,Flash);
       }
      
-      User.users($scope,$rootScope,$timeout);
-      User.activeRolesAndAccessTokens($scope,$rootScope,$timeout);
+      //User.users($scope,$rootScope,$timeout);
+      //User.activeRolesAndAccessTokens($scope,$rootScope,$timeout);
     }else if(roleId){
       $rootScope.loading = true;
       $scope.save = function(){
@@ -37,13 +37,13 @@ angular.module('opensrpSiteApp')
       User.users($scope,$rootScope,$timeout,$routeParams.user);
       User.activeRolesAndAccessTokens($scope,$rootScope,$timeout,$routeParams.role,$routeParams.status);
     }else{
-       $rootScope.loading = true;
-       $scope.userAssign =
+      $rootScope.loading = true;
+      $scope.userAssign =
       ' <a href="#/add-user">'+
       '<i class="glyphicon glyphicon-list-alt"></i>'+
-     ' <span>Add User</span>'+
-     '</a>';
-      User.rolesAndUser($scope,$rootScope,$timeout);
-      }
+      ' <span>Add User</span>'+
+      '</a>';
+      User.allUsers($scope,$rootScope,$timeout);
+    }
      
   });

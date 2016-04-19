@@ -1,0 +1,32 @@
+<data-ng-include src="'views/partials/header.html'"></data-ng-include>
+<script type="text/javascript" src="assets/js/download.js"></script>
+
+<section>
+  <div class="container">
+    <div class="row">
+      <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include>            
+      <div class="col-sm-9 col-md-9">
+
+        <!-- <div class="row">
+          <div class="panel panel-default" ng-repeat="friend in friends | otherFilter">  
+          {{friend.name}} 
+          </div>
+        </div> -->        
+        <form  class="form-search-patient " ng-submit="edit()">
+        <span id="validmessagename" style="color:#000000;display:none">You have typed invalid character. </span>               
+        <label>Privilege Name</label>     
+        <input type="text" class="form-control" ng-required="true" id="name" name="name" ng-model="formData.name" value="{{formData.name}}">
+
+        <input type="hidden" class="form-control" id="id" name="id"  ng-model="formData.id" value = "{{formData.id}}">
+        <!-- <input type="text" class="form-control" ng-required="true" id="name" name="privilegeName" placeholder="Another Field"> -->
+        <!-- ng-model="formData.privilegeName"  -->
+
+        <div id="message"></div>
+        <button id="submit"  class="btn btn-lg btn-primary btn-block"  type="submit"> Submit</button>
+        </form>        
+        <div>{{privilegeName}}</div>
+      </div>
+    </div>
+  </div>
+    
+</section>

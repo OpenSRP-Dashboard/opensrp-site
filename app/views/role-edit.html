@@ -16,10 +16,11 @@
                   <input type="text" class="form-control" ng-readonly="true" id="name" name="roleName" ng-model="formData.roleName" placeholder="Role Name">
                   <input type="hidden" class="form-control" id="roleId" name="roleId" ng-model="formData.roleId" placeholder="Role Name">
                   <br />
-                  <label> Access Tokens : </label>
+                  <label> Access Tokens: </label>
                   <span ng-repeat="access in accessList">
-                  <!--<input ng-checked="checked(access)" type="checkbox"  class="role_method" ng-model="formData.accessTokens[$index]" ng-true-value="'{{access}}'">{{access}}-->
-                  <input type="checkbox" checklist-model="formData.accessTokens" checklist-value="access"> {{access}}
+                  <!-- <input ng-checked="checked(access)" type="checkbox"  class="role_method" ng-model="formData.accessTokens[$index]" ng-true-value="'{{access}}'">{{access}} -->
+                  <input type="checkbox" checklist-model="formData.accessTokens" checklist-value="access"
+                  ng-checked="ifPrivileged(access)"> {{access}}
                  
                   </span>
                   <br />
@@ -31,6 +32,8 @@
                   <div id="message"></div>
                   <button id="submit" ng-disabled ="disabled" class="btn btn-lg btn-primary btn-block"  type="submit"> Submit</button>
                   </form>
+
+                  {{role}}
                   <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
                 </div>
               </div>

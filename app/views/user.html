@@ -19,10 +19,12 @@
                     
                     <table>
                       <tr><td>User Name</td><td>Role Name</td><td>Status</td></tr>
-                    <tr ng-repeat="role in roleAndUser track by $index">                      
-                      <td style="width: 10%"><a href="/#/user/{{role.roleId}}/{{role.roleName}}/{{role.userName}}/{{role.status}}" >{{role.userName}}</a> </td>
-                      <td style="width: 10%"><a href="/#/user/{{role.roleId}}/{{role.roleName}}/{{role.userName}}/{{role.status}}" >{{role.roleName}}</a></td>
-                      <td style="width: 10%">{{role.status}}</td>
+                    <!-- <tr ng-repeat="role in roleAndUser track by $index"> -->      
+                    <!-- <a href="/#/user/{{role.roleId}}/{{role.roleName}}/{{role.userName}}/{{role.status}}" > -->                
+                    <tr ng-repeat="user in Users">
+                      <td style="width: 10%"><a href="/#/user/oka" >{{user.value.user_name}}</a> </td>
+                      <td style="width: 10%"><span ng-repeat="role in user.value.roles"><a href="/#/role/{{role.id}}" >{{role.name}}</a><br/></span></td>
+                      <td style="width: 10%">{{user.value.status}}</td>
                     </tr>
                     </table>
                     <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>

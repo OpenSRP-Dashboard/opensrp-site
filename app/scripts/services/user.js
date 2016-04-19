@@ -8,7 +8,7 @@
  * Service in the opensrpSiteApp.
  */
 angular.module('opensrpSiteApp')
-  .service('User', function ($http,$rootScope,Base64,OPENSRP_WEB_BASE_URL) {
+  .service('User', function ($http,$rootScope,Base64,OPENSRP_WEB_BASE_URL, COUCHURL) {
     // AngularJS will instantiate a singleton by calling "new" on this function    
     
       this.editRole = function(role,user,roleId,status,$window,Flash){
@@ -121,15 +121,35 @@ angular.module('opensrpSiteApp')
         }); 
       }
       
-      this.rolesAndUser = function ($scope,$rootScope,$timeout){
-        var apiURLs = OPENSRP_WEB_BASE_URL+"/all-roles-with-user"; 
-         $http.get(apiURLs, { cache: true}).success(function (data) {
+      this.allUsers = function ($scope,$rootScope,$timeout){
+        //"http://192.168.21.86:1337/192.168.21.86:5984/opensrp/_design/Privilege/_view/privilege_by_name";
+        var apiURLs = COUCHURL + "/opensrp/_design/User/_view/by_id"; //OPENSRP_WEB_BASE_URL+"/all-roles-with-user"; 
+         $http.get(apiURLs, { 
+          cache: true,
+          withCredentials: false,
+          headers: {
+            'Authorization' : ''
+          }
+        })
+        .success(function (data) {
           $timeout(function () {
-            $rootScope.roleAndUser = data;
+            $rootScope.Users = data.rows;
             $rootScope.loading = false;
             $scope.disabled = false;
           }, 250);  
-        }); 
+        });
+
+        /*$http.get(couchUrl, { 
+                  cache: true, 
+                  withCredentials: false,
+                  headers: {
+                    'Authorization' : ''
+                  }
+                })
+                .success(function (data) { 
+                  console.log("inside success function of privilege promise.");           
+                  privileges = data.rows;
+            }) */
       }
      
   });

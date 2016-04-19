@@ -10,8 +10,7 @@
 angular.module('opensrpSiteApp')
   .service('ScheduleRule', function ($http,$rootScope,Base64,OPENSRP_WEB_BASE_URL,COUCHURL) {   
         var scheduleRules = null;
-        var couchUrl = COUCHURL+"/schedule/_design/ScheduleRules/_view/all_rule";
-        
+        var couchUrl = COUCHURL+"/schedule/_design/ScheduleRules/_view/all_rule";        
         
         return {
             promise: $http.get(couchUrl, { 

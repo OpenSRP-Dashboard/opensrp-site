@@ -13,7 +13,8 @@ angular.module('opensrpSiteApp')
         var schedules = null;
 
         var hhTestUrl = "http://192.168.21.246:5984/opensrp/_design/HouseHold/_view/all";
-        var couchUrl = COUCHURL + "/opensrp/_design/ScheduleLog/_view/testViewForDashboard";
+        //http://192.168.21.86:1337/192.168.21.86:5984/opensrp/_design/ScheduleLog/_view/testViewForDashboard
+        var couchUrl = "http://192.168.21.86:1337/192.168.19.90:5984/opensrp/_design/ScheduleLog/_view/all"; //COUCHURL + 
         var scheduleData = $http.get(couchUrl, { 
               cache: true, 
               withCredentials: false,
