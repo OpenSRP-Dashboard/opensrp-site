@@ -1,0 +1,194 @@
+<data-ng-include src="'views/partials/header.html'"></data-ng-include>
+
+<!-- box -->
+ <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="../../images/heder_logo.png" alt="">
+                    <div class="intro-text">
+                        <!--<span class="name">Start Bootstrap</span>-->
+                        <span class="skills">Open Smart Register Platform is an open source mobile health platform that allows frontline health workers to electronically register and track the health of their entire client                         population.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+</header>
+ 
+<div show-during-resolve class="loader">   
+  <center><img src="images/spinner.gif"  alt="Opensrp"/></center>
+</div>
+ <div>  
+<mapbox map-id="probir123.ifhlcpgl"  zoom="12" lat="23.8103" lng="90.41" width="99%" height="500" style="margin-top: 10px;margin-left: 10px">                                                
+  <div ng-repeat="household in households | filter: filterTerm""> 
+    <marker lat="{{household.value[0]}}" lng="{{household.value[1]}}"  color="#39cccc" symbol="village" icon="village">
+      <span style="clear:both;display:block"><b>ELCO:</b> {{household.value[2]}}</span>            
+      <span style="clear:both;display:block"><b>FWMAUZA PARA:</b> {{household.value[3]}}</span>
+      <span style="clear:both;display:block"> <b>DIVISION:</b> {{household.value[4]}}</span>
+      <span style="clear:both;display:block"> <b>DISTRICT:</b> {{household.value[5]}}</span>
+      <span style="clear:both;display:block"> <b>UPAZILLA:</b> {{household.value[6]}}</span>
+      <span style="clear:both;display:block"> <b>UNION:</b> {{household.value[7]}}</span>
+      <span style="clear:both;display:block"><b> WARD:</b> {{household.value[8]}}</span>
+    </marker>
+  </div> 
+</mapbox>
+
+<input type="text" class="form-control" placeholder="Search household" ng-model="filterTerm">
+   </div>
+    <div class='container sp'>
+			<div class="row ">
+				<div class="col-lg-3 col-xs-6">
+					<!-- small box -->
+					<div class="box1 ">
+						<a href="#hh"><img src="../../images/station_icon.png" class="imgs" alt="image"> </a>
+						<div class="counter">
+							<div class="counter_left" id="LH"></div>
+							<div class="counter_mid" id="MH1"></div>
+              				<div class="counter_mid" id="MH2"></div>
+							<div class="counter_mid" id="MH3"></div>
+							<div class="counter_right" id="RH"></div>
+						</div>
+					</div>
+					<div class="count_box">
+						<div class="box_inner1">
+							<div class="box_top">  TODAY   </div>
+							 <div class="box_buttom" id="todayHH">    </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top"> THIS WEEK 	 </div>
+							<div class="box_buttom" id="thisWeekHH">  </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top">  THIS MONTH  </div>
+							<div class="box_buttom" id="thisMonthHH">  </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-xs-6">
+					<!-- small box -->
+					<div class="box2">
+						<a href="#/ec"><img src="../../images/cupol_icon.png" class="imgs" alt="slider">  </a>
+						<div class="counter">
+							<div class="counter_left" id="LE"></div>
+              				<div class="counter_mid" id="ME1"></div>
+              				<div class="counter_mid" id="ME2"></div>
+              				<div class="counter_mid" id="ME3"></div>
+              				<div class="counter_right" id="RE"></div>
+						</div>
+					</div>
+					<div class="count_box">
+						<div class="box_inner1">
+							<div class="box_top1">  TODAY </div>
+							<div class="box_buttom1" id="todayEC">    </div>
+						</div>
+						<div class="box_inner1">
+						  <div class="box_top1">  THIS WEEK  </div>
+						  <div class="box_buttom1" id="thisWeekEC">  </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top1">   THIS MONTH   </div>
+							<div class="box_buttom1" id="thisMonthEC">  </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-xs-6">
+					<!-- small box -->
+					<div class="box3 ">
+						<a href="/#/pw"><img src="../../images/p_icon.png" class="imgs" alt="slider">  </a>
+						<div class="counter">
+							<div class="counter_left" id="LW"></div>
+              				<div class="counter_mid" id="MW1"></div>
+              				<div class="counter_mid" id="MW2" ></div>
+              				<div class="counter_mid" id="MW3"></div>
+              				<div class="counter_right" id="RW"></div>
+						</div>
+					</div>
+					<div class="count_box">
+						<div class="box_inner1">
+							<div class="box_top2">  TODAY  </div>
+							<div class="box_buttom2" id="todayPW">   </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top2">   THIS WEEK  </div>
+							<div class="box_buttom2" id="thisWeekPW">    </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top2">  THIS MONTH  </div>
+								<div class="box_buttom2" id="thisMonthPW">  </div>
+						</div>
+					</div>
+	
+				</div>
+				<div class="col-lg-3 col-xs-6 hidden">
+					<!-- small box -->
+					<div class="box3 ">
+						<a href="user.html"><img src="../../images/p_icon.png" class="imgs" alt="slider">  </a>
+						<div class="counter">
+							<div class="counter_left">1</div> <div class="counter_mid">0</div><div class="counter_mid">3</div><div class="counter_right">5</div>
+						</div>
+					</div>
+					<div class="count_box">
+						<div class="box_inner1">
+							<div class="box_top2"> TODAY </div>
+							<div class="box_buttom2"> 10 </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top2"> THIS WEEK </div>
+							<div class="box_buttom2"> 09  </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top2">THIS MONTH  </div>
+							<div class="box_buttom2">18 </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-xs-6 hidden">
+					<!-- small box -->
+					<div class="box3 ">
+						<a href="user.html"><img src="../../images/p_icon.png" class="imgs" alt="slider">  </a>
+						<div class="counter">
+							<div class="counter_left">1</div> <div class="counter_mid">0</div><div class="counter_mid">3</div><div class="counter_right">5</div>
+						</div>
+					</div>
+					<div class="count_box">
+						<div class="box_inner1">
+							<div class="box_top2"> TODAY  </div>
+							<div class="box_buttom2"> 10 </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top2"> THIS WEEK </div>
+							<div class="box_buttom2"> 09 </div>
+						</div>
+						<div class="box_inner1">
+						  <div class="box_top2"> THIS MONTH  </div>
+						  <div class="box_buttom2"> 18 </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-xs-6 hidden">
+					<!-- small box -->
+					<div class="box3 ">
+						<a href="user.html"><img src="../../images/p_icon.png" class="imgs" alt="slider">  </a>
+						<div class="counter">
+							<div class="counter_left">1</div> <div class="counter_mid">0</div><div class="counter_mid">3</div><div class="counter_right">5</div>
+						</div>
+					</div>
+					<div class="count_box">
+						<div class="box_inner1">
+							<div class="box_top2"> TODAY </div>
+							<div class="box_buttom2"> 10 </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top2"> THIS WEEK  </div>
+							<div class="box_buttom2">  09 </div>
+						</div>
+						<div class="box_inner1">
+							<div class="box_top2">THIS MONTH </div>
+							<div class="box_buttom2"> 18 </div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
