@@ -8,34 +8,81 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('UserCtrl', function ($scope,$rootScope,Flash,$window,$timeout,$location,$routeParams,$http,User,AclService) {
-    $scope.access = [
-      {  name: 'Feature'}, 
-      { name: 'Bug' }, 
-      { name: 'Enhancement' }
-    ];
+  .controller('UserCtrl', function ($scope,$rootScope,Flash,$window,$timeout,$location,$routeParams,$http,User,AclService, OPENSRP_WEB_BASE_URL) {   
     
-    $scope.disabled = true;
+    //$scope.disabled = true;
     $scope.can = AclService.can;
-    var roleId = $routeParams.param;
+    var userName = $routeParams.name;
     if ($location.path() == '/add-user') {
       $rootScope.loading = true;      
       $scope.formData = {};
-      
-      $scope.save = function(){
-       User.role($scope.formData,$window,Flash);
+      User.fetchRoles($scope, $rootScope, $timeout);
+      User.fetchUsers($scope, $rootScope, $timeout);
+
+      $scope.ifOneElementOfBooleanArrayIsTrue = function (object) {
+        return Object.keys(object).some(function (key) {
+          //console.log("called for key -" + key);
+          return object[key];
+        });
       }
+      
+      $scope.roleCheckboxClicked = function (toggleThis) {
+        $scope.formData.selectedRoles[toggleThis] = ! $scope.formData.selectedRoles[toggleThis]
+        console.log($scope.formData.selectedRoles);
+        if($scope.ifOneElementOfBooleanArrayIsTrue($scope.formData.selectedRoles)){
+          console.log("at least one role is selected");
+          if(!$("#decoyCheckbox").is(':checked')){
+            $("#decoyCheckbox").click();
+          }
+        }
+        else{
+          console.log("no role is selected");
+          if($("#decoyCheckbox").is(':checked')){
+            $("#decoyCheckbox").click();
+          }
+        }
+      }
+
+      $scope.save = function(){
+        console.log("form submitted");
+        console.log($scope.formData);
+        $scope.formData.children = [];
+        $scope.formData.roles = [];
+
+        for(var i =0; i<$scope.users.length; i++){
+          if($scope.formData.selectedChildren[$scope.users[i].name]){
+            $scope.formData.children.push({"user_name" : $scope.users[i].name, "id" : $scope.users[i].id});
+          }
+        }
+
+        for(var i =0; i<$scope.roles.length; i++){
+          if($scope.formData.selectedRoles[$scope.roles[i].name]){
+            $scope.formData.roles.push({"name" : $scope.roles[i].name, "id" : $scope.roles[i].id});
+          }
+        }
+        
+        console.log($scope.formData);
+        User.createUser($scope.formData,$window,Flash);
+      }     
+
+      /*$("#user_name").blur(function(){        
+        var url = OPENSRP_WEB_BASE_URL + "/valid-username?userName=" + $("#user_name").val(); //192.168.23.239:9979 
+        console.log("inside blur- " + url);
+        if($("#user_name").val().length >= 6 && $("#user_name").val().length <=20){
+          $http.get(url).success(function (data) {
+            console.log("received response- " + data);          
+          });  
+        }        
+      });*/
      
       //User.users($scope,$rootScope,$timeout);
       //User.activeRolesAndAccessTokens($scope,$rootScope,$timeout);
-    }else if(roleId){
+    }else if(userName){
       $rootScope.loading = true;
-      $scope.save = function(){
+      /*$scope.save = function(){
        User.editRole($scope.roleName,$scope.userName,roleId,$scope.statusModel,$window,Flash);
-      }
-      $scope.roleId = roleId;
-      User.users($scope,$rootScope,$timeout,$routeParams.user);
-      User.activeRolesAndAccessTokens($scope,$rootScope,$timeout,$routeParams.role,$routeParams.status);
+      }*/
+      User.userByName($scope,$rootScope,$timeout,userName);
     }else{
       $rootScope.loading = true;
       $scope.userAssign =
@@ -47,3 +94,48 @@ angular.module('opensrpSiteApp')
     }
      
   });
+
+angular.module('opensrpSiteApp').directive("decoyForCheckboxGroup", function() {
+    return {
+        restrict: "A",         
+        require: "ngModel",
+         
+        link: function(scope, element, attributes, ngModel) {
+            ngModel.$validators.atLeastOneCheckboxIsChecked = function(modelValue) {  
+                console.log("decoy validator is called");                
+                console.log(modelValue);      
+                if(modelValue){
+                  return true;
+                }
+                return false;
+            }
+        }
+    };
+});
+angular.module('opensrpSiteApp').directive('usernameAvailable', function($q, $http,OPENSRP_WEB_BASE_URL) {
+  return {
+    restrict: 'A',
+    require: 'ngModel',
+    link: function(scope, elm, attr, model) { 
+      model.$asyncValidators.usernameExists = function() { 
+
+        console.log("inside asyncValidator directive with username- " + model.$viewValue);
+
+        var url = OPENSRP_WEB_BASE_URL + "/valid-username?userName=" + model.$viewValue;
+        scope.addUser.user_name.$setValidity("usernameAlreadyTaken", true);
+        return $http.get(url).success(function (data) {
+          console.log("received response- " + data);          
+          if(data == "1"){
+            model.$setValidity('usernameExists', true); 
+            console.log("inside valid userName");                               
+          }
+          else{
+            console.log("inside username already taken section");
+            scope.addUser.user_name.$setValidity("usernameAlreadyTaken", false);
+          }          
+        });   
+      };
+    }
+  } 
+});
+

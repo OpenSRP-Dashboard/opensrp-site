@@ -9,14 +9,14 @@
  * Main module of the application.
  */
 angular
-  .module('opensrpSiteApp', ['ngBootstrap','ngAnimate','ngCookies','ngResource','ngRoute','angular-momentjs','ngSanitize','ngTouch','ui.bootstrap','ngDialog','angular-mapbox','nvd3','chart.js','checklist-model','mm.acl','flash'])
+  .module('opensrpSiteApp', ['ngBootstrap','ngAnimate','ngCookies','ngResource','ngRoute','angular-momentjs','ngSanitize','ngTouch','ui.bootstrap','ngDialog','angular-mapbox','nvd3','chart.js','checklist-model','mm.acl','flash', 'ngMessages'])
   .constant('AUTH_URL', 'http://192.168.21.167:1337/27.147.129.50:9979/authenticate-user')
   //.constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.246:1234/192.168.21.246:9979')
   //ip for jivita server - 192.168.19.90
-  .constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.86:1337/192.168.21.86:9979')
+  .constant('OPENSRP_WEB_BASE_URL', 'http://192.168.23.239:1337/192.168.23.239:9979')
   .constant("HH_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/hh?anm-id=')
   .constant("ELCO_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/ec?anm-id=')
-  .constant("COUCHURL",'http://192.168.21.86:1337/192.168.21.86:5984')
+  .constant("COUCHURL",'http://192.168.23.239:1337/192.168.23.239:5984')
   .config(['AclServiceProvider', function (AclServiceProvider) {
   var myConfig = {
       storage: 'localStorage',
@@ -158,7 +158,7 @@ angular
           }]
         }
       })
-      .when('/role/:param', {
+      .when('/role/:roleId', {
         templateUrl: 'views/role-edit.html',
         controller: 'RoleCtrl',
         controllerAs: 'role',
@@ -192,7 +192,7 @@ angular
           }]
         }
       })
-      .when('/user', {
+      .when('/users', {
         templateUrl: 'views/user.html',
         controller: 'UserCtrl',
         controllerAs: 'user',
@@ -209,7 +209,7 @@ angular
           }]
         }
       })
-      .when('/user/:param/:role/:user/:status', {
+      .when('/user/:name', {
         templateUrl: 'views/user-assign-edit.html',
         controller: 'UserCtrl',
         controllerAs: 'user',
@@ -573,28 +573,6 @@ angular
         
       }
       
-      /*$rootScope.checkFunction = function(){
-        console.log("log from newly added checkFunction in app.js");
-        
-        //var url = "http://192.168.21.218:1234/192.168.21.218:9979/registers/hh?anm-id=sohel";
-        var url = "http://192.168.21.218:1234/192.168.21.218:5984/opensrp/_design/ScheduleLog/_view/testViewForDashboard";
-        var couchUrl = "http://192.168.21.218:1234/192.168.21.218:5984/opensrp/_design/ScheduleLog/_view/testViewForDashboard";
-        console.log("now will issue a http get request.");
-        $http({
-            method: 'GET',
-            url: couchUrl
-        }).then(
-            function successCallback(response) {
-                console.log("success occurred ");
-                console.log(response.statusText);
-            },
-            function errorCallback(response) {
-                console.log("error occurred.");
-                console.log(response.status + " -- " + response.statusText);
-            }
-          );
-      }*/
-
     $rootScope.aclLing =
      ' <a href="#/acl">'+
      '<i class="glyphicon glyphicon-list-alt"></i>'+

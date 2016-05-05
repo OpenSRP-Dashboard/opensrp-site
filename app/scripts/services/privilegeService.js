@@ -12,19 +12,19 @@ angular.module('opensrpSiteApp')
         console.log("inside testService");
         var privileges = null;
 
-        var couchUrl = "http://192.168.21.86:1337/192.168.21.86:5984/opensrp/_design/Privilege/_view/privilege_by_name";
-        var testUrl = "http://192.168.21.86:1337/192.168.21.86:5984/opensrp/_design/Privilege/_view/all";
+        var couchUrl = "http://192.168.23.239:1337/192.168.23.239:5984/opensrp/_design/Privilege/_view/privilege_by_name";
+        //var testUrl = "http://192.168.21.86:1337/192.168.21.86:5984/opensrp/_design/Privilege/_view/all";
         this.promise =  $http.get(couchUrl, { 
-                  cache: true, 
-                  withCredentials: false,
-                  headers: {
-                    'Authorization' : ''
-                  }
-                })
-                .success(function (data) { 
-                  console.log("inside success function of privilege promise.");           
-                  privileges = data.rows;
-            });
+              cache: true, 
+              withCredentials: false,
+              headers: {
+                'Authorization' : ''
+              }
+            })
+            .success(function (data) { 
+              console.log("inside success function of privilege promise.");           
+              privileges = data.rows;
+        });
         this.privilegeById =  function($scope,$rootScope,$timeout,id){
           //http://localhost:5984/opensrp/_design/Privilege/_view/privilege_by_id?key=%225da9913d2e051554a772deae8b02aa0b%22
           var url = COUCHURL+'/opensrp/_design/Privilege/_view/privilege_by_id?key="' + id + '"';              

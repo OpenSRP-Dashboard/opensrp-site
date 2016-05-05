@@ -124,7 +124,7 @@ angular.module('opensrpSiteApp')
       this.allUsers = function ($scope,$rootScope,$timeout){
         //"http://192.168.21.86:1337/192.168.21.86:5984/opensrp/_design/Privilege/_view/privilege_by_name";
         var apiURLs = COUCHURL + "/opensrp/_design/User/_view/by_id"; //OPENSRP_WEB_BASE_URL+"/all-roles-with-user"; 
-         $http.get(apiURLs, { 
+        $http.get(apiURLs, { 
           cache: true,
           withCredentials: false,
           headers: {
@@ -138,18 +138,114 @@ angular.module('opensrpSiteApp')
             $scope.disabled = false;
           }, 250);  
         });
-
-        /*$http.get(couchUrl, { 
-                  cache: true, 
-                  withCredentials: false,
-                  headers: {
-                    'Authorization' : ''
-                  }
-                })
-                .success(function (data) { 
-                  console.log("inside success function of privilege promise.");           
-                  privileges = data.rows;
-            }) */
       }
-     
+
+      this.fetchRoles = function($scope, $rootScope, $timeout){
+        var roleUrl = COUCHURL + "/opensrp/_design/Role/_view/role_by_name";
+        $http.get(roleUrl, { 
+          cache: true,
+          withCredentials: false,
+          headers: {
+            'Authorization' : ''
+          }
+        })
+        .success(function (data) {
+          $scope.roles = [];
+          $scope.formData.selectedRoles = [];
+          for(var i = 0 ; i < data.rows.length; i++){
+            $scope.roles.push({ "name" : data.rows[i].key, "id" : data.rows[i].id });
+            $scope.formData.selectedRoles[data.rows[i].key] = false;
+          }          
+          console.log($scope.formData.selectedRoles );
+          $rootScope.loading = false;
+          $scope.disabled = false;          
+        });
+      }
+
+      this.fetchUsers = function($scope, $rootScope, $timeout){
+        var userUrl = COUCHURL + "/opensrp/_design/User/_view/by_user_name";
+        $http.get(userUrl, { 
+          cache: true,
+          withCredentials: false,
+          headers: {
+            'Authorization' : ''
+          }
+        })
+        .success(function (data) {
+          $scope.users = [];
+          $scope.formData.parent = {};
+          $scope.formData.selectedChildren = [];
+          for(var i = 0 ; i < data.rows.length; i++){
+            $scope.users.push({ "name" : data.rows[i].key, "id" : data.rows[i].id });
+            $scope.formData.selectedChildren[data.rows[i].key] = false;
+          }          
+          console.log($scope.formData.selectedChildren );
+          $rootScope.loading = false;
+          $scope.disabled = false;          
+        });
+      }
+
+      this.createUser = function(data,$window,Flash){
+        
+        $("#submit").attr('disabled','disabled');
+        $("#submit").html("Please Wait");
+        
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/add-user";          
+        delete data.selectedChildren;
+        delete data.selectedRoles;
+        delete data.decoyCheckbox;
+        console.log(data);    
+        $http.post(apiURLs, data).success(function (data) {
+          $("#submit").html("Submit");
+           $('#submit').prop('disabled', false);
+          if (data == 1) {            
+            var message = '<strong>Successfully created a user. </strong> ';
+            Flash.create('success', message, 'custom-class');
+            $window.location = '/#/users';
+          }else{
+             $("#message").html("<p class='lead'>Failed to create user</p>");
+            $( "#message" ).delay(3000).fadeOut( "slow" );
+          }
+          
+        });   
+      };
+
+      this.userByName =  function($scope,$rootScope,$timeout,id){
+        //http://localhost:5984/opensrp/_design/Privilege/_view/privilege_by_id?key=%225da9913d2e051554a772deae8b02aa0b%22
+        var url = COUCHURL+'/opensrp/_design/User/_view/by_user_name?key="' + id + '"';              
+        $timeout(function () {
+          var roleData = $http.get(url, { 
+            cache: true, 
+            withCredentials: false,                  
+            headers: {
+              'Authorization' : ''
+            }
+          })
+          .success(function (data) {  
+            $rootScope.loading = false;
+            if(data.rows.length > 0){
+              console.log("role data successfully fetched for id- " + id);
+              console.log(data);  
+              $scope.role = data.rows[0].value;
+
+              $scope.formData = {};
+              $scope.formData.name = $scope.role.name;
+              $scope.formData.id = $scope.role._id;
+              $scope.formData.privilegesOfCurrentRole = {};
+              while($rootScope.accessList == null){
+
+              }
+              for(var i = 0; i < $rootScope.accessList.length; i++){
+                $scope.formData.privilegesOfCurrentRole[$rootScope.accessList[i].name] = false;
+              }
+              for(var i =0; i < $scope.role.privileges.length; i++){
+                $scope.formData.privilegesOfCurrentRole[$scope.role.privileges[i].name] = true;
+              }
+              $scope.formData.status = $scope.role.status;
+              console.log($scope.formData);
+              $rootScope.loading = false;
+            } 
+          });
+        }, 250); 
+      };     
   });

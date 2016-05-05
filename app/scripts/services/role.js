@@ -26,74 +26,36 @@ angular.module('opensrpSiteApp')
       })
     } ;
 
-    this.roleAndAccesssByRoleName = function(roleId,$rootScope,$timeout,$scope){
-        console.log("call for a particular role is here.");
-        var apiURLs = COUCHURL + '/opensrp/_design/Role/_view/role_by_id?key="' + roleId + '"';//OPENSRP_WEB_BASE_URL+"/role-access-tokens-by-name?roleName="+roleName;
-        
-        $timeout(function () {
-          var roleData = $http.get(apiURLs, { 
-            cache: true, 
-            withCredentials: false,                  
-            headers: {
-              'Authorization' : ''
-            }
-          })
-          .success(function (data) {                         
-             console.log("data successfully fetched");
-            // processing has to be done
-            console.log(data);
-            $timeout(function () {
-              $rootScope.roleAndAccess = data;
-              $scope.statusData = [
-                'status'
-              ];
-              $rootScope.formData = {
-                roleName : $rootScope.roleAndAccess.roleName ,
-                roleId : $rootScope.roleAndAccess.roleId,
-                accessTokens : [],
-                status : []
-              }
-
-              /*for(var i=0; i< Object.keys(data.accessTokens).length ; i++){
-                $rootScope.formData.accessTokens.push(data.accessTokens[Object.keys(data.accessTokens)[i]]);
-              }*/
-              $scope.disabled = false;
-              if ($rootScope.roleAndAccess.status == 'Active') {
-                 $rootScope.formData.status.push('status') ;
-              }
-              //console.log(data);
-              $rootScope.loading = false;
-              //console.log($rootScope.roleList);            
-            
-          });
-        }, 250); 
-        });         
-      };     
-
       this.save = function(data,$window,Flash){
         
         $("#submit").attr('disabled','disabled');
         $("#submit").html("Please Wait");
-        var apiURLs = OPENSRP_WEB_BASE_URL+"/add-acl";       
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/add-role";   
+        data.privileges = [];
+        for(var i = 0; i < $rootScope.accessList.length; i++){
+          if(data.privilegesOfCurrentRole[$rootScope.accessList[i].name]){
+            data.privileges.push({ "name": $rootScope.accessList[i].name, 
+                                    "id" : $rootScope.accessList[i].id});
+          }
+        }
+        delete data.privilegesOfCurrentRole;
+        console.log(data);    
         $http.post(apiURLs, data).success(function (data) {
           $("#submit").html("Submit");
            $('#submit').prop('disabled', false);
           if (data == 1) {            
             var message = '<strong>Successfully created a role. </strong> ';
             Flash.create('success', message, 'custom-class');
-            $window.location = '/#/acl';
-          }else if (data == 2) {
-            $("#message").html("<p class='lead'>This role already exists</p>");
-            $( "#message" ).delay(3000).fadeOut( "slow" );
+            $window.location = '/#/roles';
           }else{
              $("#message").html("<p class='lead'>Failed to create role</p>");
             $( "#message" ).delay(3000).fadeOut( "slow" );
           }
           
-        });       
+        });   
       };
 
-      this.accessTokens = function($rootScope, $timeout){
+      this.accessTokens = function($rootScope, $timeout, $scope, roleId){
         var url = COUCHURL + '/opensrp/_design/Privilege/_view/privilege_by_name';
         $timeout(function () {
           var roleData = $http.get(url, { 
@@ -109,9 +71,56 @@ angular.module('opensrpSiteApp')
               console.log(data); 
               $rootScope.accessList = [];
               for(var i = 0; i < data.rows.length; i++){
-                $rootScope.accessList.push(data.rows[i].key);
+                $rootScope.accessList.push({"name" : data.rows[i].key, "id" : data.rows[i].id});
               }
+              console.log($rootScope.accessList);
+              if($scope.addRole){
+                $scope.formData.privilegesOfCurrentRole = {};
+                for(var i = 0; i < $rootScope.accessList.length; i++){
+                  $scope.formData.privilegesOfCurrentRole[$rootScope.accessList[i].name] = false;
+                }
+              }
+              $rootScope.loading = true;
+              //roleById($scope, $rootScope, $timeout, roleId);
               //$rootScope.accessList = ['Household', 'Household Details', 'Elco', 'Elco Details','PW','PW Details','Data Export','User List','User Assign','User Assign Edit','Role Edit','Add Role','Acl','Add Rule','Edit Rule','Rule List'];
+
+              //this.roleById($scope,$rootScope,$timeout,$scope.id);
+
+              $timeout(function () {
+                var url = COUCHURL+'/opensrp/_design/Role/_view/role_by_id?key="' + roleId + '"';              
+                var roleData = $http.get(url, { 
+                  cache: false, 
+                  withCredentials: false,                  
+                  headers: {
+                    'Authorization' : ''
+                  }
+                })
+                .success(function (data) {  
+                  $rootScope.loading = false;
+                  if(data.rows.length > 0){
+                    console.log("role data successfully fetched for id- " + roleId);
+                    console.log(data);  
+                    $scope.role = data.rows[0].value;
+
+                    $scope.formData = {};
+                    $scope.formData.name = $scope.role.name;
+                    $scope.formData.id = $scope.role._id;
+                    $scope.formData.privilegesOfCurrentRole = {};
+                    while(angular.isUndefined($rootScope.accessList)){
+
+                    }
+                    for(var i = 0; i < $rootScope.accessList.length; i++){
+                      $scope.formData.privilegesOfCurrentRole[$rootScope.accessList[i].name] = false;
+                    }
+                    for(var i =0; i < $scope.role.privileges.length; i++){
+                      $scope.formData.privilegesOfCurrentRole[$scope.role.privileges[i].name] = true;
+                    }
+                    $scope.formData.status = $scope.role.status;
+                    console.log($scope.formData);
+                    $rootScope.loading = false;
+                  } 
+                });
+              }, 250); 
             } 
           });
         }, 250); 
@@ -119,26 +128,21 @@ angular.module('opensrpSiteApp')
       };
 
       this.edit = function(data,$window,Flash){
-        
-        //console.log(data.accessTokens.length)
-        var dd = [];
-        var obj = {}
-        for(var i=0;i<data.accessTokens.length;i++){
-          obj[i] = data.accessTokens[i];
-        }
-        var statusValue = "";
-        if (data.status != "") {
-          statusValue = "Active";
-        }else{
-          statusValue = "InActive";
-        }        
-        data.accessTokens = obj;
-        data.status = statusValue;       
-        console.log(data);
-        
+              
         $("#submit").attr('disabled','disabled');
         $("#submit").html("Please Wait");
-        var apiURLs = OPENSRP_WEB_BASE_URL+"/edit-acl";       
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/edit-role";     
+        data.privileges = [];
+        for(var i = 0; i < $rootScope.accessList.length; i++){
+          if(data.privilegesOfCurrentRole[$rootScope.accessList[i].name]){
+            data.privileges.push({ "name": $rootScope.accessList[i].name, 
+                                    "id" : $rootScope.accessList[i].id});
+          }
+        }
+        //console.log(data);
+        delete data.privilegesOfCurrentRole;
+        console.log("final object being sent- " + data);
+
         $http.post(apiURLs, data).success(function (data) {
           $("#submit").html("Submit");
            $('#submit').prop('disabled', false);
@@ -146,16 +150,13 @@ angular.module('opensrpSiteApp')
             
             var message = '<strong>Successfully edit a role. </strong> ';
             Flash.create('success', message, 'custom-class');
-            $window.location = '/#/acl';
-          }else if (data == 2) {
-            $("#message").html("<p class='lead'>This role already exists</p>");
-            $( "#message" ).delay(3000).fadeOut( "slow" );
+            $window.location = '/#/roles';
           }else{
-             $("#message").html("<p class='lead'>Failed to create role</p>");
+             $("#message").html("<p class='lead'>Error while updating</p>");
             $( "#message" ).delay(3000).fadeOut( "slow" );
           }
           
-        });     
+        });
       };
 
       this.allRoles =  function($scope,$rootScope,$timeout){
@@ -197,25 +198,21 @@ angular.module('opensrpSiteApp')
               $scope.role = data.rows[0].value;
 
               $scope.formData = {};
-              $scope.formData.roleName = $scope.role.name;
-              $scope.formData.roleId = $scope.role._id;
-              /*roleName roleId
-              $scope.formData = {
-                roleName : $scope.role.name,
-                roleId : $scope.role._id,
-                accessTokens : [],
-                status : []
-              }*/
+              $scope.formData.name = $scope.role.name;
+              $scope.formData.id = $scope.role._id;
+              $scope.formData.privilegesOfCurrentRole = {};
+              while(angular.isUndefined($rootScope.accessList)){
 
-              /*for(var i=0; i< Object.keys(data.accessTokens).length ; i++){
-                $rootScope.formData.accessTokens.push(data.accessTokens[Object.keys(data.accessTokens)[i]]);
-              }*/
-              /*$scope.disabled = false;
-              if ($rootScope.roleAndAccess.status == 'Active') {
-                 $rootScope.formData.status.push('status') ;
               }
-              //console.log(data);
-              $rootScope.loading = false;*/
+              for(var i = 0; i < $rootScope.accessList.length; i++){
+                $scope.formData.privilegesOfCurrentRole[$rootScope.accessList[i].name] = false;
+              }
+              for(var i =0; i < $scope.role.privileges.length; i++){
+                $scope.formData.privilegesOfCurrentRole[$scope.role.privileges[i].name] = true;
+              }
+              $scope.formData.status = $scope.role.status;
+              console.log($scope.formData);
+              $rootScope.loading = false;
             } 
           });
         }, 250); 

@@ -23,7 +23,7 @@ angular.module('opensrpSiteApp')
     $scope.schedules = scheduleLogService.Data();
     console.log("inside ScheduleLogCtrl");
     //console.log(AclService);
-    $scope.sortType = 'id';
+    $scope.sortType = 'value.caseID';
     $scope.sortReverse  = false;
     
     /*$scope.totalItems = $scope.schedules.length;
@@ -43,7 +43,7 @@ angular.module('opensrpSiteApp')
     var y = moment(x).format('YYYY-MM-DD'); 
 
     $scope.dateRange = {
-      startDate: moment(new Date('March 1, 2016')).format('YYYY-MM-DD'),
+      startDate: moment(new Date('January 1, 2016')).format('YYYY-MM-DD'),
       endDate: moment(new Date()).format('YYYY-MM-DD')
     };
 

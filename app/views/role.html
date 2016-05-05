@@ -12,21 +12,24 @@
                   <p class="lead"></p>
                   <form  class="form-search-patient " ng-submit="save()">
                   <span id="validmessagename" style="color:#000000;display:none">You have typed invalid character. </span>                    
-                  <input type="text" class="form-control" ng-required="true" id="name" name="roleName" ng-model="formData.roleName" placeholder="Role Name">
-                  <input type="hidden" class="form-control"  id="roleId" name="roleId" ng-model="formData.roleId" placeholder="Role Name">
+                  <input type="text" class="form-control" ng-required="true" id="name" name="roleName" ng-model="formData.name" placeholder="Role Name">
                   <br />
                   <label> Access Tokens : </label>
                   <span ng-repeat="access in accessList">
-                  <input type="checkbox"  class="role_method" ng-model="formData.accessTokens[$index]" ng-true-value="'{{access}}'">{{access}}
+
+                  <input type="checkbox" ng-checked="formData.privilegesOfCurrentRole[access.name]" ng-click="formData.privilegesOfCurrentRole[access.name] = !formData.privilegesOfCurrentRole[access.name]"> {{access.name}}                  
+                  </span>
                  
                   </span>
                   <br />
                   <label> Status : </label>
-                  <input type="checkbox"  class="role_method" ng-model="formData.status" ng-false-value ="'InActive'" ng-true-value="'Active'">
+                  <input type="checkbox"  class="role_method" ng-model="formData.status" ng-false-value ="false" ng-true-value="true">
+                  <!-- ng-false-value ="'InActive'" ng-true-value="'Active'" -->
                   <br />
                   <div id="message"></div>
                   <button id="submit"  class="btn btn-lg btn-primary btn-block"  type="submit"> Submit</button>
                   </form>
+                  {{formData}}
                 </div>
               </div>
             </div>

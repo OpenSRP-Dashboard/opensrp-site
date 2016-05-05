@@ -13,27 +13,30 @@
                   
                   <form  class="form-search-patient " ng-submit="edit()">
                   <span id="validmessagename" style="color:#000000;display:none">You have typed invalid character. </span>                    
-                  <input type="text" class="form-control" ng-readonly="true" id="name" name="roleName" ng-model="formData.roleName" placeholder="Role Name">
-                  <input type="hidden" class="form-control" id="roleId" name="roleId" ng-model="formData.roleId" placeholder="Role Name">
+                  <input type="text" class="form-control" ng-readonly="true" id="name" name="roleName" ng-model="formData.name" placeholder="Role Name">
+                  <input type="hidden" class="form-control" id="roleId" name="roleId" ng-model="formData.id" placeholder="Role Name">
                   <br />
-                  <label> Access Tokens: </label>
-                  <span ng-repeat="access in accessList">
+                  <label> Privileges: </label>
+                  <br/>
+                  <span ng-repeat="access in accessList" style="float:left; width:300px; display:inline-block;">
                   <!-- <input ng-checked="checked(access)" type="checkbox"  class="role_method" ng-model="formData.accessTokens[$index]" ng-true-value="'{{access}}'">{{access}} -->
-                  <input type="checkbox" checklist-model="formData.accessTokens" checklist-value="access"
-                  ng-checked="ifPrivileged(access)"> {{access}}
-                 
+
+                  <input type="checkbox" ng-checked="formData.privilegesOfCurrentRole[access.name]" ng-click="formData.privilegesOfCurrentRole[access.name] = !formData.privilegesOfCurrentRole[access.name]">   <span > {{access.name}}</span>  <!--  {{$even}} <span ng-if="$even">wow</span>             -->
+                  <br ng-if="!$even">
                   </span>
+                  
                   <br />
+                  <br/>
+                  <br/>
+                  <div style="float:left; width:300px; display:inline-block;">
                   <label> Status : </label>
-                  <span ng-repeat="statusValue in statusData">
-                  <input type="checkbox" checklist-model="formData.status" checklist-value="statusValue">
-                  </span>
+                  <input type="checkbox"  class="role_method" ng-model="formData.status" >
+                  </div>
                   <br />
                   <div id="message"></div>
-                  <button id="submit" ng-disabled ="disabled" class="btn btn-lg btn-primary btn-block"  type="submit"> Submit</button>
+                  <button id="submit" class="btn btn-lg btn-primary btn-block"  type="submit"> Submit</button>
                   </form>
-
-                  {{role}}
+                  <!-- {{formData.privilegesOfCurrentRole}} -->
                   <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
                 </div>
               </div>

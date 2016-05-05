@@ -11,23 +11,29 @@
                   <h2 class="form-signin-heading">Add Schedule Rule</h2>
                   <p class="lead"></p>
                   <form id="rule_def" ng-submit="save()">
-                    <label>Schedule Rule Name:</label><input ng-model="name" type="text">			
+				  <div class="col-sm-9 col-md-12">
+                    <label>Schedule Rule Name:</label><input class="form-control ng-pristine ng-untouched ng-valid" ng-model="name" type="text">
+					</div>			
                     <div id="rule">
                       <div id="rule1" class="clonedInput">
-                        <h3 id="reference" name="reference" class="heading-reference">Rule #1</h3>
+                       </br></br></br>
+						<div class="col-sm-6 col-md-6">
                         <label>Start Form Name</label>
-                        <input type="text" name="startFormName1[]" />
+                        <input class="form-control ng-pristine ng-untouched ng-valid" type="text" name="startFormName1[]" />
+						</div>
+						<div class="col-sm-6 col-md-6">
                         <label>End Form Name</label>
-                        <input type="text" name="endFormName1[]" />
-                        <p>Defination</p>
+                        <input class="form-control ng-pristine ng-untouched ng-valid" type="text" name="endFormName1[]" />
+						</div>
+                        <label>Defination</label>
                         <div id="defination_space_1">                        
                         </div>
-                        <div style="clear:both;padding-top:25px;"></div>				
-                        <input type="button"  onclick="def(this.id)" class="btnRule" id="btnRule_1" value="add defination">
+						</br></br></br>
+                        <input class="btn btn-primary dbtn" type="button"  onclick="def(this.id)" class="btnRule" id="btnRule_1" value="add defination">
                       </div><!-- end #entry1 -->
                     </div>
                     <div id="addDelButtons">
-                        <input type="button" id="btnAdd" value="add Rule">
+                        <input class="btn btn-primary dbtn" type="button" id="btnAdd" value="add Rule">
                     </div>
                     <div id="message"></div>
                     <button id="submit"  class="btn btn-lg btn-primary btn-block"  type="submit"> Submit</button>

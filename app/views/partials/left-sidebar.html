@@ -3,20 +3,21 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <span data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close">
-                            </span>Sidebar</span>
+                            <span data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-th-large">
+                            </span>Menu</span>
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in">
                       <div class="panel-body">
                         <ul class="nav">
-                          <li ng-show="can('PW Details')" ><a href="#/households"><i class="glyphicon glyphicon-list-alt"></i> <span> Household Details</span> </a> </li>
-                          <li ng-show="can('Elco Details')" ><a href="#/elcos"><i class="glyphicon glyphicon-list-alt"></i> <span> Elco Details</span> </a> </li>
-                          <li ng-show="can('PW Details')" ><a href="#/pregnant-womens"><i class="glyphicon glyphicon-list-alt"></i> <span> Pregnant Women Details</span> </a> </li>                          
-                          <li ng-show="can('Acl')" ><a href="#/acl"><i class="glyphicon glyphicon-list-alt"></i><span> Acl</span></a> </li>
-                          <li ng-show="can('User List')"><a href="#/user"><i class="glyphicon glyphicon-list-alt"></i><span> User</span></a> </li>
-                          <li ng-show="can('Elco Details')"><a href="#/schedule-log"><i class="glyphicon glyphicon-list-alt"></i><span> Schedule Log</span></a> </li>
-                          <li ng-show="can('Rule List')"><a href="#/schedule-rule"><i class="glyphicon glyphicon-list-alt"></i><span> Schedule Rule</span></a> </li>  
+                          <li ng-show="can('PW Details')" ><a href="#/households"><i class="glyphicon glyphicon-chevron-right"></i> <span> Household Details</span> </a> </li>
+                          <li ng-show="can('Elco Details')" ><a href="#/elcos"><i class="glyphicon glyphicon-chevron-right"></i> <span> Elco Details</span> </a> </li>
+                          <li ng-show="can('PW Details')" ><a href="#/pregnant-womens"><i class="glyphicon glyphicon-chevron-right"></i> <span> Pregnant Women Details</span> </a> </li>                          
+                          <!-- <li ng-show="can('Acl')" ><a href="#/acl"><i class="glyphicon glyphicon-chevron-right"></i><span> Acl</span></a> </li> -->
+                          <li ng-show="can('User List')"><a href="#/users"><i class="glyphicon glyphicon-chevron-right"></i><span> Users</span></a> </li>
+                          <li ng-show="can('User List')"><a href="#/roles"><i class="glyphicon glyphicon-chevron-right"></i><span> Roles</span></a> </li>
+                          <li ng-show="can('Elco Details')"><a href="#/schedule-log"><i class="glyphicon glyphicon-chevron-right"></i><span> Schedule Log</span></a> </li>
+                          <li ng-show="can('Rule List')"><a href="#/schedule-rule"><i class="glyphicon glyphicon-chevron-right"></i><span> Schedule Rule</span></a> </li>  
                         </ul>
                       </div>
                     </div>

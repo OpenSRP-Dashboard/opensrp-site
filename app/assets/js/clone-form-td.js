@@ -34,14 +34,14 @@ $(function () {
         }      
         
         $("#rule").append('<div id="rule'+newNum+'" class="clonedInput">'+
-          '<h3 id="reference'+newNum+'" name="reference" class="heading-reference">Rule #'+newNum+'</h3>'+		
-          '<lable>Start Form Name:</label><input type="text" name="startFormName'+newNum+'[]" />'+
-          '<lable>End Form Name:</label><input type="text" name="endFormName'+newNum+'[]" />'+
-          '<a href="#" class="ruleDelete" id="ruleDel'+newNum+'"> Delete</a>'+
-          '<p>Defination</p>'+
+          '</br></br></br>'+		
+          '<div class="col-sm-6 col-md-6"><lable>Start Form Name:</label><input class="form-control ng-pristine ng-untouched ng-valid" type="text" name="startFormName'+newNum+'[]" /></div>'+
+          '<div class="col-sm-6 col-md-6"><lable>End Form Name:</label><input class="form-control ng-pristine ng-untouched ng-valid" type="text" name="endFormName'+newNum+'[]" />'+
+          '<a href="#" class="ruleDelete" id="ruleDel'+newNum+'"> Delete</a></div>'+
+          '<label>Defination</label>'+
           '<div id="defination_space_'+newNum+'"></div>'+
           '<div style="clear:both;padding-top:25px;"></div>'+        
-          '<input type="button"  onclick="def(this.id)" class="btnRule" id="btnRule_'+newNum+'" value="add defination">'+
+          '<input type="button"  onclick="def(this.id)" class="btn btn-primary btnRule" id="btnRule_'+newNum+'" value="add defination">'+
         '</div>'
         ); 
     });
@@ -70,7 +70,7 @@ $(document).ready(function () {
 function def(idName){
   
   var id = idName.split("_")[1];		       		     
-		$("#defination_space_"+id).append('<div class="defination'+id+'" style="border:1px solid #fff;margin-right:5px;;margin-bottom:20px"><label> Name:</label><input type="text" name="name'+id+'[]"/>'+
-            '<label>Value:</label> <input type="text" name="value'+id+'[]"/><a href="#" class="delete" id="def'+id+'"> Delete</a> </div>'
+		$("#defination_space_"+id).append('<div class="defination'+id+'" style="border:1px solid #e8eaeb;background:#ecf0f1;margin-right:5px;;margin-bottom:20px"><div class="col-sm-6 col-md-6"><label> Name:</label><input class="form-control ng-pristine ng-untouched ng-valid" type="text" name="name'+id+'[]"/></div>'+
+            '<div class="col-sm-6 col-md-6"><label>Value:</label> <input class="form-control ng-pristine ng-untouched ng-valid" type="text" name="value'+id+'[]"/></div><a href="#" class="delete" id="def'+id+'"> Delete</a> </div>'
 		);
 }

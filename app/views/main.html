@@ -10,7 +10,8 @@
 <div show-during-resolve class="loader">   
   <center><img src="images/spinner.gif"  alt="Opensrp"/></center>
 </div>
- <div>  
+ <div>
+ <input type="text" class="form-control2 " placeholder="Search household" ng-model="filterTerm">
 <mapbox map-id="probir123.ifhlcpgl"  zoom="12" lat="23.8103" lng="90.41" width="100%" height="500" >                                                
   <div ng-repeat="household in households | filter: filterTerm"> 
     <marker lat="{{household.value[0]}}" lng="{{household.value[1]}}"  color="#39cccc" symbol="village" icon="village">
@@ -25,7 +26,6 @@
   </div> 
 </mapbox>
 
-<input type="text" class="form-control test" placeholder="Search household" ng-model="filterTerm">
    </div>
     <div class='container sp'>
 			<div class="row ">

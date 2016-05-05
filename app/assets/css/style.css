@@ -1189,3 +1189,15 @@ th {
 .rule{
   margin-left: 20px;
 }
+.panel-body .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    border-top: 1px solid #ddd;
+    line-height: 1.42857;
+    padding: 8px;
+    vertical-align: top;
+	background:#fff;
+	color: #4e4e4e;
+	font-family: "Open Sans",sans-serif;
+	font-size:14px;
+}
+.panel-body .hr {
+   border-bottom:1px solid #23bff2}
