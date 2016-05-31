@@ -93,6 +93,69 @@ angular.module('opensrpSiteApp')
             },250);
         }
     }
+
+    this.chartDataForHH = function($scope,$http,$timeout,url){
+      var district, upazilla, union, provider;
+      if(angular.isUndefined($scope.dis)){
+        district = 'Gaibandha';
+      }
+      else{
+        district = 'Gaibandha';
+      }
+      if(angular.isUndefined($scope.upa) ){
+        upazilla = '';
+      }
+      else{
+        upazilla =  $scope.upa;
+      }
+
+      if(angular.isUndefined($scope.uni) ){
+        union = '';
+      }
+      else{
+        union = $scope.uni;
+      }
+
+      if(angular.isUndefined($scope.uu) ){
+        provider = '';
+      }
+      else{
+        provider = $scope.uu;
+      }
+      
+      //var url = OPENSRP_WEB_BASE_URL+"/registers/hh-data-count?district=Gaibandha&upazilla=GAIBANDHA SADAR&union=LAXMIPUR&provider=";             
+      var url = OPENSRP_WEB_BASE_URL+"/registers/" + url +"?district=" + district + 
+                    "&upazilla=" + upazilla + "&union=" + union + "&provider=" + provider;
+      
+      $rootScope.loading = true;
+      $http.get(url, { cache: false}).success(function (data) {              
+        //console.log("from new service");
+        console.log(data[0].weeklyCountsForChart);
+        var weekCounts = data[0].weeklyCountsForChart;        
+        $timeout(function () {
+          var date = new Date();      
+          var monthLists = [];
+          monthLists[3] = new Date(date.getFullYear(), date.getMonth(), 1);
+          monthLists[2] = new Date(date.getFullYear(), date.getMonth()-1, 1);
+          monthLists[1] = new Date(date.getFullYear(), date.getMonth()-2, 1);
+          monthLists[0] = new Date(date.getFullYear(), date.getMonth()-3, 1);
+          var monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"];
+          $scope.labels = [monthNames[monthLists[0].getMonth()], monthNames[monthLists[1].getMonth()], monthNames[monthLists[2].getMonth()], monthNames[monthLists[3].getMonth()]];
+          $scope.series = ['1st Week ', '2nd Week ','3rd Week', '4th Week ','5th Week '];
+            
+          $scope.chartData = [
+            [weekCounts[0],weekCounts[5],weekCounts[10],weekCounts[15]],
+            [weekCounts[1],weekCounts[6],weekCounts[11],weekCounts[16]],
+            [weekCounts[2],weekCounts[7],weekCounts[12],weekCounts[17]],
+            [weekCounts[3],weekCounts[8],weekCounts[13],weekCounts[18]],
+            [weekCounts[4],weekCounts[9],weekCounts[14],weekCounts[19]]
+          ];
+        }, 250); 
+        $rootScope.loading = false;
+      });
+    }
+
     this.chartDataCal = function($scope,monthList,data,DATE,$timeout){
       $scope.search = {};
       $scope.resetFilters = function () {    
@@ -111,7 +174,7 @@ angular.module('opensrpSiteApp')
         monthLists[1] = new Date(date.getFullYear(), date.getMonth()-2, 1);
         monthLists[0] = new Date(date.getFullYear(), date.getMonth()-3, 1);
         for(var outer = 0;outer < monthLists.length;outer++){
-          var weeks =  getWeeksInMonth(moment(monthLists[outer]).format('MM'),moment(monthLists[outer]).format('YYYY'),moment(monthLists[outer]).format('YYYY-MM-DD'));         
+          var weeks =  getWeeksInMonth(moment(monthLists[outer]).format('MM'),moment(monthLists[outer]).format('YYYY'),moment(monthLists[outer]).format('YYYY-MM-DD'));
          //console.log(weeks)
           for(var inner=0;inner<weeks.length;inner++){
             if (!angular.isUndefined(weeks[inner])) {
@@ -186,6 +249,19 @@ angular.module('opensrpSiteApp')
       }
       return false;
     }
+
+    this.bypassAcl = function($scope, $window){     
+      AclService.setAbilities({ member: ['login', 'logout', 'Acl', 'Add Role', 'Add Rule', 'Data Export',
+                                      'Edit Rule', 'Elco', 'Elco Details', 'Household', 'Household Details',
+                                      'PW', 'PW Details', 'Role Edit', 'Rule List', 'User Assign',
+                                      'User Assign Edit', 'User List'] });     
+
+      AclService.attachRole('member');   
+      $scope.loading = false;
+      $window.location = '/#/';
+      console.log("acl bypassed.");       
+    }
+
     this.acl = function($timeout,$rootScope,$http,username,$window,Authentication,$location,$scope){
       $rootScope.aclAccess = "";
       //var apiURLs = OPENSRP_WEB_BASE_URL+"/role-access-tokens?userName="+username;
@@ -229,7 +305,7 @@ angular.module('opensrpSiteApp')
         window.locationList = JSON.parse(JSON.stringify(data.map.data.myArrayList));           
         window.districtList = jsonsql.query("select * from locationList where ( tag == 'District'  ) ",locationList);
         $scope.districts=districtList;
-         $rootScope.loading = false;
+        $rootScope.loading = false;
       });
     }
     
@@ -239,9 +315,9 @@ angular.module('opensrpSiteApp')
       $http.get(url, { cache: true}).success(function (data) {              
         window.userData = JSON.parse(JSON.stringify(data));           
        // window.userList = jsonsql.query("select * from userData where ( tag == 'District'  ) ",userData);
-       
+        userData.sort();
         $scope.users=userData;
-         $rootScope.loading = false;
+        $rootScope.loading = false;
       });      
     }
     

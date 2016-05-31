@@ -5,7 +5,7 @@
 <div class="container">
     <section>    
        <div class="row">
-        <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include>	
+        	
     <div class="col-sm-9 col-md-9">
       <div show-during-resolve class="loader">   
         <center><img src="images/spinner.gif"  alt="Opensrp"/></center>
@@ -18,25 +18,26 @@
 						</div>
 					</div>
 					<div class="col-md-3">
-						 <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1" >
-                  <option ng-click="search.details.existing_District=''" value="">Select District </option>
-                  <option ng-repeat="district in districts"  ng-click="search.details.existing_District='{{district.name}}'" value="{{district.name}}">{{district.name}}</option>
+						 <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1" ng-model="dis" ng-change="districtChanged()">
+                  <option value="">Select District </option>
+                  <!-- <option ng-repeat="district in districts"  ng-click="search.details.existing_District='{{district.name}}'" value="{{district.name}}">{{district.name}}</option> -->
+                  <option ng-repeat="district in districts" value="{{district.name}}">{{district.name}}</option>
                  
                 </select>
 					</div>
 					<div class=" col-md-3">
-						<select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
-                  <option ng-click="search.details.existing_Upazilla=''"  value="">Select Upazilla </option>
-                  <option ng-repeat="thana in thanas"  ng-click="search.details.existing_Upazilla='{{thana.name}}'" value="{{thana.name}}">{{thana.name}}</option>
+						<select id="upazilla_dd" class="form-control" name="f1_gn_q11_elem1" ng-model="upa" ng-change="upazillaChanged()">
+                  <option value="">Select Upazilla </option>
+                  <option ng-repeat="thana in thanas"  value="{{thana.name}}">{{thana.name}}</option>
                 </select>
 					</div>
 					<div class=" col-md-3">
-						<select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
-                   <option ng-click="search.details.existing_Union=''" value="">Select Union </option>
-                  <option ng-repeat="union in unions"  ng-click="search.details.existing_Union='{{union.name}}'" value="{{union.name}}">{{union.name}}</option>
+						<select id="union_dd" class="form-control" name="f1_gn_q11_elem1" ng-model="uni" ng-change="locationClick()">
+                   <option value="">Select Union </option>
+                  <option ng-repeat="union in unions" value="{{union.name}}">{{union.name}}</option>
                 </select>
 					</div>
-                </div> <!-- main col right -->
+                </div> <!-- main col right -->                
             </div><!--/row-->
 			<div class="row"> <!-- main col left --> 
 				<div class="starter-template3">		
@@ -46,12 +47,13 @@
 						</div>
 					</div>
 					<div class="col-md-9">
-						<select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1">
-                   <option ng-click="search.PROVIDERID=''" value="">Select User </option>
-                  <option ng-repeat="user in users"  ng-click="search.PROVIDERID='{{user}}'" value="{{user}}">{{user}}</option>
+						<select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1" ng-model="uu">
+                   <option value="">Select User </option>
+                  <option ng-repeat="user in users" value="{{user}}">{{user}}</option>
                 </select>
 					</div>
                 </div> <!-- main col right -->
+            <button ng-click = "changeChartData()" type="button">Apply</button>
             </div><!--/row-->
 			<div class="row">
                 <div class="col-xs-6 col-lg-4">

@@ -18,8 +18,8 @@ angular
   .constant("ELCO_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/ec?anm-id=')
   .constant("COUCHURL",'http://192.168.23.239:1337/192.168.23.239:5984')
   .config(['AclServiceProvider', function (AclServiceProvider) {
-  var myConfig = {
-      storage: 'localStorage',
+    var myConfig = {
+      storage: 'sessionStorage',  // localStorage
       storageKey: 'AppAcl'
     };
     AclServiceProvider.config(myConfig);
@@ -66,7 +66,6 @@ angular
         controller: 'HhCtrl',
         controllerAs: 'hh',
         resolve : {
-          'HHServiceData':function(HHRegisterService){ return HHRegisterService.promise;},
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('Household')){
               // Has proper permissions              
@@ -87,7 +86,6 @@ angular
         controller: 'EcCtrl',
         controllerAs: 'ec',
         resolve : {
-          'ElcoServiceData':function(ElcoRegisterService){ return ElcoRegisterService.promise;},
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('Elco')){
               // Has proper permissions
@@ -107,8 +105,7 @@ angular
         templateUrl: 'views/pw.html',
         controller: 'PwCtrl',
         controllerAs: 'pw',
-        resolve : {
-          'ElcoServiceData':function(ElcoRegisterService){ return ElcoRegisterService.promise;},
+        resolve : {          
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('PW')){
               // Has proper permissions
@@ -356,7 +353,6 @@ angular
         controllerAs: 'elco',
         resolve : {
           'ElcoServiceData':function(ElcoRegisterService){ 
-            console.log("inside ElcoServiceData of resolve of /elcos");
             return ElcoRegisterService.promise; // promise returns a fucntion that returns a $q
           },
           'acl' : ['$q', 'AclService', function($q, AclService){
@@ -473,105 +469,101 @@ angular
       //$locationProvider.html5Mode(true);
   })  
   .run(function ($rootScope, $location, $window, $timeout,AclService, Authentication, $http,$q,Base64,OPENSRP_WEB_BASE_URL,page) {
-      'use strict';
+    'use strict';
 
-      $rootScope.$on('$locationChangeStart', function (current, previous, rejection) {
-        if (!Authentication.isAuthenticated()) {
-              //evt.preventDefault();
-             
-              $location.path('/login');
-              if (!$rootScope.$$phase) {
-                  //this will kickstart angular if to notice the change
+    $rootScope.$on('$routeChangeError', function (current, previous, rejection) {        
+      $location.path('/un-authorized');    
+    });
 
-                  //$$phase is a flag set while angular is in a $digest cycle.
-                  //Sometimes (in rare cases), you want to check $$phase on the 
-                  //scope before doing an $apply. An error occurs if you try to $apply during a $digest:
-                  $rootScope.$apply();
-              }
-              else {
-                  $window.location = '/#/login';
-              }
-              delete $http.defaults.headers.common['X-Requested-With'];
-              delete $http.defaults.headers.common.Authorization;
-        }  
-      });
-       $rootScope.$on('$routeChangeError', function (current, previous, rejection) {        
-        $location.path('/un-authorized');    
-       });
-       var aclData = {
-            member: ['login','logout']        
-          }
+    $rootScope.$on('$locationChangeStart', function (current, previous, rejection) {
+      if (!Authentication.isAuthenticated()) {
+            //evt.preventDefault();           
+        $location.path('/login');
+        if (!$rootScope.$$phase) {
+            //this will kickstart angular if to notice the change
+
+            //$$phase is a flag set while angular is in a $digest cycle.
+            //Sometimes (in rare cases), you want to check $$phase on the 
+            //scope before doing an $apply. An error occurs if you try to $apply during a $digest:
+            $rootScope.$apply();
+        }
+        else {
+            $window.location = '/#/login';
+        }
+        delete $http.defaults.headers.common['X-Requested-With'];
+        delete $http.defaults.headers.common.Authorization;
+      }  
+    });
+     
       
-      $rootScope.HHDATAEXPORT= function(){
-        $("#export").css("display","none");
-        $("#wait").css("display","block");       
-        var url = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
-          $rootScope.Data = '';
-          $.ajax({
-            async:false,       
-            dataType: "json",
-            cache:true,
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
-            },
-            url:url,
-              success:function (data) {
-                window.HhData = data.hhRegisterEntries;
-                $("#wait").css("display","none");
-                $("#export").css("display","block");
-               page.downloadHH(window.HhData,"New Household Registration form");
-            },
-            type:"get"        
-          });
-        
-      }
-      $rootScope.PWDATAEXPORT= function(){
-        $("#wait").css("display","block");
-        $("#export").css("display","none");
-        var url = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username;
-          $rootScope.Data = '';
-          $.ajax({
-            async:false,       
-            dataType: "json",
-            cache:true,
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
-            },
-            url:url,
-              success:function (data) {
-                window.ecData = data.ecRegisterEntries;                
-                $("#wait").css("display","none");
-                $("#export").css("display","block");
-               page.downloadpw( window.ecData,"PSRF form");
-            },
-            type:"get"        
-          });
-        
-      }
-      //adding function in $rootscope makes it available everywhere
-      $rootScope.CENCUSDATAEXPORT= function(){
-       $("#export").css("display","none");
-        $("#wait").css("display","block");       
-        var url = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
-          $rootScope.Data = '';
-          $.ajax({
-            async:false,       
-            dataType: "json",
-            cache:true,
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
-            },
-            url:url,
-              success:function (data) {
-                window.HhData = data.hhRegisterEntries;
-                $("#wait").css("display","none");
-                $("#export").css("display","block");
-               page.downloadCS(window.HhData,"Census New Women Registration form");
-            },
-            type:"get"        
-          });
-        
-      }
+    $rootScope.HHDATAEXPORT= function(){
+      $("#export").css("display","none");
+      $("#wait").css("display","block");       
+      var url = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
+        $rootScope.Data = '';
+        $.ajax({
+          async:false,       
+          dataType: "json",
+          cache:true,
+          beforeSend: function (xhr) {
+              xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
+          },
+          url:url,
+            success:function (data) {
+              window.HhData = data.hhRegisterEntries;
+              $("#wait").css("display","none");
+              $("#export").css("display","block");
+             page.downloadHH(window.HhData,"New Household Registration form");
+          },
+          type:"get"        
+        });      
+    };
+    
+    $rootScope.PWDATAEXPORT= function(){
+      $("#wait").css("display","block");
+      $("#export").css("display","none");
+      var url = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username;
+        $rootScope.Data = '';
+        $.ajax({
+          async:false,       
+          dataType: "json",
+          cache:true,
+          beforeSend: function (xhr) {
+              xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
+          },
+          url:url,
+            success:function (data) {
+              window.ecData = data.ecRegisterEntries;                
+              $("#wait").css("display","none");
+              $("#export").css("display","block");
+             page.downloadpw( window.ecData,"PSRF form");
+          },
+          type:"get"        
+        });      
+    };
+    //adding function in $rootscope makes it available everywhere
+    $rootScope.CENCUSDATAEXPORT= function(){
+     $("#export").css("display","none");
+      $("#wait").css("display","block");       
+      var url = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
+        $rootScope.Data = '';
+        $.ajax({
+          async:false,       
+          dataType: "json",
+          cache:true,
+          beforeSend: function (xhr) {
+              xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
+          },
+          url:url,
+          success:function (data) {
+            window.HhData = data.hhRegisterEntries;
+            $("#wait").css("display","none");
+            $("#export").css("display","block");
+            page.downloadCS(window.HhData,"Census New Women Registration form");
+          },
+          type:"get"        
+        });      
+    };
       
     $rootScope.aclLing =
      ' <a href="#/acl">'+

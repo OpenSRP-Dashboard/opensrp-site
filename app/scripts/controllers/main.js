@@ -21,19 +21,19 @@ angular.module('opensrpSiteApp')
           plain: true
       });
     };
-    mapboxService.init({ accessToken: 'pk.eyJ1IjoicHJvYmlyMTIzIiwiYSI6IjhwRDJyZ0EifQ.KzOVb_vdS3CMYzUKMww59g' });
+    //mapboxService.init({ accessToken: 'pk.eyJ1IjoicHJvYmlyMTIzIiwiYSI6IjhwRDJyZ0EifQ.KzOVb_vdS3CMYzUKMww59g' });
    
     /**
     Houshold list for map data
     */
-    Main.houseHoldList($scope,$rootScope,$timeout);
+    //Main.houseHoldList($scope,$rootScope,$timeout);
     
-    $scope.HHDATA = function(){     
+    /*$scope.HHDATA = function(){     
       page.downloadHH(HhData,'Household Report');
-    }
+    }*/
     Main.dataCount($scope);
     $scope.mySplit = function(string, nb) {
-    var array = string.split(' ');
-    return array[nb];
-} 
+      var array = string.split(' ');
+      return array[nb];
+    } 
   });

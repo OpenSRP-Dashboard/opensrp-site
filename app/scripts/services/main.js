@@ -75,7 +75,7 @@ angular.module('opensrpSiteApp')
   
     this.dataCount = function($scope){      
       var date = new Date();
-      var currentMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+      var currentMonth = new Date(date.getFullYear(), date.getMonth(), 1);  
       var startMonth = moment(currentMonth).format('YYYY-MM-DD');
       var endMonth = moment(date).format('YYYY-MM-DD');    
   

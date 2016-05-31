@@ -20,9 +20,6 @@ angular.module('opensrpSiteApp')
      '<i class="glyphicon glyphicon-list-alt"></i>'+
     ' <span>Data Details</span>'+
     '</a>';
-    
-    window.getData = JSON.parse(JSON.stringify(ElcoRegisterService.Data()));       
-    $scope.data= jsonsql.query("select * from getData where (PSRFDETAILS != '' && details.FWPSRPREGSTS == 1 ) ",getData);
     EC.reportThisMonth($scope, $scope.data,$rootScope,'PSRFDETAILS[0].today','thisMonth',$filter);
     EC.reportThisWeek($scope, $scope.data,$rootScope,'PSRFDETAILS[0].today','thisWeek',$filter);
     EC.reportToday($scope,$scope.data,$rootScope,'PSRFDETAILS[0].today','today',$filter);
