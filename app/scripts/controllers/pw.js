@@ -20,7 +20,8 @@ angular.module('opensrpSiteApp')
      '<i class="glyphicon glyphicon-list-alt"></i>'+
     ' <span>Data Details</span>'+
     '</a>';
-    PW.allReports($scope, $rootScope, $http);
+    //PW.allReports($scope, $rootScope, $http);
+    
     Common.locations($scope);
     Common.users($scope);
     Common.chartDataForHH($scope, $http, $timeout, 'pw-data-count');

@@ -32,7 +32,9 @@ angular.module('opensrpSiteApp')
     Common.locations($scope);
     Common.users($scope);
     Common.chartDataForHH($scope, $http, $timeout, 'elco-data-count');
-    EC.allReports($scope, $rootScope, $http);
+    
+    //EC.allReports($scope, $rootScope, $http);
+    
     /*Common.chartDataCal($scope,monthLists,$scope.data,'TODAY',$timeout)
     EC.reportThisMonth($scope,$scope.data,$rootScope,'TODAY','thisMonth', $filter,0);
     EC.reportThisWeek($scope,$scope.data,$rootScope,'TODAY','thisWeek', $filter,0);

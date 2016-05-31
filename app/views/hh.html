@@ -6,7 +6,7 @@
     <section>    
        <div class="row">
         	
-    <div class="col-sm-9 col-md-9">
+    <div class="col-sm-12 col-md-12">
       <div show-during-resolve class="loader">   
         <center><img src="images/spinner.gif"  alt="Opensrp"/></center>
       </div>
@@ -46,14 +46,16 @@
 							<span class="glyphicon glyphicon-user"></span>WORKER NAME
 						</div>
 					</div>
-					<div class="col-md-9">
+					<div class="col-md-7">
 						<select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1" ng-model="uu">
                    <option value="">Select User </option>
                   <option ng-repeat="user in users" value="{{user}}">{{user}}</option>
                 </select>
 					</div>
                 </div> <!-- main col right -->
-            <button ng-click = "changeChartData()" type="button">Show Data</button>
+                <div class="col-md-2">
+            <button ng-click = "changeChartData()" class="btn btn-sub" style="margin:0 0 10px 0" type="button">Show Data</button>
+            </div>
             </div><!--/row-->
 			<div class="row">
                 <div class="col-xs-6 col-lg-4">

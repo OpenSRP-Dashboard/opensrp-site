@@ -53,7 +53,9 @@ angular.module('opensrpSiteApp')
     /*HH.reportThisMonth($scope,$scope.data,$rootScope,'TODAY','thisMonth',$filter);
     HH.reportThisWeek($scope,$scope.data,$rootScope,'TODAY','thisWeek',$filter);
     HH.reportToday($scope,$scope.data,$rootScope,'TODAY','today',$filter);*/
-    HH.allReports($scope, $rootScope, $http);
+    
+    //HH.allReports($scope, $rootScope, $http);
+    
     Common.locations($scope);
     Common.users($scope);
     $scope.locationClick = function(){

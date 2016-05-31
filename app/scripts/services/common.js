@@ -94,6 +94,12 @@ angular.module('opensrpSiteApp')
         }
     }
 
+    this.getWeekIndex = function(){
+      var newDate = new Date();
+      var dayOfMonth = newDate.getDate();
+      return Math.floor(dayOfMonth/7) ;
+    }
+
     this.chartDataForHH = function($scope,$http,$timeout,url){
       var district, upazilla, union, provider;
       if(angular.isUndefined($scope.dis)){
@@ -127,11 +133,17 @@ angular.module('opensrpSiteApp')
       var url = OPENSRP_WEB_BASE_URL+"/registers/" + url +"?district=" + district + 
                     "&upazilla=" + upazilla + "&union=" + union + "&provider=" + provider;
       
+      var newDate = new Date();
+      var dayOfMonth = newDate.getDate();
+      var weekIndex = Math.floor(dayOfMonth/7) ;
       $rootScope.loading = true;
       $http.get(url, { cache: false}).success(function (data) {              
         //console.log("from new service");
         console.log(data[0].weeklyCountsForChart);
-        var weekCounts = data[0].weeklyCountsForChart;        
+        var weekCounts = data[0].weeklyCountsForChart;  
+        $scope['thisMonth'] = weekCounts[15] + weekCounts[16] + weekCounts[17] + weekCounts[18] + weekCounts[19];
+        $scope['thisWeek'] = weekCounts[15 + weekIndex];
+        //$scope['today'] = weekCounts[22];
         $timeout(function () {
           var date = new Date();      
           var monthLists = [];

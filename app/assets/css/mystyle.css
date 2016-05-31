@@ -4,6 +4,8 @@
 
 .menu{
   height:  69px;
+  width:90%;
+  margin:0 auto;
   
   
 }
@@ -41,7 +43,7 @@ div.menu ul li ul {
   padding: 0;
   position: absolute;
   top: 48px;
-  left: 0;
+  left: -60px;
   
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -60,6 +62,7 @@ div.menu ul li ul li {
   display: block; 
   color: #fff;
   text-shadow: 0 -1px 0 #000;
+  text-align: center;
 }
 div ul li ul li:hover { background: #fff; }
 div.menu ul li:hover ul {
@@ -68,7 +71,9 @@ div.menu ul li:hover ul {
   visibility: visible;
 }
 .right-side{
-  margin-right: 98px;
   float: right;
   
+}
+.btn-sub {
+  background-color: #a1a3a6;
 }
