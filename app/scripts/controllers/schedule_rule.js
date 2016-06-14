@@ -20,12 +20,15 @@ angular.module('opensrpSiteApp')
       var formData = document.forms.rule_def;
       var numOfRule = $('.clonedInput').length;
       var rules = [];
-      for(var i=1;i<=numOfRule;i++){
-        var numOfDefination = $('.defination'+i).length;
+      var cloneInput = $('.clonedInput');
+      for(var i=0;i<numOfRule;i++){
+        var ruleId = cloneInput[i].id;
+        var ruleNumber = ruleId.split("rule");        
+        var numOfDefination = $('.defination'+ruleNumber[1]).length;
         var definations = [];
         for(var j=1;j<=numOfDefination;j++){          
-          var name = formData.elements['name'+i+'[]'];
-          var value = formData.elements['value'+i+'[]'];
+          var name = formData.elements['name'+ruleNumber[1]+'[]'];
+          var value = formData.elements['value'+ruleNumber[1]+'[]'];
           if (numOfDefination ==1) {
              var defination = {name:name.value,value:value.value}; 
           }else{            
@@ -33,9 +36,10 @@ angular.module('opensrpSiteApp')
           }
           definations.push(defination)
         }         
-        rules.push({startFormName:formData.elements['startFormName'+i+'[]'].value,endFormName:formData.elements['endFormName'+i+'[]'].value, defination:definations});
+        rules.push({startFormName:formData.elements['startFormName'+ruleNumber[1]+'[]'].value,endFormName:formData.elements['endFormName'+ruleNumber[1]+'[]'].value, defination:definations});
       }
-      var scheduleRule = {name:$scope.name,rule:rules,createdBy:"proshanto",createdDate:new Date()}     
+      var scheduleRule = {name:$scope.name,rule:rules,createdBy:$rootScope.username,createdDate:new Date()}
+      console.log(scheduleRule);
       ScheduleRule.save(scheduleRule,$window,Flash);
     };
   });
