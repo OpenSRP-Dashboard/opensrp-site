@@ -66,9 +66,9 @@ $(document).ready(function () {
 
 $(document).ready(function () {	
     $(document.body).on("click",'.delete', function (event) {	
-	event.preventDefault();
-    console.log(this)
-    $(this).parent().parent().parent('.defination').remove();	
+    event.preventDefault();    
+    var id= this.id.split("def");
+    $(this).parent().parent().parent('.defination'+id[1]).remove();	
     });
 	
 });
