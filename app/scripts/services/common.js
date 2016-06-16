@@ -143,7 +143,7 @@ angular.module('opensrpSiteApp')
         var weekCounts = data[0].weeklyCountsForChart;  
         $scope['thisMonth'] = weekCounts[15] + weekCounts[16] + weekCounts[17] + weekCounts[18] + weekCounts[19];
         $scope['thisWeek'] = weekCounts[15 + weekIndex];
-        //$scope['today'] = weekCounts[22];
+        $scope['today'] = weekCounts[20];
         $timeout(function () {
           var date = new Date();      
           var monthLists = [];
