@@ -235,7 +235,7 @@ angular
               // Has proper permissions
               console.log('is it true?' + AclService.can('Elco Details'));
               return true;
-            } else {
+            } else {  
               // Does not have permission
               return $q.reject('Unauthorized');
             
