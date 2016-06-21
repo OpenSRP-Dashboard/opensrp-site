@@ -637,25 +637,38 @@ function misElcoFormExport(JSONData, ReportTitle, ShowLabel) {
         //append Label row with line break
         CSV += row + '\r\n';
     }
+    //console.log(Data);
+
     //1st loop is to extract each row
     for (var i = 0; i < Data.length; i++) {      
         //2nd loop will extract each column and convert it in string comma-seprated
-      if(Data[i].MISDETAILS.length !=0){        
+      if(Data[i].MISDETAILS != null){
+      if(Data[i].MISDETAILS.length !=0){      
         for (var index=0 ; index< Data[i].MISDETAILS.length;index++) {
             var row = "";
             row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//1
-            row += ",";//2
-            row += '"' + checkNullValue(Data[i].MISDETAILS[index].start) +'",';//3
+            if (Data[i].MISDETAILS[index].current_formStatus == null || Data[i].MISDETAILS[index].current_formStatus =="") {
+              row += ",";
+            }else{
+              row += '"' + convertString(Data[i].MISDETAILS[index].current_formStatus)+ '",';
+            } 
+            row += '"' + checkNullValue((Data[i].MISDETAILS[index].start).substring(0,10)) +'",';//3
             row += '"' + checkNullValue(Data[i].MISDETAILS[index].today) + '",';//4
             row += '"' + checkNullValue(Data[i].MISDETAILS[index].start) + '",';//5
             row += '"' + checkNullValue(Data[i].MISDETAILS[index].end) + '",';//6
             row += '"' + checkNullValue(Data[i].MISDETAILS[index].FWMISELCODATE) + '",';//7
             row += '"' + checkNullValue(Data[i].MISDETAILS[index].FWPMISBIRTHCTRL) + '",';//8
-            row += '"' + checkNullValue(Data[i].MISDETAILS[index].FWMISBCSOURCE) + '",';//9      
+            if (Data[i].MISDETAILS[index].FWMISBCSOURCE == null || Data[i].MISDETAILS[index].FWMISBCSOURCE =="") {
+              row += ",";
+            }else{
+              row += '"' + convertString(Data[i].MISDETAILS[index].FWMISBCSOURCE)+ '",';
+            }  
+
             //row.slice(0, row.length - 1);        
             //add a line break after each row
             CSV += row + '\r\n';
         //row += '"' + checkNullValue(Data[i].details}) + '",';//48 
+        }
         }
       } 
     }
