@@ -70,9 +70,12 @@ angular.module('opensrpSiteApp')
     this.downloadCS = function(data,title){     
       censusFornExport(data, title, true);       
     }
-    //this.downloadMC = function(data,title){     
-    //  misCensusFormExport(data, title, true);       
-    //}
+    this.downloadMC = function(data,title){     
+      misCensusFormExport(data, title, true);       
+    }
+    this.downloadME = function(data,title){     
+      misElcoFormExport(data, title, true);       
+    }
     
     this.reportThisMonth = function($scope,data,$rootScope,today,ngBind){      
       $scope.search = {};

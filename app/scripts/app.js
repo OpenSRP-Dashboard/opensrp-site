@@ -588,6 +588,29 @@ angular
           type:"get"        
         });      
     };
+
+    $rootScope.MISELCODATAEXPORT= function(){
+      $("#wait").css("display","block");
+      $("#export").css("display","none");
+      var url = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username;
+        $rootScope.Data = '';
+        $.ajax({
+          async:false,       
+          dataType: "json",
+          cache:true,
+          beforeSend: function (xhr) {
+              xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
+          },
+          url:url,
+            success:function (data) {
+              window.ecData = data.ecRegisterEntries;                
+              $("#wait").css("display","none");
+              $("#export").css("display","block");
+             page.downloadME( window.ecData,"MIS ELCO FORM");
+          },
+          type:"get"        
+        });      
+    };
       
     $rootScope.aclLing =
      ' <a href="#/acl">'+
