@@ -647,10 +647,10 @@ function misElcoFormExport(JSONData, ReportTitle, ShowLabel) {
         for (var index=0 ; index< Data[i].MISDETAILS.length;index++) {
             var row = "";
             row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//1
-            if (Data[i].MISDETAILS[index].current_formStatus == null || Data[i].MISDETAILS[index].current_formStatus =="") {
+            if (Data[i].MISDETAILS[index].mis_elco_current_formStatus == null || Data[i].MISDETAILS[index].mis_elco_current_formStatus =="") {
               row += ",";
             }else{
-              row += '"' + convertString(Data[i].MISDETAILS[index].current_formStatus)+ '",';
+              row += '"' + convertString(Data[i].MISDETAILS[index].mis_elco_current_formStatus)+ '",';
             } 
             row += '"' + checkNullValue((Data[i].MISDETAILS[index].start).substring(0,10)) +'",';//3
             row += '"' + checkNullValue(Data[i].MISDETAILS[index].today) + '",';//4
