@@ -535,3 +535,170 @@ function censusFornExport(JSONData, ReportTitle, ShowLabel) {
     document.body.removeChild(link);
 }
 
+function misCensusFormExport(JSONData, ReportTitle, ShowLabel) {
+    //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
+    var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+    var CSV = '';    
+    //Set Report title in first row or line
+   // CSV += ReportTitle + '\r\n\n';
+    //This condition will generate the Label/Header
+    if (ShowLabel) {
+        var row = ""; 
+        row += 'FWA Worker ID' + ',';//1     
+        row += 'existing_location' + ',';//2
+        row += 'today' + ',';//3 
+        row += 'start' + ',';//4 
+        row += 'end' + ',';//5
+        row += 'FWMISCENSUSDATE' + ',';//6
+        row += 'FWCOUPLENUM' + ',';//7
+        row += 'FWTETSTAT' + ',';//8
+        row += 'FWMARRYDATE' + ',';//9
+        row += 'num_children_alive_grp' + ',';//10
+        row += 'FWCHILDALIVEB' + ',';//11
+        row += 'FWCHILDALIVEG' + ',';//12
+        row = row.slice(0, -1);        
+        //append Label row with line break
+        CSV += row + '\r\n';
+    }
+    //1st loop is to extract each row
+    for (var i = 0; i < Data.length; i++) {            
+        //2nd loop will extract each column and convert it in string comma-seprated
+      if(Data[i].details.length != 0)
+        if(Data[i].details.MisToday != null && Data[i].details.MisToday != ""){        
+            var row = "";
+            row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//1
+            row += '"' + checkNullValue(Data[i].FWWOMMAUZA_PARA) + '",';//2
+            row += '"' + checkNullValue(Data[i].details.MisToday) +'",';//3
+            row += '"' + checkNullValue(Data[i].details.MisStart) + '",';//4
+            row += '"' + checkNullValue(Data[i].details.MisEnd) + '",';//5
+            row += '"' + checkNullValue(Data[i].details.FWMISCENSUSDATE) + '",';//6
+            row += '"' + checkNullValue(Data[i].details.FWCOUPLENUM) + '",';//7
+            row += '"' + checkNullValue(Data[i].details.FWTETSTAT) + '",';//8
+            row += '"' + checkNullValue(Data[i].details.FWMARRYDATE) + '",';//9
+            row += ",";//10
+            row += '"' + checkNullValue(Data[i].details.FWCHILDALIVEB) + '",';//11
+            row += '"' + checkNullValue(Data[i].details.FWCHILDALIVEG) + '",';//12
+            //row.slice(0, row.length - 1);        
+            //add a line break after each row
+            CSV += row + '\r\n';
+        //row += '"' + checkNullValue(Data[i].details}) + '",';//48 
+        } 
+    }
+    if (CSV == '') {        
+        alert("Invalid data");
+        return;
+    }
+    //Generate a file name
+    var fileName = "";
+    //this will remove the blank-spaces from the title and replace it with an underscore
+    fileName += ReportTitle.replace(/ /g,"_");   
+        //Initialize file format you want csv or xls
+    var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+   
+    // Now the little tricky part.
+    // you can use either>> window.open(uri);
+    // but this will not work in some browsers
+    // or you will not get the correct file extension    
+    
+    //this trick will generate a temp <a /> tag
+    var link = document.createElement("a");    
+    link.href = uri;
+   
+    //set the visibility hidden so it will not effect on your web-layout
+    link.style = "visibility:hidden";
+    link.download = fileName + ".csv";
+    
+    //this part will append the anchor tag and remove it after automatic click
+    document.body.appendChild(link);
+    link.click();
+    //window.open(link);
+    document.body.removeChild(link);
+}
+
+function misElcoFormExport(JSONData, ReportTitle, ShowLabel) {
+    //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
+    var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+    var CSV = '';    
+    //Set Report title in first row or line
+    // CSV += ReportTitle + '\r\n\n';
+    //This condition will generate the Label/Header
+    if (ShowLabel) {
+        var row = ""; 
+        row += 'FWA Worker ID' + ',';//1     
+        row += 'Form Status at Submission' + ',';//2
+        row += 'SCHEDULED_DATE' + ',';//3 
+        row += 'today' + ',';//4 
+        row += 'start' + ',';//5
+        row += 'end' + ',';//6
+        row += 'FWMISELCODATE' + ',';//7
+        row += 'FWPMISBIRTHCTRL' + ',';//8
+        row += 'FWMISBCSOURCE' + ',';//9
+        row = row.slice(0, -1);        
+        //append Label row with line break
+        CSV += row + '\r\n';
+    }
+    //console.log(Data);
+
+    //1st loop is to extract each row
+    for (var i = 0; i < Data.length; i++) {      
+        //2nd loop will extract each column and convert it in string comma-seprated
+      if(Data[i].MISDETAILS != null){
+      if(Data[i].MISDETAILS.length !=0){      
+        for (var index=0 ; index< Data[i].MISDETAILS.length;index++) {
+            var row = "";
+            row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//1
+            if (Data[i].MISDETAILS[index].mis_elco_current_formStatus == null || Data[i].MISDETAILS[index].mis_elco_current_formStatus =="") {
+              row += ",";
+            }else{
+              row += '"' + convertString(Data[i].MISDETAILS[index].mis_elco_current_formStatus)+ '",';
+            } 
+            row += '"' + checkNullValue((Data[i].MISDETAILS[index].start).substring(0,10)) +'",';//3
+            row += '"' + checkNullValue(Data[i].MISDETAILS[index].today) + '",';//4
+            row += '"' + checkNullValue(Data[i].MISDETAILS[index].start) + '",';//5
+            row += '"' + checkNullValue(Data[i].MISDETAILS[index].end) + '",';//6
+            row += '"' + checkNullValue(Data[i].MISDETAILS[index].FWMISELCODATE) + '",';//7
+            row += '"' + checkNullValue(Data[i].MISDETAILS[index].FWPMISBIRTHCTRL) + '",';//8
+            if (Data[i].MISDETAILS[index].FWMISBCSOURCE == null || Data[i].MISDETAILS[index].FWMISBCSOURCE =="") {
+              row += ",";
+            }else{
+              row += '"' + convertString(Data[i].MISDETAILS[index].FWMISBCSOURCE)+ '",';
+            }  
+
+            //row.slice(0, row.length - 1);        
+            //add a line break after each row
+            CSV += row + '\r\n';
+        //row += '"' + checkNullValue(Data[i].details}) + '",';//48 
+        }
+        }
+      } 
+    }
+    if (CSV == '') {        
+        alert("Invalid data");
+        return;
+    }
+    //Generate a file name
+    var fileName = "";
+    //this will remove the blank-spaces from the title and replace it with an underscore
+    fileName += ReportTitle.replace(/ /g,"_");   
+        //Initialize file format you want csv or xls
+    var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+   
+    // Now the little tricky part.
+    // you can use either>> window.open(uri);
+    // but this will not work in some browsers
+    // or you will not get the correct file extension    
+    
+    //this trick will generate a temp <a /> tag
+    var link = document.createElement("a");    
+    link.href = uri;
+   
+    //set the visibility hidden so it will not effect on your web-layout
+    link.style = "visibility:hidden";
+    link.download = fileName + ".csv";
+    
+    //this part will append the anchor tag and remove it after automatic click
+    document.body.appendChild(link);
+    link.click();
+    //window.open(link);
+    document.body.removeChild(link);
+}

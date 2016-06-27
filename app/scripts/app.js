@@ -14,10 +14,10 @@ angular
   //.constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.246:1234/192.168.21.246:9979')
   //ip for jivita server - 192.168.19.90  
   //.constant('OPENSRP_WEB_BASE_URL', 'http://27.147.129.50:1234/192.168.19.55:9979')
-  .constant('OPENSRP_WEB_BASE_URL', 'http://192.168.23.239:1337/192.168.23.239:9979')
+  .constant('OPENSRP_WEB_BASE_URL', 'http://192.168.23.223:1337/192.168.23.223:9979')
   .constant("HH_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/hh?anm-id=')
   .constant("ELCO_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/ec?anm-id=') 
-  .constant("COUCHURL",'http://192.168.23.239:1337/192.168.23.239:5984')
+  .constant("COUCHURL",'http://192.168.23.223:1337/192.168.23.223:5984')
   .config(['AclServiceProvider', function (AclServiceProvider) {
     var myConfig = {
       storage: 'sessionStorage',  // localStorage
@@ -561,6 +561,52 @@ angular
             $("#wait").css("display","none");
             $("#export").css("display","block");
             page.downloadCS(window.HhData,"Census New Women Registration form");
+          },
+          type:"get"        
+        });      
+    };
+
+    $rootScope.MISCENSUSDATAEXPORT= function(){
+      $("#wait").css("display","block");
+      $("#export").css("display","none");
+      var url = OPENSRP_WEB_BASE_URL+"/registers/ec?start-date=2016-05-15&end-date=2016-06-16";
+        $rootScope.Data = '';
+        $.ajax({
+          async:false,       
+          dataType: "json",
+          cache:true,
+          beforeSend: function (xhr) {
+              xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
+          },
+          url:url,
+            success:function (data) {
+              window.ecData = data.ecRegisterEntries;                
+              $("#wait").css("display","none");
+              $("#export").css("display","block");
+             page.downloadMC( window.ecData,"MIS CENSUS FORM");
+          },
+          type:"get"        
+        });      
+    };
+
+    $rootScope.MISELCODATAEXPORT= function(){
+      $("#wait").css("display","block");
+      $("#export").css("display","none");
+      var url = OPENSRP_WEB_BASE_URL+"/registers/ec?start-date=2016-05-15&end-date=2016-06-16";
+        $rootScope.Data = '';
+        $.ajax({
+          async:false,       
+          dataType: "json",
+          cache:true,
+          beforeSend: function (xhr) {
+              xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
+          },
+          url:url,
+            success:function (data) {
+              window.ecData = data.ecRegisterEntries;                
+              $("#wait").css("display","none");
+              $("#export").css("display","block");
+             page.downloadME( window.ecData,"MIS ELCO FORM");
           },
           type:"get"        
         });      
