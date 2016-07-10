@@ -500,7 +500,7 @@ angular
     $rootScope.HHDATAEXPORT= function(){
       $("#export").css("display","none");
       $("#wait").css("display","block");       
-      var url = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
+      var url = OPENSRP_WEB_BASE_URL+"/registers/household?start-date=2016-05-15&end-date=2016-06-16";
         $rootScope.Data = '';
         $.ajax({
           async:false,       
@@ -523,7 +523,7 @@ angular
     $rootScope.PWDATAEXPORT= function(){
       $("#wait").css("display","block");
       $("#export").css("display","none");
-      var url = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username;
+      var url = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date=2016-05-15&end-date=2016-06-16";
         $rootScope.Data = '';
         $.ajax({
           async:false,       
@@ -546,7 +546,7 @@ angular
     $rootScope.CENCUSDATAEXPORT= function(){
      $("#export").css("display","none");
       $("#wait").css("display","block");       
-      var url = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
+      var url = OPENSRP_WEB_BASE_URL+"/registers/household?start-date=2016-05-15&end-date=2016-06-16";
         $rootScope.Data = '';
         $.ajax({
           async:false,       
@@ -569,7 +569,7 @@ angular
     $rootScope.MISCENSUSDATAEXPORT= function(){
       $("#wait").css("display","block");
       $("#export").css("display","none");
-      var url = OPENSRP_WEB_BASE_URL+"/registers/ec?start-date=2016-05-15&end-date=2016-06-16";
+      var url = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date=2016-05-15&end-date=2016-06-16";
         $rootScope.Data = '';
         $.ajax({
           async:false,       
@@ -592,7 +592,7 @@ angular
     $rootScope.MISELCODATAEXPORT= function(){
       $("#wait").css("display","block");
       $("#export").css("display","none");
-      var url = OPENSRP_WEB_BASE_URL+"/registers/ec?start-date=2016-05-15&end-date=2016-06-16";
+      var url = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date=2016-05-15&end-date=2016-06-16";
         $rootScope.Data = '';
         $.ajax({
           async:false,       
