@@ -44,6 +44,11 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+       .when('/csv_export', {
+        templateUrl: 'views/csv_export.html',
+        controller: 'csvexportCtrl',
+        controllerAs: 'csv_export'
+      })
       .when('/acl', {
         templateUrl: 'views/acl.html',
         controller: 'AclCtrl',

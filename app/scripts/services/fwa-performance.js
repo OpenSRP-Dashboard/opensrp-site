@@ -12,10 +12,11 @@ angular.module('opensrpSiteApp')
         var allData = null;
         var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username; 
         var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
-            allData = data.ecRegisterEntries;
+            allData = data.ecRegisterEntries;          
             
-            
-        });    
+        }); 
+
+
         return {
             promise:getData,
             setData: function (data) {
