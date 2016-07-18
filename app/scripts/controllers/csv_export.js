@@ -37,7 +37,7 @@ angular.module('opensrpSiteApp')
 
       $scope.start = date.startDate._d.getFullYear()+'-'+stratMonth+'-'+startDay;
 
-      var endDay = date.endDate._d.getDate();
+      var endDay = date.endDate._d.getDate() - 1;
 
       endDay =  endDay < 10 ? '0' + endDay : '' + endDay;
 
@@ -48,7 +48,7 @@ angular.module('opensrpSiteApp')
 
       if(form.localeCompare("NEW HOUSEHOLD FORM") == 0)
         csvexport.HHDATAEXPORT($scope);
-      else if (form.localeCompare("CENSUS FORM") == 0) 
+      else if (form.localeCompare(" CENSUS FORM") == 0) 
         csvexport.CENCUSDATAEXPORT($scope);
       else if (form.localeCompare("PSRF FORM") == 0)
         csvexport.PWDATAEXPORT($scope);
