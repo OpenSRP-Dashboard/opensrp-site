@@ -11,9 +11,9 @@ angular.module('opensrpSiteApp')
   .service('csvexport', function ($http,$rootScope,page,Base64,OPENSRP_WEB_BASE_URL,filterFilter,Common) {     
         
 
-    this.HHDATAEXPORT= function(){
+    this.HHDATAEXPORT= function($scope){
         var allData = null;
-        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/househol?start-date=2016-05-15&end-date=2016-06-16";
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/household?start-date="+$scope.start+"&end-date="+$scope.end;
         var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
             allData = data.hhRegisterEntries;         
             $("#wait").css("display","none");
@@ -22,9 +22,9 @@ angular.module('opensrpSiteApp')
         });    
     };
     
-    this.PWDATAEXPORT= function(){
+    this.PWDATAEXPORT= function($scope){
         var allData = null;
-        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elc?start-date=2016-05-15&end-date=2016-06-16";
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date="+$scope.start+"&end-date="+$scope.end;
         var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
             allData = data.ecRegisterEntries;         
             $("#wait").css("display","none");
@@ -33,9 +33,9 @@ angular.module('opensrpSiteApp')
         });  
     };
     //adding function in $rootscope makes it available everywhere
-    this.CENCUSDATAEXPORT= function(){
+    this.CENCUSDATAEXPORT= function($scope){
         var allData = null;
-        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/househol?start-date=2016-05-15&end-date=2016-06-16";
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/household?start-date="+$scope.start+"&end-date="+$scope.end;
         var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
             allData = data.hhRegisterEntries;         
             $("#wait").css("display","none");
@@ -44,9 +44,9 @@ angular.module('opensrpSiteApp')
         });  
     };
 
-    this.MISCENSUSDATAEXPORT= function(){
+    this.MISCENSUSDATAEXPORT= function($scope){
         var allData = null;
-        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elc?start-date=2016-05-15&end-date=2016-06-16";
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date="+$scope.start+"&end-date="+$scope.end;
         var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
             allData = data.ecRegisterEntries;         
             $("#wait").css("display","none");
@@ -55,9 +55,9 @@ angular.module('opensrpSiteApp')
         });       
     };
 
-    this.MISELCODATAEXPORT= function(){
+    this.MISELCODATAEXPORT= function($scope){
         var allData = null;
-        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elc?start-date=2016-05-15&end-date=2016-06-16";
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date="+$scope.start+"&end-date="+$scope.end;
         var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
             allData = data.ecRegisterEntries;         
             $("#wait").css("display","none");

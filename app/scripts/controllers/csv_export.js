@@ -14,15 +14,8 @@ angular.module('opensrpSiteApp')
       'AngularJS',
       'Karma'
     ];
-  $scope.detailDataLink =
-     ' <a href="#/households">'+
-     '<i class="glyphicon glyphicon-list-alt"></i>'+
-    ' <span>Data Details</span>'+
-    '</a>';
  
     $scope.forms = ['NEW HOUSEHOLD FORM', 'CENSUS FORM', 'PSRF FORM', 'MIS CENSUS FORM', 'MIS ELCO FORM'];
-
-    $scope.selectedItem;
 
     $scope.dataexport = function (date, form) {
       console.log(date);
@@ -42,27 +35,27 @@ angular.module('opensrpSiteApp')
 
       endMonth =  endMonth < 10 ? '0' + endMonth : '' + endMonth;
 
-      var start = date.startDate._d.getFullYear()+'-'+stratMonth+'-'+startDay;
+      $scope.start = date.startDate._d.getFullYear()+'-'+stratMonth+'-'+startDay;
 
       var endDay = date.endDate._d.getDate();
 
       endDay =  endDay < 10 ? '0' + endDay : '' + endDay;
 
-      var end = date.endDate._d.getFullYear()+'-'+endMonth+'-'+endDay;
+      $scope.end = date.endDate._d.getFullYear()+'-'+endMonth+'-'+endDay;
 
-      console.log(start);
-      console.log(end);
+      console.log($scope.start);
+      console.log($scope.end);
 
       if(form.localeCompare("NEW HOUSEHOLD FORM") == 0)
-        csvexport.HHDATAEXPORT();
+        csvexport.HHDATAEXPORT($scope);
       else if (form.localeCompare("CENSUS FORM") == 0) 
-        csvexport.CENCUSDATAEXPORT();
+        csvexport.CENCUSDATAEXPORT($scope);
       else if (form.localeCompare("PSRF FORM") == 0)
-        csvexport.PWDATAEXPORT();
+        csvexport.PWDATAEXPORT($scope);
       else if (form.localeCompare("MIS CENSUS FORM") == 0)
-        csvexport.MISCENSUSDATAEXPORT();
+        csvexport.MISCENSUSDATAEXPORT($scope);
       else if (form.localeCompare("MIS ELCO FORM") == 0) 
-        csvexport.MISELCODATAEXPORT();
+        csvexport.MISELCODATAEXPORT($scope);
       else ;
 
     }
