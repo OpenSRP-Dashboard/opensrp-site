@@ -14,7 +14,7 @@
             <option ng-repeat="form in forms" value="{{form}}">{{form}}</option>
           </select>
 
-        <input class="form-control" type="daterange" placeholder="Select Date" limit="3 months" ng-model="dateRange">
+        <input class="form-control" type="daterange" placeholder="Select Date" limit="3 months" max-date="{{maxDate}}" ng-model="dateRange">
         <button ng-click="dataexport(dateRange,form)">Report</button>
 
       </div>

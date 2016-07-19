@@ -17,6 +17,10 @@ angular.module('opensrpSiteApp')
  
     $scope.forms = ['NEW HOUSEHOLD FORM', 'CENSUS FORM', 'PSRF FORM', 'MIS CENSUS FORM', 'MIS ELCO FORM'];
 
+    var today = new Date();
+
+    $scope.maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
     $scope.dataexport = function (date, form) {
       console.log(date);
       console.log(form);
@@ -48,7 +52,7 @@ angular.module('opensrpSiteApp')
 
       if(form.localeCompare("NEW HOUSEHOLD FORM") == 0)
         csvexport.HHDATAEXPORT($scope);
-      else if (form.localeCompare(" CENSUS FORM") == 0) 
+      else if (form.localeCompare("CENSUS FORM") == 0) 
         csvexport.CENCUSDATAEXPORT($scope);
       else if (form.localeCompare("PSRF FORM") == 0)
         csvexport.PWDATAEXPORT($scope);
