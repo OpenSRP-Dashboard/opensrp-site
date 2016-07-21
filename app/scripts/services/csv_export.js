@@ -18,7 +18,7 @@ angular.module('opensrpSiteApp')
             allData = data.hhRegisterEntries;         
             $("#wait").css("display","none");
             $("#export").css("display","block");
-            page.downloadHH(allData,"New Household Registration form");
+            page.downloadHH(allData,"New Household Registration Form");
         });    
     };
     
@@ -29,7 +29,7 @@ angular.module('opensrpSiteApp')
             allData = data.ecRegisterEntries;         
             $("#wait").css("display","none");
             $("#export").css("display","block");
-            page.downloadpw(allData,"PSRF form");
+            page.downloadpw(allData,"PSRF Form");
         });  
     };
     //adding function in $rootscope makes it available everywhere
@@ -40,7 +40,7 @@ angular.module('opensrpSiteApp')
             allData = data.hhRegisterEntries;         
             $("#wait").css("display","none");
             $("#export").css("display","block");
-            page.downloadCS(allData,"Census New Women Registration form");
+            page.downloadCS(allData,"Census New Women Registration Form");
         });  
     };
 

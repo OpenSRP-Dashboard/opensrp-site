@@ -50,15 +50,15 @@ angular.module('opensrpSiteApp')
       console.log($scope.start);
       console.log($scope.end);
 
-      if(form.localeCompare("NEW HOUSEHOLD FORM") == 0)
+      if(form.localeCompare("NEW HOUSEHOLD") == 0)
         csvexport.HHDATAEXPORT($scope);
-      else if (form.localeCompare("CENSUS FORM") == 0) 
+      else if (form.localeCompare("CENSUS") == 0) 
         csvexport.CENCUSDATAEXPORT($scope);
-      else if (form.localeCompare("PSRF FORM") == 0)
+      else if (form.localeCompare("PSRF") == 0)
         csvexport.PWDATAEXPORT($scope);
-      else if (form.localeCompare("MIS CENSUS FORM") == 0)
+      else if (form.localeCompare("MIS CENSUS") == 0)
         csvexport.MISCENSUSDATAEXPORT($scope);
-      else if (form.localeCompare("MIS ELCO FORM") == 0) 
+      else if (form.localeCompare("MIS ELCO") == 0) 
         csvexport.MISELCODATAEXPORT($scope);
       else ;
 

@@ -553,8 +553,8 @@ function misCensusFormExport(JSONData, ReportTitle, ShowLabel) {
         row += 'FWWARD' + ',';//7
         row += 'FWSUBUNIT' + ',';//8
         row += 'FWMAUZA_PARA' + ',';//9
-        row += 'wom_nid' + ',';//10
-        row += 'wob_bid' + ',';//11
+        row += 'FWWOMNID' + ',';//10
+        row += 'FWWOMBID' + ',';//11
         row += 'wom_age' + ',';//12
         row += 'first_name' + ',';//13
         row += 'husname' + ',';//14
@@ -680,8 +680,8 @@ function misElcoFormExport(JSONData, ReportTitle, ShowLabel) {
         row += 'FWWARD' + ',';//7
         row += 'FWSUBUNIT' + ',';//8
         row += 'FWMAUZA_PARA' + ',';//9
-        row += 'wom_nid' + ',';//10
-        row += 'wob_bid' + ',';//11
+        row += 'FWWOMNID' + ',';//10
+        row += 'FWWOMBID' + ',';//11
         row += 'wom_age' + ',';//12
         row += 'first_name' + ',';//13
         row += 'husname' + ',';//14
