@@ -332,7 +332,9 @@ angular.module('opensrpSiteApp')
         $rootScope.loading = false;
       });      
     }
+
     
+
     this.hh_location_tree = function(newVal,$scope){
       $scope.unions = "";
       $scope.thanas = "";                        

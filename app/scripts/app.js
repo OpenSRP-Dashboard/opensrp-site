@@ -44,6 +44,11 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+       .when('/csv_export', {
+        templateUrl: 'views/csv_export.html',
+        controller: 'csvexportCtrl',
+        controllerAs: 'csv_export'
+      })
       .when('/acl', {
         templateUrl: 'views/acl.html',
         controller: 'AclCtrl',
@@ -496,120 +501,59 @@ angular
       }  
     });
      
-      
     $rootScope.HHDATAEXPORT= function(){
-      $("#export").css("display","none");
-      $("#wait").css("display","block");       
-      var url = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
-        $rootScope.Data = '';
-        $.ajax({
-          async:false,       
-          dataType: "json",
-          cache:true,
-          beforeSend: function (xhr) {
-              xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
-          },
-          url:url,
-            success:function (data) {
-              window.HhData = data.hhRegisterEntries;
-              $("#wait").css("display","none");
-              $("#export").css("display","block");
-             page.downloadHH(window.HhData,"New Household Registration form");
-          },
-          type:"get"        
-        });      
+        var allData = null;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/household?start-date=2016-05-15&end-date=2016-06-16";
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
+            allData = data.hhRegisterEntries;         
+            $("#wait").css("display","none");
+            $("#export").css("display","block");
+            page.downloadHH(allData,"New Household Registration form");
+        });    
     };
     
     $rootScope.PWDATAEXPORT= function(){
-      $("#wait").css("display","block");
-      $("#export").css("display","none");
-      var url = OPENSRP_WEB_BASE_URL+"/registers/ec?anm-id="+$rootScope.username;
-        $rootScope.Data = '';
-        $.ajax({
-          async:false,       
-          dataType: "json",
-          cache:true,
-          beforeSend: function (xhr) {
-              xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
-          },
-          url:url,
-            success:function (data) {
-              window.ecData = data.ecRegisterEntries;                
-              $("#wait").css("display","none");
-              $("#export").css("display","block");
-             page.downloadpw( window.ecData,"PSRF form");
-          },
-          type:"get"        
-        });      
+        var allData = null;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date=2016-05-15&end-date=2016-06-16";
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
+            allData = data.ecRegisterEntries;         
+            $("#wait").css("display","none");
+            $("#export").css("display","block");
+            page.downloadpw(allData,"PSRF form");
+        });  
     };
     //adding function in $rootscope makes it available everywhere
     $rootScope.CENCUSDATAEXPORT= function(){
-     $("#export").css("display","none");
-      $("#wait").css("display","block");       
-      var url = OPENSRP_WEB_BASE_URL+"/registers/hh?anm-id="+$rootScope.username;
-        $rootScope.Data = '';
-        $.ajax({
-          async:false,       
-          dataType: "json",
-          cache:true,
-          beforeSend: function (xhr) {
-              xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
-          },
-          url:url,
-          success:function (data) {
-            window.HhData = data.hhRegisterEntries;
+        var allData = null;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/household?start-date=2016-05-15&end-date=2016-06-16";
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
+            allData = data.hhRegisterEntries;         
             $("#wait").css("display","none");
             $("#export").css("display","block");
-            page.downloadCS(window.HhData,"Census New Women Registration form");
-          },
-          type:"get"        
-        });      
+            page.downloadCS(allData,"Census New Women Registration form");
+        });  
     };
 
     $rootScope.MISCENSUSDATAEXPORT= function(){
-      $("#wait").css("display","block");
-      $("#export").css("display","none");
-      var url = OPENSRP_WEB_BASE_URL+"/registers/ec?start-date=2016-05-15&end-date=2016-06-16";
-        $rootScope.Data = '';
-        $.ajax({
-          async:false,       
-          dataType: "json",
-          cache:true,
-          beforeSend: function (xhr) {
-              xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
-          },
-          url:url,
-            success:function (data) {
-              window.ecData = data.ecRegisterEntries;                
-              $("#wait").css("display","none");
-              $("#export").css("display","block");
-             page.downloadMC( window.ecData,"MIS CENSUS FORM");
-          },
-          type:"get"        
-        });      
+        var allData = null;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date=2016-05-15&end-date=2016-06-16";
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
+            allData = data.ecRegisterEntries;         
+            $("#wait").css("display","none");
+            $("#export").css("display","block");
+            page.downloadMC(allData,"MIS CENSUS FORM");
+        });       
     };
 
     $rootScope.MISELCODATAEXPORT= function(){
-      $("#wait").css("display","block");
-      $("#export").css("display","none");
-      var url = OPENSRP_WEB_BASE_URL+"/registers/ec?start-date=2016-05-15&end-date=2016-06-16";
-        $rootScope.Data = '';
-        $.ajax({
-          async:false,       
-          dataType: "json",
-          cache:true,
-          beforeSend: function (xhr) {
-              xhr.setRequestHeader ("Authorization", "Basic " + btoa($rootScope.username + ":" + $rootScope.password));
-          },
-          url:url,
-            success:function (data) {
-              window.ecData = data.ecRegisterEntries;                
-              $("#wait").css("display","none");
-              $("#export").css("display","block");
-             page.downloadME( window.ecData,"MIS ELCO FORM");
-          },
-          type:"get"        
-        });      
+        var allData = null;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date=2016-05-15&end-date=2016-06-16";
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
+            allData = data.ecRegisterEntries;         
+            $("#wait").css("display","none");
+            $("#export").css("display","block");
+            page.downloadME(allData,"MIS ELCO FORM");
+        });   
     };
       
     $rootScope.aclLing =
