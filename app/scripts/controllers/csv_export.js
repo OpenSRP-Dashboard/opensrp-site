@@ -19,7 +19,17 @@ angular.module('opensrpSiteApp')
 
     var today = new Date();
 
-    $scope.maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    var btimeMonth = today.getMonth();
+
+      btimeMonth = btimeMonth + 1;
+
+      btimeMonth =  btimeMonth < 10 ? '0' + btimeMonth : '' + btimeMonth;
+
+      var btimeDay = today.getDate();
+
+      btimeDay =  btimeDay < 10 ? '0' + btimeDay : '' + btimeDay;
+
+      $scope.btime = today.getFullYear()+'-'+btimeMonth+'-'+btimeDay;
 
     $scope.dataexport = function (date, form) {
       console.log(date);
@@ -41,7 +51,7 @@ angular.module('opensrpSiteApp')
 
       $scope.start = date.startDate._d.getFullYear()+'-'+stratMonth+'-'+startDay;
 
-      var endDay = date.endDate._d.getDate() - 1;
+      var endDay = date.endDate._d.getDate();
 
       endDay =  endDay < 10 ? '0' + endDay : '' + endDay;
 
@@ -50,15 +60,46 @@ angular.module('opensrpSiteApp')
       console.log($scope.start);
       console.log($scope.end);
 
-      if(form.localeCompare("NEW HOUSEHOLD") == 0)
+      var maxMonth = today.getMonth();
+
+      maxMonth = maxMonth + 1;
+
+      maxMonth =  maxMonth < 10 ? '0' + maxMonth : '' + maxMonth;
+
+      var maxDay = today.getDate();
+
+      maxDay =  maxDay < 10 ? '0' + maxDay : '' + maxDay;
+
+      $scope.max = today.getFullYear()+'-'+maxMonth+'-'+maxDay;
+      console.log($scope.max);
+
+      if(angular.equals($scope.start, $scope.max) && angular.equals($scope.end, $scope.max)){
+        console.log("No date selected");
+
+        var replaceMonth = today.getMonth();
+
+        replaceMonth = replaceMonth - 2;
+
+        replaceMonth =  replaceMonth < 10 ? '0' + replaceMonth : '' + replaceMonth;
+
+        var replaceDay = today.getDate();
+
+        replaceDay =  replaceDay < 10 ? '0' + replaceDay : '' + replaceDay;
+
+        $scope.start = today.getFullYear()+'-'+replaceMonth+'-'+replaceDay;
+        
+        console.log($scope.start);
+      }      
+
+      if(form.localeCompare("NEW HOUSEHOLD FOR") == 0)
         csvexport.HHDATAEXPORT($scope);
-      else if (form.localeCompare("CENSUS") == 0) 
+      else if (form.localeCompare("CENSUS FOR") == 0) 
         csvexport.CENCUSDATAEXPORT($scope);
-      else if (form.localeCompare("PSRF") == 0)
+      else if (form.localeCompare("PSRF FOR") == 0)
         csvexport.PWDATAEXPORT($scope);
-      else if (form.localeCompare("MIS CENSUS") == 0)
+      else if (form.localeCompare("MIS CENSUS FOR") == 0)
         csvexport.MISCENSUSDATAEXPORT($scope);
-      else if (form.localeCompare("MIS ELCO") == 0) 
+      else if (form.localeCompare("MIS ELCO FOR") == 0) 
         csvexport.MISELCODATAEXPORT($scope);
       else ;
 
