@@ -14,10 +14,11 @@ angular
   //.constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.246:1234/192.168.21.246:9979')
   //ip for jivita server - 192.168.19.90  
   //.constant('OPENSRP_WEB_BASE_URL', 'http://27.147.129.50:1234/192.168.19.55:9979')
-  .constant('OPENSRP_WEB_BASE_URL', 'http://192.168.23.239:1337/192.168.23.239:9979')
+  .constant('OPENSRP_WEB_BASE_URL', 'http://192.168.22.158:1337/192.168.22.158:9979')
+  //.constant('OPENSRP_WEB_BASE_URL', 'http://192.168.22.152:1234/192.168.22.152:9979')
   .constant("HH_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/hh?anm-id=')
   .constant("ELCO_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/ec?anm-id=') 
-  .constant("COUCHURL",'http://192.168.23.239:1337/192.168.23.239:5984')
+  .constant("COUCHURL",'http://192.168.22.158:1337/192.168.22.158:5984')
   .config(['AclServiceProvider', function (AclServiceProvider) {
     var myConfig = {
       storage: 'sessionStorage',  // localStorage
@@ -213,7 +214,7 @@ angular
         }
       })
       .when('/user/:name', {
-        templateUrl: 'views/user-assign-edit.html',
+        templateUrl: 'views/user-assign.html',
         controller: 'UserCtrl',
         controllerAs: 'user',
         resolve : {
@@ -272,7 +273,7 @@ angular
         controller: 'PrivilegeCtrl',
         controllerAs: 'PrivilegeCtrl',
         resolve : {
-          'userData':function(privilegeService){ return privilegeService.promise;},
+          //'userData':function(privilegeService){ return privilegeService.promise;},
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('Acl')){
               // Has proper permissions
@@ -287,7 +288,7 @@ angular
           }]
         }        
       })
-      .when('/privileges/add', {
+      .when('/add-privilege', {
         templateUrl: 'views/privilege_add.html',
         controller: 'PrivilegeCtrl',
         controllerAs: 'PrivilegeCtrl',

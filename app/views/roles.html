@@ -7,22 +7,86 @@
         <div class="row">
             <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include>
             <div class="row"> <!-- main col left --> 
-              <div class="col-sm-2 col-md-2"></div>
+			<div class="col-sm-9 col-md-9">
+              <div class="add_pannel">
+              <a href="#/add-role">
+                <i class="glyphicon glyphicon-list-alt"></i>        
+              <span>Add Role</span>
+              </a>
+              </div>
+			  </div>
               <div class="col-sm-9 col-md-9">
                 <div id="top" class="login-container">
                     <table>
                     <tr><td>Role Name</td><td>Privileges</td><td>Status</td></tr>
 
                     <tr ng-repeat="role in roles">
-                      <td style="width: 10%"><a href="/#/role/{{role.value._id}}">{{role.value.name}}</a> 
-                      </td>
-                      <td style="width: 10%"><span ng-repeat="privilege in role.value.privileges"><a href="/#/privileges/{{privilege.id}}" >{{privilege.name}}</a><br/></span></td>
-                      <td style="width: 10%">{{role.value.status}}</td>
+                      <td style="width: 20%"><a href="/#/role/{{role.value._id}}">{{role.value.name}}</a> </td>
+                      <td ><span ng-repeat="privilege in role.value.privileges"><a href="/#/privileges/{{privilege.id}}">{{privilege.name}} </a>&nbsp; &nbsp;&nbsp;</span></td>
+                      <td style="width: 20%">{{role.value.status}}</td>
+                    </tr>
+                    </table> 
+                    <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
+                  </div>
+                </div>	
+				
+				
+				<div class="col-sm-9 col-md-9">
+                <div id="top" class="login-container" style="overflow:auto">
+                    <table>
+                    <tr><td>Role Name</td><td>Privileges1</td><td>Privileges2</td><td>Privileges3</td><td>Privileges4</td><td>Privileges5</td><td>Privileges6</td><td>Privileges8</td><td>Status</td></tr>
+
+                    <tr ng-repeat="role in roles">
+                      <td style="width: 20%">
+					     <span>
+							 role
+						 </span>
+					  </td>
+					   <td style="width: 20%">
+					     <span>
+							 <input type="checkbox" ng-click="formData.selectedChildren[user.name] = !formData.selectedRoles[user.name]"> &nbsp; user
+						 </span>
+					  </td>
+					   <td style="width: 20%">
+					     <span>
+							 <input type="checkbox" ng-click="formData.selectedChildren[user.name] = !formData.selectedRoles[user.name]"> &nbsp; user
+						 </span>
+					  </td>
+					   <td style="width: 20%">
+					     <span>
+							 <input type="checkbox" ng-click="formData.selectedChildren[user.name] = !formData.selectedRoles[user.name]"> &nbsp; user
+						 </span>
+					  </td>
+					   <td style="width: 20%">
+					     <span>
+							 <input type="checkbox" ng-click="formData.selectedChildren[user.name] = !formData.selectedRoles[user.name]"> &nbsp; user
+						 </span>
+					  </td>
+					   <td style="width: 20%">
+					     <span>
+							 <input type="checkbox" ng-click="formData.selectedChildren[user.name] = !formData.selectedRoles[user.name]"> &nbsp; user
+						 </span>
+					  </td>
+					   <td style="width: 20%">
+					     <span>
+							 <input type="checkbox" ng-click="formData.selectedChildren[user.name] = !formData.selectedRoles[user.name]"> &nbsp; user
+						 </span>
+					  </td>
+					   <td style="width: 20%">
+					     <span>
+							 <input type="checkbox" ng-click="formData.selectedChildren[user.name] = !formData.selectedRoles[user.name]"> &nbsp; user
+						 </span>
+					  </td>
+                      <td style="width: 20%">{{role.value.status}}</td>
                     </tr>
                     </table> 
                     <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
                   </div>
                 </div>
+				
+				
+				
+							
             </div>
             
         </div>
