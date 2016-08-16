@@ -4,23 +4,45 @@
 <link rel="stylesheet" href="assets/css/MarkerCluster.Default.css" /> -->
 <section>  
   <div class="container">
-    <div class="row">
-      <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include> 
+    <div class="row" style="margin-left: 300px;">
+      <!-- <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include> -->
 
-     
+      <div class="row"> <!-- main col left -->  
+          <div class="col-md-7">
+              <span class="note">SELECT FORM</span>
+              <font color="red">*</font>
+          </div>        
+      </div>
+      <div class="row">
+        <div class="col-md-7">
+            <select id="dropdownMenu1" class="form-control" name="dropdownMenu1" ng-model="form">
+              <option ng-repeat="form in forms" value="{{form}}">{{form}}</option>
+            </select>
+        </div>
+      </div>
+      <div class="row"> <!-- main col left -->  
+          <div class="col-md-7">
+              <span class="note">SELECT DATE</span>
+              <font color="red">*</font>
+          </div>        
+      </div>
 
+      <div class="row">
+        <div class="col-md-7">
+          <input class="form-control" id="dateRange" type="daterange" placeholder="yy-mm-date" limit="3 months" max-date="{{btime}}" ng-model="dateRange" readonly="readonly" ng-click="dataex()">  
+        </div>      
+      </div>
+      
       <div class="col-md-7">
-          <select id="dropdownMenu1" class="form-control" name="dropdownMenu1" ng-model="form">
-            <option ng-repeat="form in forms" value="{{form}}">{{form}}</option>
-          </select>
-
-        <input class="form-control" type="daterange" placeholder="Select Date" limit="3 months" max-date="{{btime}}" ng-model="dateRange">
-        <button ng-click="dataexport(dateRange,form)">Report</button>
-
+        <div class="row">
+          <button ng-click="dataexport(dateRange,form)" style="background-color: #4CAF50; color: white; 
+          padding: 10px 15px; text-align: center; text-decoration: none; display: inline-block; font-size: 18px;">Report</button>
+        </div>
       </div>
-
-      </div>
+      
+      <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
 
     </div>
+
   </div>    
 </section>

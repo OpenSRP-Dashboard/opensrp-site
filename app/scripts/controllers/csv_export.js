@@ -8,14 +8,18 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
- .controller('csvexportCtrl', function ($scope,$rootScope,$http,page,csvexport,mapboxService,AclService,$filter,Common, OPENSRP_WEB_BASE_URL) {
+ .controller('csvexportCtrl', function ($scope,$rootScope,$http,page,csvexport,AclService,$filter, OPENSRP_WEB_BASE_URL) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
- 
+
     $scope.forms = ['NEW HOUSEHOLD FORM', 'CENSUS FORM', 'PSRF FORM', 'MIS CENSUS FORM', 'MIS ELCO FORM'];
+
+    $scope.IsVisible = false;
+
+    $rootScope.loading = false;
 
     var today = new Date();
 
@@ -31,78 +35,109 @@ angular.module('opensrpSiteApp')
 
       $scope.btime = today.getFullYear()+'-'+btimeMonth+'-'+btimeDay;
 
-    $scope.dataexport = function (date, form) {
-      console.log(date);
-      console.log(form);
+      $scope.dataex = function () {
+        $scope.IsVisible = true;
+      }
 
-     var stratMonth = date.startDate._d.getMonth();
-     stratMonth = stratMonth  + 1;
+      $scope.dataexport = function (date, form) {
 
-      stratMonth =  stratMonth < 10 ? '0' + stratMonth : '' + stratMonth;
+        console.log(date);
+        console.log(form);
 
-      var startDay = date.startDate._d.getDate();
+        var stratMonth = date.startDate._d.getMonth();
+        stratMonth = stratMonth  + 1;
 
-      startDay =  startDay < 10 ? '0' + startDay : '' + startDay;
+        stratMonth =  stratMonth < 10 ? '0' + stratMonth : '' + stratMonth;
 
-      var endMonth = date.endDate._d.getMonth();
-      endMonth = endMonth + 1;
+        var startDay = date.startDate._d.getDate();
 
-      endMonth =  endMonth < 10 ? '0' + endMonth : '' + endMonth;
+        startDay =  startDay < 10 ? '0' + startDay : '' + startDay;
 
-      $scope.start = date.startDate._d.getFullYear()+'-'+stratMonth+'-'+startDay;
+        var endMonth = date.endDate._d.getMonth();
+        endMonth = endMonth + 1;
 
-      var endDay = date.endDate._d.getDate();
+        endMonth =  endMonth < 10 ? '0' + endMonth : '' + endMonth;
 
-      endDay =  endDay < 10 ? '0' + endDay : '' + endDay;
+        $scope.start = date.startDate._d.getFullYear()+'-'+stratMonth+'-'+startDay;
 
-      $scope.end = date.endDate._d.getFullYear()+'-'+endMonth+'-'+endDay;
+        var endDay = date.endDate._d.getDate();
 
-      console.log($scope.start);
-      console.log($scope.end);
+        endDay =  endDay < 10 ? '0' + endDay : '' + endDay;
 
-      var maxMonth = today.getMonth();
+        $scope.end = date.endDate._d.getFullYear()+'-'+endMonth+'-'+endDay;
 
-      maxMonth = maxMonth + 1;
-
-      maxMonth =  maxMonth < 10 ? '0' + maxMonth : '' + maxMonth;
-
-      var maxDay = today.getDate();
-
-      maxDay =  maxDay < 10 ? '0' + maxDay : '' + maxDay;
-
-      $scope.max = today.getFullYear()+'-'+maxMonth+'-'+maxDay;
-      console.log($scope.max);
-
-      if(angular.equals($scope.start, $scope.max) && angular.equals($scope.end, $scope.max)){
-        console.log("No date selected");
-
-        var replaceMonth = today.getMonth();
-
-        replaceMonth = replaceMonth - 2;
-
-        replaceMonth =  replaceMonth < 10 ? '0' + replaceMonth : '' + replaceMonth;
-
-        var replaceDay = today.getDate();
-
-        replaceDay =  replaceDay < 10 ? '0' + replaceDay : '' + replaceDay;
-
-        $scope.start = today.getFullYear()+'-'+replaceMonth+'-'+replaceDay;
-        
         console.log($scope.start);
-      }      
+        console.log($scope.end);
 
-      if(form.localeCompare("NEW HOUSEHOLD FOR") == 0)
-        csvexport.HHDATAEXPORT($scope);
-      else if (form.localeCompare("CENSUS FOR") == 0) 
-        csvexport.CENCUSDATAEXPORT($scope);
-      else if (form.localeCompare("PSRF FOR") == 0)
-        csvexport.PWDATAEXPORT($scope);
-      else if (form.localeCompare("MIS CENSUS FOR") == 0)
-        csvexport.MISCENSUSDATAEXPORT($scope);
-      else if (form.localeCompare("MIS ELCO FOR") == 0) 
-        csvexport.MISELCODATAEXPORT($scope);
-      else ;
+        //console.log($scope.IsVisible);
 
-    }
+        if(angular.equals($scope.IsVisible, false))
+        {
+          console.log("No date selected");
+          alert(" Select Date ");
+        } 
+
+        else if(typeof form == 'undefined')
+        {
+          console.log("No FORM selected");
+          alert(" Select FORM ");
+        }
+
+        if($scope.start > $scope.btime || $scope.end > $scope.btime) 
+        {
+            console.log("Input date greater than today");
+            alert(" Input date should be less than today ");
+        } 
+
+        else {
+
+          /* if(angular.equals($scope.start, $scope.max) && angular.equals($scope.end, $scope.max)){
+            console.log("No date selected");
+
+            var replaceMonth = today.getMonth();
+
+            replaceMonth = replaceMonth - 2;
+
+            replaceMonth =  replaceMonth < 10 ? '0' + replaceMonth : '' + replaceMonth;
+
+            var replaceDay = today.getDate();
+
+            replaceDay =  replaceDay < 10 ? '0' + replaceDay : '' + replaceDay;
+
+            $scope.start = today.getFullYear()+'-'+replaceMonth+'-'+replaceDay;
+            
+            console.log($scope.start);
+          } */
+
+        if(form.localeCompare("NEW HOUSEHOLD FORM") == 0){
+
+          csvexport.HHDATAEXPORT($scope,$rootScope);
+ 
+        }        
+        else if (form.localeCompare("CENSUS FORM") == 0){
+
+          csvexport.CENCUSDATAEXPORT($scope);
+
+        }
+        else if (form.localeCompare("PSRF FORM") == 0){
+
+          csvexport.PWDATAEXPORT($scope);
+
+        }
+        else if (form.localeCompare("MIS CENSUS FORM") == 0){
+
+          csvexport.MISCENSUSDATAEXPORT($scope);
+
+        }
+        else if (form.localeCompare("MIS ELCO FORM") == 0){
+
+          csvexport.MISELCODATAEXPORT($scope);
+
+        }
+        else ;
+
+      }
+
+      }
 
 });
