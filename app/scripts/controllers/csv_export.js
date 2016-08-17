@@ -62,6 +62,8 @@ angular.module('opensrpSiteApp')
 
         var endDay = date.endDate._d.getDate();
 
+        endDay =  endDay - 1;
+
         endDay =  endDay < 10 ? '0' + endDay : '' + endDay;
 
         $scope.end = date.endDate._d.getFullYear()+'-'+endMonth+'-'+endDay;
