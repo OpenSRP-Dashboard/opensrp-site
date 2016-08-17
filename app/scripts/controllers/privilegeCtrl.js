@@ -31,11 +31,11 @@ angular.module('opensrpSiteApp')
          console.log($scope.formData);
          privilegeService.edit($scope.formData,$window,Flash,id);           
       }         
-    }else if( $location.path() =='/privileges/add' ){  
+    }else if( $location.path() =='/add-privilege' ){  
       $scope.save = function() {
-        privilegeService.save($scope.formData,$window,Flash);
+        privilegeService.save($scope.formData,$window,Flash, $location);
       };
     }else{
-      $scope.privileges = privilegeService.Data();
+      privilegeService.allPrivileges($scope, $rootScope);
     }    
   });

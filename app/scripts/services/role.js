@@ -52,7 +52,7 @@ angular.module('opensrpSiteApp')
             $( "#message" ).delay(3000).fadeOut( "slow" );
           }
           
-        });   
+        }); 
       };
 
       this.accessTokens = function($rootScope, $timeout, $scope, roleId){
@@ -87,6 +87,7 @@ angular.module('opensrpSiteApp')
               //this.roleById($scope,$rootScope,$timeout,$scope.id);
 
               $timeout(function () {
+                console.log("is it called :/  ");
                 var url = COUCHURL+'/opensrp/_design/Role/_view/role_by_id?key="' + roleId + '"';              
                 var roleData = $http.get(url, { 
                   cache: false, 
@@ -159,23 +160,22 @@ angular.module('opensrpSiteApp')
         });
       };
 
-      this.allRoles =  function($scope,$rootScope,$timeout){
+      this.allRoles =  function($scope,$rootScope){
         //http://localhost:5984/opensrp/_design/Privilege/_view/privilege_by_id?key=%225da9913d2e051554a772deae8b02aa0b%22
         var url = COUCHURL+'/opensrp/_design/Role/_view/role_by_id';              
-        $timeout(function () {
-          var privilegeData = $http.get(url, { 
-            cache: true, 
-            withCredentials: false,                  
-            headers: {
-              'Authorization' : ''
-            }
-          })
-          .success(function (data) {                         
-            console.log("all roles fetched.");
-            console.log(data);       
-            $scope.roles = data.rows;     
-          });
-        }, 250); 
+        
+        $http.get(url, { 
+          cache: false, 
+          withCredentials: false,                  
+          headers: {
+            'Authorization' : ''
+          }
+        })
+        .success(function (data) {                         
+          console.log("all roles fetched.");
+          console.log(data);       
+          $scope.roles = data.rows;     
+        });
       };
 
       this.roleById =  function($scope,$rootScope,$timeout,id){

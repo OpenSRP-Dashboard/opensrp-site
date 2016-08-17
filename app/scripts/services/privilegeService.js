@@ -10,21 +10,7 @@
 angular.module('opensrpSiteApp')
   .service('privilegeService', function ($http,$rootScope,Base64,OPENSRP_WEB_BASE_URL,Common, COUCHURL) {
         console.log("inside testService");
-        var privileges = null;
 
-        var couchUrl = "http://192.168.23.239:1337/192.168.23.239:5984/opensrp/_design/Privilege/_view/privilege_by_name";
-        //var testUrl = "http://192.168.21.86:1337/192.168.21.86:5984/opensrp/_design/Privilege/_view/all";
-        this.promise =  $http.get(couchUrl, { 
-              cache: true, 
-              withCredentials: false,
-              headers: {
-                'Authorization' : ''
-              }
-            })
-            .success(function (data) { 
-              console.log("inside success function of privilege promise.");           
-              privileges = data.rows;
-        });
         this.privilegeById =  function($scope,$rootScope,$timeout,id){
           //http://localhost:5984/opensrp/_design/Privilege/_view/privilege_by_id?key=%225da9913d2e051554a772deae8b02aa0b%22
           var url = COUCHURL+'/opensrp/_design/Privilege/_view/privilege_by_id?key="' + id + '"';              
@@ -47,13 +33,21 @@ angular.module('opensrpSiteApp')
             });
           }, 250); 
         };
-        this.setData = function (data) {
-            privileges = data;
+        this.allPrivileges = function($scope,$rootScope){
+          var couchUrl = COUCHURL + "/opensrp/_design/Privilege/_view/privilege_by_name";
+          $http.get(couchUrl, { 
+            cache: false, 
+            withCredentials: false,
+            headers: {
+              'Authorization' : ''
+            }
+          })
+          .success(function (data) { 
+            console.log("inside success function of privilege promise.");           
+            $scope.privileges = data.rows;
+          });
         };
-        this.Data = function () {    
-            return privileges;                
-        };
-        this.save = function(data,$window,Flash){        
+        this.save = function(data,$window,Flash, $location){        
           $("#submit").attr('disabled','disabled');
           $("#submit").html("Please Wait");
           var apiURLs = OPENSRP_WEB_BASE_URL+"/add-privilege";       
@@ -64,7 +58,8 @@ angular.module('opensrpSiteApp')
               console.log("privilege creation worked.");
               var message = '<strong>Successfully you have created a privilege. </strong> ';                                    
               Flash.create('success', message, 'custom-class');
-              $window.location = '/#/privileges';                  
+              //$window.location = '/#/privileges';                  
+              $location.url('/privileges');
             }else if (data == 2) {
               console.log("privilege creation didn't work for privilege with same name already exists.");
               $("#message").html("<p class='lead'>Sorry this privilege already exists.</p>");

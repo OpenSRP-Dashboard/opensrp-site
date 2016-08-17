@@ -1,10 +1,10 @@
-<data-ng-include src="'views/partials/header.html'"></data-ng-include>
+  <data-ng-include src="'views/partials/header.html'"></data-ng-include>
 <script type="text/javascript" src="assets/js/download.js"></script>
 
 <section>
   <div class="container">
     <div class="row">
-      <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include>            
+      <data-ng-include src="'views/partials/left-sidebar.html'"></data-ng-include>      
       <div class="col-sm-9 col-md-9">
 
         <!-- <div class="row">
@@ -12,12 +12,12 @@
           {{friend.name}} 
           </div>
         </div> -->
-        <div class="row">
-        <a href="#/privileges/add">
+        <!-- <div class="row"> -->
+        <a href="#/add-privilege">
            <i class="glyphicon glyphicon-list-alt"></i>        
         <span>Add Privilege</span>
         </a>
-        </div>
+        <!-- </div> -->
         <br/>
         <br/>
         <div class="row">
@@ -26,11 +26,10 @@
           </div> -->
 
           <table >
-          <tr><td>Privilege Name</td><td>Privilege Status</td><td>Created At</td></tr>
+          <tr><td>Privilege Name</td><td>Privilege Status</td></tr>
           <tr ng-repeat="privilege in privileges">                      
-            <td style="width: 10%"><a href="#/privileges/{{privilege.value._id}}" >{{privilege.value.name}}</a> </td>
-            <td style="width: 10%">{{privilege.value.status}}</td>
-            <td style="width: 10%">{{privilege.value.created_at}}</td>
+            <td style="width: 10%"><a href="#/privileges/{{privilege.id}}" >{{privilege.key}}</a> </td>
+            <td style="width: 10%">{{privilege.value.status}} default</td>
           </tr>
           </table>
         </div>
