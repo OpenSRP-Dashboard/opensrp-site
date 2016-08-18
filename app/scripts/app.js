@@ -12,12 +12,12 @@ angular
   .module('opensrpSiteApp', ['ngBootstrap','ngAnimate','ngCookies','ngResource','ngRoute','angular-momentjs','ngSanitize','ngTouch','ui.bootstrap','ngDialog','angular-mapbox','nvd3','chart.js','checklist-model','mm.acl','flash', 'ngMessages'])
   .constant('AUTH_URL', 'http://192.168.21.167:1337/27.147.129.50:9979/authenticate-user')
   //.constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.246:1234/192.168.21.246:9979')
-  //ip for jivita server - 192.168.19.90  
+  //ip for jivita server - 192.168.19.90
   //.constant('OPENSRP_WEB_BASE_URL', 'http://27.147.129.50:1234/192.168.19.55:9979')
   .constant('OPENSRP_WEB_BASE_URL', 'http://192.168.22.158:1337/192.168.22.158:9979')
   //.constant('OPENSRP_WEB_BASE_URL', 'http://192.168.22.152:1234/192.168.22.152:9979')
   .constant("HH_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/hh?anm-id=')
-  .constant("ELCO_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/ec?anm-id=') 
+  .constant("ELCO_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/ec?anm-id=')
   .constant("COUCHURL",'http://192.168.22.158:1337/192.168.22.158:5984')
   .config(['AclServiceProvider', function (AclServiceProvider) {
     var myConfig = {
@@ -29,7 +29,7 @@ angular
   .config(['AclServiceProvider', function (AclServiceProvider) {
     AclServiceProvider.resume();
   }])
-  .config(['$httpProvider', function ($httpProvider) {           
+  .config(['$httpProvider', function ($httpProvider) {
       $httpProvider.defaults.cache = true;
   }])
   .config(function ($routeProvider,$locationProvider) {
@@ -38,7 +38,7 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
-        
+
       })
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -62,11 +62,11 @@ angular
             } else {
               // Does not have permission
               return $q.reject('Unauthorized');
-            
+
             }
           }]
         }
-        
+
       })
       .when('/hh', {
         templateUrl: 'views/hh.html',
@@ -75,18 +75,18 @@ angular
         resolve : {
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('Household')){
-              // Has proper permissions              
+              // Has proper permissions
               return true;
             } else {
               // Does not have permission
-              
+
               return $q.reject('Unauthorized');
-            
+
             }
           }]
         }
-        
-        
+
+
       })
       .when('/ec', {
         templateUrl: 'views/ec.html',
@@ -99,20 +99,20 @@ angular
               return true;
             } else {
               // Does not have permission
-              
+
               return $q.reject('Unauthorized');
-            
+
             }
           }]
         }
-        
-        
+
+
       })
       .when('/pw', {
         templateUrl: 'views/pw.html',
         controller: 'PwCtrl',
         controllerAs: 'pw',
-        resolve : {          
+        resolve : {
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('PW')){
               // Has proper permissions
@@ -120,11 +120,11 @@ angular
             } else {
               // Does not have permission
               return $q.reject('Un/authorized');
-            
+
             }
           }]
         }
-        
+
       })
       .when('/add-role', {
         templateUrl: 'views/role.html',
@@ -139,11 +139,11 @@ angular
             } else {
               // Does not have permission
               return $q.reject('Unauthorized');
-            
+
             }
           }]
         }
-      })      
+      })
       .when('/roles', {
         templateUrl: 'views/roles.html',
         controller: 'RoleCtrl',
@@ -157,7 +157,7 @@ angular
             } else {
               // Does not have permission
               return $q.reject('Unauthorized');
-            
+
             }
           }]
         }
@@ -174,13 +174,13 @@ angular
             } else {
               // Does not have permission
               return $q.reject('Unauthorized');
-            
+
             }
           }]
         }
       })
       .when('/add-user', {
-        templateUrl: 'views/user-assign.html',
+        templateUrl: 'views/user-assign-edit.html',
         controller: 'UserCtrl',
         controllerAs: 'user',
         resolve : {
@@ -191,7 +191,7 @@ angular
             } else {
               // Does not have permission
               return $q.reject('Unauthorized');
-            
+
             }
           }]
         }
@@ -208,13 +208,13 @@ angular
             } else {
               // Does not have permission
               return $q.reject('Unauthorized');
-            
+
             }
           }]
         }
       })
       .when('/user/:name', {
-        templateUrl: 'views/user-assign.html',
+        templateUrl: 'views/user-assign-edit.html',
         controller: 'UserCtrl',
         controllerAs: 'user',
         resolve : {
@@ -225,7 +225,7 @@ angular
             } else {
               // Does not have permission
               return $q.reject('Unauthorized');
-            
+
             }
           }]
         }
@@ -241,13 +241,13 @@ angular
               // Has proper permissions
               console.log('is it true?' + AclService.can('Elco Details'));
               return true;
-            } else {  
+            } else {
               // Does not have permission
               return $q.reject('Unauthorized');
-            
+
             }
           }]
-        }        
+        }
       })
       .when('/test', {
         templateUrl: 'views/testView.html',
@@ -263,10 +263,10 @@ angular
             } else {
               // Does not have permission
               return $q.reject('Unauthorized');
-            
+
             }
           }]
-        }        
+        }
       })
       .when('/privileges', {
         templateUrl: 'views/privileges.html',
@@ -283,10 +283,10 @@ angular
               // Does not have permission
               return $q.reject('Unauthorized');
               //return true;
-            
+
             }
           }]
-        }        
+        }
       })
       .when('/add-privilege', {
         templateUrl: 'views/privilege_add.html',
@@ -302,16 +302,16 @@ angular
             } else {
               // Does not have permission
               return $q.reject('Unauthorized');
-            
+
             }
           }]
-        }        
+        }
       })
       .when('/privileges/:id', {
         templateUrl: 'views/privilege_edit.html',
         controller: 'PrivilegeCtrl',
         controllerAs: 'PrivilegeCtrl',
-        resolve : {          
+        resolve : {
           'acl' : ['$q', 'AclService', function($q, AclService){
           if(AclService.can('Acl')){
             // Has proper permissions
@@ -320,7 +320,7 @@ angular
           } else {
             // Does not have permission
             return $q.reject('Unauthorized');
-          
+
           }
           }]
         }
@@ -348,18 +348,18 @@ angular
             } else {
               // Does not have permission
               return $q.reject('Unauthorized');
-            
+
             }
           }]
         }
-        
+
       })
       .when('/elcos', {
         templateUrl: 'views/elco_details.html',
         controller: 'ElcoCtrl',
         controllerAs: 'elco',
         resolve : {
-          'ElcoServiceData':function(ElcoRegisterService){ 
+          'ElcoServiceData':function(ElcoRegisterService){
             return ElcoRegisterService.promise; // promise returns a fucntion that returns a $q
           },
           'acl' : ['$q', 'AclService', function($q, AclService){
@@ -369,11 +369,11 @@ angular
             } else {
               // Does not have permission
               return $q.reject('Unauthorized');
-            
+
             }
           }]
         }
-        
+
       })
       .when('/pregnant-womens', {
         templateUrl: 'views/pw_details.html',
@@ -388,11 +388,11 @@ angular
             } else {
               // Does not have permission
               return $q.reject('Unauthorized');
-            
+
             }
           }]
         }
-        
+
       })
       .when('/fwa-performance', {
         templateUrl: 'views/fwa-performance.html',
@@ -407,11 +407,11 @@ angular
             } else {
               // Does not have permission
               return $q.reject('Unauthorized');
-            
+
             }
           }]
         }
-        
+
       })
       .when('/schedule-rule', {
         templateUrl: 'views/schedule_rule.html',
@@ -426,7 +426,7 @@ angular
             } else {
               // Does not have permission
               return $q.reject('Unauthorized');
-            
+
             }
           }]
         }
@@ -435,7 +435,7 @@ angular
         templateUrl: 'views/schedule_rule_edit.html',
         controller: 'ScheduleRuleCtrl',
         controllerAs: 'rule',
-        resolve : {          
+        resolve : {
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('Edit Rule')){
               // Has proper permissions
@@ -443,7 +443,7 @@ angular
             } else {
               // Does not have permission
               return $q.reject('Unauthorized');
-            
+
             }
           }]
         }
@@ -460,7 +460,7 @@ angular
             } else {
               // Does not have permission
               return $q.reject('Unauthorized');
-            
+
             }
           }]
         }
@@ -468,29 +468,29 @@ angular
        .when('/un-authorized', {
         templateUrl: 'views/unauthorized.html',
         controller: 'UnauthorizedCtrl',
-        controllerAs: 'unauthorized',        
+        controllerAs: 'unauthorized',
       })
       .otherwise({
         redirectTo: '/'
       });
       //$locationProvider.html5Mode(true);
-  })  
+  })
   .run(function ($rootScope, $location, $window, $timeout,AclService, Authentication, $http,$q,Base64,OPENSRP_WEB_BASE_URL,page) {
     'use strict';
 
-    $rootScope.$on('$routeChangeError', function (current, previous, rejection) {        
-      $location.path('/un-authorized');    
+    $rootScope.$on('$routeChangeError', function (current, previous, rejection) {
+      $location.path('/un-authorized');
     });
 
     $rootScope.$on('$locationChangeStart', function (current, previous, rejection) {
       if (!Authentication.isAuthenticated()) {
-            //evt.preventDefault();           
+            //evt.preventDefault();
         $location.path('/login');
         if (!$rootScope.$$phase) {
             //this will kickstart angular if to notice the change
 
             //$$phase is a flag set while angular is in a $digest cycle.
-            //Sometimes (in rare cases), you want to check $$phase on the 
+            //Sometimes (in rare cases), you want to check $$phase on the
             //scope before doing an $apply. An error occurs if you try to $apply during a $digest:
             $rootScope.$apply();
         }
@@ -499,64 +499,64 @@ angular
         }
         delete $http.defaults.headers.common['X-Requested-With'];
         delete $http.defaults.headers.common.Authorization;
-      }  
+      }
     });
-     
+
     $rootScope.HHDATAEXPORT= function(){
         var allData = null;
         var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/household?start-date=2016-05-15&end-date=2016-06-16";
-        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
-            allData = data.hhRegisterEntries;         
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {
+            allData = data.hhRegisterEntries;
             $("#wait").css("display","none");
             $("#export").css("display","block");
             page.downloadHH(allData,"New Household Registration form");
-        });    
+        });
     };
-    
+
     $rootScope.PWDATAEXPORT= function(){
         var allData = null;
         var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date=2016-05-15&end-date=2016-06-16";
-        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
-            allData = data.ecRegisterEntries;         
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {
+            allData = data.ecRegisterEntries;
             $("#wait").css("display","none");
             $("#export").css("display","block");
             page.downloadpw(allData,"PSRF form");
-        });  
+        });
     };
     //adding function in $rootscope makes it available everywhere
     $rootScope.CENCUSDATAEXPORT= function(){
         var allData = null;
         var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/household?start-date=2016-05-15&end-date=2016-06-16";
-        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
-            allData = data.hhRegisterEntries;         
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {
+            allData = data.hhRegisterEntries;
             $("#wait").css("display","none");
             $("#export").css("display","block");
             page.downloadCS(allData,"Census New Women Registration form");
-        });  
+        });
     };
 
     $rootScope.MISCENSUSDATAEXPORT= function(){
         var allData = null;
         var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date=2016-05-15&end-date=2016-06-16";
-        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
-            allData = data.ecRegisterEntries;         
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {
+            allData = data.ecRegisterEntries;
             $("#wait").css("display","none");
             $("#export").css("display","block");
             page.downloadMC(allData,"MIS CENSUS FORM");
-        });       
+        });
     };
 
     $rootScope.MISELCODATAEXPORT= function(){
         var allData = null;
         var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date=2016-05-15&end-date=2016-06-16";
-        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
-            allData = data.ecRegisterEntries;         
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {
+            allData = data.ecRegisterEntries;
             $("#wait").css("display","none");
             $("#export").css("display","block");
             page.downloadME(allData,"MIS ELCO FORM");
-        });   
+        });
     };
-      
+
     $rootScope.aclLing =
      ' <a href="#/acl">'+
      '<i class="glyphicon glyphicon-list-alt"></i>'+
@@ -567,6 +567,6 @@ angular
      '<i class="glyphicon glyphicon-list-alt"></i>'+
     ' <span>User</span>'+
     '</a>';
-   
+
   });
 /*_.mixin(_.str.exports());*/
