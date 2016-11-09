@@ -574,19 +574,6 @@ function misCensusFormExport(JSONData, ReportTitle, ShowLabel) {
         row += 'RECEIVED_TIME_AT_SERVER' + ','; //28       
         row += 'INSTANCE ID' + ','; //29
         row += 'ENTITY ID' + ','; //30
-        row += 'ELCO' + ','; //31
-        row += 'GOBHHID' + ','; //32
-        row += 'JiVitAHHID' + ','; //33
-        row += 'FWCOUNTRY' + ','; //34
-        row += 'FWDIVISION' + ','; //35
-        row += 'FWDISTRICT' + ','; //36
-        row += 'FWUPAZILLA' + ','; //37
-        row += 'FWUNION' + ','; //38
-        row += 'FWWARD' + ','; //39
-        row += 'FWSUBUNIT' + ','; //40
-        row += 'FWMAUZA_PARA' + ','; //41
-        row += 'FWNHHHGPS' + ','; //42
-        row += 'FWMISCENTTDOSE' + ','; //43
         row = row.slice(0, -1);        
         //append Label row with line break
         CSV += row + '\r\n';
@@ -638,19 +625,6 @@ function misCensusFormExport(JSONData, ReportTitle, ShowLabel) {
             row += '"' + checkNullValue(Data[i].details.received_time) + '",';//28
             row += '"' + checkNullValue(Data[i].INSTANCEID) + '",';//29
             row += '"' + checkNullValue(Data[i].CASEID) + '",';//30
-            row += '"' + checkNullValue(Data[i].details.ELCO) + '",';//31
-            row += '"' + checkNullValue(Data[i].details.GOBHHID) + '",';//32
-            row += '"' + checkNullValue(Data[i].details.JiVitAHHID) + '",';//33
-            row += '"' + checkNullValue(Data[i].details.FWCOUNTRY) + '",';//34
-            row += '"' + checkNullValue(Data[i].details.FWDIVISION) + '",';//35
-            row += '"' + checkNullValue(Data[i].details.FWDISTRICT) + '",';//36
-            row += '"' + checkNullValue(Data[i].details.FWUPAZILLA) + '",';//37
-            row += '"' + checkNullValue(Data[i].details.FWUNION) + '",';//38
-            row += '"' + checkNullValue(Data[i].details.FWWARD) + '",';//39
-            row += '"' + checkNullValue(Data[i].details.FWSUBUNIT) + '",';//40
-            row += '"' + checkNullValue(Data[i].details.FWMAUZA_PARA) + '",';//41
-            row += '"' + checkNullValue(Data[i].details.FWNHHHGPS) + '",';//42
-            row += '"' + checkNullValue(Data[i].details.FWMISCENTTDOSE) + '",';//43
             //row.slice(0, row.length - 1);        
             //add a line break after each row
             CSV += row + '\r\n';
@@ -722,26 +696,6 @@ function misElcoFormExport(JSONData, ReportTitle, ShowLabel) {
         row += 'RECEIVED_TIME_AT_SERVER' + ','; //23       
         row += 'INSTANCE ID' + ','; //24
         row += 'ENTITY ID' + ','; //25
-        row += 'FWWOMMAUZA_PARA' + ',';//26
-        row += 'GOBHHID' + ',';//27
-        row += 'JiVitAHHID' + ','; //28       
-        row += 'FWWOMFNAME' + ','; //29
-        row += 'FWHUSNAME' + ','; //30
-        row += 'FWWOMNID' + ','; //31
-        row += 'FWWOMBID' + ','; //32
-        row += 'FWWOMAGE' + ','; //33
-        row += 'ELCO' + ','; //34
-        row += 'existing_location' + ','; //35
-        row += 'FWMISINJGIVENDATE' + ','; //36
-        row += 'FWMISINJNEXTDATECALC' + ','; //37
-        row += 'FWMISINJNEXTDATE' + ','; //38
-        row += 'FWMISPMDATE' + ','; //39
-        row += 'FWMISPILLGIVENNO' + ','; //40
-        row += 'FWMISPILLGIVENDATE' + ','; //41
-        row += 'FWMISCONDGIVENNO' + ','; //42
-        row += 'FWMISCONDGIVENDATE' + ','; //43
-        row += 'FWMISOPT' + ','; //44
-        row += 'FWMISIMPT' + ','; //45
         row = row.slice(0, -1);        
         //append Label row with line break
         CSV += row + '\r\n';
@@ -778,6 +732,7 @@ function misElcoFormExport(JSONData, ReportTitle, ShowLabel) {
             }else{
             row += "'" + convertString(Data[i].FWWOMRETYPEBID)+"',";
             }
+
             //row += '"' + Data[i].FWWOMRETYPENID + '",';//10
             //row += '"' + Data[i].FWWOMRETYPEBID + '",';//11
             row += '"' + checkNullValue(Data[i].FWWOMAGE) + '",';//12
@@ -798,26 +753,7 @@ function misElcoFormExport(JSONData, ReportTitle, ShowLabel) {
             row += '"' + checkNullValue(Data[i].details.received_time) + '",';//23
             row += '"' + checkNullValue(Data[i].INSTANCEID) + '",';//24
             row += '"' + checkNullValue(Data[i].CASEID) + '",';//25
-            row += '"' + checkNullValue(Data[i].details.FWWOMMAUZA_PARA) + '",';//26
-            row += '"' + checkNullValue(Data[i].details.GOBHHID) + '",';//27
-            row += '"' + checkNullValue(Data[i].details.JiVitAHHID) + '",';//28
-            row += '"' + checkNullValue(Data[i].details.FWWOMFNAME) + '",';//29
-            row += '"' + checkNullValue(Data[i].details.FWHUSNAME) + '",';//30
-            row += '"' + checkNullValue(Data[i].details.FWWOMNID) + '",';//31
-            row += '"' + checkNullValue(Data[i].details.FWWOMBID) + '",';//32
-            row += '"' + checkNullValue(Data[i].details.FWWOMAGE) + '",';//33
-            row += '"' + checkNullValue(Data[i].details.ELCO) + '",';//34
-            row += '"' + checkNullValue(Data[i].details.existing_location) + '",';//35
-            row += '"' + checkNullValue(Data[i].details.FWMISINJGIVENDATE) + '",';//36
-            row += '"' + checkNullValue(Data[i].details.FWMISINJNEXTDATECALC) + '",';//37
-            row += '"' + checkNullValue(Data[i].details.FWMISINJNEXTDATE) + '",';//38
-            row += '"' + checkNullValue(Data[i].details.FWMISPMDATE) + '",';//39
-            row += '"' + checkNullValue(Data[i].details.FWMISPILLGIVENNO) + '",';//40
-            row += '"' + checkNullValue(Data[i].details.FWMISPILLGIVENDATE) + '",';//41
-            row += '"' + checkNullValue(Data[i].details.FWMISCONDGIVENNO) + '",';//42
-            row += '"' + checkNullValue(Data[i].details.FWMISCONDGIVENDATE) + '",';//43
-            row += '"' + checkNullValue(Data[i].details.FWMISOPT) + '",';//44
-            row += '"' + checkNullValue(Data[i].details.FWMISIMPT) + '",';//45
+
             //row.slice(0, row.length - 1);        
             //add a line break after each row
             CSV += row + '\r\n';

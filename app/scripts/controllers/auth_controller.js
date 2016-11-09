@@ -24,12 +24,8 @@ angular.module('opensrpSiteApp')
                         $scope.$apply();
                     }
                 } else {
-                    Authentication.asuthenticate("sohel", "Sohel@123");
-{
-    //
-}
-                        //alert('Authentication failed for user: ' + $scope.username);
-                    $window.location = '#/';
+                        alert('Authentication failed for user: ' + $scope.username);
+                        $window.location = '#/';
                     }
             }, function () {
                 alert('Authentication failed for user: ' + $scope.username);
