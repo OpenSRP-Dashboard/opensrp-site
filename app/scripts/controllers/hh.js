@@ -49,7 +49,7 @@ angular.module('opensrpSiteApp')
    
     
     //Common.chartDataCal($scope,monthLists,window.getHHata,'TODAY',$timeout);
-    Common.chartDataForHH($scope, $http, $timeout, 'hh-data-count');
+    Common.chartDataForHH($scope, $http, $timeout, 'hh-count');
     /*HH.reportThisMonth($scope,$scope.data,$rootScope,'TODAY','thisMonth',$filter);
     HH.reportThisWeek($scope,$scope.data,$rootScope,'TODAY','thisWeek',$filter);
     HH.reportToday($scope,$scope.data,$rootScope,'TODAY','today',$filter);*/

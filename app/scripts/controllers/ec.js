@@ -31,7 +31,7 @@ angular.module('opensrpSiteApp')
     $scope.data = jsonsql.query("select * from getData where (FWELIGIBLE == 1 )", getData);*/
     Common.locations($scope);
     Common.users($scope);
-    Common.chartDataForHH($scope, $http, $timeout, 'elco-data-count');
+    Common.chartDataForHH($scope, $http, $timeout, 'elco-count');
     
     //EC.allReports($scope, $rootScope, $http);
     
