@@ -15,7 +15,7 @@ angular.module('opensrpSiteApp')
       'Karma'
     ];
 
-    $scope.forms = ['NEW HOUSEHOLD FORM', 'CENSUS FORM', 'PSRF FORM', 'MIS CENSUS FORM', 'MIS ELCO FORM'];
+    $scope.forms = ['NEW HOUSEHOLD FORM', 'CENSUS FORM', 'PSRF FORM', 'MIS CENSUS FORM', 'MIS ELCO FORM', 'ANC1 FORM', 'ANC2 FORM', 'ANC3 FORM', 'ANC4 FORM', 'PNC1 FORM', 'PNC2 FORM', 'PNC3 FORM', 'BNF FORM', 'ENCC1 FORM', 'ENCC2 FORM', 'ENCC3 FORM'];
 
     $scope.IsVisible = false;
 
@@ -134,6 +134,61 @@ angular.module('opensrpSiteApp')
         else if (form.localeCompare("MIS ELCO FORM") == 0){
 
           csvexport.MISELCODATAEXPORT($scope);
+
+        }
+        if(form.localeCompare("ANC1 FORM") == 0){
+
+          csvexport.ANC1DATAEXPORT($scope,$rootScope);
+ 
+        }        
+        else if (form.localeCompare("ANC2 FORM") == 0){
+
+          csvexport.ANC2DATAEXPORT($scope);
+
+        }
+        else if (form.localeCompare("ANC3 FORM") == 0){
+
+          csvexport.ANC3DATAEXPORT($scope);
+
+        }
+        else if (form.localeCompare("ANC4 FORM") == 0){
+
+          csvexport.ANC4DATAEXPORT($scope);
+
+        }
+        else if (form.localeCompare("PNC1 FORM") == 0){
+
+          csvexport.PNC1DATAEXPORT($scope);
+
+        }
+        else if (form.localeCompare("PNC2 FORM") == 0){
+
+          csvexport.PNC2DATAEXPORT($scope);
+
+        }
+        else if (form.localeCompare("PNC3 FORM") == 0){
+
+          csvexport.PNC3DATAEXPORT($scope);
+
+        }
+        else if (form.localeCompare("BNF FORM") == 0){
+
+          csvexport.BNFDATAEXPORT($scope);
+
+        }
+        if(form.localeCompare("ENCC1 FORM") == 0){
+
+          csvexport.ENCC1DATAEXPORT($scope,$rootScope);
+ 
+        }        
+        else if (form.localeCompare("ENCC2 FORM") == 0){
+
+          csvexport.ENCC2DATAEXPORT($scope);
+
+        }
+        else if (form.localeCompare("ENCC3 FORM") == 0){
+
+          csvexport.ENCC3DATAEXPORT($scope);
 
         }
         else ;

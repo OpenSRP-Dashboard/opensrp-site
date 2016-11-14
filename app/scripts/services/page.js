@@ -76,6 +76,39 @@ angular.module('opensrpSiteApp')
     this.downloadME = function(data,title){     
       misElcoFormExport(data, title, true);       
     }
+    this.downloadANC1 = function(data,title){     
+      ANC1FormExport(data, title, true);       
+    }
+    this.downloadANC2 = function(data,title){     
+      ANC2FromExport(data, title, true);       
+    }
+    this.downloadANC3 = function(data,title){     
+      ANC3FormExport(data, title, true);       
+    }
+    this.downloadANC4 = function(data,title){     
+      ANC4FormExport(data, title, true);       
+    }
+    this.downloadPNC1 = function(data,title){     
+      PNC1FormExport(data, title, true);       
+    }
+    this.downloadPNC2 = function(data,title){     
+      PNC2FromExport(data, title, true);       
+    }
+    this.downloadPNC3 = function(data,title){     
+      PNC3FormExport(data, title, true);       
+    }
+    this.downloadBNF = function(data,title){     
+      BNFFormExport(data, title, true);       
+    }
+    this.downloadENCC1 = function(data,title){     
+      ENCC1FormExport(data, title, true);       
+    }
+    this.downloadENCC2 = function(data,title){     
+      ENCC2FromExport(data, title, true);       
+    }
+    this.downloadENCC3 = function(data,title){     
+      ENCC3FormExport(data, title, true);       
+    }
     
     this.reportThisMonth = function($scope,data,$rootScope,today,ngBind){      
       $scope.search = {};

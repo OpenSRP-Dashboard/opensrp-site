@@ -556,6 +556,7 @@ angular
         });
     };
 
+
     $rootScope.aclLing =
      ' <a href="#/acl">'+
      '<i class="glyphicon glyphicon-list-alt"></i>'+

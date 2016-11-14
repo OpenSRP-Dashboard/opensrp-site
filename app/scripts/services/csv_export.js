@@ -76,4 +76,148 @@ angular.module('opensrpSiteApp')
         });   
     };
 
+
+    this.ANC1DATAEXPORT= function($scope){
+      $rootScope.loading=true;
+        var allData = null;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date="+$scope.start+"&end-date="+$scope.end;
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
+            allData = data.ecRegisterEntries;         
+            $("#wait").css("display","none");
+            $("#export").css("display","block");
+            page.downloadANC1(allData,"ANC1 FORM");
+            $rootScope.loading=false;
+        });   
+    };
+
+    this.ANC2DATAEXPORT= function($scope){
+      $rootScope.loading=true;
+        var allData = null;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date="+$scope.start+"&end-date="+$scope.end;
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
+            allData = data.ecRegisterEntries;         
+            $("#wait").css("display","none");
+            $("#export").css("display","block");
+            page.downloadANC2(allData,"ANC2 FORM");
+            $rootScope.loading=false;
+        });   
+    };
+
+    this.ANC3DATAEXPORT= function($scope){
+      $rootScope.loading=true;
+        var allData = null;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date="+$scope.start+"&end-date="+$scope.end;
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
+            allData = data.ecRegisterEntries;         
+            $("#wait").css("display","none");
+            $("#export").css("display","block");
+            page.downloadANC3(allData,"ANC3 FORM");
+            $rootScope.loading=false;
+        });   
+    };
+
+    this.ANC4DATAEXPORT= function($scope){
+      $rootScope.loading=true;
+        var allData = null;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date="+$scope.start+"&end-date="+$scope.end;
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
+            allData = data.ecRegisterEntries;         
+            $("#wait").css("display","none");
+            $("#export").css("display","block");
+            page.downloadANC4(allData,"ANC4 FORM");
+            $rootScope.loading=false;
+        });   
+    };
+
+    this.PNC1DATAEXPORT= function($scope){
+      $rootScope.loading=true;
+        var allData = null;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date="+$scope.start+"&end-date="+$scope.end;
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
+            allData = data.ecRegisterEntries;         
+            $("#wait").css("display","none");
+            $("#export").css("display","block");
+            page.downloadPNC1(allData,"PNC1 FORM");
+            $rootScope.loading=false;
+        });   
+    };
+
+    this.PNC2DATAEXPORT= function($scope){
+      $rootScope.loading=true;
+        var allData = null;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date="+$scope.start+"&end-date="+$scope.end;
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
+            allData = data.ecRegisterEntries;         
+            $("#wait").css("display","none");
+            $("#export").css("display","block");
+            page.downloadPNC2(allData,"PNC2 FORM");
+            $rootScope.loading=false;
+        });   
+    };
+
+    this.PNC3DATAEXPORT= function($scope){
+      $rootScope.loading=true;
+        var allData = null;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date="+$scope.start+"&end-date="+$scope.end;
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
+            allData = data.ecRegisterEntries;         
+            $("#wait").css("display","none");
+            $("#export").css("display","block");
+            page.downloadPNC3(allData,"PNC3 FORM");
+            $rootScope.loading=false;
+        });   
+    };
+
+    this.BNFDATAEXPORT= function($scope){
+      $rootScope.loading=true;
+        var allData = null;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date="+$scope.start+"&end-date="+$scope.end;
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
+            allData = data.ecRegisterEntries;         
+            $("#wait").css("display","none");
+            $("#export").css("display","block");
+            page.downloadBNF(allData,"BNF FORM");
+            $rootScope.loading=false;
+        });   
+    };
+
+    this.ENCC1DATAEXPORT= function($scope){
+      $rootScope.loading=true;
+        var allData = null;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/child?start-date="+$scope.start+"&end-date="+$scope.end;
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
+            allData = data.ecRegisterEntries;         
+            $("#wait").css("display","none");
+            $("#export").css("display","block");
+            page.downloadENCC1(allData,"ENCC1 FORM");
+            $rootScope.loading=false;
+        });   
+    };
+
+    this.ENCC2DATAEXPORT= function($scope){
+      $rootScope.loading=true;
+        var allData = null;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/child?start-date="+$scope.start+"&end-date="+$scope.end;
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
+            allData = data.ecRegisterEntries;         
+            $("#wait").css("display","none");
+            $("#export").css("display","block");
+            page.downloadENCC2(allData,"ENCC2 FORM");
+            $rootScope.loading=false;
+        });   
+    };
+
+    this.ENCC3DATAEXPORT= function($scope){
+      $rootScope.loading=true;
+        var allData = null;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/child?start-date="+$scope.start+"&end-date="+$scope.end;
+        var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
+            allData = data.ecRegisterEntries;         
+            $("#wait").css("display","none");
+            $("#export").css("display","block");
+            page.downloadENCC3(allData,"ENCC3 FORM");
+            $rootScope.loading=false;
+        });   
+    };
+
   });
