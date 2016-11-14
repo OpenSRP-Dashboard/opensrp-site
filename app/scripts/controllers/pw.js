@@ -24,7 +24,7 @@ angular.module('opensrpSiteApp')
     
     Common.locations($scope);
     Common.users($scope);
-    Common.chartDataForHH($scope, $http, $timeout, 'pw-data-count');
+    Common.chartDataForHH($scope, $http, $timeout, 'pw-count');
 
     $scope.locationClick = function(){
       console.log('nothing');
