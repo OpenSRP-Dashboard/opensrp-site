@@ -42,6 +42,22 @@ angular.module('opensrpSiteApp')
       $scope.dataexport = function (date, form) {
 
         console.log(date);
+
+        var dateFixed = new Date(new Date().setDate(date.endDate._d.getDate() - 1));
+
+        var enMonth = dateFixed.getMonth();
+        enMonth = enMonth + 1;
+
+        enMonth =  enMonth < 10 ? '0' + enMonth : '' + enMonth;
+
+        var enDay = dateFixed.getDate();
+
+        enDay =  enDay < 10 ? '0' + enDay : '' + enDay;
+
+        $scope.en = dateFixed.getFullYear()+'-'+enMonth+'-'+enDay;
+
+        console.log($scope.en);
+
         console.log(form);
 
         var stratMonth = date.startDate._d.getMonth();
@@ -85,13 +101,22 @@ angular.module('opensrpSiteApp')
           alert(" Select FORM ");
         }
 
-        if($scope.start > $scope.btime || $scope.end > $scope.btime) 
+        if($scope.end > $scope.btime) 
         {
-            console.log("Input date greater than today");
-            alert(" Input date should be less than today ");
+            console.log("End date greater than today");
+            $scope.end = $scope.btime;
         } 
 
-        else {
+        else if($scope.end < $scope.btime) 
+        {
+
+        $scope.end = $scope.en;
+
+        console.log("End date less than today");
+        console.log($scope.end);
+
+        }
+
 
           /* if(angular.equals($scope.start, $scope.max) && angular.equals($scope.end, $scope.max)){
             console.log("No date selected");
@@ -137,8 +162,6 @@ angular.module('opensrpSiteApp')
 
         }
         else ;
-
-      }
 
       }
 
