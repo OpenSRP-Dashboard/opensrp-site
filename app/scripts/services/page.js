@@ -80,12 +80,13 @@ angular.module('opensrpSiteApp')
       ANC1FormExport(data, title, true);       
     }
     this.downloadANC2 = function(data,title){     
-      ANC2FromExport(data, title, true);       
+      ANC2FormExport(data, title, true);       
     }
     this.downloadANC3 = function(data,title){     
       ANC3FormExport(data, title, true);       
     }
-    this.downloadANC4 = function(data,title){     
+    this.downloadANC4 = function(data,title){  
+    console.log("page");   
       ANC4FormExport(data, title, true);       
     }
     this.downloadPNC1 = function(data,title){     

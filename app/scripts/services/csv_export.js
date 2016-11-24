@@ -80,9 +80,9 @@ angular.module('opensrpSiteApp')
     this.ANC1DATAEXPORT= function($scope){
       $rootScope.loading=true;
         var allData = null;
-        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date="+$scope.start+"&end-date="+$scope.end;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/anc?start-date="+$scope.start+"&end-date="+$scope.end;
         var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
-            allData = data.ecRegisterEntries;         
+            allData = data.ancRegisterEntries;         
             $("#wait").css("display","none");
             $("#export").css("display","block");
             page.downloadANC1(allData,"ANC1 FORM");
@@ -93,9 +93,9 @@ angular.module('opensrpSiteApp')
     this.ANC2DATAEXPORT= function($scope){
       $rootScope.loading=true;
         var allData = null;
-        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date="+$scope.start+"&end-date="+$scope.end;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/anc?start-date="+$scope.start+"&end-date="+$scope.end;
         var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
-            allData = data.ecRegisterEntries;         
+            allData = data.ancRegisterEntries;         
             $("#wait").css("display","none");
             $("#export").css("display","block");
             page.downloadANC2(allData,"ANC2 FORM");
@@ -106,9 +106,9 @@ angular.module('opensrpSiteApp')
     this.ANC3DATAEXPORT= function($scope){
       $rootScope.loading=true;
         var allData = null;
-        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date="+$scope.start+"&end-date="+$scope.end;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/anc?start-date="+$scope.start+"&end-date="+$scope.end;
         var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
-            allData = data.ecRegisterEntries;         
+            allData = data.ancRegisterEntries;         
             $("#wait").css("display","none");
             $("#export").css("display","block");
             page.downloadANC3(allData,"ANC3 FORM");
@@ -119,11 +119,12 @@ angular.module('opensrpSiteApp')
     this.ANC4DATAEXPORT= function($scope){
       $rootScope.loading=true;
         var allData = null;
-        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date="+$scope.start+"&end-date="+$scope.end;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/anc?start-date="+$scope.start+"&end-date="+$scope.end;
         var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
-            allData = data.ecRegisterEntries;         
+            allData = data.ancRegisterEntries;         
             $("#wait").css("display","none");
             $("#export").css("display","block");
+            console.log("service");
             page.downloadANC4(allData,"ANC4 FORM");
             $rootScope.loading=false;
         });   
