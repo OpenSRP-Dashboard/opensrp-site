@@ -172,9 +172,9 @@ angular.module('opensrpSiteApp')
     this.BNFDATAEXPORT= function($scope){
       $rootScope.loading=true;
         var allData = null;
-        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date="+$scope.start+"&end-date="+$scope.end;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/anc?start-date="+$scope.start+"&end-date="+$scope.end;
         var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
-            allData = data.ecRegisterEntries;         
+            allData = data.ancRegisterEntries;         
             $("#wait").css("display","none");
             $("#export").css("display","block");
             page.downloadBNF(allData,"BNF FORM");

@@ -220,6 +220,4 @@ angular.module('opensrpSiteApp')
 
       }
 
-      }
-
 });
