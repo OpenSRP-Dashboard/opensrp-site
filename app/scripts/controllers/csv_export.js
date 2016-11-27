@@ -161,7 +161,7 @@ angular.module('opensrpSiteApp')
           csvexport.MISELCODATAEXPORT($scope);
 
         }
-        if(form.localeCompare("ANC1 FORM") == 0){
+        else if(form.localeCompare("ANC1 FORM") == 0){
 
           csvexport.ANC1DATAEXPORT($scope,$rootScope);
  
@@ -201,7 +201,7 @@ angular.module('opensrpSiteApp')
           csvexport.BNFDATAEXPORT($scope);
 
         }
-        if(form.localeCompare("ENCC1 FORM") == 0){
+        else if(form.localeCompare("ENCC1 FORM") == 0){
 
           csvexport.ENCC1DATAEXPORT($scope,$rootScope);
  

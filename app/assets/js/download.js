@@ -24,6 +24,15 @@ function checkNullValue(value){
   }
   
 }
+function checkValue(obj) {
+                var p;
+                for (p in obj) {
+                    if (obj.hasOwnProperty(p)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
 function convertString(value){
   return String(value);
 }
@@ -795,7 +804,6 @@ function misElcoFormExport(JSONData, ReportTitle, ShowLabel) {
 
 
 function ANC1FormExport(JSONData, ReportTitle, ShowLabel) {  
-    console.log("download");
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
     var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
     var CSV = '';    
@@ -862,8 +870,12 @@ function ANC1FormExport(JSONData, ReportTitle, ShowLabel) {
     //console.log(Data);
     //1st loop is to extract each row
     for (var i = 0; i < Data.length; i++) {      
+
+        var obj = Data[i].ancVisitOne;
+            var isEmpty = checkValue(obj);
+        console.log("isEmpty: " + isEmpty);
         //2nd loop will extract each column and convert it in string comma-seprated
-      if(Data[i].ancVisitOne != null){  
+      if(!isEmpty){   
             var row = "";
             row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//1
             if (Data[i].ancVisitOne.ANC1_current_formStatus == null || Data[i].ancVisitOne.ANC1_current_formStatus =="") {
@@ -970,7 +982,6 @@ function ANC1FormExport(JSONData, ReportTitle, ShowLabel) {
 
 
 function ANC2FormExport(JSONData, ReportTitle, ShowLabel) {  
-    console.log("download");
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
     var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
     var CSV = '';    
@@ -1037,8 +1048,12 @@ function ANC2FormExport(JSONData, ReportTitle, ShowLabel) {
     //console.log(Data);
     //1st loop is to extract each row
     for (var i = 0; i < Data.length; i++) {      
+
+        var obj = Data[i].ancVisitTwo;
+            var isEmpty = checkValue(obj);
+        console.log("isEmpty: " + isEmpty);
         //2nd loop will extract each column and convert it in string comma-seprated
-      if(Data[i].ancVisitTwo != null){  
+      if(!isEmpty){   
             var row = "";
             row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//1
             if (Data[i].ancVisitTwo.ANC2_current_formStatus == null || Data[i].ancVisitTwo.ANC2_current_formStatus =="") {
@@ -1145,7 +1160,6 @@ function ANC2FormExport(JSONData, ReportTitle, ShowLabel) {
 
 
 function ANC3FormExport(JSONData, ReportTitle, ShowLabel) {  
-    console.log("download");
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
     var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
     var CSV = '';    
@@ -1212,8 +1226,12 @@ function ANC3FormExport(JSONData, ReportTitle, ShowLabel) {
     //console.log(Data);
     //1st loop is to extract each row
     for (var i = 0; i < Data.length; i++) {      
+
+        var obj = Data[i].ancVisitThree;
+            var isEmpty = checkValue(obj);
+        console.log("isEmpty: " + isEmpty);
         //2nd loop will extract each column and convert it in string comma-seprated
-      if(Data[i].ancVisitThree != null){  
+      if(!isEmpty){  
             var row = "";
             row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//1
             if (Data[i].ancVisitThree.ANC3_current_formStatus == null || Data[i].ancVisitThree.ANC3_current_formStatus =="") {
@@ -1320,7 +1338,6 @@ function ANC3FormExport(JSONData, ReportTitle, ShowLabel) {
 
 
 function ANC4FormExport(JSONData, ReportTitle, ShowLabel) {  
-    console.log("download");
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
     var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
     var CSV = '';    
@@ -1387,8 +1404,12 @@ function ANC4FormExport(JSONData, ReportTitle, ShowLabel) {
     //console.log(Data);
     //1st loop is to extract each row
     for (var i = 0; i < Data.length; i++) {      
+
+        var obj = Data[i].ancVisitFour;
+            var isEmpty = checkValue(obj);
+        console.log("isEmpty: " + isEmpty);
         //2nd loop will extract each column and convert it in string comma-seprated
-      if(Data[i].ancVisitFour != null){  
+      if(!isEmpty){  
             var row = "";
             row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//1
             if (Data[i].ancVisitFour.ANC4_current_formStatus == null || Data[i].ancVisitFour.ANC4_current_formStatus =="") {
@@ -1495,7 +1516,6 @@ function ANC4FormExport(JSONData, ReportTitle, ShowLabel) {
 
 
 function BNFFormExport(JSONData, ReportTitle, ShowLabel) {  
-    console.log("download");
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
     var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
     var CSV = '';    
@@ -1623,4 +1643,820 @@ function BNFFormExport(JSONData, ReportTitle, ShowLabel) {
     link.click();
     //window.open(link);
     document.body.removeChild(link);
+}
+
+
+function PNC1FormExport(JSONData, ReportTitle, ShowLabel) {  
+    //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
+    var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+    var CSV = '';    
+    //Set Report title in first row or line
+    // CSV += ReportTitle + '\r\n\n';
+    //This condition will generate the Label/Header
+    if (ShowLabel) {
+        var row = ""; 
+        row += 'FWA Worker ID' + ',';//1     
+        row += 'Form Status at Submission' + ',';//2
+        row += 'SCHEDULED_DATE' + ',';//3 
+        row += 'FWGOBHHID' + ',';//4
+        row += 'FWJIVHHID' + ',';//5
+        row += 'FWMAUZA_PARA' + ',';//9
+        row += 'wom_nid' + ',';//10
+        row += 'wob_bid' + ',';//11
+        row += 'wom_age' + ',';//12
+        row += 'first_name' + ',';//13
+        row += 'husname' + ',';//14
+        row += 'FD Worker ID' + ',';//15
+        row += 'FWA Worker ID' + ','; //16
+        row += 'today' + ',';//17
+        row += 'start' + ',';//18
+        row += 'end' + ',';//19
+        row += 'FWPNC1DATE' + ',';//20
+        row += 'FWCONFIRMATION' + ',';//21
+        row += 'FWPNC1REMSTS' + ','; //23       
+        row += 'FWPNC1INT' + ','; //24
+        row += 'FWPNC1KNWPRVDR' + ','; //25
+        row += 'FWPNC1FVR' + ',';//26
+        row += 'FWPNC1TEMP' + ',';//27
+        row += 'FWPNC1DNGRSIGN' + ',';//28
+        row += 'FWPNC1DELCOMP' + ',';//29
+        row = row.slice(0, -1);        
+        //append Label row with line break
+        CSV += row + '\r\n';
+    }
+    //console.log(Data);
+    //1st loop is to extract each row
+    for (var i = 0; i < Data.length; i++) {      
+
+        var obj = Data[i].pncVisitOne;
+            var isEmpty = checkValue(obj);
+        console.log("isEmpty: " + isEmpty);
+        //2nd loop will extract each column and convert it in string comma-seprated
+      if(!isEmpty){ 
+            var row = "";
+            row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//1
+            if (Data[i].pncVisitOne.pnc1_current_formStatus == null || Data[i].pncVisitOne.pnc1_current_formStatus =="") {
+              row += ",";
+            }else{
+              row += '"' + convertString(Data[i].pncVisitOne.pnc1_current_formStatus)+ '",';
+            } 
+            row += '"' + checkNullValue((Data[i].pncVisitOne.start).substring(0,10)) +'",';//3
+            row += '"' + checkNullValue(Data[i].mother_gobhhid) + '",';//4
+            row += '"' + checkNullValue(Data[i].mother_jivhhid) + '",';//5
+            row += '"' + checkNullValue(Data[i].mother_mauza) + '",';//9
+            if (convertString(Data[i].mother_wom_nid) =='null' || convertString(Data[i].mother_wom_nid) =="") {
+            row += ",";
+            }else{
+            row +=  "'"+ convertString(Data[i].mother_wom_nid)+"',";
+            }
+            if (convertString(Data[i].mother_wom_bid) =='null' || convertString(Data[i].mother_wom_bid) == "") {
+            row += ",";
+            }else{
+            row += "'" + convertString(Data[i].mother_wom_bid)+"',";
+            }
+            //row += '"' + Data[i].FWWOMRETYPENID + '",';//10
+            //row += '"' + Data[i].FWWOMRETYPEBID + '",';//11
+            row += '"' + checkNullValue(Data[i].mother_wom_age) + '",';//12
+            row += '"' + checkNullValue(Data[i].mother_first_name) + '",';//13
+            row += '"' + checkNullValue(Data[i].mother_husname) + '",';//14            
+            row += '"' + checkNullValue(Data[i].pncVisitOne.external_user_ID) + '",';//15
+            row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//16
+            row += '"' + checkNullValue(Data[i].pncVisitOne.today) + '",';//17
+            row += '"' + checkNullValue(Data[i].pncVisitOne.start) + '",';//18
+            row += '"' + checkNullValue(Data[i].pncVisitOne.end) + '",';//19
+            row += '"' + checkNullValue(Data[i].pncVisitOne.FWPNC1DATE) + '",';//20
+            row += '"' + checkNullValue(Data[i].pncVisitOne.FWCONFIRMATION) + '",';//21
+            row += '"' + checkNullValue(Data[i].pncVisitOne.FWPNC1REMSTS)  + '",';//23
+            row += '"' + checkNullValue(Data[i].pncVisitOne.FWPNC1INT) + '",';//24
+            row += '"' + checkNullValue(Data[i].pncVisitOne.FWPNC1KNWPRVDR) + '",';//25
+            row += '"' + checkNullValue(Data[i].pncVisitOne.FWPNC1FVR) + '",';//26
+            row += '"' + checkNullValue(Data[i].pncVisitOne.FWPNC1TEMP)+ '",';//27
+            row += '"' + checkNullValue(Data[i].pncVisitOne.FWPNC1DNGRSIGN) + '",';//28
+            row += '"' + checkNullValue(Data[i].pncVisitOne.FWPNC1DELCOMP) + '",';//29
+            //row.slice(0, row.length - 1);        
+            //add a line break after each row
+            CSV += row + '\r\n';
+        //row += '"' + checkNullValue(Data[i].details}) + '",';//48 
+      } 
+    }
+    if (CSV == '') {        
+        alert("Invalid data");
+        return;
+    }
+    //Generate a file name
+    var fileName = "";
+    //this will remove the blank-spaces from the title and replace it with an underscore
+    fileName += ReportTitle.replace(/ /g,"_");   
+        //Initialize file format you want csv or xls
+    var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+   
+    // Now the little tricky part.
+    // you can use either>> window.open(uri);
+    // but this will not work in some browsers
+    // or you will not get the correct file extension    
+    
+    //this trick will generate a temp <a /> tag
+    var link = document.createElement("a");    
+    link.href = uri;
+   
+    //set the visibility hidden so it will not effect on your web-layout
+    link.style = "visibility:hidden";
+    link.download = fileName + ".csv";
+    
+    //this part will append the anchor tag and remove it after automatic click
+    document.body.appendChild(link);
+    link.click();
+    //window.open(link);
+    document.body.removeChild(link);
+}
+
+
+function PNC2FormExport(JSONData, ReportTitle, ShowLabel) {  
+    //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
+    var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+    var CSV = '';    
+    //Set Report title in first row or line
+    // CSV += ReportTitle + '\r\n\n';
+    //This condition will generate the Label/Header
+    if (ShowLabel) {
+        var row = ""; 
+        row += 'FWA Worker ID' + ',';//1     
+        row += 'Form Status at Submission' + ',';//2
+        row += 'SCHEDULED_DATE' + ',';//3 
+        row += 'FWGOBHHID' + ',';//4
+        row += 'FWJIVHHID' + ',';//5
+        row += 'FWMAUZA_PARA' + ',';//9
+        row += 'wom_nid' + ',';//10
+        row += 'wob_bid' + ',';//11
+        row += 'wom_age' + ',';//12
+        row += 'first_name' + ',';//13
+        row += 'husname' + ',';//14
+        row += 'FD Worker ID' + ',';//15
+        row += 'FWA Worker ID' + ','; //16
+        row += 'today' + ',';//17
+        row += 'start' + ',';//18
+        row += 'end' + ',';//19
+        row += 'FWPNC2DATE' + ',';//20
+        row += 'FWCONFIRMATION' + ',';//21
+        row += 'FWPNC2REMSTS' + ','; //23       
+        row += 'FWPNC2INT' + ','; //24
+        row += 'FWPNC2KNWPRVDR' + ','; //25
+        row += 'FWPNC2FVR' + ',';//26
+        row += 'FWPNC2TEMP' + ',';//27
+        row += 'FWPNC2DNGRSIGN' + ',';//28
+        row += 'FWPNC2DELCOMP' + ',';//29
+        row = row.slice(0, -1);        
+        //append Label row with line break
+        CSV += row + '\r\n';
+    }
+    //console.log(Data);
+    //1st loop is to extract each row
+    for (var i = 0; i < Data.length; i++) {      
+
+        var obj = Data[i].pncVisitTwo;
+            var isEmpty = checkValue(obj);
+        console.log("isEmpty: " + isEmpty);
+        //2nd loop will extract each column and convert it in string comma-seprated
+      if(!isEmpty){   
+            var row = "";
+            row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//1
+            if (Data[i].pncVisitTwo.pnc2_current_formStatus == null || Data[i].pncVisitTwo.pnc2_current_formStatus =="") {
+              row += ",";
+            }else{
+              row += '"' + convertString(Data[i].pncVisitTwo.pnc2_current_formStatus)+ '",';
+            } 
+            row += '"' + checkNullValue((Data[i].pncVisitTwo.start).substring(0,10)) +'",';//3
+            row += '"' + checkNullValue(Data[i].mother_gobhhid) + '",';//4
+            row += '"' + checkNullValue(Data[i].mother_jivhhid) + '",';//5
+            row += '"' + checkNullValue(Data[i].mother_mauza) + '",';//9
+            if (convertString(Data[i].mother_wom_nid) =='null' || convertString(Data[i].mother_wom_nid) =="") {
+            row += ",";
+            }else{
+            row +=  "'"+ convertString(Data[i].mother_wom_nid)+"',";
+            }
+            if (convertString(Data[i].mother_wom_bid) =='null' || convertString(Data[i].mother_wom_bid) == "") {
+            row += ",";
+            }else{
+            row += "'" + convertString(Data[i].mother_wom_bid)+"',";
+            }
+            //row += '"' + Data[i].FWWOMRETYPENID + '",';//10
+            //row += '"' + Data[i].FWWOMRETYPEBID + '",';//11
+            row += '"' + checkNullValue(Data[i].mother_wom_age) + '",';//12
+            row += '"' + checkNullValue(Data[i].mother_first_name) + '",';//13
+            row += '"' + checkNullValue(Data[i].mother_husname) + '",';//14            
+            row += '"' + checkNullValue(Data[i].pncVisitTwo.external_user_ID) + '",';//15
+            row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//16
+            row += '"' + checkNullValue(Data[i].pncVisitTwo.today) + '",';//17
+            row += '"' + checkNullValue(Data[i].pncVisitTwo.start) + '",';//18
+            row += '"' + checkNullValue(Data[i].pncVisitTwo.end) + '",';//19
+            row += '"' + checkNullValue(Data[i].pncVisitTwo.FWPNC2DATE) + '",';//20
+            row += '"' + checkNullValue(Data[i].pncVisitTwo.FWCONFIRMATION) + '",';//21
+            row += '"' + checkNullValue(Data[i].pncVisitTwo.FWPNC2REMSTS)  + '",';//23
+            row += '"' + checkNullValue(Data[i].pncVisitTwo.FWPNC2INT) + '",';//24
+            row += '"' + checkNullValue(Data[i].pncVisitTwo.FWPNC2KNWPRVDR) + '",';//25
+            row += '"' + checkNullValue(Data[i].pncVisitTwo.FWPNC2FVR) + '",';//26
+            row += '"' + checkNullValue(Data[i].pncVisitTwo.FWPNC2TEMP)+ '",';//27
+            row += '"' + checkNullValue(Data[i].pncVisitTwo.FWPNC2DNGRSIGN) + '",';//28
+            row += '"' + checkNullValue(Data[i].pncVisitTwo.FWPNC2DELCOMP) + '",';//29
+            //row.slice(0, row.length - 1);        
+            //add a line break after each row
+            CSV += row + '\r\n';
+        //row += '"' + checkNullValue(Data[i].details}) + '",';//48 
+      } 
+    }
+    if (CSV == '') {        
+        alert("Invalid data");
+        return;
+    }
+    //Generate a file name
+    var fileName = "";
+    //this will remove the blank-spaces from the title and replace it with an underscore
+    fileName += ReportTitle.replace(/ /g,"_");   
+        //Initialize file format you want csv or xls
+    var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+   
+    // Now the little tricky part.
+    // you can use either>> window.open(uri);
+    // but this will not work in some browsers
+    // or you will not get the correct file extension    
+    
+    //this trick will generate a temp <a /> tag
+    var link = document.createElement("a");    
+    link.href = uri;
+   
+    //set the visibility hidden so it will not effect on your web-layout
+    link.style = "visibility:hidden";
+    link.download = fileName + ".csv";
+    
+    //this part will append the anchor tag and remove it after automatic click
+    document.body.appendChild(link);
+    link.click();
+    //window.open(link);
+    document.body.removeChild(link);
+
+}
+
+
+
+function PNC3FormExport(JSONData, ReportTitle, ShowLabel) {  
+    //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
+    var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+    var CSV = '';    
+    //Set Report title in first row or line
+    // CSV += ReportTitle + '\r\n\n';
+    //This condition will generate the Label/Header
+    if (ShowLabel) {
+        var row = ""; 
+        row += 'FWA Worker ID' + ',';//1     
+        row += 'Form Status at Submission' + ',';//2
+        row += 'SCHEDULED_DATE' + ',';//3 
+        row += 'FWGOBHHID' + ',';//4
+        row += 'FWJIVHHID' + ',';//5
+        row += 'FWMAUZA_PARA' + ',';//9
+        row += 'wom_nid' + ',';//10
+        row += 'wob_bid' + ',';//11
+        row += 'wom_age' + ',';//12
+        row += 'first_name' + ',';//13
+        row += 'husname' + ',';//14
+        row += 'FD Worker ID' + ',';//15
+        row += 'FWA Worker ID' + ','; //16
+        row += 'today' + ',';//17
+        row += 'start' + ',';//18
+        row += 'end' + ',';//19
+        row += 'FWPNC3DATE' + ',';//20
+        row += 'FWCONFIRMATION' + ',';//21
+        row += 'FWPNC3REMSTS' + ','; //23       
+        row += 'FWPNC3INT' + ','; //24
+        row += 'FWPNC3KNWPRVDR' + ','; //25
+        row += 'FWPNC3FVR' + ',';//26
+        row += 'FWPNC3TEMP' + ',';//27
+        row += 'FWPNC3DNGRSIGN' + ',';//28
+        row += 'FWPNC3DELCOMP' + ',';//29
+        row = row.slice(0, -1);        
+        //append Label row with line break
+        CSV += row + '\r\n';
+    }
+    //console.log(Data);
+    //1st loop is to extract each row
+    for (var i = 0; i < Data.length; i++) {      
+
+        var obj = Data[i].pncVisitThree;
+            var isEmpty = checkValue(obj);
+        console.log("isEmpty: " + isEmpty);
+        //2nd loop will extract each column and convert it in string comma-seprated
+      if(!isEmpty){   
+            var row = "";
+            row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//1
+            if (Data[i].pncVisitThree.pnc3_current_formStatus == null || Data[i].pncVisitThree.pnc3_current_formStatus =="") {
+              row += ",";
+            }else{
+              row += '"' + convertString(Data[i].pncVisitThree.pnc3_current_formStatus)+ '",';
+            } 
+            row += '"' + checkNullValue((Data[i].pncVisitThree.start).substring(0,10)) +'",';//3
+            row += '"' + checkNullValue(Data[i].mother_gobhhid) + '",';//4
+            row += '"' + checkNullValue(Data[i].mother_jivhhid) + '",';//5
+            row += '"' + checkNullValue(Data[i].mother_mauza) + '",';//9
+            if (convertString(Data[i].mother_wom_nid) =='null' || convertString(Data[i].mother_wom_nid) =="") {
+            row += ",";
+            }else{
+            row +=  "'"+ convertString(Data[i].mother_wom_nid)+"',";
+            }
+            if (convertString(Data[i].mother_wom_bid) =='null' || convertString(Data[i].mother_wom_bid) == "") {
+            row += ",";
+            }else{
+            row += "'" + convertString(Data[i].mother_wom_bid)+"',";
+            }
+            //row += '"' + Data[i].FWWOMRETYPENID + '",';//10
+            //row += '"' + Data[i].FWWOMRETYPEBID + '",';//11
+            row += '"' + checkNullValue(Data[i].mother_wom_age) + '",';//12
+            row += '"' + checkNullValue(Data[i].mother_first_name) + '",';//13
+            row += '"' + checkNullValue(Data[i].mother_husname) + '",';//14            
+            row += '"' + checkNullValue(Data[i].pncVisitThree.external_user_ID) + '",';//15
+            row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//16
+            row += '"' + checkNullValue(Data[i].pncVisitThree.today) + '",';//17
+            row += '"' + checkNullValue(Data[i].pncVisitThree.start) + '",';//18
+            row += '"' + checkNullValue(Data[i].pncVisitThree.end) + '",';//19
+            row += '"' + checkNullValue(Data[i].pncVisitThree.FWPNC3DATE) + '",';//20
+            row += '"' + checkNullValue(Data[i].pncVisitThree.FWCONFIRMATION) + '",';//21
+            row += '"' + checkNullValue(Data[i].pncVisitThree.FWPNC3REMSTS)  + '",';//23
+            row += '"' + checkNullValue(Data[i].pncVisitThree.FWPNC3INT) + '",';//24
+            row += '"' + checkNullValue(Data[i].pncVisitThree.FWPNC3KNWPRVDR) + '",';//25
+            row += '"' + checkNullValue(Data[i].pncVisitThree.FWPNC3FVR) + '",';//26
+            row += '"' + checkNullValue(Data[i].pncVisitThree.FWPNC3TEMP)+ '",';//27
+            row += '"' + checkNullValue(Data[i].pncVisitThree.FWPNC3DNGRSIGN) + '",';//28
+            row += '"' + checkNullValue(Data[i].pncVisitThree.FWPNC3DELCOMP) + '",';//29
+            //row.slice(0, row.length - 1);        
+            //add a line break after each row
+            CSV += row + '\r\n';
+        //row += '"' + checkNullValue(Data[i].details}) + '",';//48 
+      } 
+    }
+    if (CSV == '') {        
+        alert("Invalid data");
+        return;
+    }
+    //Generate a file name
+    var fileName = "";
+    //this will remove the blank-spaces from the title and replace it with an underscore
+    fileName += ReportTitle.replace(/ /g,"_");   
+        //Initialize file format you want csv or xls
+    var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+   
+    // Now the little tricky part.
+    // you can use either>> window.open(uri);
+    // but this will not work in some browsers
+    // or you will not get the correct file extension    
+    
+    //this trick will generate a temp <a /> tag
+    var link = document.createElement("a");    
+    link.href = uri;
+   
+    //set the visibility hidden so it will not effect on your web-layout
+    link.style = "visibility:hidden";
+    link.download = fileName + ".csv";
+    
+    //this part will append the anchor tag and remove it after automatic click
+    document.body.appendChild(link);
+    link.click();
+    //window.open(link);
+    document.body.removeChild(link);
+
+}
+
+
+function ENCC1FormExport(JSONData, ReportTitle, ShowLabel) {  
+    //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
+    var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+    var CSV = '';    
+    //Set Report title in first row or line
+    // CSV += ReportTitle + '\r\n\n';
+    //This condition will generate the Label/Header
+    if (ShowLabel) {
+        var row = ""; 
+        row += 'FWA Worker ID' + ',';//1     
+        row += 'Form Status at Submission' + ',';//2
+        row += 'SCHEDULED_DATE' + ',';//3 
+        row += 'FWGOBHHID' + ',';//4
+        row += 'FWJIVHHID' + ',';//5
+        row += 'FWMAUZA_PARA' + ',';//9
+        row += 'NID' + ',';//10
+        row += 'BID' + ',';//11
+        row += 'wom_age' + ',';//12
+        row += 'first_name' + ',';//13
+        row += 'husname' + ',';//14
+        row += 'FD Worker ID' + ',';//15
+        row += 'FWA Worker ID' + ','; //16
+        row += 'SCHEDULED_DATE_ENCC1_FWA' + ',';
+        row += 'COMPLETED_DATE_ENCC1_FW' + ','; 
+        row += 'today' + ',';//17
+        row += 'start' + ',';//18
+        row += 'end' + ',';//19
+        row += 'FWENC1DATE' + ',';//20
+        row += 'FWENC1STS' + ',';//21
+        row += 'FWENC1BFINTN' + ','; //23       
+        row += 'FWENC1PRLCTL' + ','; //24
+        row += 'FWENC1DRYWM' + ','; //25
+        row += 'FWENC1HDCOV' + ',';//26
+        row += 'FWENC1UMBS' + ',';//27
+        row += 'FWENC1BTHD' + ',';//28
+        row += 'FWENC1DSFVRCLD' + ',';//29
+        row += 'FWENC1TEMP' + ',';//30        
+        row += 'FWENC1DSFOULUMBS' + ',';//31
+        row += 'FWENC1DSLIMBLUE' + ',';//32
+        row += 'FWENC1DSSKNYLW' + ',';//33
+        row += 'FWENC1DSLETH' + ',';//34
+        row += 'FWENC1DSDIFBRTH' + ',';//35
+        row += 'FWENC1DSCONVL' + ',';//36
+        row += 'FWENC1DELCOMP' + ',';//37
+        row = row.slice(0, -1);        
+        //append Label row with line break
+        CSV += row + '\r\n';
+    }
+    //console.log(Data);
+    //1st loop is to extract each row
+    for (var i = 0; i < Data.length; i++) {      
+
+        var obj = Data[i].enccVisitOne;
+            var isEmpty = checkValue(obj);
+        console.log("isEmpty: " + isEmpty);
+        //2nd loop will extract each column and convert it in string comma-seprated
+      if(!isEmpty){  
+            var row = "";
+            row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//1
+            if (Data[i].enccVisitOne.encc1_current_formStatus == null || Data[i].enccVisitOne.encc1_current_formStatus =="") {
+              row += ",";
+            }else{
+              row += '"' + convertString(Data[i].enccVisitOne.encc1_current_formStatus)+ '",';
+            } 
+            row += '"' + checkNullValue((Data[i].enccVisitOne.start).substring(0,10)) +'",';//3
+            row += '"' + checkNullValue(Data[i].details.GOBHHID) + '",';//4
+            row += '"' + checkNullValue(Data[i].details.JiVitAHHID) + '",';//5
+            row += '"' + checkNullValue(Data[i].details.mother_mauza) + '",';//9
+            if (convertString(Data[i].details.FWWOMNID) =='null' || convertString(Data[i].details.FWWOMNID) =="") {
+            row += ",";
+            }else{
+            row +=  "'"+ convertString(Data[i].details.FWWOMNID)+"',";
+            }
+            if (convertString(Data[i].details.FWWOMBID) =='null' || convertString(Data[i].details.FWWOMBID) == "") {
+            row += ",";
+            }else{
+            row += "'" + convertString(Data[i].details.FWWOMBID)+"',";
+            }
+            //row += '"' + Data[i].FWWOMRETYPENID + '",';//10
+            //row += '"' + Data[i].FWWOMRETYPEBID + '",';//11
+            row += '"' + checkNullValue(Data[i].details.mother_wom_age) + '",';//12
+            row += '"' + checkNullValue(Data[i].details.FWWOMFNAME) + '",';//13
+            row += '"' + checkNullValue(Data[i].details.FWHUSNAME) + '",';//14            
+            row += '"' + checkNullValue(Data[i].enccVisitOne.external_user_ID) + '",';//15
+            row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//16
+            row += '"' + checkNullValue(Data[i].enccVisitOne.start) + '",';
+            row += '"' + checkNullValue(Data[i].enccVisitOne.end) + '",';
+            row += '"' + checkNullValue(Data[i].enccVisitOne.today) + '",';//17
+            row += '"' + checkNullValue(Data[i].enccVisitOne.start) + '",';//18
+            row += '"' + checkNullValue(Data[i].enccVisitOne.end) + '",';//19
+            row += '"' + checkNullValue(Data[i].enccVisitOne.FWENC1DATE) + '",';//20
+            row += '"' + checkNullValue(Data[i].enccVisitOne.FWENC1STS) + '",';//21
+            row += '"' + checkNullValue(Data[i].enccVisitOne.FWENC1BFINTN)  + '",';//23
+            row += '"' + checkNullValue(Data[i].enccVisitOne.FWENC1PRLCTL) + '",';//24
+            row += '"' + checkNullValue(Data[i].enccVisitOne.FWENC1DRYWM) + '",';//25
+            row += '"' + checkNullValue(Data[i].enccVisitOne.FWENC1HDCOV) + '",';//26
+            row += '"' + checkNullValue(Data[i].enccVisitOne.FWENC1UMBS)+ '",';//27
+            row += '"' + checkNullValue(Data[i].enccVisitOne.FWENC1BTHD) + '",';//28
+            row += '"' + checkNullValue(Data[i].enccVisitOne.FWENC1DSFVRCLD) + '",';//29
+            row += '"' + checkNullValue(Data[i].enccVisitOne.FWENC1TEMP) + '",';//30
+            row += '"' + checkNullValue(Data[i].enccVisitOne.FWENC1DSFOULUMBS) + '",';//31
+            row += '"' + checkNullValue(Data[i].enccVisitOne.FWENC1DSLIMBLUE) + '",';//32
+            row += '"' + checkNullValue(Data[i].enccVisitOne.FWENC1DSSKNYLW) + '",';//33
+            row += '"' + checkNullValue(Data[i].enccVisitOne.FWENC1DSLETH) + '",';//34
+            row += '"' + checkNullValue(Data[i].enccVisitOne.FWENC1DSDIFBRTH) + '",';//35
+            row += '"' + checkNullValue(Data[i].enccVisitOne.FWENC1DSCONVL) + '",';//36
+            row += '"' + checkNullValue(Data[i].enccVisitOne.FWENC1DELCOMP) + '",';//37
+            //row.slice(0, row.length - 1);        
+            //add a line break after each row
+            CSV += row + '\r\n';
+        //row += '"' + checkNullValue(Data[i].details}) + '",';//48 
+      } 
+    }
+    if (CSV == '') {        
+        alert("Invalid data");
+        return;
+    }
+    //Generate a file name
+    var fileName = "";
+    //this will remove the blank-spaces from the title and replace it with an underscore
+    fileName += ReportTitle.replace(/ /g,"_");   
+        //Initialize file format you want csv or xls
+    var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+   
+    // Now the little tricky part.
+    // you can use either>> window.open(uri);
+    // but this will not work in some browsers
+    // or you will not get the correct file extension    
+    
+    //this trick will generate a temp <a /> tag
+    var link = document.createElement("a");    
+    link.href = uri;
+   
+    //set the visibility hidden so it will not effect on your web-layout
+    link.style = "visibility:hidden";
+    link.download = fileName + ".csv";
+    
+    //this part will append the anchor tag and remove it after automatic click
+    document.body.appendChild(link);
+    link.click();
+    //window.open(link);
+    document.body.removeChild(link);
+
+}
+
+
+function ENCC2FormExport(JSONData, ReportTitle, ShowLabel) {  
+    //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
+    var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+    var CSV = '';    
+    //Set Report title in first row or line
+    // CSV += ReportTitle + '\r\n\n';
+    //This condition will generate the Label/Header
+    if (ShowLabel) {
+        var row = ""; 
+        row += 'FWA Worker ID' + ',';//1     
+        row += 'Form Status at Submission' + ',';//2
+        row += 'SCHEDULED_DATE' + ',';//3 
+        row += 'FWGOBHHID' + ',';//4
+        row += 'FWJIVHHID' + ',';//5
+        row += 'FWMAUZA_PARA' + ',';//9
+        row += 'NID' + ',';//10
+        row += 'BID' + ',';//11
+        row += 'wom_age' + ',';//12
+        row += 'first_name' + ',';//13
+        row += 'husname' + ',';//14
+        row += 'FD Worker ID' + ',';//15
+        row += 'FWA Worker ID' + ','; //16
+        row += 'SCHEDULED_DATE_ENCC2_FWA' + ',';
+        row += 'COMPLETED_DATE_ENCC2_FW' + ','; 
+        row += 'today' + ',';//17
+        row += 'start' + ',';//18
+        row += 'end' + ',';//19
+        row += 'FWENC2DATE' + ',';//20
+        row += 'FWENC2STS' + ',';//21
+        row += 'FWENC2BFINTN' + ','; //23       
+        row += 'FWENC2PRLCTL' + ','; //24
+        row += 'FWENC2DRYWM' + ','; //25
+        row += 'FWENC2HDCOV' + ',';//26
+        row += 'FWENC2UMBS' + ',';//27
+        row += 'FWENC2BTHD' + ',';//28
+        row += 'FWENC2DSFVRCLD' + ',';//29
+        row += 'FWENC2TEMP' + ',';//30        
+        row += 'FWENC2DSFOULUMBS' + ',';//31
+        row += 'FWENC2DSLIMBLUE' + ',';//32
+        row += 'FWENC2DSSKNYLW' + ',';//33
+        row += 'FWENC2DSLETH' + ',';//34
+        row += 'FWENC2DSDIFBRTH' + ',';//35
+        row += 'FWENC2DSCONVL' + ',';//36
+        row += 'FWENC2DELCOMP' + ',';//37
+        row = row.slice(0, -1);        
+        //append Label row with line break
+        CSV += row + '\r\n';
+    }
+    //console.log(Data);
+    //1st loop is to extract each row
+    for (var i = 0; i < Data.length; i++) {      
+
+        var obj = Data[i].enccVisitTwo;
+            var isEmpty = checkValue(obj);
+        console.log("isEmpty: " + isEmpty);
+        //2nd loop will extract each column and convert it in string comma-seprated
+      if(!isEmpty){  
+            var row = "";
+            row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//1
+            if (Data[i].enccVisitTwo.encc2_current_formStatus == null || Data[i].enccVisitTwo.encc2_current_formStatus =="") {
+              row += ",";
+            }else{
+              row += '"' + convertString(Data[i].enccVisitTwo.encc2_current_formStatus)+ '",';
+            } 
+            row += '"' + checkNullValue((Data[i].enccVisitTwo.start).substring(0,10)) +'",';//3
+            row += '"' + checkNullValue(Data[i].details.GOBHHID) + '",';//4
+            row += '"' + checkNullValue(Data[i].details.JiVitAHHID) + '",';//5
+            row += '"' + checkNullValue(Data[i].details.mother_mauza) + '",';//9
+            if (convertString(Data[i].details.FWWOMNID) =='null' || convertString(Data[i].details.FWWOMNID) =="") {
+            row += ",";
+            }else{
+            row +=  "'"+ convertString(Data[i].details.FWWOMNID)+"',";
+            }
+            if (convertString(Data[i].details.FWWOMBID) =='null' || convertString(Data[i].details.FWWOMBID) == "") {
+            row += ",";
+            }else{
+            row += "'" + convertString(Data[i].details.FWWOMBID)+"',";
+            }
+            //row += '"' + Data[i].FWWOMRETYPENID + '",';//10
+            //row += '"' + Data[i].FWWOMRETYPEBID + '",';//11
+            row += '"' + checkNullValue(Data[i].details.mother_wom_age) + '",';//12
+            row += '"' + checkNullValue(Data[i].details.FWWOMFNAME) + '",';//13
+            row += '"' + checkNullValue(Data[i].details.FWHUSNAME) + '",';//14            
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.external_user_ID) + '",';//15
+            row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//16
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.start) + '",';
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.end) + '",';
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.today) + '",';//17
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.start) + '",';//18
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.end) + '",';//19
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.FWENC2DATE) + '",';//20
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.FWENC2STS) + '",';//21
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.FWENC2BFINTN)  + '",';//23
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.FWENC2PRLCTL) + '",';//24
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.FWENC2DRYWM) + '",';//25
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.FWENC2HDCOV) + '",';//26
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.FWENC2UMBS)+ '",';//27
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.FWENC2BTHD) + '",';//28
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.FWENC2DSFVRCLD) + '",';//29
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.FWENC2TEMP) + '",';//30
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.FWENC2DSFOULUMBS) + '",';//31
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.FWENC2DSLIMBLUE) + '",';//32
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.FWENC2DSSKNYLW) + '",';//33
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.FWENC2DSLETH) + '",';//34
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.FWENC2DSDIFBRTH) + '",';//35
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.FWENC2DSCONVL) + '",';//36
+            row += '"' + checkNullValue(Data[i].enccVisitTwo.FWENC2DELCOMP) + '",';//37
+            //row.slice(0, row.length - 1);        
+            //add a line break after each row
+            CSV += row + '\r\n';
+        //row += '"' + checkNullValue(Data[i].details}) + '",';//48 
+      } 
+    }
+    if (CSV == '') {        
+        alert("Invalid data");
+        return;
+    }
+    //Generate a file name
+    var fileName = "";
+    //this will remove the blank-spaces from the title and replace it with an underscore
+    fileName += ReportTitle.replace(/ /g,"_");   
+        //Initialize file format you want csv or xls
+    var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+   
+    // Now the little tricky part.
+    // you can use either>> window.open(uri);
+    // but this will not work in some browsers
+    // or you will not get the correct file extension    
+    
+    //this trick will generate a temp <a /> tag
+    var link = document.createElement("a");    
+    link.href = uri;
+   
+    //set the visibility hidden so it will not effect on your web-layout
+    link.style = "visibility:hidden";
+    link.download = fileName + ".csv";
+    
+    //this part will append the anchor tag and remove it after automatic click
+    document.body.appendChild(link);
+    link.click();
+    //window.open(link);
+    document.body.removeChild(link);
+
+}
+
+
+function ENCC3FormExport(JSONData, ReportTitle, ShowLabel) {  
+    //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
+    var Data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+    var CSV = '';    
+    //Set Report title in first row or line
+    // CSV += ReportTitle + '\r\n\n';
+    //This condition will generate the Label/Header
+    if (ShowLabel) {
+        var row = ""; 
+        row += 'FWA Worker ID' + ',';//1     
+        row += 'Form Status at Submission' + ',';//2
+        row += 'SCHEDULED_DATE' + ',';//3 
+        row += 'FWGOBHHID' + ',';//4
+        row += 'FWJIVHHID' + ',';//5
+        row += 'FWMAUZA_PARA' + ',';//9
+        row += 'NID' + ',';//10
+        row += 'BID' + ',';//11
+        row += 'wom_age' + ',';//12
+        row += 'first_name' + ',';//13
+        row += 'husname' + ',';//14
+        row += 'FD Worker ID' + ',';//15
+        row += 'FWA Worker ID' + ','; //16
+        row += 'SCHEDULED_DATE_ENCC3_FWA' + ',';
+        row += 'COMPLETED_DATE_ENCC3_FW' + ','; 
+        row += 'today' + ',';//17
+        row += 'start' + ',';//18
+        row += 'end' + ',';//19
+        row += 'FWENC3DATE' + ',';//20
+        row += 'FWENC3STS' + ',';//21
+        row += 'FWENC3BFINTN' + ','; //23       
+        row += 'FWENC3PRLCTL' + ','; //24
+        row += 'FWENC3DRYWM' + ','; //25
+        row += 'FWENC3HDCOV' + ',';//26
+        row += 'FWENC3UMBS' + ',';//27
+        row += 'FWENC3BTHD' + ',';//28
+        row += 'FWENC3DSFVRCLD' + ',';//29
+        row += 'FWENC3TEMP' + ',';//30        
+        row += 'FWENC3DSFOULUMBS' + ',';//31
+        row += 'FWENC3DSLIMBLUE' + ',';//32
+        row += 'FWENC3DSSKNYLW' + ',';//33
+        row += 'FWENC3DSLETH' + ',';//34
+        row += 'FWENC3DSDIFBRTH' + ',';//35
+        row += 'FWENC3DSCONVL' + ',';//36
+        row += 'FWENC3DELCOMP' + ',';//37
+        row = row.slice(0, -1);        
+        //append Label row with line break
+        CSV += row + '\r\n';
+    }
+    //console.log(Data);
+    //1st loop is to extract each row
+    for (var i = 0; i < Data.length; i++) {  
+
+        var obj = Data[i].enccVisitThree;
+            var isEmpty = checkValue(obj);
+        console.log("isEmpty: " + isEmpty);
+        //2nd loop will extract each column and convert it in string comma-seprated
+      if(!isEmpty){  
+            var row = "";
+            row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//1
+            if (Data[i].enccVisitThree.encc3_current_formStatus == null || Data[i].enccVisitThree.encc3_current_formStatus =="") {
+              row += ",";
+            }else{
+              row += '"' + convertString(Data[i].enccVisitThree.encc3_current_formStatus)+ '",';
+            } 
+            row += '"' + checkNullValue((Data[i].enccVisitThree.start).substring(0,10)) +'",';//3
+            row += '"' + checkNullValue(Data[i].details.GOBHHID) + '",';//4
+            row += '"' + checkNullValue(Data[i].details.JiVitAHHID) + '",';//5
+            row += '"' + checkNullValue(Data[i].details.mother_mauza) + '",';//9
+            if (convertString(Data[i].details.FWWOMNID) =='null' || convertString(Data[i].details.FWWOMNID) =="") {
+            row += ",";
+            }else{
+            row +=  "'"+ convertString(Data[i].details.FWWOMNID)+"',";
+            }
+            if (convertString(Data[i].details.FWWOMBID) =='null' || convertString(Data[i].details.FWWOMBID) == "") {
+            row += ",";
+            }else{
+            row += "'" + convertString(Data[i].details.FWWOMBID)+"',";
+            }
+            //row += '"' + Data[i].FWWOMRETYPENID + '",';//10
+            //row += '"' + Data[i].FWWOMRETYPEBID + '",';//11
+            row += '"' + checkNullValue(Data[i].details.mother_wom_age) + '",';//12
+            row += '"' + checkNullValue(Data[i].details.FWWOMFNAME) + '",';//13
+            row += '"' + checkNullValue(Data[i].details.FWHUSNAME) + '",';//14            
+            row += '"' + checkNullValue(Data[i].enccVisitThree.external_user_ID) + '",';//15
+            row += '"' + checkNullValue(Data[i].PROVIDERID) + '",';//16
+            row += '"' + checkNullValue(Data[i].enccVisitThree.start) + '",';
+            row += '"' + checkNullValue(Data[i].enccVisitThree.end) + '",';
+            row += '"' + checkNullValue(Data[i].enccVisitThree.today) + '",';//17
+            row += '"' + checkNullValue(Data[i].enccVisitThree.start) + '",';//18
+            row += '"' + checkNullValue(Data[i].enccVisitThree.end) + '",';//19
+            row += '"' + checkNullValue(Data[i].enccVisitThree.FWENC3DATE) + '",';//20
+            row += '"' + checkNullValue(Data[i].enccVisitThree.FWENC3STS) + '",';//21
+            row += '"' + checkNullValue(Data[i].enccVisitThree.FWENC3BFINTN)  + '",';//23
+            row += '"' + checkNullValue(Data[i].enccVisitThree.FWENC3PRLCTL) + '",';//24
+            row += '"' + checkNullValue(Data[i].enccVisitThree.FWENC3DRYWM) + '",';//25
+            row += '"' + checkNullValue(Data[i].enccVisitThree.FWENC3HDCOV) + '",';//26
+            row += '"' + checkNullValue(Data[i].enccVisitThree.FWENC3UMBS)+ '",';//27
+            row += '"' + checkNullValue(Data[i].enccVisitThree.FWENC3BTHD) + '",';//28
+            row += '"' + checkNullValue(Data[i].enccVisitThree.FWENC3DSFVRCLD) + '",';//29
+            row += '"' + checkNullValue(Data[i].enccVisitThree.FWENC3TEMP) + '",';//30
+            row += '"' + checkNullValue(Data[i].enccVisitThree.FWENC3DSFOULUMBS) + '",';//31
+            row += '"' + checkNullValue(Data[i].enccVisitThree.FWENC3DSLIMBLUE) + '",';//32
+            row += '"' + checkNullValue(Data[i].enccVisitThree.FWENC3DSSKNYLW) + '",';//33
+            row += '"' + checkNullValue(Data[i].enccVisitThree.FWENC3DSLETH) + '",';//34
+            row += '"' + checkNullValue(Data[i].enccVisitThree.FWENC3DSDIFBRTH) + '",';//35
+            row += '"' + checkNullValue(Data[i].enccVisitThree.FWENC3DSCONVL) + '",';//36
+            row += '"' + checkNullValue(Data[i].enccVisitThree.FWENC3DELCOMP) + '",';//37
+            //row.slice(0, row.length - 1);        
+            //add a line break after each row
+            CSV += row + '\r\n';
+        //row += '"' + checkNullValue(Data[i].details}) + '",';//48 
+      } 
+    }
+    if (CSV == '') {        
+        alert("Invalid data");
+        return;
+    }
+    //Generate a file name
+    var fileName = "";
+    //this will remove the blank-spaces from the title and replace it with an underscore
+    fileName += ReportTitle.replace(/ /g,"_");   
+        //Initialize file format you want csv or xls
+    var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+   
+    // Now the little tricky part.
+    // you can use either>> window.open(uri);
+    // but this will not work in some browsers
+    // or you will not get the correct file extension    
+    
+    //this trick will generate a temp <a /> tag
+    var link = document.createElement("a");    
+    link.href = uri;
+   
+    //set the visibility hidden so it will not effect on your web-layout
+    link.style = "visibility:hidden";
+    link.download = fileName + ".csv";
+    
+    //this part will append the anchor tag and remove it after automatic click
+    document.body.appendChild(link);
+    link.click();
+    //window.open(link);
+    document.body.removeChild(link);
+
 }

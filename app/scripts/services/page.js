@@ -85,15 +85,14 @@ angular.module('opensrpSiteApp')
     this.downloadANC3 = function(data,title){     
       ANC3FormExport(data, title, true);       
     }
-    this.downloadANC4 = function(data,title){  
-    console.log("page");   
+    this.downloadANC4 = function(data,title){    
       ANC4FormExport(data, title, true);       
     }
     this.downloadPNC1 = function(data,title){     
-      PNC1FormExport(data, title, true);       
+      PNC1FormExport(data, title, true);      
     }
     this.downloadPNC2 = function(data,title){     
-      PNC2FromExport(data, title, true);       
+      PNC2FormExport(data, title, true);       
     }
     this.downloadPNC3 = function(data,title){     
       PNC3FormExport(data, title, true);       
@@ -105,7 +104,7 @@ angular.module('opensrpSiteApp')
       ENCC1FormExport(data, title, true);       
     }
     this.downloadENCC2 = function(data,title){     
-      ENCC2FromExport(data, title, true);       
+      ENCC2FormExport(data, title, true);       
     }
     this.downloadENCC3 = function(data,title){     
       ENCC3FormExport(data, title, true);       

@@ -133,9 +133,9 @@ angular.module('opensrpSiteApp')
     this.PNC1DATAEXPORT= function($scope){
       $rootScope.loading=true;
         var allData = null;
-        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date="+$scope.start+"&end-date="+$scope.end;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/anc?start-date="+$scope.start+"&end-date="+$scope.end;
         var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
-            allData = data.ecRegisterEntries;         
+            allData = data.ancRegisterEntries;         
             $("#wait").css("display","none");
             $("#export").css("display","block");
             page.downloadPNC1(allData,"PNC1 FORM");
@@ -146,9 +146,9 @@ angular.module('opensrpSiteApp')
     this.PNC2DATAEXPORT= function($scope){
       $rootScope.loading=true;
         var allData = null;
-        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date="+$scope.start+"&end-date="+$scope.end;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/anc?start-date="+$scope.start+"&end-date="+$scope.end;
         var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
-            allData = data.ecRegisterEntries;         
+            allData = data.ancRegisterEntries;         
             $("#wait").css("display","none");
             $("#export").css("display","block");
             page.downloadPNC2(allData,"PNC2 FORM");
@@ -159,9 +159,9 @@ angular.module('opensrpSiteApp')
     this.PNC3DATAEXPORT= function($scope){
       $rootScope.loading=true;
         var allData = null;
-        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/elco?start-date="+$scope.start+"&end-date="+$scope.end;
+        var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/anc?start-date="+$scope.start+"&end-date="+$scope.end;
         var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
-            allData = data.ecRegisterEntries;         
+            allData = data.ancRegisterEntries;         
             $("#wait").css("display","none");
             $("#export").css("display","block");
             page.downloadPNC3(allData,"PNC3 FORM");
@@ -187,7 +187,7 @@ angular.module('opensrpSiteApp')
         var allData = null;
         var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/child?start-date="+$scope.start+"&end-date="+$scope.end;
         var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
-            allData = data.ecRegisterEntries;         
+            allData = data.childRegisterEntries;         
             $("#wait").css("display","none");
             $("#export").css("display","block");
             page.downloadENCC1(allData,"ENCC1 FORM");
@@ -200,7 +200,7 @@ angular.module('opensrpSiteApp')
         var allData = null;
         var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/child?start-date="+$scope.start+"&end-date="+$scope.end;
         var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
-            allData = data.ecRegisterEntries;         
+            allData = data.childRegisterEntries;         
             $("#wait").css("display","none");
             $("#export").css("display","block");
             page.downloadENCC2(allData,"ENCC2 FORM");
@@ -213,7 +213,7 @@ angular.module('opensrpSiteApp')
         var allData = null;
         var apiURLs = OPENSRP_WEB_BASE_URL+"/registers/child?start-date="+$scope.start+"&end-date="+$scope.end;
         var getData = $http.get(apiURLs, { cache: true}).success(function (data) {            
-            allData = data.ecRegisterEntries;         
+            allData = data.childRegisterEntries;         
             $("#wait").css("display","none");
             $("#export").css("display","block");
             page.downloadENCC3(allData,"ENCC3 FORM");
