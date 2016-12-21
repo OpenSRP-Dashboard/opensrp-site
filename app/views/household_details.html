@@ -1,5 +1,14 @@
 <data-ng-include src="'views/partials/header.html'"></data-ng-include>
-
+<head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js"></script>
+    <script>
+      $(document).ready(function() {
+          $('.img-responsive').fancybox();
+      });
+    </script>
+</head>
 <!--<link rel="stylesheet" href="assets/css/MarkerCluster.css" />
 <link rel="stylesheet" href="assets/css/MarkerCluster.Default.css" /> -->
 <section>  
@@ -11,6 +20,8 @@
               <center><img src="images/spinner.gif"  alt="Opensrp"/></center>
           </div>
           <div class="row"> <!-- main col left --> 
+          <!-- <a href="images/example.jpg" class="img-responsive" title="Sample title"><img src="images/example.jpg" height="100" width="100"/></a> --> 
+          <!-- <a href="large_image.jpg" class="fancybox" title="Sample title"><img src="small_image.jpg" /></a> --> 
             <div class="starter-template3">   
               <div class="col-md-3"><div class="location" > <span class="glyphicon glyphicon-map-marker"></span>LOCATION</div></div>
               <div ng-model="districts"></div>
@@ -144,9 +155,14 @@
                       </div> -->
                       <div ng-show="hhRegisterEntry.multimediaAttachments != ''">    
 
-                      <div class="col-md-3 col-lg-2 " align="center">Image for DP<img alt="User Pic" ng-attr-src="{{baseURL + hhRegisterEntry.multimediaAttachments[0].filePath}}" class="img-responsive">                      
-                      </div>
-                      </div>
+                      <!-- <div class="col-md-3 col-lg-2 " align="center">Image for DP<img alt="User Pic" ng-attr-src="{{baseURL + hhRegisterEntry.multimediaAttachments[0].filePath}}" class="img-responsive">                      
+                      </div> -->
+                      <div class="col-md-3 col-lg-2 " align="center">
+                        <a href="{{baseURL + hhRegisterEntry.multimediaAttachments[0].filePath}}" class="img-responsive" title="Image Profile">Image Profile<img src="{{baseURL + hhRegisterEntry.multimediaAttachments[0].filePath}}" alt="User Pic"  height="100" width="100"/></a>
+                      </div> 
+                     </div>
+
+                      
                       <div class=" col-md-4 col-lg-8 ">                                           
                         <div>
                           <div><strong> Name of HH Head:</strong> {{hhRegisterEntry.FWHOHFNAME}}</div>
@@ -192,13 +208,26 @@
                             <div class="row">
                               <div class="col-md-2 col-lg-2 " align="center">
                                 <!-- <span>{{elco.FWWOMFNAME}}</span> -->
-        <div ng-if="elco.profileImagePath == '' " >
+        <!-- <div ng-if="elco.profileImagePath == '' " >
           <img alt="User Pic" src="images/photo2.png" class="img-circle img-responsive">
         </div>
                                  
         <div ng-if="elco.profileImagePath != ''" align="center">
           <img alt="User Pic" ng-attr-src="{{baseURL + elco.profileImagePath}}" class="img-responsive">
-         </div>
+         </div> -->
+
+         <!-- <div ng-if="elco.profileImagePath == ''">
+          <img alt="User Pic" src="images/photo2.png" class="img-circle img-responsive">
+        </div> -->
+
+        <div ng-if="elco.profileImagePath == ''">
+          <a href="images/photo2.png" class="img-responsive" title="Image Profile"><img src="images/photo2.png" alt="User Pic"  height="100" width="100"/></a>
+        </div>
+
+        <div ng-if="elco.profileImagePath != ''" align="center">
+          <a href="{{baseURL + elco.profileImagePath}}" class="img-responsive" title="Image Profile">Image Profile<img src="{{baseURL + elco.profileImagePath}}" alt="User Pic"  height="100" width="100"/></a>
+        </div>
+
                               </div>
                               <div class=" col-md-4 col-lg-6 ">                                           
                                 <div>
@@ -219,9 +248,14 @@
                                 </div>
                               </div>
         <div class="col-md-2 col-lg-2 " align="center">       
-        <div ng-if="elco.nidImagePath != ''" align="center">
+        <!-- <div ng-if="elco.nidImagePath != ''" align="center">
           <img alt="User Pic" ng-attr-src="{{baseURL + elco.nidImagePath}}" class="img-responsive">
-         </div> 
+         </div> -->  
+
+         <div ng-if="elco.nidImagePath != ''" align="center">
+            <a href="{{baseURL + elco.nidImagePath}}" class="img-responsive" title="Image NID">Image NID<img src="{{baseURL + elco.nidImagePath}}" alt="User Pic"  height="100" width="100"/></a>
+         </div>
+
                               </div>                                                    
                             </div>
                           </div>                     
