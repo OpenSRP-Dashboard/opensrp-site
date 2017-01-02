@@ -6,7 +6,11 @@
     <script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js"></script>
     <script>
       $(document).ready(function() {
-          $('.img-responsive').fancybox();
+          $('.img-responsive')
+          //.attr('rel', 'gallery')
+          .fancybox({
+              padding : 0
+          });
       });
     </script>
 </head>
@@ -135,14 +139,14 @@
                       <div ng-show="elcoRegisterEntry.multimediaAttachments != ''">    
 
                       <div class="col-md-3 col-lg-2" align="center">
-                        <a href="{{baseURL + elcoRegisterEntry.multimediaAttachments[0].filePath}}" class="img-responsive" title="Image Profile">Image Profile<img src="{{baseURL + elcoRegisterEntry.multimediaAttachments[0].filePath}}" alt="User Pic"  height="100" width="100"/></a>
+                        <a href="{{baseURL + elcoRegisterEntry.multimediaAttachments[0].filePath}}" class="img-responsive" title="Image Profile" rel="{{elcoRegisterEntry.CASEID}}">Image Profile<img src="{{baseURL + elcoRegisterEntry.multimediaAttachments[0].filePath}}" alt="User Pic"  height="100" width="100"/></a>
                       </div>
 
                       <!-- <div class="col-md-3 col-lg-2 " align="center">Image for DP<img alt="User Pic" ng-attr-src="{{baseURL + elcoRegisterEntry.multimediaAttachments[0].filePath}}" class="img-responsive">                      
                       </div> -->
 
                       <div ng-show="elcoRegisterEntry.multimediaAttachments.length == 2" class="col-md-3 col-lg-2" align="center">
-                        <a href="{{baseURL + elcoRegisterEntry.multimediaAttachments[1].filePath}}" class="img-responsive" title="Image NID">Image NID<img src="{{baseURL + elcoRegisterEntry.multimediaAttachments[1].filePath}}" alt="User Pic"  height="100" width="100"/></a>
+                        <a href="{{baseURL + elcoRegisterEntry.multimediaAttachments[1].filePath}}" class="img-responsive" title="Image NID" rel="{{elcoRegisterEntry.CASEID}}">Image NID<img src="{{baseURL + elcoRegisterEntry.multimediaAttachments[1].filePath}}" alt="User Pic"  height="100" width="100"/></a>
                       </div>
                       
                       <!-- <div ng-show="elcoRegisterEntry.multimediaAttachments.length == 2" class="col-md-3 col-lg-2" align="center">Image for NID<img alt="User Pic" ng-attr-src="{{baseURL + elcoRegisterEntry.multimediaAttachments[1].filePath}}" class="img-responsive">                      

@@ -5,7 +5,11 @@
     <script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js"></script>
     <script>
       $(document).ready(function() {
-          $('.img-responsive').fancybox();
+          $('.img-responsive')
+          //.attr('rel', 'gallery')
+          .fancybox({
+              padding : 0
+          });
       });
     </script>
 </head>
@@ -158,7 +162,7 @@
                       <!-- <div class="col-md-3 col-lg-2 " align="center">Image for DP<img alt="User Pic" ng-attr-src="{{baseURL + hhRegisterEntry.multimediaAttachments[0].filePath}}" class="img-responsive">                      
                       </div> -->
                       <div class="col-md-3 col-lg-2 " align="center">
-                        <a href="{{baseURL + hhRegisterEntry.multimediaAttachments[0].filePath}}" class="img-responsive" title="Image Profile">Image Profile<img src="{{baseURL + hhRegisterEntry.multimediaAttachments[0].filePath}}" alt="User Pic"  height="100" width="100"/></a>
+                        <a href="{{baseURL + hhRegisterEntry.multimediaAttachments[0].filePath}}" class="img-responsive" title="Image Profile" rel="{{hhRegisterEntry.CASEID}}">Image Profile<img src="{{baseURL + hhRegisterEntry.multimediaAttachments[0].filePath}}" alt="User Pic"  height="100" width="100"/></a>
                       </div> 
                      </div>
 
@@ -221,11 +225,11 @@
         </div> -->
 
         <div ng-if="elco.profileImagePath == ''">
-          <a href="images/photo2.png" class="img-responsive" title="Image Profile"><img src="images/photo2.png" alt="User Pic"  height="100" width="100"/></a>
+          <a href="images/photo2.png" class="img-responsive" title="Image Profile" rel="{{elco.TODAY}}"><img src="images/photo2.png" alt="User Pic"  height="100" width="100"/></a>
         </div>
 
         <div ng-if="elco.profileImagePath != ''" align="center">
-          <a href="{{baseURL + elco.profileImagePath}}" class="img-responsive" title="Image Profile">Image Profile<img src="{{baseURL + elco.profileImagePath}}" alt="User Pic"  height="100" width="100"/></a>
+          <a href="{{baseURL + elco.profileImagePath}}" class="img-responsive" title="Image Profile" rel="{{elco.id}}">Image Profile<img src="{{baseURL + elco.profileImagePath}}" alt="User Pic"  height="100" width="100"/></a>
         </div>
 
                               </div>
@@ -253,7 +257,7 @@
          </div> -->  
 
          <div ng-if="elco.nidImagePath != ''" align="center">
-            <a href="{{baseURL + elco.nidImagePath}}" class="img-responsive" title="Image NID">Image NID<img src="{{baseURL + elco.nidImagePath}}" alt="User Pic"  height="100" width="100"/></a>
+            <a href="{{baseURL + elco.nidImagePath}}" class="img-responsive" title="Image NID" rel="{{elco.id}}">Image NID<img src="{{baseURL + elco.nidImagePath}}" alt="User Pic"  height="100" width="100"/></a>
          </div>
 
                               </div>                                                    

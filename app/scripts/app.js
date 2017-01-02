@@ -20,7 +20,7 @@ angular
   .constant("COUCHURL",'http://27.147.129.50:1234/192.168.19.55:5984')
   .config(['AclServiceProvider', function (AclServiceProvider) {
     var myConfig = {
-      storage: 'sessionStorage',  // localStorage
+      storage: 'localStorage',  // sessionStorage
       storageKey: 'AppAcl'
     };
     AclServiceProvider.config(myConfig);
