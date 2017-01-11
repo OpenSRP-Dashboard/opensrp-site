@@ -17,7 +17,7 @@ angular.module('opensrpSiteApp')
 
     $scope.forms = ['NEW HOUSEHOLD FORM', 'CENSUS FORM', 'PSRF FORM', 'MIS CENSUS FORM', 'MIS ELCO FORM'];
 
-    $scope.IsVisible = false;
+        $scope.IsVisible = false;
 
     $rootScope.loading = false;
 
@@ -43,9 +43,9 @@ angular.module('opensrpSiteApp')
 
         console.log(date);
 
-        var dateFixed = new Date(new Date().setDate(date.endDate._d.getDate() - 1));
+        var dateFixed = new Date(new Date().setDate(date.endDate._d.getDate()-1));
 
-        var enMonth = dateFixed.getMonth();
+        var enMonth = date.endDate._d.getMonth();
         enMonth = enMonth + 1;
 
         enMonth =  enMonth < 10 ? '0' + enMonth : '' + enMonth;
@@ -54,7 +54,7 @@ angular.module('opensrpSiteApp')
 
         enDay =  enDay < 10 ? '0' + enDay : '' + enDay;
 
-        $scope.en = dateFixed.getFullYear()+'-'+enMonth+'-'+enDay;
+        $scope.en = date.endDate._d.getFullYear()+'-'+enMonth+'-'+enDay;
 
         console.log($scope.en);
 
@@ -105,16 +105,73 @@ angular.module('opensrpSiteApp')
         {
             console.log("End date greater than today");
             $scope.end = $scope.btime;
+            console.log($scope.end);
         } 
 
-        else if($scope.end < $scope.btime) 
+        if($scope.end == $scope.btime) 
         {
+            console.log("End date equal to today");
+            console.log($scope.end);
+        }
 
-        $scope.end = $scope.en;
-
-        console.log("End date less than today");
+        else if($scope.end < $scope.start) 
+        {
+        $scope.end = $scope.start;
+        console.log("End date less than start");
         console.log($scope.end);
+        }
 
+        /*else if(endDay === "01") 
+        {
+        console.log("End date not changed");
+        console.log($scope.end);
+        }*/
+
+        else if(endDay === "01" && enMonth==="01")
+        {
+          var dateFi = new Date(new Date().setDate(date.endDate._d.getDate()-1));
+
+          var en1Month = "12";
+
+          var en1Day = dateFixed.getDate();
+
+          en1Day =  en1Day < 10 ? '0' + en1Day : '' + en1Day;
+
+          $scope.en1 = date.startDate._d.getFullYear()+'-'+en1Month+'-'+en1Day;
+
+          console.log("01::01::"+$scope.en1);
+
+          $scope.end = $scope.en1;
+        }
+
+        else if(endDay === "01")
+        {
+          var en2Month = date.endDate._d.getMonth();
+          en2Month = en2Month;
+
+          en2Month =  en2Month < 10 ? '0' + en2Month : '' + en2Month;
+
+          var en2Day;
+
+          if(en2Month === "01" || en2Month === "03" || en2Month === "05" || en2Month === "07"
+           || en2Month === "08" || en2Month === "10" || en2Month === "12"){
+              en2Day = "31";
+          }
+          else
+              en2Day = "30";          
+
+          $scope.en2 = date.endDate._d.getFullYear()+'-'+en2Month+'-'+en2Day;
+
+          console.log("01:::"+$scope.en2);
+          
+          $scope.end = $scope.en2;
+        }
+
+        else 
+        {
+        $scope.end = $scope.en;
+        console.log("End date lessened");
+        console.log($scope.end);
         }
 
 
