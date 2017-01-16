@@ -8,13 +8,13 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
- .controller('csvexportCtrl', function ($scope,$rootScope,$http,page,csvexport,AclService,$filter, OPENSRP_WEB_BASE_URL) {
+ .controller('csvexportCtrl', function ($scope,$rootScope,$http,$q,page,csvexport,AclService,$filter, OPENSRP_WEB_BASE_URL,EXPORTURL) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-
+    $scope.EXPORTURL = EXPORTURL;
     $scope.forms = ['NEW HOUSEHOLD FORM', 'CENSUS FORM', 'PSRF FORM', 'MIS CENSUS FORM', 'MIS ELCO FORM'];
 
         $scope.IsVisible = false;
@@ -193,9 +193,10 @@ angular.module('opensrpSiteApp')
             console.log($scope.start);
           } */
 
-        if(form.localeCompare("NEW HOUSEHOLD FORM") == 0){
 
-          csvexport.HHDATAEXPORT($scope,$rootScope);
+        if(form.localeCompare("NEW HOUSEHOLD FORM") == 0){
+          csvexport.export($scope,"NEW HOUSEHOLD FORM");
+          //csvexport.HHDATAEXPORT($scope,$rootScope);
  
         }        
         else if (form.localeCompare("CENSUS FORM") == 0){
@@ -221,5 +222,19 @@ angular.module('opensrpSiteApp')
         else ;
 
       }
+
+   
+    console.log($rootScope.username);
+      var apiURLs = OPENSRP_WEB_BASE_URL+"/all-export?user="+$rootScope.username;
+      var deferred = $q.defer();
+      var campDateList = $http.get(apiURLs, { cache: false});               
+      // search data
+      $q.all([campDateList]).then(function(results){           
+        $scope.data = results[0].data;
+        console.log("okkkkkkkkkk");
+             console.log($scope.data);  
+        
+      });
+   
 
 });

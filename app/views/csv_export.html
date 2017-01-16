@@ -44,5 +44,64 @@
 
     </div>
 
+
+
+   
+          <div class="row">
+            <div class="col-xs-12 col-lg-12">
+                <!-- content accordion  start -->           
+              <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                  <div class="panel-heading2" role="tab" id="headingOne">
+                    <table>
+                      <thead> <!--table head-->
+                        <tr style="background:none">
+                          <th style="width:228px;">
+                               Form Name                                                
+                          </th>
+                          <th style="width:157px;">
+                              Report Name
+                          </th>
+                         
+                          <th style="width:154px;">
+                            Date                                                              
+                          </th>
+                          <th style="width:154px;">
+                            Actions                                                             
+                          </th>                                            
+                        </tr>
+                      </thead><!--//table head-->
+                    </table>                        
+                  </div>  <!--end panel-heading2 -->                     
+                </div> <!--end panel panel-default -->
+                 
+                <div class="panel panel-default" ng-repeat="export in data">
+                  <div class="panel-heading2" role="tab" id="headingTwo2">
+                    <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion2 "aria-expanded="false" aria-controls="collapseTwo">
+                      <thead>
+                        <tr>
+                          <td style="width:150px;">               
+                            {{export.formName}}  
+                          </td>                                       
+                          <td style="width:100px;">{{export.reportName}}</td>
+                          <td style="width:100px;">{{export.created_date}}</td>
+                          
+<a href="{{EXPORTURL}}/multimedia/export/{{export.reportName}}" download="lo.ppf">Download</a>   
+                         
+                        </tr>
+                      </thead>
+                    </table><!--//table body-->                    
+
+                  </div> <!--end  panel-heading2 -->
+                                   
+                </div> <!-- end panel panel-default -->
+              
+            </div><!-- end panel-group-->
+          </div> <!-- end col-xs-12 col-lg-12-->
+        </div><!--end row -->
+
+
   </div>    
 </section>
+
+

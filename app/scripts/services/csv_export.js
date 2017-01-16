@@ -8,7 +8,7 @@
  * Service in the opensrpSiteApp.
  */
 angular.module('opensrpSiteApp')
-  .service('csvexport', function ($http,$rootScope,page,Base64,OPENSRP_WEB_BASE_URL,filterFilter,Common) {     
+  .service('csvexport', function ($http,$rootScope,$q,page,Base64,OPENSRP_WEB_BASE_URL,filterFilter,Common) {     
         
 
     this.HHDATAEXPORT= function($scope,$rootScope){
@@ -76,4 +76,31 @@ angular.module('opensrpSiteApp')
         });   
     };
 
+
+    this.export= function($scope,formName){
+        $rootScope.loading=true;
+        var allData = null;
+
+        
+        var exportUrl = OPENSRP_WEB_BASE_URL+"/export?formName="+formName+"&start_date="+$scope.start+"&end_date="+$scope.end+"&user="+$rootScope.username;
+        var deferred = $q.defer();
+        var exportSend = $http.get(exportUrl, { cache: false});
+                     
+          // search data
+        $q.all([exportSend]).then(function(results){           
+            
+            var apiURLs = OPENSRP_WEB_BASE_URL+"/all-export?user="+$rootScope.username;
+            var deferred = $q.defer();
+            var campDateList = $http.get(apiURLs, { cache: false});  
+            $q.all([campDateList]).then(function(results){           
+                $scope.data = results[0].data;
+                console.log("okkkkkkkkkk");
+                console.log($scope.data);
+            });
+        });
+
+        
+    };
+
+    
   });
