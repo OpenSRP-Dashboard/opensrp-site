@@ -93,9 +93,9 @@ angular.module('opensrpSiteApp')
             var deferred = $q.defer();
             var campDateList = $http.get(apiURLs, { cache: false});  
             $q.all([campDateList]).then(function(results){           
-                $scope.data = results[0].data;
-                console.log("okkkkkkkkkk");
-                console.log($scope.data);
+                $scope.data = results[0].data;               
+                $rootScope.loading=false; 
+                $scope.message="Please Download the top most file from the list";
             });
         });
 

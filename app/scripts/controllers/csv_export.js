@@ -17,8 +17,8 @@ angular.module('opensrpSiteApp')
     $scope.EXPORTURL = EXPORTURL;
     $scope.forms = ['NEW HOUSEHOLD FORM', 'CENSUS FORM', 'PSRF FORM', 'MIS CENSUS FORM', 'MIS ELCO FORM'];
 
-        $scope.IsVisible = false;
-
+    $scope.IsVisible = false;
+    $scope.color="dd";
     $rootScope.loading = false;
 
     var today = new Date();
@@ -195,13 +195,13 @@ angular.module('opensrpSiteApp')
 
 
         if(form.localeCompare("NEW HOUSEHOLD FORM") == 0){
-          csvexport.export($scope,"NEW HOUSEHOLD FORM");
+          csvexport.export($scope,"NEW_HOUSEHOLD_FORM");
           //csvexport.HHDATAEXPORT($scope,$rootScope);
  
         }        
         else if (form.localeCompare("CENSUS FORM") == 0){
-
-          csvexport.CENCUSDATAEXPORT($scope);
+ csvexport.export($scope,"CENSUS_FORM");
+          //csvexport.CENCUSDATAEXPORT($scope);
 
         }
         else if (form.localeCompare("PSRF FORM") == 0){
@@ -224,17 +224,35 @@ angular.module('opensrpSiteApp')
       }
 
    
-    console.log($rootScope.username);
-      var apiURLs = OPENSRP_WEB_BASE_URL+"/all-export?user="+$rootScope.username;
-      var deferred = $q.defer();
-      var campDateList = $http.get(apiURLs, { cache: false});               
+   // shows exports default list  view
+    var apiURLs = OPENSRP_WEB_BASE_URL+"/all-export?user="+$rootScope.username;
+    var deferred = $q.defer();
+    var exportList = $http.get(apiURLs, { cache: false});               
       // search data
-      $q.all([campDateList]).then(function(results){           
-        $scope.data = results[0].data;
-        console.log("okkkkkkkkkk");
-             console.log($scope.data);  
+    $q.all([exportList]).then(function(results){           
+        $scope.data = results[0].data;            
         
+    });
+   $scope.delete =function(id){
+      var deleteUrl = OPENSRP_WEB_BASE_URL+"/delete-export?id="+id;
+      var deferred = $q.defer();
+      var deleteExport = $http.get(deleteUrl, { cache: false});               
+        // search data
+      $q.all([deleteExport]).then(function(results){           
+          $scope.data = results[0].data;  
+
+          var allExportUrl = OPENSRP_WEB_BASE_URL+"/all-export?user="+$rootScope.username;
+          var deferred = $q.defer();
+          var exportList = $http.get(allExportUrl, { cache: false});               
+            // search data
+          $q.all([exportList]).then(function(results){           
+              $scope.data = results[0].data;            
+              
+          });
+
+          
       });
-   
+    
+   }
 
 });

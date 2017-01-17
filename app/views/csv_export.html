@@ -39,7 +39,7 @@
           padding: 10px 15px; text-align: center; text-decoration: none; display: inline-block; font-size: 18px;">Report</button>
         </div>
       </div>
-      
+      <div><p>  {{message}}</p></div>
       <div class="spinner" ng-show="loading"> <center><img src="images/spinner.gif"  alt="Opensrp"/></center></div>
 
     </div>
@@ -79,14 +79,14 @@
                   <div class="panel-heading2" role="tab" id="headingTwo2">
                     <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion2 "aria-expanded="false" aria-controls="collapseTwo">
                       <thead>
-                        <tr>
+                        <tr >
                           <td style="width:150px;">               
-                            {{export.formName}}  
+                            {{export.formName}}  {{color}}
                           </td>                                       
                           <td style="width:100px;">{{export.reportName}}</td>
                           <td style="width:100px;">{{export.created_date}}</td>
                           
-<a href="{{EXPORTURL}}/multimedia/export/{{export.reportName}}" download="lo.ppf">Download</a>   
+<a href="{{EXPORTURL}}/multimedia/export/{{export.reportName}}" download="lo.ppf">Download</a>    <button  ng-click="delete('{{export.id}}')"> Delete</button>
                          
                         </tr>
                       </thead>
