@@ -16,7 +16,7 @@ angular.module('opensrpSiteApp')
     ];
     $scope.EXPORTURL = EXPORTURL;
     $scope.forms = ['NEW HOUSEHOLD FORM', 'CENSUS FORM', 'PSRF FORM', 'MIS CENSUS FORM', 'MIS ELCO FORM'];
-
+     $scope.can = AclService.can;
     $scope.IsVisible = false;
     $scope.color="dd";
     $rootScope.loading = false;
