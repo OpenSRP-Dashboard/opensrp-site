@@ -13,11 +13,12 @@ angular
   .constant('AUTH_URL', 'http://192.168.21.167:1337/27.147.129.50:9979/authenticate-user')
   //.constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.246:1234/192.168.21.246:9979')
   //ip for jivita server - 192.168.19.90
-  .constant('OPENSRP_WEB_BASE_URL', 'http://27.147.138.60:1234/192.168.19.90:9979')
-  .constant("HH_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/hh?anm-id=')
-  .constant("ELCO_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/ec?anm-id=')
-  .constant("COUCHURL",'http://27.147.138.60:1234/192.168.19.90:5984')
-  .constant("COUCHURL",'http://27.147.138.60:1234/27.147.138.60:5984')
+  .constant('OPENSRP_WEB_BASE_URL', 'http://192.168.22.55:1234/192.168.22.55:9979')
+  //.constant("HH_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/hh?anm-id=')
+  //.constant("ELCO_REGISTER_ENTRY_URL_API",'27.147.129.50:9979/registers/ec?anm-id=')
+  .constant("COUCHURL",'http://192.168.22.55:1234/192.168.22.55:5984')
+  .constant("COUCHURL",'http://192.168.22.55:1234/192.168.22.55:5984')
+  .constant("EXPORTURL",'http://192.168.22.55:9979')
   .config(['AclServiceProvider', function (AclServiceProvider) {
     var myConfig = {
       storage: 'sessionStorage',  // localStorage

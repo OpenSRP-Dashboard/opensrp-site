@@ -195,29 +195,19 @@ angular.module('opensrpSiteApp')
 
 
         if(form.localeCompare("NEW HOUSEHOLD FORM") == 0){
-          csvexport.export($scope,"NEW_HOUSEHOLD_FORM");
-          //csvexport.HHDATAEXPORT($scope,$rootScope);
- 
+          csvexport.export($scope,"NEW_HOUSEHOLD_FORM"); 
         }        
         else if (form.localeCompare("CENSUS FORM") == 0){
- csvexport.export($scope,"CENSUS_FORM");
-          //csvexport.CENCUSDATAEXPORT($scope);
-
+          csvexport.export($scope,"CENSUS_FORM");         
         }
         else if (form.localeCompare("PSRF FORM") == 0){
-
-          csvexport.PWDATAEXPORT($scope);
-
+          csvexport.export($scope,"PSRF_FORM");
         }
         else if (form.localeCompare("MIS CENSUS FORM") == 0){
-
-          csvexport.MISCENSUSDATAEXPORT($scope);
-
+          csvexport.export($scope,"MIS_CENSUS_FORM");
         }
         else if (form.localeCompare("MIS ELCO FORM") == 0){
-
-          csvexport.MISELCODATAEXPORT($scope);
-
+          csvexport.export($scope,"MIS_ELCO_FORM");
         }
         else ;
 
