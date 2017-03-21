@@ -1,7 +1,5 @@
 <data-ng-include src="'views/partials/header.html'"></data-ng-include>
 
-<!--<link rel="stylesheet" href="assets/css/MarkerCluster.css" />
-<link rel="stylesheet" href="assets/css/MarkerCluster.Default.css" /> -->
 <section>  
   <div class="container">
     <div class="row">
@@ -99,12 +97,7 @@
                               <span ng-show="sortType == 'TODAY' && sortReverse" class="fa fa-caret-up"></span>
                             </a>                                    
                           </th>
-                          <!--<th>
-                            <a href="/#/households"  ng-click="sortType = 'STATUS'; sortReverse = !sortReverse">Current Visit Status
-                              <span ng-show="sortType == 'STATUS' && !sortReverse" class="fa fa-caret-down"></span>
-                              <span ng-show="sortType == 'STATUS' && sortReverse" class="fa fa-caret-up"></span>
-                            </a>                            
-                          </th>    -->                    
+                                              
                         </tr>
                       </thead><!--//table head-->
                     </table>                        
@@ -117,9 +110,7 @@
                     <thead>
                       <tr>
                         <th style="width:150px;">                                           
-                        <!-- <div class="btn-group-md">
-                          <img src="images/photo.png" alt=""> &nbsp; &nbsp;&nbsp;{{hhRegisterEntry.FWGOBHHID}}/{{hhRegisterEntry.FWJIVHHID}}
-                        </div> -->              
+                                     
                         <div class="btn-group-md" ng-show="hhRegisterEntry.multimediaAttachments != ''" class="btn-group-md">
                         <img width="55" height="55" alt="User Pic" ng-attr-src="{{baseURL + hhRegisterEntry.multimediaAttachments[0].filePath}}">
                         </div>                                           
@@ -131,7 +122,7 @@
                         <th style="width:100px;">{{hhRegisterEntry.FWHOHFNAME}}</th>
                         <th style="width:100px;">{{hhRegisterEntry.ELCO}}</th>
                         <th style="width:100px;">{{hhRegisterEntry.TODAY}}</th>
-                       <!-- <th style="width:100px;"></th>  -->
+                       
                       </tr>
                     </thead>
                   </table><!--//table body-->
@@ -139,9 +130,7 @@
                 <div id="{{hhRegisterEntry.CASEID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">                    
                   <div class="panel-body">
                     <div class="row">     
-                      <!-- <div class="col-md-2 col-lg-2 " align="center">                          
-                        <img alt="User Pic" src="images/photo2.png" class="img-circle img-responsive">
-                      </div> -->
+                      
                       <div ng-show="hhRegisterEntry.multimediaAttachments != ''">    
 
                       <div class="col-md-3 col-lg-2 " align="center">Image for DP<img alt="User Pic" ng-attr-src="{{baseURL + hhRegisterEntry.multimediaAttachments[0].filePath}}" class="img-responsive">                      
@@ -158,9 +147,7 @@
                       </div>
                       <div class=" col-md-6 col-lg-6 ">                                           
                         <div>
-                           <!--<mapbox map-id="probir123.ifhlcpgl" lat="{{latitude(hhRegisterEntry.FWNHHHGPS)}}" lng="{{longitude(hhRegisterEntry.FWNHHHGPS)}}" style="width:100%; height:120px; margin-top: 10px;">                                                
-                            <marker lat="{{latitude(hhRegisterEntry.FWNHHHGPS)}}" lng="{{longitude(hhRegisterEntry.FWNHHHGPS)}}"><h1>This is an unstyled marker</h1></marker>
-                          </mapbox> -->                                            
+                                                                     
                           </div>
                       </div>                                    
                     </div>
@@ -191,37 +178,31 @@
                           <div class="panel-body">
                             <div class="row">
                               <div class="col-md-2 col-lg-2 " align="center">
-                                <!-- <span>{{elco.FWWOMFNAME}}</span> -->
-        <div ng-if="elco.profileImagePath == '' " >
-          <img alt="User Pic" src="images/photo2.png" class="img-circle img-responsive">
-        </div>
-                                 
-        <div ng-if="elco.profileImagePath != ''" align="center">
-          <img alt="User Pic" ng-attr-src="{{baseURL + elco.profileImagePath}}" class="img-responsive">
-         </div>
+                                
+								<div ng-if="elco.profileImagePath == '' " >
+								  <img alt="User Pic" src="images/photo2.png" class="img-circle img-responsive">
+								</div>
+														 
+								<div ng-if="elco.profileImagePath != ''" align="center">
+								  <img alt="User Pic" ng-attr-src="{{baseURL + elco.profileImagePath}}" class="img-responsive">
+								 </div>
                               </div>
                               <div class=" col-md-4 col-lg-6 ">                                           
                                 <div>
                                   <div><strong>HHID:</strong> {{hhRegisterEntry.FWGOBHHID}} / {{hhRegisterEntry.FWJIVHHID}}</div>
                                   <div> <strong>Husband Name:</strong> {{elco.FWHUSNAME}}</div>
                                   <div> <strong>Age: </strong>{{elco.FWWOMAGE}}</div>
-          <!--
-                                  <div ng-if="elco.FWELIGIBLE =='0'"><strong>Current  Status:</strong> No</div>
-                                  <div ng-if="elco.FWELIGIBLE =='1'"><strong>Current  Status:</strong> Yes</div>
-                                  -->
-          <div><strong>NID:</strong> {{elco.FWWOMNID}}</div>
+          
+								<div><strong>NID:</strong> {{elco.FWWOMNID}}</div>
                                   <div><strong>BID:</strong> {{elco.FWWOMBID}}</div>
-          <!-- <div ng-show="elco.profileImagePath == ''">image absent</div>
-          <div ng-show="elco.profileImagePath != ''">image present
-          <img width="55" height="55" alt="User Pic" ng-attr-src="{{baseURL + elco.profileImagePath}}">
-          </div> --> 
+         
 
                                 </div>
                               </div>
-        <div class="col-md-2 col-lg-2 " align="center">       
-        <div ng-if="elco.nidImagePath != ''" align="center">
-          <img alt="User Pic" ng-attr-src="{{baseURL + elco.nidImagePath}}" class="img-responsive">
-         </div> 
+								<div class="col-md-2 col-lg-2 " align="center">       
+								<div ng-if="elco.nidImagePath != ''" align="center">
+								  <img alt="User Pic" ng-attr-src="{{baseURL + elco.nidImagePath}}" class="img-responsive">
+								 </div> 
                               </div>                                                    
                             </div>
                           </div>                     

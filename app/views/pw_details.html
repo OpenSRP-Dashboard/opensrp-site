@@ -110,7 +110,7 @@
                         <div ng-show="elcoRegisterEntry.multimediaAttachments == ''" class="btn-group-md">
                           <img src="images/photo.png" alt="">
                         </div> 
-                        <!-- <div class="btn-group-md"> <img src="images/photo.png" alt=""></div> -->                                           
+                                                           
                       </th>  
                       <th style="width:100px;">{{elcoRegisterEntry.FWWOMFNAME}}</th>                                        
                       <th style="width:100px;">{{elcoRegisterEntry.FWWOMAGE}}</th>
@@ -123,7 +123,7 @@
               <div id="{{elcoRegisterEntry.CASEID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">                    
                 <div class="panel-body">
                   <div class="row">
-                    <!-- <div class="col-md-3 col-lg-3 " align="center">{{elcoRegisterEntry.FWWOMFNAME}}<img alt="User Pic" src="images/photo2.png" class="img-circle img-responsive"> </div> -->
+                    
                     <div ng-show="elcoRegisterEntry.multimediaAttachments != ''">    
 
                     <div class="col-md-3 col-lg-2 " align="center">Image for DP<img alt="User Pic" ng-attr-src="{{baseURL + elcoRegisterEntry.multimediaAttachments[0].filePath}}" class="img-responsive">                      
@@ -150,10 +150,7 @@
           <div class="col-md-3 col-lg-10 ">
             <pagination page="currentPage" boundary-links="true" max-size="6" total-items="totalItems" items-per-page="entryLimit"></pagination>
           </div>
-                <!--
-                <div class="col-md-3 col-lg-2 ">
-                <button id="login" ng-click="download()" class="btn btn-lg btn-primary btn-block" type="submit">Export</button>
-               </div>-->
+                
         </div>                    
       </div><!-- content accordion  end -->
     </div>

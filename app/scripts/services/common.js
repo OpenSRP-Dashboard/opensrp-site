@@ -135,7 +135,7 @@ angular.module('opensrpSiteApp')
       
       var newDate = new Date();
       var dayOfMonth = newDate.getDate();
-      var weekIndex = Math.floor(dayOfMonth/7) ;
+      var weekIndex = Math.floor(dayOfMonth/7)-1 ;
       $rootScope.loading = true;
       $http.get(url, { cache: false}).success(function (data) {              
         //console.log("from new service");
