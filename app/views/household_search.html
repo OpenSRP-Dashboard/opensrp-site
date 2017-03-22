@@ -1,0 +1,143 @@
+<data-ng-include src="'views/partials/header.html'"></data-ng-include>
+<div class="container">
+    <section>    
+      	<div class="row">        	
+			<div class="col-sm-12 col-md-12">
+				<div show-during-resolve class="loader">   
+					<center><img src="images/spinner.gif"  alt="Opensrp"/></center>
+				</div>
+				<form  name="camp" ng-submit="search()">  
+				<div class="row"> <!-- main col left --> 
+					<div class="starter-template3">		
+						<div class="col-md-3">
+							<div class="location" >
+								<span class="note"></span>LOCATION
+							</div>
+						</div>
+						<div class="col-md-3">
+							 <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1" ng-model="dis" ng-change="districtChanged()">
+	                  		<option value="">Select District </option>
+	                  
+	                  		<option ng-repeat="district in districts" value="{{district.name}}">{{district.name}}</option>
+	                 
+	                		</select>
+						</div>
+						<div class=" col-md-3">
+							<select id="upazilla_dd" class="form-control" name="f1_gn_q11_elem1" ng-model="upa" ng-change="upazillaChanged()">
+	                  		<option value="">Select Upazilla </option>
+	                  		<option ng-repeat="thana in thanas"  value="{{thana.name}}">{{thana.name}}</option>
+	                		</select>
+						</div>
+						<div class=" col-md-3">
+							<select id="union_dd" class="form-control" name="f1_gn_q11_elem1" ng-model="uni" ng-change="locationClick()">
+	                   		<option value="">Select Union </option>
+	                  		<option ng-repeat="union in unions" value="{{union.name}}">{{union.name}}</option>
+	                		</select>
+						</div>
+	                </div> <!-- main col right -->                
+            	</div><!--/row-->
+
+
+				<div class="row"> <!-- main col left --> 
+				<div class="starter-template3">		
+					<div class="col-md-3">
+						<div class="location" >
+							<span class="glyphicon glyphicon-user"></span>WORKER NAME
+						</div>
+					</div>
+					<div class="col-md-7">
+						<select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1" ng-model="uu">
+                   <option value="">Select User </option>
+                  <option ng-repeat="user in users" value="{{user}}">{{user}}</option>
+                </select>
+					</div>
+                </div> <!-- main col right -->
+                <!-- <div class="col-md-2"> -->
+            	 <button type="submit" class="btn btn-lg btn-primary ">Search</button>  
+            	</form>
+            	</div><!--/row-->
+			
+				<div class="row">
+          
+          <div style="clear:both"></div>
+          <div class="row" >
+            <div class="alert alert-danger" ng-show="emptyDataShowHide"> No Data Found....</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-lg-12">
+                <!-- content accordion  start -->           
+              <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                  <div class="panel-heading2" role="tab" id="headingOne">
+                    <table>
+                      <thead> <!--table head-->
+                        <tr style="background:none">
+                          <th style="width:228px;">
+                               Household Name                                                 
+                          </th>
+                          <th style="width:157px;">
+                              Health Assistant
+                          </th>
+                          <th style="width:150px;">
+                            FWJIVHHID                               
+                          </th>
+                          <th style="width:154px;">
+                            FWGOBHHID                                                              
+                          </th>
+                          <th style="width:154px;">
+                            FWNHREGDATE                                                              
+                          </th>
+                          <th style="width:154px;">
+                            Actions                                                             
+                          </th>                                            
+                        </tr>
+                      </thead><!--//table head-->
+                    </table>                        
+                  </div>  <!--end panel-heading2 -->                     
+                </div> <!--end panel panel-default -->
+                 
+                <div class="panel panel-default" dir-paginate="household in data |itemsPerPage:itemsPerPage" total-items="total_count" current-page="pagination.current">
+                  <div class="panel-heading2" role="tab" id="headingTwo2">
+                    <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion2" href="#{{household.caseId}}" aria-expanded="false" aria-controls="collapseTwo">
+                      <thead>
+                        <tr>
+                          <th style="width:150px;">   
+                            <img src="images/photo.png" alt="">                                        
+                            {{household.FWHOHFNAME}}                           
+                          </th>                                       
+                          <th style="width:100px;">{{household.PROVIDERID}}</th>
+                          <th style="width:100px;">{{household.FWJIVHHID}}</th>
+                          <th style="width:100px;">{{household.FWGOBHHID}}</th>
+                          <th style="width:100px;">{{household.FWNHREGDATE}}</th>
+                          <th style="width:100px;"><a href="/#/household/details/{{household.id}}">View Details</a>
+                        </tr>
+                      </thead>
+                    </table><!--//table body-->                    
+
+                  </div> <!--end  panel-heading2 -->
+                                   
+                </div> <!-- end panel panel-default -->
+              <div class="row">
+                <div class="col-md-3 col-lg-10 ">
+                  <dir-pagination-controls
+                   max-size="8"
+                   direction-links="true"
+                   boundary-links="true" 
+                   on-page-change="searchData(newPageNumber)" >
+                </dir-pagination-controls>
+                </div>                
+              </div>
+            </div><!-- end panel-group-->
+          </div> <!-- end col-xs-12 col-lg-12-->
+        </div><!--end row -->
+
+
+        
+      </div><!-- col-sm-9 col-md-9  end -->
+
+
+    </div> <!--end row -->
+    		</div>
+		</div>       
+	</section>
+</div>

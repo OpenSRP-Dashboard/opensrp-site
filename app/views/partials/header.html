@@ -6,6 +6,17 @@
   <ul>
     <li><a href="/#/"> <i class="glyphicon glyphicon-home"></i> <span>Home</span>  </a></li>    
    
+   <li ng-show="can('Data Export')">
+      <a id="export" href="#"><i class="glyphicon glyphicon-download-alt"></i><span>   <span>Registry Search </span> <i class="caret"></i></a>
+      <ul>
+         <li>
+          <p class="hoverMenu"><a href="/#/household/search">HOUSEHOLD</a></p>
+          <p class="hoverMenu"><a href""> ELCO </a></p>
+          
+          
+         </li>
+      </ul>
+    </li> 
     <li>
       <a href="/#/csv_export"> <i class="glyphicon glyphicon-download-alt"></i> Data Export </a>
     </li> 

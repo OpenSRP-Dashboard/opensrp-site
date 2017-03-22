@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('opensrpSiteApp', ['ngBootstrap','ngAnimate','ngCookies','ngResource','ngRoute','angular-momentjs','ngSanitize','ngTouch','ui.bootstrap','ngDialog','angular-mapbox','nvd3','chart.js','checklist-model','mm.acl','flash', 'ngMessages'])
+  .module('opensrpSiteApp', ['ngBootstrap','ngAnimate','ngCookies','ngResource','ngRoute','angular-momentjs','ngSanitize','ngTouch','ui.bootstrap','ngDialog','angular-mapbox','nvd3','chart.js','checklist-model','mm.acl','flash', 'ngMessages','angularUtils.directives.dirPagination'])
   .constant('AUTH_URL', 'http://192.168.21.167:1337/27.147.129.50:9979/authenticate-user')
   //.constant('OPENSRP_WEB_BASE_URL', 'http://192.168.21.246:1234/192.168.21.246:9979')
   //ip for jivita server - 192.168.19.90
@@ -32,6 +32,7 @@ angular
   .config(['$httpProvider', function ($httpProvider) {           
       $httpProvider.defaults.cache = true;
   }])
+  
   .config(function ($routeProvider,$locationProvider) {
     $routeProvider
       .when('/', {
@@ -335,12 +336,29 @@ angular
         controller: 'LogoutCtrl',
         controllerAs: 'logout'
       })
-       .when('/households', {
+       .when('/household/search', {
+        templateUrl: 'views/household_search.html',
+        controller: 'HouseholdCtrl',
+        controllerAs: 'household',
+        resolve : {
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('Household')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
+        }
+        
+      })
+      .when('/household/details/:id', {
         templateUrl: 'views/household_details.html',
         controller: 'HouseholdCtrl',
         controllerAs: 'household',
         resolve : {
-           'HHServiceData':function(HHRegisterService){ return HHRegisterService.promise;},
           'acl' : ['$q', 'AclService', function($q, AclService){
             if(AclService.can('Household Details')){
               // Has proper permissions
@@ -353,7 +371,7 @@ angular
           }]
         }
         
-      })
+      })      
       .when('/elcos', {
         templateUrl: 'views/elco_details.html',
         controller: 'ElcoCtrl',
