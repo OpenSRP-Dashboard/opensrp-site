@@ -2,14 +2,13 @@
 
 /**
  * @ngdoc function
- * @name opensrpSiteApp.controller:ElcoRegisterControllerCtrl
+ * @name opensrpSiteApp.controller:PwdetailsCtrl
  * @description
- * # ElcoRegisterControllerCtrl
+ * # PwdetailsCtrl
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('ElcoCtrl', function ($scope,$rootScope,$cookies, $routeParams,$q,$location, $http,$window,$timeout,AclService,$filter,Common,OPENSRP_WEB_BASE_URL) {    
-   
+  .controller('MotherCtrl', function ($scope,$rootScope,$cookies, $routeParams,$q,$location, $http,$window,$timeout,AclService,$filter,Common,OPENSRP_WEB_BASE_URL) {
     $scope.can = AclService.can;
     var url = $location.path().split("/")[2]; 
         
@@ -21,7 +20,7 @@ angular.module('opensrpSiteApp')
       if(url =='list'){
 
       }else if(url =='details'){
-        var DetailsApiURL = OPENSRP_WEB_BASE_URL+"/get-elco-details?id="+$routeParams.id;
+        var DetailsApiURL = OPENSRP_WEB_BASE_URL+"/get-mother-details?id="+$routeParams.id;
         var deferred = $q.defer();
         var detailsData = $http.get(DetailsApiURL, { cache: false}); 
           $q.all([detailsData]).then(function(results){
@@ -49,14 +48,13 @@ angular.module('opensrpSiteApp')
          
       $rootScope.loading = true;  
       $scope.dataShowHide = false;
-      var district;
-      var union;
-      var thana;
-      var union;
+      var district="";
+      var union="";
+      var thana="";      
       var provider;
       var HouseholdName;
-      var type = "type=Elco";      
-      if(angular.isUndefined($scope.dis)){
+      var type = "type=Mother";      
+     /* if(angular.isUndefined($scope.dis)){
         district ="";
       }else{        
         district = "&FWWOMDISTRICT="+'"'+$scope.dis+'"';     
@@ -65,7 +63,7 @@ angular.module('opensrpSiteApp')
         thana = "";
       }else{      
         thana = "&FWWOMUPAZILLA="+'"'+$scope.upa+'"';
-      }
+      }*/
       if(angular.isUndefined($scope.uni) ){
         union = "";
       }else{        
@@ -76,22 +74,19 @@ angular.module('opensrpSiteApp')
       }else{
         provider = "&PROVIDERID="+'"'+$scope.uu+'"';
       }
-      if(district=="" && thana == "" && union=="" && provider==""){
+      if( union=="" && provider==""){
         $scope.data="";
         $scope.total_count=0;
       }else{
-
-      
-      var countApiUrl = "get-elco-count-by-keys?";
-        var dataUrlApi = "elco-search?";
+        var countApiUrl = "get-mother-count-by-keys?";
+        var dataUrlApi = "mother-search?";
         Common.registerSearch($scope,type,district,thana,union,provider,countApiUrl,dataUrlApi);
-
     }
 
     }
   Common.locations($scope);
   Common.users($scope);
-   $scope.districtChanged = function(){
+  $scope.districtChanged = function(){
       $('#upazilla_dd').find('option:eq(0)').prop('selected', true);
       $scope.upa = '';    
       $('#union_dd').find('option:eq(0)').prop('selected', true);
@@ -103,8 +98,8 @@ angular.module('opensrpSiteApp')
         window.allLocation = window.locationList;            
         window.thanaList = jsonsql.query("select * from allLocation where ( tag =='Upazilla' && parent._value == '"+ $scope.dis +"'  ) ",allLocation);        
         $scope.thanas = thanaList;            
-      }      
-    }   
+    }      
+  }   
 
     $scope.upazillaChanged = function(){
       $('#union_dd').find('option:eq(0)').prop('selected', true);
@@ -119,5 +114,4 @@ angular.module('opensrpSiteApp')
       }         
     }
 
-    
   });

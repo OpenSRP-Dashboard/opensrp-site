@@ -77,29 +77,11 @@ angular.module('opensrpSiteApp')
 			if(district=="" && thana == "" && union=="" && provider==""){
 				$scope.data="";
 				$scope.total_count=0;
-			}else{
-			var householdSearchCountApiURL = OPENSRP_WEB_BASE_URL+"/get-household-count-by-keys?"+type+district+thana+union+provider;
-			var deferred = $q.defer();
-			var householdSearchDataCount = $http.get(householdSearchCountApiURL, { cache: false}); 
-			$scope.pageno = 1; // initialize page no to 1         
-			$scope.itemsPerPage = 10; //this could be a dynamic value from a drop down    
-			$scope.data = []; 
-			$q.all([householdSearchDataCount]).then(function(results){
-			    $scope.count = results[0].data ;
-			    $scope.searchData=function(pageno){       
-			    var p = (pageno*$scope.itemsPerPage)-$scope.itemsPerPage;
-			    var householdSearchApiURL = OPENSRP_WEB_BASE_URL+"/household-search?"+type+district+thana+union+provider+"&p="+p+"&limit="+$scope.itemsPerPage;
-			    var deferred = $q.defer();
-			    var householdSerchDataList = $http.get(householdSearchApiURL, { cache: false}); 
-			        $q.all([householdSerchDataList]).then(function(results){ 
-			           $scope.data = results[0].data.registries;
-			           $scope.total_count =  $scope.count;
-			           $rootScope.loading = false;	
-			           console.log($scope.data); 
-			        });
-			    }
-			    $scope.searchData($scope.pageno);
-			});
+			}else{		
+
+				var countApiUrl = "get-household-count-by-keys?";
+        		var dataUrlApi = "household-search?";
+        		Common.registerSearch($scope,type,district,thana,union,provider,countApiUrl,dataUrlApi);
 
 		}
 

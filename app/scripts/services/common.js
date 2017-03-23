@@ -421,5 +421,29 @@ angular.module('opensrpSiteApp')
       
     }
     
+    this.registerSearch = function($scope,type,district,thana,union,provider,countApiUrl,dataUrlApi){      
+      var deferred = $q.defer();
+      var searchCountApiURL = OPENSRP_WEB_BASE_URL+"/"+countApiUrl+type+district+thana+union+provider;
+      var searchDataCount = $http.get(searchCountApiURL, { cache: false}); 
+      $scope.pageno = 1; // initialize page no to 1         
+      $scope.itemsPerPage = 10; //this could be a dynamic value from a drop down    
+      $scope.data = []; 
+      $q.all([searchDataCount]).then(function(results){
+          $scope.count = results[0].data ;
+          $scope.searchData=function(pageno){       
+          var p = (pageno*$scope.itemsPerPage)-$scope.itemsPerPage;
+          var searchApiURL = OPENSRP_WEB_BASE_URL+"/"+dataUrlApi+type+district+thana+union+provider+"&p="+p+"&limit="+$scope.itemsPerPage;
+          var deferred = $q.defer();
+          var dataList = $http.get(searchApiURL, { cache: false}); 
+              $q.all([dataList]).then(function(results){ 
+                 $scope.data = results[0].data.registries;
+                 $scope.total_count =  $scope.count;
+                 $rootScope.loading = false;  
+                 console.log($scope.data); 
+              });
+          }
+          $scope.searchData($scope.pageno);
+      });
+    }
    
   });

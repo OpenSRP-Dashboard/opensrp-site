@@ -21,7 +21,7 @@ angular
   .constant("EXPORTURL",'http://192.168.22.55:9979')
   .config(['AclServiceProvider', function (AclServiceProvider) {
     var myConfig = {
-      storage: 'sessionStorage',  // localStorage
+      storage: 'localStorage',  //  sessionStorage
       storageKey: 'AppAcl'
     };
     AclServiceProvider.config(myConfig);
@@ -371,7 +371,79 @@ angular
           }]
         }
         
-      })      
+      }) 
+      .when('/elco/search', {
+        templateUrl: 'views/elco_search.html',
+        controller: 'ElcoCtrl',
+        controllerAs: 'elco',
+        resolve : {
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('Household')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
+        }
+        
+      })
+      .when('/elco/details/:id', {
+        templateUrl: 'views/elco_details.html',
+        controller: 'ElcoCtrl',
+        controllerAs: 'elco',
+        resolve : {
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('Household Details')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
+        }
+        
+      }) 
+      .when('/mother/search', {
+        templateUrl: 'views/mother_search.html',
+        controller: 'MotherCtrl',
+        controllerAs: 'mother',
+        resolve : {
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('Household')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
+        }
+        
+      })
+      .when('/mother/details/:id', {
+        templateUrl: 'views/mother_details.html',
+        controller: 'MotherCtrl',
+        controllerAs: 'mother',
+        resolve : {
+          'acl' : ['$q', 'AclService', function($q, AclService){
+            if(AclService.can('Household Details')){
+              // Has proper permissions
+              return true;
+            } else {
+              // Does not have permission
+              return $q.reject('Unauthorized');
+            
+            }
+          }]
+        }
+        
+      })    
       .when('/elcos', {
         templateUrl: 'views/elco_details.html',
         controller: 'ElcoCtrl',
