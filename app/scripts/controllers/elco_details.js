@@ -54,29 +54,34 @@ angular.module('opensrpSiteApp')
       var thana;
       var union;
       var provider;
-      var HouseholdName;
+      var elcoName ;
       var type = "type=Elco";      
-      if(angular.isUndefined($scope.dis)){
+      if(angular.isUndefined($scope.dis || $scope.dis == "")){
         district ="";
       }else{        
         district = "&FWWOMDISTRICT="+'"'+$scope.dis+'"';     
       }
-      if(angular.isUndefined($scope.upa) ){
+      if(angular.isUndefined($scope.upa || $scope.upa == "") ){
         thana = "";
       }else{      
         thana = "&FWWOMUPAZILLA="+'"'+$scope.upa+'"';
       }
-      if(angular.isUndefined($scope.uni) ){
+      if(angular.isUndefined($scope.uni) || $scope.uni == "" ){
         union = "";
       }else{        
         union = "&FWWOMUNION="+'"'+$scope.uni+'"';
       }
-      if(angular.isUndefined($scope.uu) ){
+      if(angular.isUndefined($scope.uu) || $scope.uu =="" ){
         provider = "";
       }else{
         provider = "&PROVIDERID="+'"'+$scope.uu+'"';
       }
-      if(district=="" && thana == "" && union=="" && provider==""){
+      if(angular.isUndefined($scope.name) || $scope.name == "" ){
+            elcoName = "";
+          }else{
+            elcoName = "&FWWOMFNAME="+$scope.name;
+          }
+      if(district=="" && thana == "" && union=="" && provider=="" && elcoName ==""){
         $scope.data="";
         $scope.total_count=0;
       }else{
@@ -84,7 +89,7 @@ angular.module('opensrpSiteApp')
       
       var countApiUrl = "get-elco-count-by-keys?";
         var dataUrlApi = "elco-search?";
-        Common.registerSearch($scope,type,district,thana,union,provider,countApiUrl,dataUrlApi);
+        Common.registerSearch($scope,type,district,thana,union,provider,elcoName,countApiUrl,dataUrlApi);
 
     }
 

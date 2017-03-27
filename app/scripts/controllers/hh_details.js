@@ -43,47 +43,51 @@ angular.module('opensrpSiteApp')
 
         }
 
-        $scope.search = function(){
-        	console.log(3333333333333);
-        	$rootScope.loading = true;	
-			$scope.dataShowHide = false;
-			var district;
-			var union;
-			var thana;
-			var union;
-			var provider;
-			var HouseholdName;
-			var type = "type=HouseHold"; 			
-			if(angular.isUndefined($scope.dis)){
-				district ="";
-			}else{				
-				district = "&FWDISTRICT="+'"'+$scope.dis+'"';			
-			}
-			if(angular.isUndefined($scope.upa) ){
-				thana = "";
-			}else{			
-				thana = "&FWUPAZILLA="+'"'+$scope.upa+'"';
-			}
-			if(angular.isUndefined($scope.uni) ){
-				union = "";
-			}else{			  
-				union = "&FWUNION="+'"'+$scope.uni+'"';
-			}
-			if(angular.isUndefined($scope.uu) ){
-				provider = "";
-			}else{
-				provider = "&PROVIDERID="+'"'+$scope.uu+'"';
-			}
-			if(district=="" && thana == "" && union=="" && provider==""){
-				$scope.data="";
-				$scope.total_count=0;
-			}else{		
+        $scope.search = function(){        	
+        	 $rootScope.loading = true;	
+			     $scope.dataShowHide = false;
+			     var district ;
+			     var union ;
+			     var thana ;
+			     var union ;
+			     var provider;
+    			var householdName ;
+    			var type = "type=HouseHold"; 			
+    			if(angular.isUndefined($scope.dis) || $scope.dis==""){
+    				district ="";
+    			}else{				
+    				district = "&FWDISTRICT="+'"'+$scope.dis+'"';			
+    			}
+    			if(angular.isUndefined($scope.upa) || $scope.upa==""){
+    				thana = "";
+    			}else{			
+    				thana = "&FWUPAZILLA="+'"'+$scope.upa+'"';
+    			}
+    			if(angular.isUndefined($scope.uni) || $scope.uni=="" ){
+    				union = "";
+    			}else{			  
+    				union = "&FWUNION="+'"'+$scope.uni+'"';
+    			}
+    			if(angular.isUndefined($scope.uu) || $scope.uu=="" ){
+    				provider = "";
+    			}else{
+    				provider = "&PROVIDERID="+'"'+$scope.uu+'"';
+    			}
+          if(angular.isUndefined($scope.name) || $scope.name=="" ){
+            householdName = "";
+          }else{
+            householdName = "&FWHOHFNAME="+$scope.name;
+          }
+    			if(district=="" && thana == "" && union=="" && provider=="" && householdName==""){
+    				$scope.data="";
+    				$scope.total_count=0;
+    			}else{		
+            console.log(union);
+    			  var countApiUrl = "get-household-count-by-keys?";
+            var dataUrlApi = "household-search?";
+            Common.registerSearch($scope,type,district,thana,union,provider,householdName,countApiUrl,dataUrlApi);
 
-				var countApiUrl = "get-household-count-by-keys?";
-        		var dataUrlApi = "household-search?";
-        		Common.registerSearch($scope,type,district,thana,union,provider,countApiUrl,dataUrlApi);
-
-		}
+    		}
 
 		}
 	Common.locations($scope);
