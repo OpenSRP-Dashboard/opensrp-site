@@ -8,45 +8,13 @@
  * Controller of the opensrpSiteApp
  */
 angular.module('opensrpSiteApp')
-  .controller('ElcoCtrl', function ($scope,$rootScope,$cookies, $routeParams,$q,$location, $http,$window,$timeout,AclService,$filter,Common,OPENSRP_WEB_BASE_URL) {    
+  .controller('ElcoCtrl', function ($scope,$rootScope,$cookies, $routeParams,$q,$location, $http,$window,$timeout,AclService,$filter,Common,OPENSRP_WEB_BASE_URL,ngDialog) {    
    
     $scope.can = AclService.can;
-    var url = $location.path().split("/")[2]; 
-        
-        // default data based on user type
-        // if user type is Admin then all data are showing
-        // if user type is HI then data showing only within his/her area which is thana based
-        // if user type is AHI then data showing only within his/her area which is Union based
-        // if user is HA then only his/her data are showing.
-      if(url =='list'){
-
-      }else if(url =='details'){
-        var DetailsApiURL = OPENSRP_WEB_BASE_URL+"/get-elco-details?id="+$routeParams.id;
-        var deferred = $q.defer();
-        var detailsData = $http.get(DetailsApiURL, { cache: false}); 
-          $q.all([detailsData]).then(function(results){
-            $scope.data = results[0].data;
-            
-            $scope.PSRFDETAILS = $scope.data["PSRFDETAILS"];
-            delete $scope.data["PSRFDETAILS"];
-
-            $scope.MISDETAILS = $scope.data["MISDETAILS"];
-            delete $scope.data["MISDETAILS"];
-            $scope.details = $scope.data["details"];
-            delete $scope.data["details"];
-            $scope.multimediaAttachments = $scope.data["multimediaAttachments"];
-            delete $scope.data["multimediaAttachments"];
-            delete $scope.data["revision"];
-            delete $scope.data["type"];
-
-          });
-
-        }else{
-
-        }
-
-      $scope.search = function(){
-         
+    var url = $location.path().split("/")[2];
+    Common.locations($scope);
+    Common.users($scope);
+    $scope.onSearch = function(){         
       $rootScope.loading = true;  
       $scope.dataShowHide = false;
       var district;
@@ -56,12 +24,12 @@ angular.module('opensrpSiteApp')
       var provider;
       var elcoName ;
       var type = "type=Elco";      
-      if(angular.isUndefined($scope.dis || $scope.dis == "")){
+      if(angular.isUndefined($scope.dis) || $scope.dis == ""){
         district ="";
       }else{        
         district = "&FWWOMDISTRICT="+'"'+$scope.dis+'"';     
       }
-      if(angular.isUndefined($scope.upa || $scope.upa == "") ){
+      if(angular.isUndefined($scope.upa) || $scope.upa == "" ){
         thana = "";
       }else{      
         thana = "&FWWOMUPAZILLA="+'"'+$scope.upa+'"';
@@ -84,18 +52,14 @@ angular.module('opensrpSiteApp')
       if(district=="" && thana == "" && union=="" && provider=="" && elcoName ==""){
         $scope.data="";
         $scope.total_count=0;
-      }else{
-
-      
-      var countApiUrl = "get-elco-count-by-keys?";
+      }else{      
+        var countApiUrl = "get-elco-count-by-keys?";
         var dataUrlApi = "elco-search?";
-        Common.registerSearch($scope,type,district,thana,union,provider,elcoName,countApiUrl,dataUrlApi);
+        Common.onSearch($scope,type,district,thana,union,provider,elcoName,countApiUrl,dataUrlApi);
+      }
 
     }
-
-    }
-  Common.locations($scope);
-  Common.users($scope);
+ 
    $scope.districtChanged = function(){
       $('#upazilla_dd').find('option:eq(0)').prop('selected', true);
       $scope.upa = '';    
@@ -123,6 +87,10 @@ angular.module('opensrpSiteApp')
         //console.log($scope.unions);
       }         
     }
-
+    $scope.onClickDialog = function (id) {      
+      var url = OPENSRP_WEB_BASE_URL+"/get-elco-details?id="+id; 
+      Common.getDetailsData(id,url,$scope,"elco");
+      ngDialog.open({ template: '../views/elco_details.html', className: '',scope:$scope,showClose: true });
+    };
     
   });

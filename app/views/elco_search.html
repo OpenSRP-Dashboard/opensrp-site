@@ -6,7 +6,7 @@
 				<div show-during-resolve class="loader">   
 					<center><img src="images/spinner.gif"  alt="Opensrp"/></center>
 				</div>
-				<form  name="camp" ng-submit="search()">  
+				<form  name="camp" ng-submit="onSearch()">  
 				<div class="row"> <!-- main col left --> 
 					<div class="starter-template3">		
 						<div class="col-md-3">
@@ -96,9 +96,7 @@
                           <th style="width:154px;">
                             Registration Date                                                              
                           </th>
-                          <th style="width:154px;">
-                           View                                                             
-                          </th>                                            
+                                                                     
                         </tr>
                       </thead><!--//table head-->
                     </table>                        
@@ -109,7 +107,7 @@
                   <div class="panel-heading2" role="tab" id="headingTwo2">
                     <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion2" href="#{{household.caseId}}" aria-expanded="false" aria-controls="collapseTwo">
                       <thead>
-                        <tr>
+                        <tr ng-click="onClickDialog(household.id)">
                           <th style="width:150px;">   
                             <img src="images/photo.png" alt="">                                        
                             {{household.FWWOMFNAME}}                           

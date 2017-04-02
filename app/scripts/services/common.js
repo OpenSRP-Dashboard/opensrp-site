@@ -135,12 +135,10 @@ angular.module('opensrpSiteApp')
       
       var newDate = new Date();
       var dayOfMonth = newDate.getDate();
-      var weekIndex = Math.floor(dayOfMonth/7)-1 ;
+      var weekIndex = Math.floor(dayOfMonth/7) ;
       $rootScope.loading = true;
-      $http.get(url, { cache: false}).success(function (data) {              
-        //console.log("from new service");
-        console.log(data[0].weeklyCountsForChart);
-        var weekCounts = data[0].weeklyCountsForChart;  
+      $http.get(url, { cache: false}).success(function (data) {
+        var weekCounts = data[0].weeklyCountsForChart;
         $scope['thisMonth'] = weekCounts[15] + weekCounts[16] + weekCounts[17] + weekCounts[18] + weekCounts[19];
         $scope['thisWeek'] = weekCounts[15 + weekIndex];
         $scope['today'] = weekCounts[20];
@@ -420,8 +418,52 @@ angular.module('opensrpSiteApp')
       }
       
     }
-    
-    this.registerSearch = function($scope,type,district,thana,union,provider,name,countApiUrl,dataUrlApi){      
+    this.getDetailsData = function(id,url,$scope,type){
+        var deferred = $q.defer();
+        var detailsData = $http.get(url, { cache: false}); 
+          $q.all([detailsData]).then(function(results){            
+            $scope.getDetailsData = results[0].data; 
+
+            if(type =="mother"){
+              $scope.ancVisitOne = $scope.getDetailsData["ancVisitOne"];
+              $scope.ancVisitTwo = $scope.getDetailsData["ancVisitTwo"];
+              $scope.ancVisitThree = $scope.getDetailsData["ancVisitThree"];
+              $scope.ancVisitFour = $scope.getDetailsData["ancVisitFour"];
+              $scope.bnfVisitDetails = $scope.getDetailsData["bnfVisitDetails"];
+              $scope.pncVisitOne = $scope.getDetailsData["pncVisitOne"];
+              $scope.pncVisitTwo = $scope.getDetailsData["pncVisitTwo"];
+              $scope.pncVisitThree = $scope.getDetailsData["pncVisitThree"];
+              delete $scope.getDetailsData["ancVisitOne"];
+              delete $scope.getDetailsData["ancVisitTwo"];
+              delete $scope.getDetailsData["ancVisitThree"];
+              delete $scope.getDetailsData["ancVisitFour"];
+              delete $scope.getDetailsData["bnfVisitDetails"];
+              delete $scope.getDetailsData["pncVisitOne"];
+              delete $scope.getDetailsData["pncVisitTwo"];
+              delete $scope.getDetailsData["pncVisitThree"]; 
+            }else if(type == "household"){
+              $scope.ELCODETAILS = $scope.getDetailsData["ELCODETAILS"];
+              delete $scope.getDetailsData["ELCODETAILS"];
+            }else if(type =="elco"){             
+              $scope.PSRFDETAILS = $scope.getDetailsData["PSRFDETAILS"];
+              delete $scope.getDetailsData["PSRFDETAILS"];
+              $scope.MISDETAILS = $scope.getDetailsData["MISDETAILS"];
+              delete $scope.getDetailsData["MISDETAILS"];
+            }else{
+
+            }
+
+
+            $scope.details = $scope.getDetailsData["details"];
+            delete $scope.getDetailsData["details"];
+            $scope.multimediaAttachments = $scope.getDetailsData["multimediaAttachments"];
+            delete $scope.getDetailsData["multimediaAttachments"];
+            delete $scope.getDetailsData["revision"];
+            delete $scope.getDetailsData["type"];
+
+          });
+    }
+    this.onSearch = function($scope,type,district,thana,union,provider,name,countApiUrl,dataUrlApi){      
       var deferred = $q.defer();
       var searchCountApiURL = OPENSRP_WEB_BASE_URL+"/"+countApiUrl+type+district+thana+union+provider+name;
       var searchDataCount = $http.get(searchCountApiURL, { cache: false}); 
@@ -445,5 +487,7 @@ angular.module('opensrpSiteApp')
           $scope.searchData($scope.pageno);
       });
     }
+
+
    
   });

@@ -6,7 +6,7 @@
 				<div show-during-resolve class="loader">   
 					<center><img src="images/spinner.gif"  alt="Opensrp"/></center>
 				</div>
-				<form  name="camp" ng-submit="search()">  
+				<form  name="camp" ng-submit="onSearch()">  
 				<div class="row"> <!-- main col left --> 
 					<div class="starter-template3">		
 						<div class="col-md-3">
@@ -15,7 +15,7 @@
 							</div>
 						</div>
 						<div class="col-md-3">
-							 <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1" ng-model="dis" ng-change="districtChanged()">
+							 <select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1" ng-model="dis" ng-change="onChangedDistrict()">
 	                  		<option value="">Select District </option>
 	                  
 	                  		<option ng-repeat="district in districts" value="{{district.name}}">{{district.name}}</option>
@@ -23,7 +23,7 @@
 	                		</select>
 						</div>
 						<div class=" col-md-3">
-							<select id="upazilla_dd" class="form-control" name="f1_gn_q11_elem1" ng-model="upa" ng-change="upazillaChanged()">
+							<select id="upazilla_dd" class="form-control" name="f1_gn_q11_elem1" ng-model="upa" ng-change="onChangedUpazila()">
 	                  		<option value="">Select Upazilla </option>
 	                  		<option ng-repeat="thana in thanas"  value="{{thana.name}}">{{thana.name}}</option>
 	                		</select>
@@ -45,12 +45,16 @@
 							<span class="glyphicon glyphicon-user"></span>WORKER NAME
 						</div>
 					</div>
-					<div class="col-md-7">
+					<div class="col-md-4">
 						<select id="f1_gn_q11_elem1" class="form-control" name="f1_gn_q11_elem1" ng-model="uu">
                    <option value="">Select User </option>
                   <option ng-repeat="user in users" value="{{user}}">{{user}}</option>
                 </select>
 					</div>
+           <div class="col-md-3">
+            <input type="name" class="form-control"  id="total_hh" name="total_hh" ng-model="name" placeholder="type mother name">
+          </div>
+
                 </div> <!-- main col right -->
                 <!-- <div class="col-md-2"> -->
             	 <button type="submit" class="btn btn-lg btn-primary ">Search</button>  
@@ -93,9 +97,7 @@
                           <th style="width:154px;">
                             Registration Date                                                              
                           </th>
-                          <th style="width:154px;">
-                           View    
-                          </th>                                            
+                                                                      
                         </tr>
                       </thead><!--//table head-->
                     </table>                        
@@ -106,7 +108,7 @@
                   <div class="panel-heading2" role="tab" id="headingTwo2">
                     <table class="table table-striped collapsed"  data-toggle="collapse" data-parent="#accordion2" href="#{{household.caseId}}" aria-expanded="false" aria-controls="collapseTwo">
                       <thead>
-                        <tr>
+                        <tr ng-click="onClickDialog(household.id)">
                           <th style="width:150px;">   
                             <img src="images/photo.png" alt="">                                        
                             {{household.mother_first_name}}                           
@@ -117,7 +119,7 @@
                           <th style="width:100px;">{{household.mother_wom_nid}}</th>
                           <th style="width:100px;">{{household.mother_wom_bid}}</th>                         
                           <th style="width:100px;">{{household.TODAY}}</th>
-                          <th style="width:100px;"><a href="/#/mother/details/{{household.id}}" >View Details</a>
+                          
                         </tr>
                       </thead>
                     </table><!--//table body-->                    

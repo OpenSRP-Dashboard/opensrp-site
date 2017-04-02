@@ -1,5 +1,5 @@
 
-<data-ng-include src="'views/partials/header.html'"></data-ng-include>
+
 
 <section>  
   <div class="container">
@@ -8,7 +8,7 @@
            <div class="row"> 
               <div class="col-sm-12 col-md-12">
                 <div class="row">
-                  <div class="col-md-3" ng-repeat="(key,value) in data"> 
+                  <div class="col-md-3" ng-repeat="(key,value) in getDetailsData"> 
                     <label>{{key}} :</label>{{value}}
                   </div>   
                 </div>
@@ -16,17 +16,72 @@
              
             </div>
             <div> -------------------------------------------</div>
-            <div class="row"  ng-repeat="member in PSRFDETAILS"> 
-              <h1>PSRFDETAILS : {{$index+1}}</h1>
+            <div class="row"> 
+              <h1>ANC Visit One</h1>
               <div style="background-color:black">
-                <div ng-repeat="(key,value) in member" class="col-md-6" > 
+                <div ng-repeat="(key,value) in ancVisitOne" class="col-md-6" > 
                  <label>{{key}} :</label>{{value}} 
                 </div>
               </div>
             </div>
 
-            <div class="row"  ng-repeat="member in MISDETAILS"> 
-              <h1>MISDETAILS : {{$index+1}}</h1>
+            <div class="row"> 
+              <h1>ANC Visit Two</h1>
+              <div style="background-color:black">
+                <div ng-repeat="(key,value) in ancVisitTwo" class="col-md-6" > 
+                 <label>{{key}} :</label>{{value}} 
+                </div>
+              </div>
+            </div>
+
+            <div class="row"> 
+              <h1>ANC Visit Three</h1>
+              <div style="background-color:black">
+                <div ng-repeat="(key,value) in ancVisitThree" class="col-md-6" > 
+                 <label>{{key}} :</label>{{value}} 
+                </div>
+              </div>
+            </div>
+
+            <div class="row"> 
+              <h1>ANC Visit Four</h1>
+              <div style="background-color:black">
+                <div ng-repeat="(key,value) in ancVisitFour" class="col-md-6" > 
+                 <label>{{key}} :</label>{{value}} 
+                </div>
+              </div>
+            </div>
+
+            <div class="row"> 
+              <h1>PNC Visit One</h1>
+              <div style="background-color:black">
+                <div ng-repeat="(key,value) in pncVisitOne" class="col-md-6" > 
+                 <label>{{key}} :</label>{{value}} 
+                </div>
+              </div>
+            </div>
+
+             <div class="row"> 
+              <h1>PNC Visit Two</h1>
+              <div style="background-color:black">
+                <div ng-repeat="(key,value) in pncVisitTwo" class="col-md-6" > 
+                 <label>{{key}} :</label>{{value}} 
+                </div>
+              </div>
+            </div>
+
+            <div class="row"> 
+              <h1>PNC Visit Three</h1>
+              <div style="background-color:black">
+                <div ng-repeat="(key,value) in pncVisitThree" class="col-md-6" > 
+                 <label>{{key}} :</label>{{value}} 
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row"  ng-repeat="member in bnfVisitDetails"> 
+              <h1>bnfVisitDetails : {{$index+1}}</h1>
               <div style="background-color:black">
                 <div ng-repeat="(key,value) in member" class="col-md-6" > 
                  <label>{{key}} :</label>{{value}} 
@@ -36,7 +91,7 @@
 
             <div> -------------------------------------------</div>
              <div class="col-sm-12 col-md-12">
-              <h1>Household details</h1>
+              <h2>Mother details</h2>
                 <div class="row">
                   <div class="col-md-3" ng-repeat="(key,value) in details"> 
                     <label>{{key}} :</label>{{value}}
